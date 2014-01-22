@@ -1,0 +1,329 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>详解Mac睡眠模式设置 | Toothpick</title>
+  <meta name="author" content="toothpickv">
+  
+  <meta name="description" content="检查现用设置
+
+
+打开终端后，首先要做的便是确定你的Mac OS目前正在使用的睡眠模式，以防你需要设置回去
+你可以通过Unix指令 pmset 来观察和更改睡眠模式
+查看当前睡眠模式设置，在终端输入以下指令：
+
+pmset -g | grep hibernatemode
+
+
+你应该在终端中看到类似如">
+  
+  
+  <meta property="og:title" content="详解Mac睡眠模式设置"/>
+  <meta property="og:site_name" content="Toothpick"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.png" >
+   <link rel="alternate" href="http://xxx.xx/atom.xml" title="Toothpick" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">Toothpick</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/about/">About</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscribe</a><li>
+    
+    </ul>
+</nav>
+
+  <div class="widget weibo">
+<iframe width="100%" height="100" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=110&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=null&verifier=78e1ee4d&colors=ffffff,ffffff,999,000,ecfbfd&dpc=1"></iframe>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>1</small></li>
+  
+    <li><a href="/categories/IOS/">IOS</a><small>8</small></li>
+  
+    <li><a href="/categories/IOS类库/">IOS类库</a><small>2</small></li>
+  
+    <li><a href="/categories/PHP/">PHP</a><small>1</small></li>
+  
+    <li><a href="/categories/coretext/">coretext</a><small>4</small></li>
+  
+    <li><a href="/categories/mac/">mac</a><small>2</small></li>
+  
+    <li><a href="/categories/插件/">插件</a><small>1</small></li>
+  
+    <li><a href="/categories/音乐/">音乐</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tags</h3>
+  <div class="entry">
+    <a href="/tags/Ad Hoc/" style="font-size: 12.50px;">Ad Hoc</a><a href="/tags/AppStore/" style="font-size: 12.50px;">AppStore</a><a href="/tags/CSS/" style="font-size: 10.00px;">CSS</a><a href="/tags/JDK/" style="font-size: 10.00px;">JDK</a><a href="/tags/Objective-C/" style="font-size: 17.50px;">Objective-C</a><a href="/tags/SASS/" style="font-size: 10.00px;">SASS</a><a href="/tags/SDWebImage/" style="font-size: 10.00px;">SDWebImage</a><a href="/tags/UIApplicationDelegate/" style="font-size: 10.00px;">UIApplicationDelegate</a><a href="/tags/UIImage/" style="font-size: 10.00px;">UIImage</a><a href="/tags/bug/" style="font-size: 10.00px;">bug</a><a href="/tags/ios/" style="font-size: 20.00px;">ios</a><a href="/tags/itunes/" style="font-size: 12.50px;">itunes</a><a href="/tags/java/" style="font-size: 10.00px;">java</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/occurred uploading/" style="font-size: 10.00px;">occurred uploading</a><a href="/tags/uitableview/" style="font-size: 10.00px;">uitableview</a><a href="/tags/优化/" style="font-size: 15.00px;">优化</a><a href="/tags/保存数据/" style="font-size: 10.00px;">保存数据</a><a href="/tags/后台/" style="font-size: 10.00px;">后台</a><a href="/tags/开发者/" style="font-size: 10.00px;">开发者</a><a href="/tags/类库/" style="font-size: 12.50px;">类库</a><a href="/tags/苹果/" style="font-size: 10.00px;">苹果</a><a href="/tags/账号/" style="font-size: 10.00px;">账号</a><a href="/tags/闪退/" style="font-size: 12.50px;">闪退</a><a href="/tags/高效/" style="font-size: 15.00px;">高效</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2014 toothpickv
+  
+</div>
+
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">Toothpick</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title">详解Mac睡眠模式设置</h1>
+  
+
+      <time datetime="2012-12-12T20:48:12.000Z"><a href="/2012/12/13/详解mac睡眠模式设置/">Dec 13 2012</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <p>检查现用设置</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>打开终端后，首先要做的便是确定你的Mac OS目前正在使用的睡眠模式，以防你需要设置回去</p>
+<p>你可以通过Unix指令 pmset 来观察和更改睡眠模式</p>
+<p>查看当前睡眠模式设置，在终端输入以下指令：</p>
+<p><span class="span4br"></span></p>
+<p>pmset -g | grep hibernatemode</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>你应该在终端中看到类似如下的结果：</p>
+<p><span class="span4br"></span></p>
+<p>$ pmset -g | grep hibernatemodehibernatemode 3</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>好的，现在我们就能知道你的机器正处于模式3</p>
+<p>多亏Dashboard中一个十分方便的小插件 Deep Sleep 的说明书</p>
+<p>我们能够正确的分别出各个睡眠模式的特点：</p>
+<p><span class="span4br"></span></p>
+<p>0-老式睡眠模式</p>
+<p>睡眠期间内存加电，禁用safe sleep（安全睡眠），超快速唤醒</p>
+<p><span class="span4br"></span></p>
+<p>1-休眠模式</p>
+<p>内存中的数据将写入到磁盘上，系统在所谓的“睡眠”时将完全关闭</p>
+<p>因为需要读取先前保存在硬盘中的内存数据，所以唤醒较慢</p>
+<p><span class="span4br"></span></p>
+<p>3-睡眠模式（2005年秋季之后机器默认采用的）</p>
+<p>睡眠过程中，内存保持通电状态，同时内存数据在进入睡眠模式之前同样要写入到硬盘</p>
+<p>万一没有外接电源并且电池也完全没电了的话，系统将自动进入休眠模式</p>
+<p><span class="span4br"></span></p>
+<p>5-和模式1一样</p>
+<p>但这是为了那些使用安全虚拟内存的用户 &nbsp;System Preferences -&gt; Security（系统设置-安全）</p>
+<p><span class="span4br"></span></p>
+<p>7-和模式3一样</p>
+<p>但同样是为了那些使用安全虚拟内存的用户</p>
+<p><span class="span4br"></span></p>
+<p>既然你已经知道自己目前所处的模式，那么做个记录吧</p>
+<p>你也可以用下面的指令，一步到位：</p>
+<p><span class="span4br"></span></p>
+<p>sudo pmset -g | grep hibernatemode &gt; ~/Desktop/current_mode.txt</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>这个指令会将pmset命令的结果除了最后的模式值其他的全部删除掉</p>
+<p>然后将结果导出到桌面上名为current_mode.txt的文本文件</p>
+<p>以防将来需要，保存好这个文件</p>
+<p><span class="span4br"></span></p>
+<p>注意：</p>
+<p>在这里我是故意如此谨慎的</p>
+<p>事实上，除非你曾经捣鼓过这个设置，不然的话你的Mac不是在模式0就是3或者7</p>
+<p>如果你的是模式0的话，这个小提示对你就无所谓了，因为你的Mac仍然使用的是老式睡眠</p>
+<p>保存一个存有3或7数字值的文本文件确实有些过了</p>
+<p>但是至少将来你不会在纠结于初始的模式到底是3还是7了</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>改变睡眠模式设置</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>要改变睡眠模式，你又需要使用pmset指令了，还需要加上变量以及相对应的你想要改变的值</p>
+<p>所以如果你想要回到老式睡眠模式（从上面可以知道是模式0），输入下列指令：</p>
+<p><span class="span4br"></span></p>
+<p>sudo pmset -a hibernatemode 0</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>按下回车，将会需要输入你的密码</p>
+<p>输完之后回车，你的睡眠模式就更改完成了</p>
+<p>如果你想使用原来的设置，用保存在current_mode.txt里面的值替代上述指令的“0”</p>
+<p>当然，这也意味着你也可以设置你的机器直接进入休眠模式，方法就是最后的数值从0改为1</p>
+<p><span class="span4br"></span></p>
+<p>我发现了一个更简单的方法，那就是使用上文提及到的Deep Sleep插件</p>
+<p>这个插件将会返回它在休眠模式之前的值，这也就是说</p>
+<p>你可以使用这个插件进入休眠同时关闭盖子</p>
+<p>（笔记本啦@_@）也能进入正常的睡眠模式</p>
+<p>需要注意的是，上面的改动并不需要重启生效</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>释放一些磁盘空间</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>如果你的机器之前的设置是3或者7并且你已经设置了使用老式睡眠模式，你可以继续下一步：</p>
+<p>释放在你改变睡眠模式之前睡眠时用于保存系统内存备份的那部分磁盘空间</p>
+<p>在终端中输入如下两条指令，按下回车输入密码即可</p>
+<p><span class="span4br"></span></p>
+<p>cd /var/vm</p>
+<p>sudo rm sleepimage</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>如果你回到了新式睡眠模式</p>
+<p>这个睡眠镜像文件（sleepimage）将会在你执行sudo pmset指令的时候自动创建</p>
+<p>一执行指令就会创建，而不是第一次将机器进入睡眠模式的时候</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>总结</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>注明：以下&quot;我&quot;均指原文作者</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>个人来说，我认为新式睡眠更好，我也将我的机器设置为这个模式</p>
+<p>但如果你更喜欢老式睡眠，你也已经知道如何设置了</p>
+<p>是的，这确实需要在终端之路上进行一趟旅程</p>
+<p>但是一旦当你决定踏上了旅程，你就会发现其实它也没有想象中的那么困难</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>p.H：</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>在读原文作者这篇帖子之前，我曾经详细查阅过pmset指令</p>
+<p>所以对原文作者的内容，算是已经有一定了解了</p>
+<p>下面给大家几点直观的使用感觉，比上述文字要直白许多</p>
+<p><span class="span4br"></span></p>
+<p>模式0，相比与其他的模式最大的区别就是进入睡眠极快</p>
+<p>可以说是1秒钟之内，我的笔记本感觉就很直观了</p>
+<p>我的系统默认的是模式3，点击睡眠之后，能够看到硬盘灯狂闪</p>
+<p>原因上文有叙述，简单说就是把内存数据写入硬盘</p>
+<p>所以要过个七八秒之后，才能看到电源灯呼吸闪烁</p>
+<p>相较之下，模式0瞬间就看到电源灯呼吸闪烁，进入睡眠状态</p>
+<p><span class="span4br"></span></p>
+<p>而关于文章中提及的释放磁盘空间</p>
+<p>我的内存是8G的，所以我特意进行了测试</p>
+<p>执行前后，系统可用空间增加了8G多一点</p>
+<p>实际上应该就是8G整，不过涉及到进制的问题，会有一些出入</p>
+<p>插句题外话，windows同样有类似的操作方法，能够释放系统盘的空间（大小等于你的内存大小）</p>
+<p><span class="span4br"></span></p>
+<p>另外，我发现我的睡眠模式默认设置的是模式3</p>
+<p>如果改成模式5的话，睡眠之后，短时间内没问题</p>
+<p>但是可能过一段时间，系统会自动断电</p>
+<p>完全断电的那种，开机就是那种正常的开机，没有任何唤醒</p>
+<p>因为上文提到牵涉到虚拟内存，而我是关闭了Mac的虚拟内存</p>
+<p>所以可能黑果对模式5和7的支持并不是太好，或者是因为我关闭了虚拟内存的缘故</p>
+<p><span class="span4br"></span></p>
+<p>除此之外，有的机器可能采用系统默认的模式3，5，7或1无法睡眠</p>
+<p>但是改用了模式0之后，能够正常睡眠</p>
+<p>当然这并不是通用的方法，但有可能</p>
+<p>它会让你原本不能睡眠的机器能够很好地支持睡眠</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>综上，个人还是比较喜欢模式0</p>
+<p><span class="span4br"></span></p>
+
+	 
+	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="null"><strong>null</strong></a> - Dec 13 2012</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://yoursite.com"><strong>Toothpick</strong></a></span>
+</p>
+       	 
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+  
+  <div class="categories">
+    <a href="/categories/mac/">mac</a>
+  </div>
+
+       		
+     		  
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/about/">About</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscribe</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>

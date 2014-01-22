@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives | Toothpick</title>
+  <title>ios | Toothpick</title>
   <meta name="author" content="toothpickv">
   
   
@@ -100,215 +100,7 @@
     <div id="main-col" class="alignright">
     <div id="wrapper">
       
-<h2 class="archive-title">Archives</h2>
-
-
-  
-    
-<article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-  <header>
-      
-      
-  
-    <h1 class="title"><a href="/2013/11/04/ios7状态栏以及导航栏/">ios7状态栏以及导航栏</a></h1>
-  
-
-      <time datetime="2013-11-04T00:34:41.000Z"><a href="/2013/11/04/ios7状态栏以及导航栏/">Nov 4 2013</a></time>
-      
-  </header>
-    <div class="entry">
-      
-        <p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->     ios7的发布使得ios的导航栏和状态栏一体化，渐渐适应以后还是蛮好看的。但是作为开发者，接下来新SDK编译的适配工作也会显得蛋疼不已。许多应用如微信等，可能还是只是适配布局，未进行较大的UI改动，或是出于谨慎考虑。设计风格的大改，怕是不可避免的。本公司的射鸡师早已酝酿出了一套界面，咋一看还真是漂亮极了。导航栏一会绿色一会白色，状态栏字体也是一会黑色一会白色，所以射鸡师它真的不痛程序猿的痛好吗！？</p>
-<div></div>
-<div>ok，这个适配工作真是有些许麻烦，既要保证完美适配，也不想搞乱项目。来吧。</div>
-<div></div>
-设置导航栏的背景颜色
-<div>在iOS 7中，不再使用tintColor属性来设置导航栏的颜色，而是使用barTintColor属性来修改背景色。我们可以在AppDelegate.m文件中的方法didFinishLaunchingWithOptions:里面添加如下代码来修改颜色：</div>
-<div>[[UINavigationBar appearance] setBarTintColor:[UIColor yellowColor]];</div>
-<div>默认情况下，导航栏的translucent属性为YES。另外，系统还会对所有的导航栏做模糊处理，这样可以让iOS 7中导航栏的颜色会变得淡了。至于这个的解决方案可以参考：</div>
-<div>如何在iOS 7中设置barTintColor实现类似网易和 Facebook 的 navigationBar 效果</div>
-<div><a href="http://www.cocoachina.com/applenews/devnews/2013/1024/7233.html" target="_blank"><a href="http://www.cocoachina.com/applenews/devnews/2013/1024/7233.html">http://www.cocoachina.com/applenews/devnews/2013/1024/7233.html</a></a></div>
-<div></div>
-<div>修改状态栏风格</div>
-<div> 在老版本的iOS中，状态栏永远都是白色风格。而在iOS 7中，我们可以修改每个view controller中状态栏的外观。通过UIStatusBarStyle常量可以指定状态栏的内容是暗色或亮色。默认情况下，状态栏的显示是暗色，状态栏上的时间、电池指示器和Wi-Fi信号显示为暗色,通常搭配浅色的背景。相反的，深色的背景时需要转为亮色的状态栏搭配。</div>
-<div></div>
-在iOS 7中，我们可以在每个view controller中overridingpreferredStatusBarStyle:方法，如下所示：
-<pre>
--(UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
-</pre>
-另外，我们也可以使用UIApplication的statusBarStyle方法来设置状态栏，不过，首先需要停止使用View controller-based status bar appearance。在project target的Info tab中，插入一个新的key，名字为View controller-based status bar appearance，并将其值设置为YES，动态改变状态栏。
-<div><img src="file:///Users/toothpick/Library/Application%20Support/Evernote/accounts/Evernote/qpdyx/content/p521/8d689d4273ef2f584a3e98b94384cafb.jpeg" alt=""></div>
-<div></div>
-<div>适配工作</div>
-<div><span style="color: #ff9300;">NO.1</span></div>
-<div>了解了修改的方法以后，接下来是如何简单方便的适配整个项目了。</div>
-<div>对于原先使用官方类UINavigationController，可以添加一个扩展类UIViewController+NavigationBar，使用公共方法来设置导航栏</div>
-<div></div>
-<pre>
-- (void)setBarColor:(UIColor<em>)color
-{
-if (isIOS7)
-{
-[self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
-[self.navigationController.navigationBar setBarTintColor:color];
-}
-else
-{
-[self.navigationController.navigationBar setBarStyle:UIBarStyleBlack];
-[self.navigationController.navigationBar setTintColor:color];
-}
-</pre>
-<div>}</div>
-<div>如果，有需要再自定义UINavigationBar为MyUINavigationBar,和UINavigationController为MyUINavigationController</div>
-<div><span style="color: #00f900;">MyUINavigationBar：</span></div>
-<pre>
-- (void)setBarTintColor:(UIColor </em>)barTintColor {
-//自定义
-}
-
-- (void)setTintColor:(UIColor <em>)tintColor
-{
-//自定义
-}
-</pre>
-<div></div>
-<div><span style="color: #00f900;">MyUINavigationController</span>：
-
-<pre>
-- (id)init {
-self = [super initWithNavigationBarClass:[MyUINavigationBar class] toolbarClass:nil];
-return self;
-}
-
-- (id)initWithRootViewController:(UIViewController </em>)rootViewController {
-self = [super initWithNavigationBarClass:[MyUINavigationBar class] toolbarClass:nil];
-        if(self) {
-self.viewControllers = @[rootViewController];
-};
-
-return self;
-}
-</pre>
-
-<div><span style="color: #ff9300;">NO.2</span></div>
-</div>
-<div>状态栏也需要因应导航栏的变化而变化，创建扩展类UIViewController+StatusBarStyle</div>
-<div><span style="color: #00f900;">UIViewController+StatusBarStyle.h: </span></div>
-<div></div>
-<pre>
-@interface StatusBarStyle : NSObject
-
-+ (UIStatusBarStyle)statusBarStyle;
-+ (BOOL)statusBarHidden;
-
-@end
-
-@interface UIViewController (StatusBarStyle)
-
-- (void)setStatusBarStyle:(UIStatusBarStyle)style;
-- (void)setStatusBarHidden:(BOOL)isHidden;
-@end
-</pre>
-
-&nbsp;
-<div>UIViewController+StatusBarStyle.m:</div>
-<div></div>
-<pre>
-@implementation StatusBarStyle
-
-static UIStatusBarStyle statusBarStyle = UIStatusBarStyleDefault;
-static bool isBarHidden = NO;
-static UIViewController *viewControllerv = nil;
-
-+ (UIStatusBarStyle)statusBarStyle
-{
-return statusBarStyle;
-}
-
-+ (BOOL)statusBarHidden
-{
-return isBarHidden;
-}
-
-@end
-
-@implementation UIViewController (StatusBarStyle)
-
-- (void)setStatusBarStyle:(UIStatusBarStyle)style
-{
-if (isIOS7) {
-statusBarStyle = style;
-[viewControllerv setNeedsStatusBarAppearanceUpdate];
-}
-}
-
-- (void)setStatusBarHidden:(BOOL)isHidden
-{
-if (isIOS7) {
-isBarHidden = isHidden;
-[viewControllerv setNeedsStatusBarAppearanceUpdate];
-}
-}
-
-#ifdef __IPHONE_7_0
-
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-viewControllerv = nil;
-viewControllerv = self;
-return [StatusBarStyle statusBarStyle];
-}
-
-- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
-{
-return UIStatusBarAnimationFade;
-}
-
-- (BOOL)prefersStatusBarHidden
-{
-return [StatusBarStyle statusBarHidden];
-}
-#endif
-@end
-</pre>
-<div></div>
-<div></div>
-<div><span style="color: #ff9300;">以上个人的解决方案，适配工作有点紧，有未充分考虑，如果大神有更方便简洁的方案，欢迎赐教。</span></div>
-	 
-	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
-<span>Posted by <a style="color:#9f9f9f;" href="null"><strong>null</strong></a> - Nov 4 2013</span><br />
-<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://yoursite.com"><strong>Toothpick</strong></a></span>
-</p>
-       	 
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
+<h2 class="archive-title tag">ios</h2>
 
 
   
@@ -945,62 +737,6 @@ imageLayer.borderWidth = 2.0;
       
       
   
-    <h1 class="title"><a href="/2012/12/27/音乐-juicy/">juicy-notorious b i g</a></h1>
-  
-
-      <time datetime="2012-12-26T22:28:22.000Z"><a href="/2012/12/27/音乐-juicy/">Dec 27 2012</a></time>
-      
-  </header>
-    <div class="entry">
-      
-        <p><script src="http://toothpick.duapp.com/wp-content/themes/dillon/audiojs/audio.min.js"></script></p>
-<p><script>
-  audiojs.events.ready(function() {
-    var as = audiojs.createAll();
-  });
-</script></p>
-<audio src="http://api.ning.com/files/eCOWELWd4YbJkSNhgZo7Ef2sr5Gmm1apFSH76E6i0BLf*yHuVgwwWcjRB3NiBvERZ-9cdhVg4ncGS-k4OO1XM38C8lqU6wsX/Juicy.mp3"></audio>
-	 
-	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
-<span>Posted by <a style="color:#9f9f9f;" href="null"><strong>null</strong></a> - Dec 27 2012</span><br />
-<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://yoursite.com"><strong>Toothpick</strong></a></span>
-</p>
-       	 
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    
-<article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-  <header>
-      
-      
-  
     <h1 class="title"><a href="/2012/12/26/ios应用生命周期/">ios应用生命周期</a></h1>
   
 
@@ -1134,126 +870,6 @@ imageLayer.borderWidth = 2.0;
       
       
   
-    <h1 class="title"><a href="/2012/12/24/lightbox效果下的图库插件：lightbox-gallery/">Lightbox效果下的图库插件：Lightbox Gallery</a></h1>
-  
-
-      <time datetime="2012-12-24T07:19:14.000Z"><a href="/2012/12/24/lightbox效果下的图库插件：lightbox-gallery/">Dec 24 2012</a></time>
-      
-  </header>
-    <div class="entry">
-      
-        <p> &nbsp; &nbsp;Lightbox效果是非常常见的图片显示效果，而这个插件将这个效果与图库（相册）整合到了一起。</p>
-<h3 id="-nbsp-nbsp-">&nbsp; &nbsp;插件介绍：</h3>
-<p> &nbsp; &nbsp;Lightbox相册插件能够将相册的浏览变为lightbox效果。</p>
-<p> &nbsp; &nbsp;将相册以Lightbox效果显示</p>
-<p> &nbsp; &nbsp;以工具栏方式显示图片说明</p>
-<p> &nbsp; &nbsp;显示与图片相关的]元数据</p>
-<p> &nbsp; &nbsp;将图库分配到几个页面中（分页功能）</p>
-<p> &nbsp; &nbsp;扩展默认图库选项</p>
-<p> &nbsp; &nbsp;选项页中设置&lt;额外选项</p>
-<p> &nbsp; &nbsp;同时，你还可以将一般图片以lightbox效果显示。</p>
-<h3 id="-nbsp-nbsp-">&nbsp; &nbsp;安装说明：</h3>
-<p> &nbsp; &nbsp;1.编辑lightbox-gallery.js</p>
-<p> &nbsp; &nbsp;并根据你的设置检查第二行的路径。</p>
-<p> &nbsp; &nbsp;2.把lightbox-gallery文件夹复制到你的 directory into yourwp-content/plugins目录中</p>
-<p> &nbsp; &nbsp;3.从WordPress中的“插件”菜单中启用插件。</p>
-<p> &nbsp; &nbsp;在“images”文件夹中可能已经有图片了。用它们替换默认文件。</p>
-<p> &nbsp; &nbsp;搞定！：）</p>
-<p> &nbsp; &nbsp;如果你的主题目录中有“lightbox-gallery.css”和“lightbox-gallery.js”存在，Lightbox Gallery会调用它们。如果这两个文件不存在，插件会调用Lightbox Gallery里的默认“lightbox-gallery.css”和“lightbox-gallery.js”。这样你不必担心升]级插件时你创建的lightbox图库样式被覆盖。</p>
-<h3 id="-nbsp-nbsp-">&nbsp; &nbsp;常见问题：</h3>
-<h3 id="-nbsp-nbsp-gallery-lightbox-">&nbsp; &nbsp;如何在不用[ gallery ]代码的情况下让一般图片在lightbox里显示？</h3>
-<p> &nbsp; &nbsp;只需添加 rel=&quot;lightbox&quot; 到 &quot;a&quot; 标签中即可。下面是一个例子：</p>
-<p> &nbsp; &nbsp;&lt;a href=&quot;image.jpg&quot; rel=&quot;lightbox&quot; title=&quot;this is a caption&quot;&gt;</p>
-<p> &nbsp; &nbsp;&lt;img src=&quot;thumbnail.jpg&quot; alt=&quot;&quot; /&gt;</p>
-<p> &nbsp; &nbsp;&lt;/a&gt;</p>
-<h3 id="-nbsp-nbsp-">&nbsp; &nbsp;如何将在同一个页面里将多个图库作为单独的图库处理？</h3>
-<p> &nbsp; &nbsp;你需要做两步。如果你想单独处理多个图库，将不同的class 名添加到 [ gallery ] ,然后将这些class 名添加到</p>
-<p> &nbsp; &nbsp;1.编辑lightbox-gallery.js</p>
-<p> &nbsp; &nbsp;然后添加一些代码。请看此文件的评论部分。</p>
-<p> &nbsp; &nbsp;将一个class 添加到 [ gallery ] 中。 比如[ gallery class=&quot;gallery2&quot; ]</p>
-<p> &nbsp; &nbsp;截图：</p>
-<p> &nbsp; &nbsp;<a href="http://plugins.wopus.org/wp-content/uploads/plugins/2009/05/screenshot-15b15d1.jpg" title="this is a caption" target="_blank"> <img src="http://plugins.wopus.org/wp-content/uploads/plugins/2009/05/screenshot-15b15d1.jpg" alt=""> </a></p>
-<h2 id="-nbsp-nbsp-span-style-font-size-16px-span-">&nbsp; &nbsp;<span style="font-size:16px;">其他注意事项：</span></h2>
-<h3 id="-nbsp-nbsp-">&nbsp; &nbsp;如何使用</h3>
-<p> &nbsp; &nbsp;这个插件的使用，简单来说就是添加 [ gallery ] 代码。此代码已在WordPress 2.5及更高版本上应用。 LightBox Gallery 插件自动将默认的图库查看方式转换为lightbox显示。 图片的说明文字以工具栏提示方式显示。 图片描述则在lightbox效果弹出后显示。</p>
-<p><span class="span4br"></span></p>
-<h3 id="-nbsp-nbsp-">&nbsp; &nbsp;高级设置</h3>
-<p> &nbsp; &nbsp;用户可以通过下列额外的选项来扩展短标记 [ gallery ]的功能。</p>
-<h3 id="-nbsp-nbsp-span-style-font-size-16px-lightboxsize-span-">&nbsp; &nbsp;<span style="font-size:16px;">lightboxsize</span></h3>
-<p> &nbsp; &nbsp;此选项控制弹出的lightbox图片大小。默认是中等大小，但是你可以将它改为全屏。</p>
-<p><span class="span4br"></span></p>
-<p> &nbsp; &nbsp;[ gallery lightboxsize=&quot;full&quot; ]</p>
-<h3 id="-nbsp-nbsp-span-style-font-size-16px-meta-span-">&nbsp; &nbsp;<span style="font-size:16px;">meta</span></h3>
-<p> &nbsp; &nbsp;此选项控制是否显示EXIF信息。默认为不显示。如果你想显示照片信息，请将它设置为“true”。Lightbox的EXIF信息会显示照相机机型，光圈，焦距，快门速度以及拍摄时间等信息。
-<span class="span4br"></span></p>
-<p> &nbsp; &nbsp;[ gallery meta=&quot;true&quot; ]
-<span class="span4br"></span></p>
-<h3 id="-nbsp-nbsp-span-style-font-size-16px-class-span-">&nbsp; &nbsp;<span style="font-size:16px;">class</span></h3>
-<p> &nbsp; &nbsp;添加一个图库的 class 属性。默认为gallery1</p>
-<p> &nbsp; &nbsp;[ gallery class=&quot;gallery2&quot; ]
-<span class="span4br"></span></p>
-<h3 id="-nbsp-nbsp-span-style-font-size-16px-nofollow-span-">&nbsp; &nbsp;<span style="font-size:16px;">nofollow</span></h3>
-<p> &nbsp; &nbsp;添加 rel=&quot;nofollow&quot; 属性。默认为“false”。
-<span class="span4br"></span></p>
-<p> &nbsp; &nbsp;[ gallery nofollow=&quot;true&quot; ]
-<span class="span4br"></span></p>
-<h3 id="-nbsp-nbsp-span-style-font-size-16px-from-num-span-">&nbsp; &nbsp;<span style="font-size:16px;">from, num</span></h3>
-<p> &nbsp; &nbsp;定义从哪张图片开始显示以及显示多少张图片]。 如果图片数超过num , 就会显示导航条。你可以使用几乎和wp_link_pages</p>
-<p> &nbsp; &nbsp;一样的导航函数。
-<span class="span4br"></span></p>
-<p> &nbsp; &nbsp;[ gallery from=&quot;5&quot; num=&quot;10&quot; ]
-<span class="span4br"></span></p>
-<h3 id="-nbsp-nbsp-span-style-font-size-16px-pagenavi-span-">&nbsp; &nbsp;<span style="font-size:16px;">pagenavi</span></h3>
-<p> &nbsp; &nbsp;如果你不想显示导航条，设置0。默认为1。
-<span class="span4br"></span></p>
-<p> &nbsp; &nbsp;[ gallery num=&quot;10&quot; pagenavi=&quot;0&quot; ]
-<span class="span4br"></span></p>
-<p> &nbsp; &nbsp;卸载</p>
-<p> &nbsp; &nbsp;禁用插件</p>
-<p> &nbsp; &nbsp;完事 :)</p>
-<p> &nbsp; &nbsp;<embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0" /></p>
-
-	 
-	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
-<span>Posted by <a style="color:#9f9f9f;" href="null"><strong>null</strong></a> - Dec 24 2012</span><br />
-<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://yoursite.com"><strong>Toothpick</strong></a></span>
-</p>
-       	 
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    
-<article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-  <header>
-      
-      
-  
     <h1 class="title"><a href="/2012/12/19/ios-object-c开发中混合使用或不使用arc/">ios objective-c开发中混合使用或不使用ARC</a></h1>
   
 
@@ -1343,11 +959,160 @@ imageLayer.borderWidth = 2.0;
 
 
   
+    
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title"><a href="/2012/12/10/sdwebimage-笔记（转）/">SDWebImage 笔记（转）</a></h1>
+  
+
+      <time datetime="2012-12-09T18:39:19.000Z"><a href="/2012/12/10/sdwebimage-笔记（转）/">Dec 10 2012</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <p>SDWebImage托管在github上。<a href="https://github.com/rs/SDWebImage" target="_blank">https://github.com/rs/SDWebImage</a>
+这个类库提供一个UIImageView类别以支持加载来自网络的远程图片。具有缓存管理、异步下载、同一个URL下载次数控制和优化等特征。
+使用示范的代码：
+UITableView使用UIImageView+WebCache类（基本应用，UIImageView的一个category）
+前提#import导入UIImageView+WebCache.h文件，然后在tableview的cellForRowAtIndexPath：方法下： </p>
+<p>[html lang=&quot;Objective-C&quot;] </p>
+<ul>
+<li>(UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath <em>)indexPath {
+   static NSString </em>MyIdentifier = @&quot;MyIdentifier&quot;;
+   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  if (cell == nil) {<pre><code>   cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier] autorelease];
+</code></pre>   }
+// Here we use the new provided setImageWithURL: method to load the web image
+  [cell.imageView setImageWithURL:[NSURL URLWithString:@&quot;<a href="http://www.domain.com/path/to/image.jpg" target="_blank">http://www.domain.com/path/to/image.jpg</a>&quot;] placeholderImage:[UIImage imageNamed:@&quot;placeholder.png&quot;]];
+  cell.textLabel.text = @&quot;My Text&quot;;
+  return cell;
+}
+[/html]</li>
+</ul>
+<p>基本代码：[imageView setImageWithURL:[NSURL URLWithString:@&quot;<a href="http://www.domain.com/path/image.jpg" target="_blank">http://www.domain.com/path/image.jpg</a>&quot;]];
+使用SDWebImageManager类：可以进行一些异步加载的工作。
+[html lang=&quot;Objective-C&quot;]
+SDWebImageManager <em>manager = [SDWebImageManager sharedManager];
+UIImage </em>cachedImage = [manager imageWithURL:url]; // 将需要缓存的图片加载进来
+if (cachedImage) {
+      // 如果Cache命中，则直接利用缓存的图片进行有关操作
+      // Use the cached image immediatly
+} else {
+      // 如果Cache没有命中，则去下载指定网络位置的图片，并且给出一个委托方法
+      // Start an async download
+     [manager downloadWithURL:url delegate:self];
+}
+[/html]
+当然你的类要实现SDWebImageManagerDelegate协议，并且要实现协议的webImageManager:didFinishWithImage:方法。
+// 当下载完成后，调用回调方法，使下载的图片显示
+[html lang=&quot;Objective-C&quot;]</p>
+<ul>
+<li>(void)webImageManager:(SDWebImageManager <em>)imageManager didFinishWithImage:(UIImage </em>)image {
+  // Do something with the downloaded image
+}
+[/html]
+独立的异步图像下载
+可能会单独用到异步图片下载，则一定要用downloaderWithURL:delegate:来建立一个SDWebImageDownloader实例。
+downloader = [SDWebImageDownloader downloaderWithURL:url delegate:self];
+这样SDWebImageDownloaderDelegate协议的方法imageDownloader:didFinishWithImage:被调用时下载会立即开始并完成。</li>
+</ul>
+<p>独立的异步图像缓存
+SDImageCache类提供一个创建空缓存的实例，并用方法imageForKey:来寻找当前缓存。
+[html lang=&quot;Objective-C&quot;]
+UIImage *myCachedImage = [[SDImageCache sharedImageCache] imageFromKey:myCacheKey];
+[/html]</p>
+<p>存储一个图像到缓存是使用方法storeImage: forKey:
+[[SDImageCache sharedImageCache] storeImage:myImage forKey:myCacheKey];
+默认情况下，图像将被存储在内存缓存和磁盘缓存中。如果仅仅是想内存缓存中，要使用storeImage:forKey:toDisk:方法的第三个参数带一负值
+来替代。</p>
+<p>SDWebImage 支持异步的图片下载+缓存，提供了 UIImageView+WebCacha 的 category，方便使用。纪录一下 SDWebImage 加载图片的流程。
+入口 setImageWithURL:placeholderImage:options: 会先把 placeholderImage 显示，然后 SDWebImageManager 根据 URL 开始处理图片。
+进入 SDWebImageManager-downloadWithURL:delegate:options:userInfo:，交给 SDImageCache 从缓存查找图片是否已经下载 queryDiskCacheForKey:delegate:userInfo:.
+先从内存图片缓存查找是否有图片，如果内存中已经有图片缓存，SDImageCacheDelegate 回调 imageCache:didFindImage:forKey:userInfo: 到 SDWebImageManager。
+SDWebImageManagerDelegate 回调 webImageManager:didFinishWithImage: 到 UIImageView+WebCache 等前端展示图片。
+如果内存缓存中没有，生成 NSInvocationOperation 添加到队列开始从硬盘查找图片是否已经缓存。
+根据 URLKey 在硬盘缓存目录下尝试读取图片文件。这一步是在 NSOperation 进行的操作，所以回主线程进行结果回调 notifyDelegate:。
+如果上一操作从硬盘读取到了图片，将图片添加到内存缓存中（如果空闲内存过小，会先清空内存缓存）。SDImageCacheDelegate 回调 imageCache:didFindImage:forKey:userInfo:。进而回调展示图片。
+如果从硬盘缓存目录读取不到图片，说明所有缓存都不存在该图片，需要下载图片，回调 imageCache:didNotFindImageForKey:userInfo:。
+共享或重新生成一个下载器 SDWebImageDownloader 开始下载图片。
+图片下载由 NSURLConnection 来做，实现相关 delegate 来判断图片下载中、下载完成和下载失败。
+connection:didReceiveData: 中利用 ImageIO 做了按图片下载进度加载效果。
+connectionDidFinishLoading: 数据下载完成后交给 SDWebImageDecoder 做图片解码处理。
+图片解码处理在一个 NSOperationQueue 完成，不会拖慢主线程 UI。如果有需要对下载的图片进行二次处理，最好也在这里完成，效率会好很多。
+在主线程 notifyDelegateOnMainThreadWithInfo: 宣告解码完成，imageDecoder:didFinishDecodingImage:userInfo: 回调给 SDWebImageDownloader。
+imageDownloader:didFinishWithImage: 回调给 SDWebImageManager 告知图片下载完成。
+通知所有的 downloadDelegates 下载完成，回调给需要的地方展示图片。
+将图片保存到 SDImageCache 中，内存缓存和硬盘缓存同时保存。写文件到硬盘也在以单独 NSInvocationOperation 完成，避免拖慢主线程。
+SDImageCache 在初始化的时候会注册一些消息通知，在内存警告或退到后台的时候清理内存图片缓存，应用结束的时候清理过期图片。
+SDWI 也提供了 UIButton+WebCache 和 MKAnnotationView+WebCache，方便使用。
+SDWebImagePrefetcher 可以预先下载图片，方便后续使用。</p>
+<p>SDWebImage库的作用：
+通过对UIImageView的类别扩展来实现异步加载替换图片的工作。
+主要用到的对象：
+1、UIImageView (WebCache)类别，入口封装，实现读取图片完成后的回调
+2、SDWebImageManager，对图片进行管理的中转站，记录那些图片正在读取。
+向下层读取Cache（调用SDImageCache），或者向网络读取对象（调用SDWebImageDownloader） 。
+实现SDImageCache和SDWebImageDownloader的回调。
+3、SDImageCache，根据URL的MD5摘要对图片进行存储和读取（实现存在内存中或者存在硬盘上两种实现）
+实现图片和内存清理工作。
+4、SDWebImageDownloader，根据URL向网络读取数据（实现部分读取和全部读取后再通知回调两种方式）
+其他类：
+SDWebImageDecoder，异步对图像进行了一次解压⋯⋯
+目前不明白为什么要做这么道工序。（现在清楚了，功能解释见下文）
+有趣的点：
+1、SDImageCache是怎么做数据管理的?
+SDImageCache分两个部分，一个是内存层面的，一个是硬盘层面的。
+内存层面的相当是个缓存器，以Key-Value的形式存储图片。当内存不够的时候会清除所有缓存图片。
+用搜索文件系统的方式做管理，文件替换方式是以时间为单位，剔除时间大于一周的图片文件。
+当SDWebImageManager向SDImageCache要资源时，先搜索内存层面的数据，如果有直接返回，没有的话去访问磁盘，将图片从磁盘读取出来，然后做Decoder，将图片对象放到内存层面做备份，再返回调用层。
+2、为啥必须做Decoder?
+通过这个博客：[crayon url=&quot;<a href="http://www.cocoanetics.com/2011/10/avoiding-image-decompression-sickness&quot;]http://www.cocoanetics.com/2011/10/avoiding-image-decompression-sickness/[/crayon" target="_blank">http://www.cocoanetics.com/2011/10/avoiding-image-decompression-sickness&quot;]http://www.cocoanetics.com/2011/10/avoiding-image-decompression-sickness/[/crayon</a>]
+现在明白了，由于UIImage的imageWithData函数是每次画图的时候才将Data解压成ARGB的图像，
+所以在每次画图的时候，会有一个解压操作，这样效率很低，但是只有瞬时的内存需求。
+为了提高效率通过SDWebImageDecoder将包装在Data下的资源解压，然后画在另外一张图片上，这样这张新图片就不再需要重复解压了。
+这种做法是典型的空间换时间的做法。</p>
+
+	 
+	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="null"><strong>null</strong></a> - Dec 10 2012</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://yoursite.com"><strong>Toothpick</strong></a></span>
+</p>
+       	 
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
 
   <nav id="pagination">
   
-  
-    <a href="/archives/page/2/" class="alignright next">Next</a>
   
 </nav>
 </div>

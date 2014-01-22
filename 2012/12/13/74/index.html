@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于彻底删除10.8.2深度休眠预留缓存的巨大垃圾文件 | Toothpick</title>
+  <meta name="author" content="toothpickv">
+  
+  <meta name="description" content="&nbsp; &nbsp; &nbsp; &nbsp;1.首先你要打开&ldquo;文本编辑器&quot;
+&nbsp; &nbsp; &nbsp;
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;2.在桌面上创建一个叫sleepimage的文档&lt;/spa">
+  
+  
+  <meta property="og:title" content="关于彻底删除10.8.2深度休眠预留缓存的巨大垃圾文件"/>
+  <meta property="og:site_name" content="Toothpick"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.png" >
+   <link rel="alternate" href="http://xxx.xx/atom.xml" title="Toothpick" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">Toothpick</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/about/">About</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscribe</a><li>
+    
+    </ul>
+</nav>
+
+  <div class="widget weibo">
+<iframe width="100%" height="100" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=110&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=null&verifier=78e1ee4d&colors=ffffff,ffffff,999,000,ecfbfd&dpc=1"></iframe>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>1</small></li>
+  
+    <li><a href="/categories/IOS/">IOS</a><small>8</small></li>
+  
+    <li><a href="/categories/IOS类库/">IOS类库</a><small>2</small></li>
+  
+    <li><a href="/categories/PHP/">PHP</a><small>1</small></li>
+  
+    <li><a href="/categories/coretext/">coretext</a><small>4</small></li>
+  
+    <li><a href="/categories/mac/">mac</a><small>2</small></li>
+  
+    <li><a href="/categories/插件/">插件</a><small>1</small></li>
+  
+    <li><a href="/categories/音乐/">音乐</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tags</h3>
+  <div class="entry">
+    <a href="/tags/Ad Hoc/" style="font-size: 12.50px;">Ad Hoc</a><a href="/tags/AppStore/" style="font-size: 12.50px;">AppStore</a><a href="/tags/CSS/" style="font-size: 10.00px;">CSS</a><a href="/tags/JDK/" style="font-size: 10.00px;">JDK</a><a href="/tags/Objective-C/" style="font-size: 17.50px;">Objective-C</a><a href="/tags/SASS/" style="font-size: 10.00px;">SASS</a><a href="/tags/SDWebImage/" style="font-size: 10.00px;">SDWebImage</a><a href="/tags/UIApplicationDelegate/" style="font-size: 10.00px;">UIApplicationDelegate</a><a href="/tags/UIImage/" style="font-size: 10.00px;">UIImage</a><a href="/tags/bug/" style="font-size: 10.00px;">bug</a><a href="/tags/ios/" style="font-size: 20.00px;">ios</a><a href="/tags/itunes/" style="font-size: 12.50px;">itunes</a><a href="/tags/java/" style="font-size: 10.00px;">java</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/occurred uploading/" style="font-size: 10.00px;">occurred uploading</a><a href="/tags/uitableview/" style="font-size: 10.00px;">uitableview</a><a href="/tags/优化/" style="font-size: 15.00px;">优化</a><a href="/tags/保存数据/" style="font-size: 10.00px;">保存数据</a><a href="/tags/后台/" style="font-size: 10.00px;">后台</a><a href="/tags/开发者/" style="font-size: 10.00px;">开发者</a><a href="/tags/类库/" style="font-size: 12.50px;">类库</a><a href="/tags/苹果/" style="font-size: 10.00px;">苹果</a><a href="/tags/账号/" style="font-size: 10.00px;">账号</a><a href="/tags/闪退/" style="font-size: 12.50px;">闪退</a><a href="/tags/高效/" style="font-size: 15.00px;">高效</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2014 toothpickv
+  
+</div>
+
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">Toothpick</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title">关于彻底删除10.8.2深度休眠预留缓存的巨大垃圾文件</h1>
+  
+
+      <time datetime="2012-12-12T21:06:50.000Z"><a href="/2012/12/13/74/">Dec 13 2012</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <p><span style="font-size:18px;"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-family:arial ;outline:none;line-height:1.5em;"><span style="outline:none;font-size:18px;">1.首先你要打开&ldquo;文本编辑器&quot;</span></span></p>
+<p><span style="font-size:18px;">&nbsp; &nbsp;</span><img src="http://images.weiphone.com/attachments/photo/Day_121121/208294_cd4a1353502667f458c7a48deed07.png" alt=""><span style="font-size:18px;"> &nbsp;</p>
+<pre><code>&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;2.在桌面上创建一个叫sleepimage的文档&lt;/span&gt;
+</code></pre><p><span style="font-size:18px;">&nbsp; &nbsp;</span><img src="http://images.weiphone.com/attachments/photo/Day_121121/208294_0cfa13535027544979e779e691f2f.png" alt=""></p>
+<pre><code>&lt;span style=&quot;font-size:18px;&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;3.然后打开你的Finder找到桌面选中这个文档回车，把它的后缀删掉 &amp;nbsp; &lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:18px;line-height:26px;background-color:#FFFFFF;&quot;&gt;.rtf&lt;/span&gt;
+
+&lt;span style=&quot;font-size:18px;&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;4.新建一个Finder，按住SHIFT+COMMAND+G，然后输入前往的文件夹地址/private/var/vm。
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;5.在第3步打开的Finder的桌面上把sleepimage拖到/private/var/vm，也就是用文档编辑器创建的那个，系统会提示你巴拉巴拉巴拉的什么要求你输入管理员密码，输入后就替换了，记得是替换！不是保留两者！
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;6.然后选中你已经替换的sleepimage按COMMAND+i把&amp;ldquo;已锁定&amp;rdquo;打上钩钩。&lt;/span&gt;
+</code></pre><p><span style="font-size:18px;">&nbsp; &nbsp;</span><img src="http://images.weiphone.com/attachments/photo/Day_121121/208294_079f1353503118cd14e965d6396cc.png" alt=""></p>
+<pre><code>&lt;span style=&quot;font-size:18px;&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 当当当！！！大功告成啦！！！这个原理就是禁止系统修改此文件夹！然后那个巨恶心的深度睡眠预留空间就不会再被创建了！重启100+N次也不会了！是的！不会了！！！！
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;span style=&quot;outline:none;color:#FF0000;font-size:18px;&quot;&gt;此教程不会影响你正常的休眠和系统，请放心更改。
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;
+
+&lt;span style=&quot;font-size:18px;&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;小弟120G的SSD，内存16G，没有删除前可用74G，删除后91G！！！！
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;![](http://images.weiphone.com/attachments/photo/Day_121121/208294_03ce13535032941d3060f7a187559.png)
+</code></pre>
+	 
+	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="null"><strong>null</strong></a> - Dec 13 2012</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://yoursite.com"><strong>Toothpick</strong></a></span>
+</p>
+       	 
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+  
+  <div class="categories">
+    <a href="/categories/mac/">mac</a>
+  </div>
+
+       		
+     		  
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/about/">About</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscribe</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>

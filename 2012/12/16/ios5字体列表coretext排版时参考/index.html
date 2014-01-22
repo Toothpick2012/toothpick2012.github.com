@@ -1,0 +1,423 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ios5字体列表,coretext排版时参考 | Toothpick</title>
+  <meta name="author" content="toothpickv">
+  
+  <meta name="description" content="&lt;table style=&quot;border-collapse: collapse; border-spacing: 0px; border-top-width: 1px; border-top-style: solid; border-top-color: rgb(161, 165, ">
+  
+  
+  <meta property="og:title" content="ios5字体列表,coretext排版时参考"/>
+  <meta property="og:site_name" content="Toothpick"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.png" >
+   <link rel="alternate" href="http://xxx.xx/atom.xml" title="Toothpick" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">Toothpick</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/about/">About</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscribe</a><li>
+    
+    </ul>
+</nav>
+
+  <div class="widget weibo">
+<iframe width="100%" height="100" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=110&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=null&verifier=78e1ee4d&colors=ffffff,ffffff,999,000,ecfbfd&dpc=1"></iframe>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CSS/">CSS</a><small>1</small></li>
+  
+    <li><a href="/categories/IOS/">IOS</a><small>8</small></li>
+  
+    <li><a href="/categories/IOS类库/">IOS类库</a><small>2</small></li>
+  
+    <li><a href="/categories/PHP/">PHP</a><small>1</small></li>
+  
+    <li><a href="/categories/coretext/">coretext</a><small>4</small></li>
+  
+    <li><a href="/categories/mac/">mac</a><small>2</small></li>
+  
+    <li><a href="/categories/插件/">插件</a><small>1</small></li>
+  
+    <li><a href="/categories/音乐/">音乐</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tags</h3>
+  <div class="entry">
+    <a href="/tags/Ad Hoc/" style="font-size: 12.50px;">Ad Hoc</a><a href="/tags/AppStore/" style="font-size: 12.50px;">AppStore</a><a href="/tags/CSS/" style="font-size: 10.00px;">CSS</a><a href="/tags/JDK/" style="font-size: 10.00px;">JDK</a><a href="/tags/Objective-C/" style="font-size: 17.50px;">Objective-C</a><a href="/tags/SASS/" style="font-size: 10.00px;">SASS</a><a href="/tags/SDWebImage/" style="font-size: 10.00px;">SDWebImage</a><a href="/tags/UIApplicationDelegate/" style="font-size: 10.00px;">UIApplicationDelegate</a><a href="/tags/UIImage/" style="font-size: 10.00px;">UIImage</a><a href="/tags/bug/" style="font-size: 10.00px;">bug</a><a href="/tags/ios/" style="font-size: 20.00px;">ios</a><a href="/tags/itunes/" style="font-size: 12.50px;">itunes</a><a href="/tags/java/" style="font-size: 10.00px;">java</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/occurred uploading/" style="font-size: 10.00px;">occurred uploading</a><a href="/tags/uitableview/" style="font-size: 10.00px;">uitableview</a><a href="/tags/优化/" style="font-size: 15.00px;">优化</a><a href="/tags/保存数据/" style="font-size: 10.00px;">保存数据</a><a href="/tags/后台/" style="font-size: 10.00px;">后台</a><a href="/tags/开发者/" style="font-size: 10.00px;">开发者</a><a href="/tags/类库/" style="font-size: 12.50px;">类库</a><a href="/tags/苹果/" style="font-size: 10.00px;">苹果</a><a href="/tags/账号/" style="font-size: 10.00px;">账号</a><a href="/tags/闪退/" style="font-size: 12.50px;">闪退</a><a href="/tags/高效/" style="font-size: 15.00px;">高效</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2014 toothpickv
+  
+</div>
+
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">Toothpick</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title">ios5字体列表,coretext排版时参考</h1>
+  
+
+      <time datetime="2012-12-15T23:09:04.000Z"><a href="/2012/12/16/ios5字体列表coretext排版时参考/">Dec 16 2012</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0">
+
+    </embed>
+
+<p><embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0">
+    <p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?--></p>
+<pre><code>&lt;table style=&quot;border-collapse: collapse; border-spacing: 0px; border-top-width: 1px; border-top-style: solid; border-top-color: rgb(161, 165, 169); border-left-width: 1px; border-left-style: solid; border-left-color: rgb(161, 165, 169); margin-bottom: 18px; color: rgb(51, 51, 51); font-family: &#39;Lucida Grande&#39;, &#39;Lucida Sans Unicode&#39;, Helvetica, Arial, Verdana, sans-serif; line-height: 18px; &quot;&gt;
+    &lt;tbody&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;**系列名称**&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;**版本**&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Academy Engraved LET&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d1e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;American Typewriter&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d1e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Apple Color Emoji&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d18e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;AppleGothic&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d5e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Arial&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;5.01.2x 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Arial Hebrew&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Arial Rounded MT Bold&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;1.51x 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Bangla Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d4e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Baskerville&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d4e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Bodoni 72&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d1e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Bodoni 72 Oldstyle&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d1e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Bodoni 72 Smallcaps&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d1e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Bodoni Ornaments&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Bradley Hand&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d3e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Chalkboard SE&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d13e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Chalkduster&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d6e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Cochin&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d1e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Copperplate&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d1e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Courier&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Courier New&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;5.00.2x 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Devanagari Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d10e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Didot&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d4e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Euphemia UCAS&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d4e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Futura&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.2d1e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Geeza Pro&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d8e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Georgia&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;5.00x-3 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Gill Sans&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d9e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Gujarati Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Gurmukhi MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Heiti SC&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d21e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Heiti TC&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d21e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Helvetica&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;8.0d9e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Helvetica Neue&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.1d5e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Hiragino Kaku Gothic ProN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;8.10 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Hiragino Mincho ProN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;8.10 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Hoefler Text&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d7e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Kailasa&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d3e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Kannada Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d3e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Malayalam Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d3e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Marion&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.1d3e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Marker Felt&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;4.4d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Noteworthy&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d15e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Optima&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d4e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Oriya Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d4e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Palatino&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d4e4&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Papyrus&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d10e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Party LET&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Sinhala Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.05e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Snell Roundhand&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d6e3&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Tamil Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Telugu Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Thonburi&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;10.7d8e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Times New Roman&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;5.01.3x 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Trebuchet MS&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;5.00x 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Verdana&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;5.01x 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Zapf Dingbats&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d3e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Zapfino&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d5e1&amp;nbsp;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;table style=&quot;border-collapse: collapse; border-spacing: 0px; border-top-width: 1px; border-top-style: solid; border-top-color: rgb(161, 165, 169); border-left-width: 1px; border-left-style: solid; border-left-color: rgb(161, 165, 169); margin-bottom: 18px; color: rgb(51, 51, 51); font-family: &#39;Lucida Grande&#39;, &#39;Lucida Sans Unicode&#39;, Helvetica, Arial, Verdana, sans-serif; line-height: 18px; &quot;&gt;&lt;/table&gt;
+
+&lt;/embed&gt;&lt;/p&gt;
+</code></pre>
+	 
+	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="null"><strong>null</strong></a> - Dec 16 2012</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://yoursite.com"><strong>Toothpick</strong></a></span>
+</p>
+       	 
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+  
+  <div class="categories">
+    <a href="/categories/coretext/">coretext</a>
+  </div>
+
+       		
+     		  
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/about/">About</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscribe</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>
