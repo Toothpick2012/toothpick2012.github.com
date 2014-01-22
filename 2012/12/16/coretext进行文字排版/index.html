@@ -1,187 +1,229 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   
   <title>CoreText进行文字排版 | Toothpick</title>
-  <meta name="author" content="toothpickv">
-  
-  <meta name="description" content="coretext实现UIlable的字间距和行间距的设置
-#import#import@interface TextLabel : UILabel{ &nbsp; &nbsp;@private &nbsp; &nbsp; &nbsp; &nbsp;CGFloat characterSpacing_;">
-  
-  
-  <meta property="og:title" content="CoreText进行文字排版"/>
-  <meta property="og:site_name" content="Toothpick"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+  <meta name="og:type" content="blog">
+<meta name="og:title" content="CoreText进行文字排版">
+<meta name="og:url" content="http://yoursite.com/2012/12/16/coretext进行文字排版/">
+<meta name="og:image">
+<meta name="og:site_name" content="Toothpick">
+<meta name="og:description" content="coretext实现UIlable的字间距和行间距的设置
+#import#import@interface TextLabel : UILabel{ &nbsp; &nbsp;@private &nbsp; &nbsp; &nbsp; &nbsp;CGFloat characterSpacing_; &nbsp; &nbsp; &nbsp; //字间距 &nbsp; &nbsp;@private">
+<meta name="twitter:card" content="summary">
   
-    <meta property="og:image" content="undefined"/>
+    <link rel="alternative" href="/atom.xml" title="Toothpick" type="application/atom+xml">
   
-   <link rel="apple-touch-icon" href="/icon.png" />
-   <link rel="shortcut icon" href="/favicon.png" >
-   <link rel="alternate" href="http://xxx.xx/atom.xml" title="Toothpick" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="http://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
 </head>
-
-
 <body>
-  <div id="content" class="inner">
-    <aside id="sidebar" class="alignleft">
-      <div class="navigationBar">
-        <a href="/">Toothpick</a>
-      </div>
-    	
-  <nav class="widget" id="menu">
-	<ul>
-    
-      <li class="cell"><a class="next" href="/">Home</a><li>
-    
-      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
-    
-      <li class="cell"><a class="next" href="/about/">About</a><li>
-    
-      <li class="cell"><a class="next" href="/atom.xml">Subscribe</a><li>
-    
-    </ul>
-</nav>
-
-  <div class="widget weibo">
-<iframe width="100%" height="100" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=110&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=null&verifier=78e1ee4d&colors=ffffff,ffffff,999,000,ecfbfd&dpc=1"></iframe>
-</div>
-
-  
-<div class="widget tag">
-  <h3 class="title">Categories</h3>
-  <ul class="entry">
-  
-    <li><a href="/categories/CSS/">CSS</a><small>1</small></li>
-  
-    <li><a href="/categories/IOS/">IOS</a><small>8</small></li>
-  
-    <li><a href="/categories/IOS类库/">IOS类库</a><small>2</small></li>
-  
-    <li><a href="/categories/PHP/">PHP</a><small>1</small></li>
-  
-    <li><a href="/categories/coretext/">coretext</a><small>4</small></li>
-  
-    <li><a href="/categories/mac/">mac</a><small>2</small></li>
-  
-    <li><a href="/categories/插件/">插件</a><small>1</small></li>
-  
-    <li><a href="/categories/音乐/">音乐</a><small>1</small></li>
-  
-  </ul>
-</div>
-
-
-  
-<div class="widget tagcloud">
-  <h3 class="title">Tags</h3>
-  <div class="entry">
-    <a href="/tags/Ad Hoc/" style="font-size: 12.50px;">Ad Hoc</a><a href="/tags/AppStore/" style="font-size: 12.50px;">AppStore</a><a href="/tags/CSS/" style="font-size: 10.00px;">CSS</a><a href="/tags/JDK/" style="font-size: 10.00px;">JDK</a><a href="/tags/Objective-C/" style="font-size: 17.50px;">Objective-C</a><a href="/tags/SASS/" style="font-size: 10.00px;">SASS</a><a href="/tags/SDWebImage/" style="font-size: 10.00px;">SDWebImage</a><a href="/tags/UIApplicationDelegate/" style="font-size: 10.00px;">UIApplicationDelegate</a><a href="/tags/UIImage/" style="font-size: 10.00px;">UIImage</a><a href="/tags/bug/" style="font-size: 10.00px;">bug</a><a href="/tags/ios/" style="font-size: 20.00px;">ios</a><a href="/tags/itunes/" style="font-size: 12.50px;">itunes</a><a href="/tags/java/" style="font-size: 10.00px;">java</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/occurred uploading/" style="font-size: 10.00px;">occurred uploading</a><a href="/tags/uitableview/" style="font-size: 10.00px;">uitableview</a><a href="/tags/优化/" style="font-size: 15.00px;">优化</a><a href="/tags/保存数据/" style="font-size: 10.00px;">保存数据</a><a href="/tags/后台/" style="font-size: 10.00px;">后台</a><a href="/tags/开发者/" style="font-size: 10.00px;">开发者</a><a href="/tags/类库/" style="font-size: 12.50px;">类库</a><a href="/tags/苹果/" style="font-size: 10.00px;">苹果</a><a href="/tags/账号/" style="font-size: 10.00px;">账号</a><a href="/tags/闪退/" style="font-size: 12.50px;">闪退</a><a href="/tags/高效/" style="font-size: 15.00px;">高效</a>
-  </div>
-</div>
-
-
-    	<footer id="footer" class="inner"><div class="copyright">
-  
-  &copy; 2014 toothpickv
-  
-</div>
-
-
-
-</footer>
-    </aside>
-    
-    
-    <div id="hidden-navigationBar" class="navigationBar">
-      <a href="/">Toothpick</a>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Toothpick</a>
+      </h1>
+      
     </div>
-    <div id="main-col" class="alignright">
-    <div id="wrapper">
-      
-<article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </div>
+    </div>
   </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-coretext进行文字排版" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/12/16/coretext进行文字排版/" class="article-date">
+  <time datetime="2012-12-15T23:10:51.000Z" itemprop="datePublished">Dec 16 2012</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/coretext/">coretext</a>
   </div>
-</div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-  <div class="post-content">
-  <header>
-      
-      
-  
-    <h1 class="title">CoreText进行文字排版</h1>
+    <h1 class="article-title" itemprop="name">
+      CoreText进行文字排版
+    </h1>
   
 
-      <time datetime="2012-12-15T23:10:51.000Z"><a href="/2012/12/16/coretext进行文字排版/">Dec 16 2012</a></time>
-      
-  </header>
-    <div class="entry">
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
       
         <p><span style="font-size:18px;">coretext实现UIlable的字间距和行间距的设置</span></p>
 <pre lang="objective-c">#import<foundation>#import<uikit>@interface TextLabel : UILabel{ &nbsp; &nbsp;@private &nbsp; &nbsp; &nbsp; &nbsp;CGFloat characterSpacing_; &nbsp; &nbsp; &nbsp; //字间距 &nbsp; &nbsp;@private &nbsp; &nbsp; &nbsp; &nbsp;long linesSpacing_; &nbsp; //行间距 &nbsp; &nbsp;}@property(nonatomic,assign) CGFloat characterSpacing;@property(nonatomic,assign) long linesSpacing;//准确计算CoreText高度的方法- (int)getAttributedStringHeightWithString:(NSAttributedString *) &nbsp;string &nbsp;WidthValue:(int) width;@end</uikit></foundation></pre>
 
 <p>[html lang=&quot;objective-c&quot;]#import &quot;TextLabel.h&quot;#import</p>
 <coretext>@implementation TextLabel@synthesize characterSpacing = characterSpacing<em>;@synthesize linesSpacing = linesSpacing</em>;-(id) initWithFrame:(CGRect)frame{//初始化字间距、行间距 &nbsp; &nbsp; &nbsp; &nbsp;if(self =[superinitWithFrame:frame]) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;self.characterSpacing = 2.0f; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;self.linesSpacing = 5.0f; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;returnself; &nbsp; &nbsp;}-(void)setCharacterSpacing:(CGFloat)characterSpacing //外部调用设置字间距{ &nbsp; &nbsp; &nbsp; &nbsp;characterSpacing<em> = characterSpacing; &nbsp; &nbsp; &nbsp; &nbsp;[selfsetNeedsDisplay]; &nbsp; &nbsp;}-(void)setLinesSpacing:(long)linesSpacing &nbsp;//外部调用设置行间距{ &nbsp; &nbsp; &nbsp; &nbsp;linesSpacing</em> = linesSpacing; &nbsp; &nbsp; &nbsp; &nbsp;[selfsetNeedsDisplay]; &nbsp; &nbsp;}-(void) drawTextInRect:(CGRect)requestedRect{ &nbsp; &nbsp; &nbsp; &nbsp;//去掉空行 &nbsp; &nbsp;// &nbsp; &nbsp;NSString <em>labelString = self.text;// &nbsp; &nbsp;// &nbsp; &nbsp;NSString </em>myString = [labelString stringByReplacingOccurrencesOfString:@&quot;\r\n&quot; withString:&quot;\n&quot;]; &nbsp; &nbsp; &nbsp; &nbsp;//创建AttributeString &nbsp; &nbsp; &nbsp; &nbsp;NSMutableAttributedString <em>string =[[NSMutableAttributedStringalloc]initWithString:self.text]; &nbsp; &nbsp; &nbsp; &nbsp;string = [selfsetStyle:string]; &nbsp; &nbsp; &nbsp; &nbsp;//排版 &nbsp; &nbsp; &nbsp; &nbsp;CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string); &nbsp; &nbsp; &nbsp; &nbsp;CGMutablePathRef leftColumnPath = CGPathCreateMutable(); &nbsp; &nbsp; &nbsp; &nbsp;CGPathAddRect(leftColumnPath, NULL ,CGRectMake(0 , 0 ,self.bounds.size.width , self.bounds.size.height)); &nbsp; &nbsp; &nbsp; &nbsp;CTFrameRef leftFrame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0, 0), leftColumnPath , NULL); &nbsp; &nbsp; &nbsp; &nbsp;//翻转坐标系统（文本原来是倒的要翻转下） &nbsp; &nbsp; &nbsp; &nbsp;CGContextRef context = UIGraphicsGetCurrentContext(); &nbsp; &nbsp; &nbsp; &nbsp;CGContextSetTextMatrix(context , CGAffineTransformIdentity); &nbsp; &nbsp; &nbsp; &nbsp;CGContextTranslateCTM(context , 0 ,self.bounds.size.height); &nbsp; &nbsp; &nbsp; &nbsp;CGContextScaleCTM(context, 1.0 ,-1.0); &nbsp; &nbsp; &nbsp; &nbsp;//画出文本 &nbsp; &nbsp; &nbsp; &nbsp;CTFrameDraw(leftFrame,context); &nbsp; &nbsp; &nbsp; &nbsp;//释放 &nbsp; &nbsp; &nbsp; &nbsp;CGPathRelease(leftColumnPath); &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(framesetter); &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(leftFrame); &nbsp; &nbsp; &nbsp; &nbsp;[string release]; &nbsp; &nbsp; &nbsp; &nbsp;UIGraphicsPushContext(context); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}-(NSMutableAttributedString</em>)setStyle:(NSMutableAttributedString<em>)string{ &nbsp; &nbsp;//设置字体及大小 &nbsp; &nbsp; &nbsp; &nbsp;CTFontRef helveticaBold = CTFontCreateWithName((CFStringRef)self.font.fontName,self.font.pointSize,NULL); &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTFontAttributeNamevalue:(id)helveticaBold range:NSMakeRange(0,[string length])]; &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(helveticaBold); &nbsp; &nbsp;//设置字间距 &nbsp; &nbsp; &nbsp; &nbsp;if(self.characterSpacing) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;long number = self.characterSpacing; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CFNumberRef num = CFNumberCreate(kCFAllocatorDefault,kCFNumberSInt8Type,&amp;number); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTKernAttributeNamevalue:(id)num range:NSMakeRange(0,[string length])]; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(num); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;//设置字体颜色 &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTForegroundColorAttributeNamevalue:(id)(self.textColor.CGColor) range:NSMakeRange(0,[string length])]; &nbsp; &nbsp; &nbsp; &nbsp;//创建文本对齐方式 &nbsp; &nbsp; &nbsp; &nbsp;CTTextAlignment alignment = kCTLeftTextAlignment; &nbsp; &nbsp; &nbsp; &nbsp;if(self.textAlignment == UITextAlignmentCenter) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;alignment = kCTCenterTextAlignment; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;if(self.textAlignment == UITextAlignmentRight) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;alignment = kCTRightTextAlignment; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting alignmentStyle; &nbsp; &nbsp; &nbsp; &nbsp;alignmentStyle.spec = kCTParagraphStyleSpecifierAlignment; &nbsp; &nbsp; &nbsp; &nbsp;alignmentStyle.valueSize = sizeof(alignment); &nbsp; &nbsp; &nbsp; &nbsp;alignmentStyle.value = &amp;alignment; &nbsp; &nbsp; &nbsp; &nbsp;//设置文本行间距 &nbsp; &nbsp; &nbsp; &nbsp;CGFloat lineSpace = self.linesSpacing; &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting lineSpaceStyle; &nbsp; &nbsp; &nbsp; &nbsp;lineSpaceStyle.spec = kCTParagraphStyleSpecifierLineSpacingAdjustment; &nbsp; &nbsp; &nbsp; &nbsp;lineSpaceStyle.valueSize = sizeof(lineSpace); &nbsp; &nbsp; &nbsp; &nbsp;lineSpaceStyle.value =&amp;lineSpace; &nbsp; &nbsp; &nbsp; &nbsp;//设置文本段间距 &nbsp; &nbsp; &nbsp; &nbsp;CGFloat paragraphSpacing = 5.0; &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting paragraphSpaceStyle; &nbsp; &nbsp; &nbsp; &nbsp;paragraphSpaceStyle.spec = kCTParagraphStyleSpecifierParagraphSpacing; &nbsp; &nbsp; &nbsp; &nbsp;paragraphSpaceStyle.valueSize = sizeof(CGFloat); &nbsp; &nbsp; &nbsp; &nbsp;paragraphSpaceStyle.value = ¶graphSpacing; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//创建设置数组 &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting settings[ ] ={alignmentStyle,lineSpaceStyle,paragraphSpaceStyle}; &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleRef style = CTParagraphStyleCreate(settings , sizeof(settings)); &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(settings); &nbsp; &nbsp;//给文本添加设置 &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTParagraphStyleAttributeName value:(id)style range:NSMakeRange(0 , [string length])]; &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(style); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return string;}//准确计算CoreText高度的方法- (int)getAttributedStringHeightWithString:(NSMutableAttributedString </em>) &nbsp;string &nbsp;WidthValue:(int) width{ &nbsp; &nbsp;string = [selfsetStyle:string]; &nbsp; &nbsp; &nbsp; &nbsp;int total_height = 0; &nbsp; &nbsp; &nbsp; &nbsp;CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string); &nbsp; &nbsp;//string 为要计算高度的NSAttributedString &nbsp; &nbsp;CGRect drawingRect = CGRectMake(0, 0, width, 99999); &nbsp;//这里的高要设置足够大 &nbsp; &nbsp;CGMutablePathRef path = CGPathCreateMutable(); &nbsp; &nbsp;CGPathAddRect(path, NULL, drawingRect); &nbsp; &nbsp;CTFrameRef textFrame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0,0), path, NULL); &nbsp; &nbsp;CGPathRelease(path); &nbsp; &nbsp;CFRelease(framesetter); &nbsp; &nbsp; &nbsp; &nbsp;NSArray <em>linesArray = (NSArray </em>) CTFrameGetLines(textFrame); &nbsp; &nbsp; &nbsp; &nbsp;CGPoint origins[[linesArray count]]; &nbsp; &nbsp;CTFrameGetLineOrigins(textFrame, CFRangeMake(0, 0), origins); &nbsp; &nbsp; &nbsp; &nbsp;int line_y = (int) origins[[linesArray count] -1].y; &nbsp;//最后一行line的原点y坐标 &nbsp; &nbsp; &nbsp; &nbsp;CGFloat ascent; &nbsp; &nbsp;CGFloat descent; &nbsp; &nbsp;CGFloat leading; &nbsp; &nbsp; &nbsp; &nbsp;CTLineRef line = (CTLineRef) [linesArray objectAtIndex:[linesArray count]-1]; &nbsp; &nbsp;CTLineGetTypographicBounds(line, &amp;ascent, &amp;descent, &amp;leading); &nbsp; &nbsp; &nbsp; &nbsp;total_height = 99999 - line_y + (int) descent +1; &nbsp; &nbsp;//+1为了纠正descent转换成int小数点后舍去的值 &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(textFrame); &nbsp; &nbsp; &nbsp; &nbsp;return total_height; &nbsp; &nbsp;}@end[/html]</coretext>
-	 
-	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
-<span>Posted by <a style="color:#9f9f9f;" href="null"><strong>null</strong></a> - Dec 16 2012</span><br />
-<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://yoursite.com"><strong>Toothpick</strong></a></span>
-</p>
-       	 
       
     </div>
-    <footer>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2012/12/16/coretext进行文字排版/" data-id="0zry0h2660gdjvpi" class="article-share-link">Share</a>
       
-	 
-     		  
-  
-  <div class="categories">
-    <a href="/categories/coretext/">coretext</a>
-  </div>
-
-       		
-  
-  <div class="tags">
-    <a href="/tags/ios/">ios</a>, <a href="/tags/Objective-C/">Objective-C</a>, <a href="/tags/优化/">优化</a>, <a href="/tags/类库/">类库</a>
-  </div>
-
-     		  
-       	 
       
-      <div class="clearfix"></div>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/优化/">优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/类库/">类库</a></li></ul>
+
     </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2012/12/19/ios-object-c开发中混合使用或不使用arc/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ios objective-c开发中混合使用或不使用ARC
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2012/12/16/ios5字体列表coretext排版时参考/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ios5字体列表,coretext排版时参考</div>
+    </a>
+  
+</nav>
+
+  
 </article>
 
-
-</div>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IOS/">IOS</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IOS/">IOS</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IOS类库/">IOS类库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IOS/">IOS</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IOS类库/">IOS类库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IOS/">IOS</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IOS类库/">IOS类库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coretext/">coretext</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IOS/">IOS</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IOS类库/">IOS类库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coretext/">coretext</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mac/">mac</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IOS/">IOS</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IOS类库/">IOS类库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coretext/">coretext</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mac/">mac</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/插件/">插件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IOS/">IOS</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IOS类库/">IOS类库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coretext/">coretext</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mac/">mac</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/插件/">插件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/">音乐</a><span class="category-list-count">1</span></li></ul>
     </div>
-    <div class="tabbar" onload="divideTabBar()">
-	
-      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+  </div>
+
+  
     
-      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ad Hoc/">Ad Hoc</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AppStore/">AppStore</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK/">JDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Objective-C/">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SASS/">SASS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SDWebImage/">SDWebImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIApplicationDelegate/">UIApplicationDelegate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIImage/">UIImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itunes/">itunes</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/occurred uploading/">occurred uploading</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uitableview/">uitableview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/保存数据/">保存数据</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台/">后台</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发者/">开发者</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类库/">类库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/苹果/">苹果</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/账号/">账号</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闪退/">闪退</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高效/">高效</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
     
-      <div class="tabbaritem"><a class="next" href="/about/">About</a></div>
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Ad Hoc/" style="font-size: 12.50px;">Ad Hoc</a><a href="/tags/AppStore/" style="font-size: 12.50px;">AppStore</a><a href="/tags/CSS/" style="font-size: 10.00px;">CSS</a><a href="/tags/JDK/" style="font-size: 10.00px;">JDK</a><a href="/tags/Objective-C/" style="font-size: 17.50px;">Objective-C</a><a href="/tags/SASS/" style="font-size: 10.00px;">SASS</a><a href="/tags/SDWebImage/" style="font-size: 10.00px;">SDWebImage</a><a href="/tags/UIApplicationDelegate/" style="font-size: 10.00px;">UIApplicationDelegate</a><a href="/tags/UIImage/" style="font-size: 10.00px;">UIImage</a><a href="/tags/bug/" style="font-size: 10.00px;">bug</a><a href="/tags/ios/" style="font-size: 20.00px;">ios</a><a href="/tags/itunes/" style="font-size: 12.50px;">itunes</a><a href="/tags/java/" style="font-size: 10.00px;">java</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/occurred uploading/" style="font-size: 10.00px;">occurred uploading</a><a href="/tags/uitableview/" style="font-size: 10.00px;">uitableview</a><a href="/tags/优化/" style="font-size: 15.00px;">优化</a><a href="/tags/保存数据/" style="font-size: 10.00px;">保存数据</a><a href="/tags/后台/" style="font-size: 10.00px;">后台</a><a href="/tags/开发者/" style="font-size: 10.00px;">开发者</a><a href="/tags/类库/" style="font-size: 12.50px;">类库</a><a href="/tags/苹果/" style="font-size: 10.00px;">苹果</a><a href="/tags/账号/" style="font-size: 10.00px;">账号</a><a href="/tags/闪退/" style="font-size: 12.50px;">闪退</a><a href="/tags/高效/" style="font-size: 15.00px;">高效</a>
+    </div>
+  </div>
+
+  
     
-      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscribe</a></div>
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11">November 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03">March 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01">January 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12">December 2012</a><span class="archive-list-count">16</span></li></ul>
+    </div>
+  </div>
+
+  
     
-</div>
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2013/11/04/ios7状态栏以及导航栏/">ios7状态栏以及导航栏</a>
+          </li>
+        
+          <li>
+            <a href="/2013/03/25/calayer与uiview的关系/">CALayer与UIView的关系</a>
+          </li>
+        
+          <li>
+            <a href="/2013/01/10/苹果-开发者账号区别（转）/">苹果 开发者账号区别（转）</a>
+          </li>
+        
+          <li>
+            <a href="/2013/01/09/xcode-4透過ad-hoc發佈app給其它裝置測試使用/">Xcode 4透過Ad-Hoc發佈App給其它裝置測試使用 </a>
+          </li>
+        
+          <li>
+            <a href="/2012/12/28/上传-appstore-出现an-error-occurred-uploading-to-the-itunes-store问题解决/">上传 appstore 出现&quot;an error occurred uploading to the itunes store&quot;问题解决</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2014 toothpickv<br>
+      Powered by <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script type="text/javascript" src="/js/script.js"></script>
   </div>
 </body>
 </html>
