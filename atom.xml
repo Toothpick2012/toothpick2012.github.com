@@ -1,0 +1,2081 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Toothpick's blog]]></title>
+  <subtitle><![CDATA[牙-_签]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2014-01-23T07:24:42.452Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name><![CDATA[toothpickv]]></name>
+    <email><![CDATA[toothpick.v@gmail.com]]></email>
+  </author>
+  
+  <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[ios7状态栏以及导航栏]]></title>
+    <link href="http://yoursite.com/2013/11/04/ios7%E7%8A%B6%E6%80%81%E6%A0%8F%E4%BB%A5%E5%8F%8A%E5%AF%BC%E8%88%AA%E6%A0%8F/"/>
+    <id>http://yoursite.com/2013/11/04/ios7状态栏以及导航栏/</id>
+    <published>2013-11-04T00:34:41.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->     ios7的发布使得ios的导航栏和状态栏一体化，渐渐适应以后还是蛮好看的。但是作为开发者，接下来新SDK编译的适配工作也会显得蛋疼不已。许多应用如微信等，可能还是只是适配布局，未进行较大的UI改动，或是出于谨慎考虑。设计风格的大改，怕是不可避免的。本公司的射鸡师早已酝酿出了一套界面，咋一看还真是漂亮极了。导航栏一会绿色一会白色，状态栏字体也是一会黑色一会白色，所以射鸡师它真的不痛程序猿的痛好吗！？</p>
+<div></div>
+<div>ok，这个适配工作真是有些许麻烦，既要保证完美适配，也不想搞乱项目。来吧。</div>
+<div></div>
+设置导航栏的背景颜色
+<div>在iOS 7中，不再使用tintColor属性来设置导航栏的颜色，而是使用barTintColor属性来修改背景色。我们可以在AppDelegate.m文件中的方法didFinishLaunchingWithOptions:里面添加如下代码来修改颜色：</div>
+<div>[[UINavigationBar appearance] setBarTintColor:[UIColor yellowColor]];</div>
+<div>默认情况下，导航栏的translucent属性为YES。另外，系统还会对所有的导航栏做模糊处理，这样可以让iOS 7中导航栏的颜色会变得淡了。至于这个的解决方案可以参考：</div>
+<div>如何在iOS 7中设置barTintColor实现类似网易和 Facebook 的 navigationBar 效果</div>
+<div><a href="http://www.cocoachina.com/applenews/devnews/2013/1024/7233.html" target="_blank"><a href="http://www.cocoachina.com/applenews/devnews/2013/1024/7233.html">http://www.cocoachina.com/applenews/devnews/2013/1024/7233.html</a></a></div>
+<div></div>
+<div>修改状态栏风格</div>
+<div> 在老版本的iOS中，状态栏永远都是白色风格。而在iOS 7中，我们可以修改每个view controller中状态栏的外观。通过UIStatusBarStyle常量可以指定状态栏的内容是暗色或亮色。默认情况下，状态栏的显示是暗色，状态栏上的时间、电池指示器和Wi-Fi信号显示为暗色,通常搭配浅色的背景。相反的，深色的背景时需要转为亮色的状态栏搭配。</div>
+<div></div>
+在iOS 7中，我们可以在每个view controller中overridingpreferredStatusBarStyle:方法，如下所示：
+<pre>
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+</pre>
+另外，我们也可以使用UIApplication的statusBarStyle方法来设置状态栏，不过，首先需要停止使用View controller-based status bar appearance。在project target的Info tab中，插入一个新的key，名字为View controller-based status bar appearance，并将其值设置为YES，动态改变状态栏。
+<div><img src="file:///Users/toothpick/Library/Application%20Support/Evernote/accounts/Evernote/qpdyx/content/p521/8d689d4273ef2f584a3e98b94384cafb.jpeg" alt=""></div>
+<div></div>
+<div>适配工作</div>
+<div><span style="color: #ff9300;">NO.1</span></div>
+<div>了解了修改的方法以后，接下来是如何简单方便的适配整个项目了。</div>
+<div>对于原先使用官方类UINavigationController，可以添加一个扩展类UIViewController+NavigationBar，使用公共方法来设置导航栏</div>
+<div></div>
+<pre>
+- (void)setBarColor:(UIColor<em>)color
+{
+if (isIOS7)
+{
+[self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
+[self.navigationController.navigationBar setBarTintColor:color];
+}
+else
+{
+[self.navigationController.navigationBar setBarStyle:UIBarStyleBlack];
+[self.navigationController.navigationBar setTintColor:color];
+}
+</pre>
+<div>}</div>
+<div>如果，有需要再自定义UINavigationBar为MyUINavigationBar,和UINavigationController为MyUINavigationController</div>
+<div><span style="color: #00f900;">MyUINavigationBar：</span></div>
+<pre>
+- (void)setBarTintColor:(UIColor </em>)barTintColor {
+//自定义
+}
+
+- (void)setTintColor:(UIColor <em>)tintColor
+{
+//自定义
+}
+</pre>
+<div></div>
+<div><span style="color: #00f900;">MyUINavigationController</span>：
+
+<pre>
+- (id)init {
+self = [super initWithNavigationBarClass:[MyUINavigationBar class] toolbarClass:nil];
+return self;
+}
+
+- (id)initWithRootViewController:(UIViewController </em>)rootViewController {
+self = [super initWithNavigationBarClass:[MyUINavigationBar class] toolbarClass:nil];
+        if(self) {
+self.viewControllers = @[rootViewController];
+};
+
+return self;
+}
+</pre>
+
+<div><span style="color: #ff9300;">NO.2</span></div>
+</div>
+<div>状态栏也需要因应导航栏的变化而变化，创建扩展类UIViewController+StatusBarStyle</div>
+<div><span style="color: #00f900;">UIViewController+StatusBarStyle.h: </span></div>
+<div></div>
+<pre>
+@interface StatusBarStyle : NSObject
+
++ (UIStatusBarStyle)statusBarStyle;
++ (BOOL)statusBarHidden;
+
+@end
+
+@interface UIViewController (StatusBarStyle)
+
+- (void)setStatusBarStyle:(UIStatusBarStyle)style;
+- (void)setStatusBarHidden:(BOOL)isHidden;
+@end
+</pre>
+
+&nbsp;
+<div>UIViewController+StatusBarStyle.m:</div>
+<div></div>
+<pre>
+@implementation StatusBarStyle
+
+static UIStatusBarStyle statusBarStyle = UIStatusBarStyleDefault;
+static bool isBarHidden = NO;
+static UIViewController *viewControllerv = nil;
+
++ (UIStatusBarStyle)statusBarStyle
+{
+return statusBarStyle;
+}
+
++ (BOOL)statusBarHidden
+{
+return isBarHidden;
+}
+
+@end
+
+@implementation UIViewController (StatusBarStyle)
+
+- (void)setStatusBarStyle:(UIStatusBarStyle)style
+{
+if (isIOS7) {
+statusBarStyle = style;
+[viewControllerv setNeedsStatusBarAppearanceUpdate];
+}
+}
+
+- (void)setStatusBarHidden:(BOOL)isHidden
+{
+if (isIOS7) {
+isBarHidden = isHidden;
+[viewControllerv setNeedsStatusBarAppearanceUpdate];
+}
+}
+
+#ifdef __IPHONE_7_0
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+viewControllerv = nil;
+viewControllerv = self;
+return [StatusBarStyle statusBarStyle];
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+return UIStatusBarAnimationFade;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+return [StatusBarStyle statusBarHidden];
+}
+#endif
+@end
+</pre>
+<div></div>
+<div></div>
+<div><span style="color: #ff9300;">以上个人的解决方案，适配工作有点紧，有未充分考虑，如果大神有更方便简洁的方案，欢迎赐教。</span></div>]]></content>
+    
+    
+      <category term="IOS" scheme="http://yoursite.com/categories/IOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[CALayer与UIView的关系]]></title>
+    <link href="http://yoursite.com/2013/03/25/calayer%E4%B8%8Euiview%E7%9A%84%E5%85%B3%E7%B3%BB/"/>
+    <id>http://yoursite.com/2013/03/25/calayer与uiview的关系/</id>
+    <published>2013-03-25T05:36:49.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<p>CALayer属于Core Animation部分的内容，比较重要而不太好理解。以下是园子中看到的一篇文章的摘录：</p>
+<p><span style="word-wrap:normal;word-break:normal;margin:0px;padding:0px;">1. UIView是iOS系统中界面元素的基础</span>，所有的界面元素都是继承自它。它本身完全是由CoreAnimation来实现的。<span style="word-wrap:normal;word-break:normal;margin:0px;padding:0px;">它真正的绘图部分，是由一个CALayer类来管理</span>。UIView本身更像是一个CALayer的管理器，访问它的跟绘图和跟坐标有关的属性，例如frame，bounds等，实际上内部都是在访问它所包含的CALayer的相关属性。</p>
+<p><span style="word-wrap:normal;word-break:normal;margin:0px;padding:0px;">2. UIView有个重要属性layer，可以返回它的主CALayer实例。
+</span></p>
+<div style="font-size:14px;color:#333333;line-height:26px;background-color:#ffffff;margin:5px 0px;padding:5px;font-family:&#39;courier new&#39;;border:1px solid #cccccc;overflow:auto;"><pre style="word-wrap:break-word;padding:0px;font-family:&#39;courier new&#39;;margin-top:0px;margin-bottom:0px;"><span style="word-wrap:normal;word-break:normal;line-height:21px;margin:0px;padding:0px;color:#008000;">//</span><span style="word-wrap:normal;word-break:normal;line-height:21px;margin:0px;padding:0px;color:#008000;"> 要访问层，读取UIView实例的layer属性</span><span style="word-wrap:normal;word-break:normal;line-height:21px;margin:0px;padding:0px;color:#008000;">
+</span>CALayer *layer = myView.layer
+</pre></div>
+
+<p>所有从UIView继承来的对象都继承了这个属性。这意味着你可以转换、缩放、旋转，甚至可以在Navigation bars，Tables，Text boxes等其它的View类上增加动画。每个UIView都有一个层，控制着各自的内容最终被显示在屏幕上的方式。
+UIView的layerClass方法，可以返回主layer所使用的类，UIView的子类可以通过重载这个方法，来让UIView使用不同的CALayer来显示。代码示例：</p>
+<div style="font-size:14px;color:#333333;line-height:26px;background-color:#ffffff;margin:5px 0px;padding:5px;font-family:&#39;courier new&#39;;border:1px solid #cccccc;overflow:auto;"><pre style="word-wrap:break-word;padding:0px;font-family:&#39;courier new&#39;;margin-top:0px;margin-bottom:0px;">- (<span style="word-wrap:normal;word-break:normal;line-height:21px;margin:0px;padding:0px;color:#0000ff;">class</span>)layerClass {
+<span style="word-wrap:normal;word-break:normal;line-height:21px;margin:0px;padding:0px;color:#0000ff;">return</span> ([CAEAGLLayer <span style="word-wrap:normal;word-break:normal;line-height:21px;margin:0px;padding:0px;color:#0000ff;">class</span>]);
+
+}
+</pre></div>
+
+<p>上述代码使得某个UIView的子类使用GL来进行绘制。</p>
+<p><span style="word-wrap:normal;word-break:normal;margin:0px;padding:0px;">3. UIView的CALayer类似UIView的子View树形结构</span>，也可以向它的layer上添加子layer，来完成某些特殊的表示。即CALayer层是可以嵌套的。示例代码：</p>
+<div style="font-size:14px;color:#333333;line-height:26px;background-color:#ffffff;margin:5px 0px;padding:5px;font-family:&#39;courier new&#39;;border:1px solid #cccccc;overflow:auto;"><pre style="word-wrap:break-word;padding:0px;font-family:&#39;courier new&#39;;margin-top:0px;margin-bottom:0px;">grayCover = [[CALayer alloc] init];
+
+grayCover.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:<span style="word-wrap:normal;word-break:normal;line-height:21px;margin:0px;padding:0px;color:#800080;">0.2</span>] CGColor];
+
+[self.layer addSubLayer:grayCover];
+</pre></div>
+
+<p>上述代码会在目标View上敷上一层黑色透明薄膜的效果。</p>
+<p><span style="word-wrap:normal;word-break:normal;margin:0px;padding:0px;">4. UIView的layer树形在系统内部，被维护着三份copy。</span>分别是逻辑树，这里是代码可以操纵的；动画树，是一个中间层，系统就在这一层上更改属性，进行各种渲染操作；显示树，其内容就是当前正被显示在屏幕上得内容。</p>
+<p><span style="word-wrap:normal;word-break:normal;margin:0px;padding:0px;">5. 动画的运作：对UIView的subLayer（非主Layer）属性进行更改，系统将自动进行动画生成</span>，动画持续时间的缺省值似乎是0.5秒。</p>
+<p><span style="word-wrap:normal;word-break:normal;margin:0px;padding:0px;">6. 坐标系统：CALayer的坐标系统比UIView多了一个anchorPoint属性，使用CGPoint结构表示，值域是0~1，是个比例值。</span>这个点是各种图形变换的坐标原点，同时会更改layer的position的位置，它的缺省值是{0.5,0.5}，即在layer的中央。
+某layer.anchorPoint = CGPointMake(0.f,0.f);
+如果这么设置，只会将layer的左上角被挪到原来的中间位置，必须加上这一句：
+某layer.position = CGPointMake(0.f,0.f);</p>
+<p>最后：layer可以设置圆角显示（cornerRadius），也可以设置阴影 <wbr>(shadowColor)。但是如果layer树中某个layer设置了圆角，树种所有layer的阴影效果都将不显示了。因此若是要有圆角又要阴影，变通方法只能做两个重叠的UIView，一个的layer显示圆角，一个layer显示阴影......</wbr></p>
+<p><span style="word-wrap:normal;word-break:normal;line-height:24px;margin:0px;padding:0px;font-size:16px;"><span style="word-wrap:normal;word-break:normal;margin:0px;padding:0px;">7.渲染</span>：</span>当更新层，改变不能立即显示在屏幕上。当所有的层都准备好时，可以调用setNeedsDisplay方法来重绘显示。</p>
+<div style="font-size:14px;color:#333333;line-height:26px;background-color:#ffffff;margin:5px 0px;padding:5px;font-family:&#39;courier new&#39;;border:1px solid #cccccc;overflow:auto;"><pre style="word-wrap:break-word;padding:0px;font-family:&#39;courier new&#39;;margin-top:0px;margin-bottom:0px;">[gameLayer setNeedsDisplay];
+</pre></div>
+
+<p>若要重绘部分屏幕区域，请使用setNeedsDisplayInRect:方法，通过在CGRect结构的区域更新：</p>
+<div style="font-size:14px;color:#333333;line-height:26px;background-color:#ffffff;margin:5px 0px;padding:5px;font-family:&#39;courier new&#39;;border:1px solid #cccccc;overflow:auto;"><pre style="word-wrap:break-word;padding:0px;font-family:&#39;courier new&#39;;margin-top:0px;margin-bottom:0px;">[gameLayer setNeedsDisplayInRect:CGRectMake(<span style="word-wrap:normal;word-break:normal;line-height:21px;margin:0px;padding:0px;color:#800080;">150.0</span>,<span style="word-wrap:normal;word-break:normal;line-height:21px;margin:0px;padding:0px;color:#800080;">100.0</span>,<span style="word-wrap:normal;word-break:normal;line-height:21px;margin:0px;padding:0px;color:#800080;">50.0</span>,<span style="word-wrap:normal;word-break:normal;line-height:21px;margin:0px;padding:0px;color:#800080;">75.0</span>)];
+</pre></div>
+
+<p>如果是用的Core Graphics框架来执行渲染的话，可以直接渲染Core Graphics的内容。用renderInContext:来做这个事。</p>
+<div style="font-size:14px;color:#333333;line-height:26px;background-color:#ffffff;margin:5px 0px;padding:5px;font-family:&#39;courier new&#39;;border:1px solid #cccccc;overflow:auto;"><pre style="word-wrap:break-word;padding:0px;font-family:&#39;courier new&#39;;margin-top:0px;margin-bottom:0px;">[gameLayer renderInContext:UIGraphicsGetCurrentCont<wbr>ext()];</wbr></pre></div>
+
+<p><span style="word-wrap:normal;word-break:normal;line-height:24px;margin:0px;padding:0px;font-size:16px;">8.变换：</span>要在一个层中添加一个3D或仿射变换，可以分别设置层的transform或affineTransform属性。</p>
+<div style="font-size:14px;color:#333333;line-height:26px;background-color:#ffffff;margin:5px 0px;padding:5px;font-family:&#39;courier new&#39;;border:1px solid #cccccc;overflow:auto;"><pre style="word-wrap:break-word;padding:0px;font-family:&#39;courier new&#39;;margin-top:0px;margin-bottom:0px;">characterView.layer.transform = CATransform3DMakeScale(-<span style="word-wrap:normal;word-break:normal;line-height:21px;margin:0px;padding:0px;color:#800080;">1.0</span>,-<span style="word-wrap:normal;word-break:normal;line-height:21px;margin:0px;padding:0px;color:#800080;">1.0</span>,<span style="word-wrap:normal;word-break:normal;line-height:21px;margin:0px;padding:0px;color:#800080;">1.0</span>);
+
+CGAffineTransform transform = CGAffineTransformMakeRot<wbr>ation(<span style="word-wrap:normal;word-break:normal;line-height:21px;margin:0px;padding:0px;color:#800080;">45.0</span>);
+backgroundView.layer.affineTransform = transform;</wbr></pre></div>
+
+<p><span style="word-wrap:normal;word-break:normal;line-height:24px;margin:0px;padding:0px;font-size:16px;">9.变形：</span>Quartz Core的渲染能力，使二维图像可以被自由操纵，就好像是三维的。图像可以在一个三维坐标系中以任意角度被旋转，缩放和倾斜。CATransform3D的一套方法提供了一些魔术般的变换效果。</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p> <span class="span4br"></span></p>
+<div style="font-size:14px;background-color:#f6f6f6;padding:0px;margin:0px;color:#555555;font-family:宋体, &#39;arial narrow&#39;, arial, serif;line-height:28px;text-align:-webkit-auto;"><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">CALayer(层)是屏幕上的一个矩形区域，在每一个UIView中都包含一个根CALayer，在UIView上的所有视觉效果都是在这个Layer上进行的。</span></span></div><div style="font-size:14px;background-color:#f6f6f6;padding:0px;margin:0px;color:#555555;font-family:宋体, &#39;arial narrow&#39;, arial, serif;line-height:28px;text-align:-webkit-auto;"><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">CALayer外形特征主要包括：
+1、层的大小尺寸
+2、背景色
+3、内容（可以填充图片或者使用Core Graphics绘制的内容）
+4、矩形是否使用圆角
+5、矩形是否有阴影</span></span></div><div style="font-size:14px;background-color:#f6f6f6;padding:0px;margin:0px;color:#555555;font-family:宋体, &#39;arial narrow&#39;, arial, serif;line-height:28px;text-align:-webkit-auto;"><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">
+</span></span></div><div style="font-size:14px;background-color:#f6f6f6;padding:0px;margin:0px;color:#555555;font-family:宋体, &#39;arial narrow&#39;, arial, serif;line-height:28px;text-align:-webkit-auto;"><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">Layer有很多种，最常用也是最基本的是CALayer，当然还包括其他的子类：
+CAScrollerLayer 简化显示层的一部分
+CATextLayer 文本层
+CAGradientLayer、CAShapeLayer等等</span></span></div><div style="font-size:14px;background-color:#f6f6f6;padding:0px;margin:0px;color:#555555;font-family:宋体, &#39;arial narrow&#39;, arial, serif;line-height:28px;text-align:-webkit-auto;"><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">
+</span></span></div><div style="font-size:14px;background-color:#f6f6f6;padding:0px;margin:0px;color:#555555;font-family:宋体, &#39;arial narrow&#39;, arial, serif;line-height:28px;text-align:-webkit-auto;"><div style="padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">使用层之前，需要在项目中引入QuartzCore.framework框架</span></span></div>
+
+<p><a href="http://img1.51cto.com/attachment/201209/224142245.png" target="_blank"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;"><img src="http://img1.51cto.com/attachment/201209/224142245.png" alt="" title="CALayer与UIView的关系"></span></span></a></p>
+<p><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">
+</span></span>
+</div><pre style="line-height:21px;padding:0px;background-color:#f7f7f7;font-family:&#39;courier new&#39;, monospace;font-size:12px;overflow:auto;width:712px;color:#555555;text-align:-webkit-auto;margin-top:0px;"></pre></p>
+<ol>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:gray;background-color:inherit;">#import <wbr>&quot;LayerSampleViewControlle<wbr>r.h&quot;</wbr></wbr></span> <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;">@implementation <wbr>LayerSampleViewControlle<wbr>r <span class="span4br"></span></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:#008200;background-color:inherit;">// <wbr>Implement <wbr>loadView <wbr>to <wbr>create <wbr>a <wbr>view <wbr>hierarchy <wbr>programmatically, <wbr>without <wbr>using <wbr>a <wbr>nib.</wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></span> <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;">- <wbr>(<span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:#006699;background-color:inherit;font-weight:bold;">void</span>)loadView <wbr>{ <span class="span4br"></span></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr>UIView <wbr>*rootView <wbr>= <wbr>[[UIView <wbr>alloc] <wbr>initWithFrame:CGRectMake(0, <wbr>0, <wbr>1024, <wbr>768)]; <span class="span4br"></span></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr>rootView.backgroundColor <wbr>= <wbr>[UIColor <wbr>whiteColor]; <span class="span4br"></span></wbr></wbr></wbr></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr>self.view <wbr>= <wbr>rootView; <span class="span4br"></span></wbr></wbr></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr>[rootView <wbr>release]; <span class="span4br"></span></wbr></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:#008200;background-color:inherit;">//加载layer</span> <span class="span4br"></span></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr>backLayer <wbr>= <wbr>[CALayer <wbr>layer]; <span class="span4br"></span></wbr></wbr></wbr></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr>backLayer.backgroundColor <wbr>= <wbr>[UIColor <wbr>orangeColor].CGColor; <span class="span4br"></span></wbr></wbr></wbr></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr>backLayer.bounds <wbr>= <wbr>CGRectMake(10, <wbr>10, <wbr>1004, <wbr>728); <wbr><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:#008200;background-color:inherit;">//设置layer的区域</span> <span class="span4br"></span></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr>backLayer.position <wbr>= <wbr>CGPointMake(1024/2, <wbr>768/2-10); <wbr><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:#008200;background-color:inherit;">//设置layer坐标</span> <span class="span4br"></span></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr>[self.view.layer <wbr>addSublayer:backLayer]; <span class="span4br"></span></wbr></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;">} <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:#008200;background-color:inherit;">// <wbr>Override <wbr>to <wbr>allow <wbr>orientations <wbr>other <wbr>than <wbr>the <wbr>default <wbr>portrait <wbr>orientation.</wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></span> <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;">- <wbr>(<span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:#2e8b57;background-color:inherit;font-weight:bold;">BOOL</span>)shouldAutorotateToInterf<wbr>aceOrientation:(UIInterfaceOrientation)interfaceOrientation <wbr>{ <span class="span4br"></span></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:#006699;background-color:inherit;font-weight:bold;">return</span> <wbr>interfaceOrientation <wbr>== <wbr>UIInterfaceOrientationLa<wbr>ndscapeLeft; <span class="span4br"></span></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;">} <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;">- <wbr>(<span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:#006699;background-color:inherit;font-weight:bold;">void</span>)didReceiveMemoryWarning <wbr>{ <span class="span4br"></span></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:#008200;background-color:inherit;">// <wbr>Releases <wbr>the <wbr>view <wbr>if <wbr>it <wbr>doesn&#39;t <wbr>have <wbr>a <wbr>superview.</wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></span> <span class="span4br"></span></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr>[super <wbr>didReceiveMemoryWarning]; <span class="span4br"></span></wbr></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:#008200;background-color:inherit;">// <wbr>Release <wbr>any <wbr>cached <wbr>data, <wbr>images, <wbr>etc <wbr>that <wbr>aren&#39;t <wbr>in <wbr>use.</wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></span> <span class="span4br"></span></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;">} <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;">- <wbr>(<span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:#006699;background-color:inherit;font-weight:bold;">void</span>)viewDidUnload <wbr>{ <span class="span4br"></span></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:#008200;background-color:inherit;">// <wbr>Release <wbr>any <wbr>retained <wbr>subviews <wbr>of <wbr>the <wbr>main <wbr>view.</wbr></wbr></wbr></wbr></wbr></wbr></wbr></wbr></span> <span class="span4br"></span></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:#008200;background-color:inherit;">// <wbr>e.g. <wbr>self.myOutlet <wbr>= <wbr>nil;</wbr></wbr></wbr></wbr></span> <span class="span4br"></span></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;">} <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;">- <wbr>(<span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;color:#006699;background-color:inherit;font-weight:bold;">void</span>)dealloc <wbr>{ <span class="span4br"></span></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <wbr> <wbr> <wbr> <wbr>[super <wbr>dealloc]; <span class="span4br"></span></wbr></wbr></wbr></wbr></wbr></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;">} <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;"> <span class="span4br"></span></span></span></p>
+</li>
+<li><p><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;border:none;color:black;background-color:inherit;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;border:none;background-color:inherit;font-family:&#39;comic sans ms&#39;;">@end <wbr></p>
+<p></wbr></span></span><pre style="color:#494949;font-size:14px;line-height:21px;background-color:#f6f6f6;"><span class="span4br"></span> <span class="span4br"></span></pre><div style="font-size:14px;background-color:#f6f6f6;padding:0px;margin:0px;color:#555555;font-family:宋体, &#39;arial narrow&#39;, arial, serif;line-height:28px;text-align:-webkit-auto;"><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">
+</span></span></div><div style="font-size:14px;background-color:#f6f6f6;padding:0px;margin:0px;color:#555555;font-family:宋体, &#39;arial narrow&#39;, arial, serif;line-height:28px;text-align:-webkit-auto;"><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">
+</span></span></div><div style="font-size:14px;background-color:#f6f6f6;padding:0px;margin:0px;color:#555555;font-family:宋体, &#39;arial narrow&#39;, arial, serif;line-height:28px;text-align:-webkit-auto;"><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">为了区分背景UIView，我将UIView的背景色设置为白色，backLayer的背景色设置为橘黄色。
+上图是一个矩形区域，如果设置矩形的四个角是椭圆角，可以添加属性：
+backLayer.cornerRadius = 20.0; //矩形椭圆角的弧度半径
+</span></span></div><div style="font-size:14px;background-color:#f6f6f6;padding:0px;margin:0px;color:#555555;font-family:宋体, &#39;arial narrow&#39;, arial, serif;line-height:28px;text-align:-webkit-auto;"><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">
+</span></span></div><div style="font-size:14px;background-color:#f6f6f6;padding:0px;margin:0px;color:#555555;font-family:宋体, &#39;arial narrow&#39;, arial, serif;line-height:28px;text-align:-webkit-auto;"><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">
+</span></span></div><div style="font-size:14px;background-color:#f6f6f6;padding:0px;margin:0px;color:#555555;font-family:宋体, &#39;arial narrow&#39;, arial, serif;line-height:28px;text-align:-webkit-auto;"><span style="word-wrap:normal;word-break:normal;line-height:21px;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">添加带阴影的子Layer（层）,代码：
+//添加子layer
+CALayer *cyanLayer = [CALayer layer];
+cyanLayer.backgroundColor = [UIColor cyanColor].CGColor;
+cyanLayer.bounds = CGRectMake(0, 0, 300, 300);
+cyanLayer.position = CGPointMake(180, 180);
+cyanLayer.shadowOffset = CGSizeMake(0, 3); //设置阴影的偏移量
+cyanLayer.shadowRadius = 10.0; //设置阴影的半径
+cyanLayer.shadowColor = [UIColor blackColor].CGColor; //设置阴影的颜色为黑色
+cyanLayer.shadowOpacity = 0.9; //设置阴影的不透明度</span></span></p>
+</li>
+</ol>
+<p><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">[backLayer addSublayer:cyanLayer];
+</span></span></p>
+<p><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">
+</span></span></p>
+<p><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">给子Layer添加图片</p>
+<p>//添加子image layer
+UIImage <em>image = [UIImage imageNamed:@&quot;feiche.jpg&quot;];
+CALayer </em>imageLayer = [CALayer layer];
+imageLayer.frame = CGRectMake(100, 100, image.size.width, image.size.height);
+imageLayer.contents = (id) image.CGImage;
+imageLayer.shadowOffset = CGSizeMake(0, 3); //设置阴影的偏移量
+imageLayer.shadowRadius = 10.0; //设置阴影的半径
+imageLayer.shadowColor = [UIColor blackColor].CGColor; //设置阴影的颜色为黑色
+imageLayer.shadowOpacity = 0.9; //设置阴影的不透明度</span></span></p>
+<p><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">[backLayer addSublayer:imageLayer];
+</span></span></p>
+<p><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">
+</span></span></p>
+<p><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">图片加边框，代码：
+imageLayer.borderColor = [UIColor grayColor].CGColor; //边框颜色
+imageLayer.borderWidth = 2.0; //边框宽度</span></span></p>
+<p><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">
+设置图片为椭圆角，代码：
+imageLayer.cornerRadius = 10.0; //设置layer圆角半径
+imageLayer.masksToBounds = YES; //隐藏边界
+</span></span></p>
+<p><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">
+</span></span></p>
+<p><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">但是由于设置masksToBounds 属性为true所以Layer的阴影效果也就没有了。
+之前我都是将图片另外在做有阴影效果的图片，这样显的比较真实，如果阴影部分只是填充边框即可，可以采用两个Layer来实现阴影效果，代码：
+UIImage <em>image = [UIImage imageNamed:@&quot;feiche.jpg&quot;];
+//阴影layer
+CALayer </em>shadowLayer = [CALayer layer];
+shadowLayer.frame = CGRectMake(100, 100, image.size.width, image.size.height);
+shadowLayer.backgroundColor = [UIColor blueColor].CGColor;
+shadowLayer.shadowOffset = CGSizeMake(0, 3);
+shadowLayer.cornerRadius = 10.0;
+shadowLayer.shadowRadius = 10.0;
+shadowLayer.shadowColor = [UIColor blackColor].CGColor; //设置阴影的颜色为黑色
+shadowLayer.shadowOpacity = 1.0; //设置阴影的不透明度
+[backLayer addSublayer:shadowLayer];</span></span></p>
+<p><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;"><span style="word-wrap:normal;word-break:normal;padding:0px;margin:0px;font-family:&#39;comic sans ms&#39;;">//添加子image layer
+CALayer *imageLayer = [CALayer layer];
+imageLayer.frame = CGRectMake(100, 100, image.size.width, image.size.height);
+imageLayer.contents = (id) image.CGImage;
+imageLayer.cornerRadius = 10.0; //设置layer圆角半径
+imageLayer.masksToBounds = YES; //隐藏边界
+imageLayer.borderColor = [UIColor grayColor].CGColor; //边框颜色
+imageLayer.borderWidth = 2.0;
+[backLayer addSublayer:imageLayer];</span></span>
+</div></p>
+<p><span class="span4br"></span></p>
+]]></content>
+    
+    
+      <category term="ios" scheme="http://yoursite.com/tags/ios/"/>
+    
+      <category term="IOS" scheme="http://yoursite.com/categories/IOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[苹果 开发者账号区别（转）]]></title>
+    <link href="http://yoursite.com/2013/01/10/%E8%8B%B9%E6%9E%9C-%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A6%E5%8F%B7%E5%8C%BA%E5%88%AB%EF%BC%88%E8%BD%AC%EF%BC%89/"/>
+    <id>http://yoursite.com/2013/01/10/苹果-开发者账号区别（转）/</id>
+    <published>2013-01-09T22:26:00.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<p><span class="span4br"></span></p>
+<p>苹果 开发者账号如下：</p>
+<p>99美金个人用户</p>
+<p>99美金团队：</p>
+<p><span class="span4br"></span></p>
+<p>审核多了企业资质认证,可以多开发者共享.（如何共享？）这个测试的时候如果有多个人的话，可以拆分多个子账户出来测试，对于测试方便点。也就是说一个AppleID对应于多个Devices ID。
+<span class="span4br"></span></p>
+<p>299美金企业用户：面向拥有500雇员以上的公司,开发专用的企业内部使用的app。这个账号需要邓氏码，小企业一般申请不下来，但只要有那个码就好办了（500或者500以上的公司用于内部分发）。为企业客户发布应用,例如为某集团发布办公客户端</p>
+<p>区别：</p>
+<p>个人和公司的区别：个人的账号只能显示个人的Full Name，公司则可以显示类似Studios，或者自定义的团队名称 。 
+<span class="span4br"></span></p>
+<p>公司帐号比个人多一些帐号管理的设置：个人帐号集Agent，Admin，Developer等为一身，而公司帐号可以设置不同的AppleID来担当。 
+<span class="span4br"></span></p>
+<p> 99美元的是供个人开发使用，</p>
+<p>99的为公司使用，可以自己定义一定数量的开发者子账号，不过只能有主账号来提交，发布等操作。</p>
+<p>299的是供企业内部账号使用，外面用户不能使用itunes访问到。而且绑定认证次数无限 &nbsp;</p>
+<p><span class="span4br"></span></p>
+<p>注意一点，公司和个人帐号都是99$一年；而299$那个是大企业专用，无法提交App到App Store，只能公司内部自用，比如基于iOS的OA系统</p>
+<p><span class="span4br"></span></p>
+]]></content>
+    
+    
+      <category term="Ad Hoc" scheme="http://yoursite.com/tags/Ad%20Hoc/"/>
+    
+      <category term="AppStore" scheme="http://yoursite.com/tags/AppStore/"/>
+    
+      <category term="ios" scheme="http://yoursite.com/tags/ios/"/>
+    
+      <category term="itunes" scheme="http://yoursite.com/tags/itunes/"/>
+    
+      <category term="开发者" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E8%80%85/"/>
+    
+      <category term="苹果" scheme="http://yoursite.com/tags/%E8%8B%B9%E6%9E%9C/"/>
+    
+      <category term="账号" scheme="http://yoursite.com/tags/%E8%B4%A6%E5%8F%B7/"/>
+    
+      <category term="IOS" scheme="http://yoursite.com/categories/IOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Xcode 4透過Ad-Hoc發佈App給其它裝置測試使用 ]]></title>
+    <link href="http://yoursite.com/2013/01/09/xcode-4%E9%80%8F%E9%81%8Ead-hoc%E7%99%BC%E4%BD%88app%E7%B5%A6%E5%85%B6%E5%AE%83%E8%A3%9D%E7%BD%AE%E6%B8%AC%E8%A9%A6%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2013/01/09/xcode-4透過ad-hoc發佈app給其它裝置測試使用/</id>
+    <published>2013-01-09T01:45:56.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<div class="alumb" style="color:#333333;font-family:arial;line-height:26px;margin:10px 0px;padding:4px;border:1px solid #cccccc;outline:0px;font-size:15px;vertical-align:baseline;text-align:center;clear:both;">这次迭代版本出了一个非常蛋疼的问题，调试版本不会出现bug，线上版本在ios6上出现一定概率闪退。这问题就蛋疼了，线上版本又不能直接测试，所以就想到了Ad Hoc的方式模拟上线版本来测出问题。目前问题以接近解决，还需要更多的测试。这行bug出的不讲理，只能尽可能的避免啦。</div><div class="alumb" style="color:#333333;font-family:arial;line-height:26px;margin:10px 0px;padding:4px;border:1px solid #cccccc;outline:0px;font-size:15px;vertical-align:baseline;text-align:center;clear:both;">编程能力还需不断的精进，谢谢高手分享这篇文章</div><div class="alumb" style="color:#333333;font-family:arial;line-height:26px;margin:10px 0px;padding:4px;border:1px solid #cccccc;outline:0px;font-size:15px;vertical-align:baseline;text-align:center;clear:both;"><img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_00.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"></div><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">　　先前曾分享過，透過憑證的設定，將Xcode開發好的App，同步到開發者行動裝置中，來進行除錯與測試，但由於一般的開發者，很難手邊同時有iPhone 3Gs、iPod Touch、iPhone 4、4s...等，這時就得靠平常的生活外交了，但總不可能把朋友手機一一的借來測試，所以這時候最好的辦法，就是將寫好的App發佈出來，安裝到各式不同的裝置上來進行測試，看是否都能正常的運作，這時就得透過Ad-Hoc的方式，將App發佈出來並安裝，而安裝方式有二種，一種是透過iTunes，另一種則是透過線上的方式來進行安裝，而這也讓梅干搞了半天，好在有好友Jason的相助，終於順利的讓App發佈出來啦！現在趁著梅干還記憶猶新時，把整個的過程記錄與分享。</span>
+
+<em> </em> <em>
+<span style="font-family:arial;line-height:26px;font-size:24px;color:#0033ff;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;font-size:21px;vertical-align:baseline;">Ad-Hoc(iTunes安裝):</span></span>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step1</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">進入</span><a href="https://developer.apple.com/devcenter/ios/index.action" target="_blank">iOS Dev Center</a><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">，進入後點選</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">Certificate</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"> / </span><span style="font-family:arial;line-height:26px;color:#ff0033;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Distribution</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">，點</span><span style="font-family:arial;line-height:26px;color:#0033ff;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Request Certificate</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">鈕。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_01.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+</em> <em> </em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step2</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">接著拉到下方，按選擇檔案，將之前所產生的Key載入，再按</span><span style="font-family:arial;line-height:26px;color:#0033ff;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Sumbit</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">鈕。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_02.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+<em> </em> <em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step3</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">過一回後，再按</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">Download</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">鈕，並雙響下載的</span><span style="font-family:arial;line-height:26px;color:#ff0000;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">.cer</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">檔。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_03.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+</em> <em> </em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step4</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">接著就會將憑證匯入MAC的鑰匙圈中。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_04.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+<em> </em> <em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step5</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">回到iOS Dev Center，切到</span><span style="font-family:arial;line-height:26px;color:#ff0033;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Devices</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">，將要測試手機的</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">UIID</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">匯入。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_05.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+</em> <em> </em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step6</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">再切到</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">Provisioning</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"> / </span><span style="font-family:arial;line-height:26px;color:#ff0033;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Distribution</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"> ，點右上的</span><span style="font-family:arial;line-height:26px;color:#0033ff;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">New Profile</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_06.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+<em> </em> <em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step7</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">選擇</span><span style="font-family:arial;line-height:26px;color:#ff0033;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Ad Hoc</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">，再將要測試的裝置，給勾選起來。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_06_1.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+</em> <em> </em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step8</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">過一回，再按</span><span style="font-family:arial;line-height:26px;color:#0033ff;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Download</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">鈕。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_07.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+<em> </em> <em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step9</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">下載完畢後，雙響它。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_08.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+</em> <em> </em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step10</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">接著就會匯入Xcode中。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_09.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+<em> </em> <em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step11</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">回到</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">Xcode</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"> , 對著專案名稱，按滑鼠右鍵，選擇</span><span style="font-family:arial;line-height:26px;color:#0033ff;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">New File</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_10.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+</em> <em> </em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step12</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">選擇</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">Code Signing</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"> -&gt; </span><span style="font-family:arial;line-height:26px;color:#0033ff;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Entitlements</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_11.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+<em> </em> <em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step13</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">名稱不用作任何更改，再按</span><span style="font-family:arial;line-height:26px;color:#0033ff;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Save</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">鈕。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_12.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+</em> <em> </em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step14</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">點一下剛所建立的</span><span style="font-family:arial;line-height:26px;color:#0033ff;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Entitlements.plist</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">檔案，將Value設成</span><span style="font-family:arial;line-height:26px;color:#ff0033;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">NO</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_13.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+<em> </em> <em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step15</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">接著點下專案，切到</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">Info</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">頁籤下，在</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">Configurations</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">按加號，複製release並命名成</span><span style="font-family:arial;line-height:26px;color:#0033ff;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">AdHoc</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_14.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+</em> <em> </em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step16</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">再切到</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">Build Settings</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">頁籤，將</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">code Signing Entitlements</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">，設成剛所新增的</span><span style="font-family:arial;line-height:26px;color:#ff0000;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Entitlements.plist</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">，再把</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">Code Signing Identity</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">下的</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">AdHoc</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">設成</span><span style="font-family:arial;line-height:26px;color:#ff0000;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">iPhone Distribution</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_15.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+<em> </em> <em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step17</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">都完成後，就按上方的</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">Run</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">，完成後在</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">Product</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">下就會看到產生好的</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">.app</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">檔，對著它按滑鼠右鍵，選擇</span><span style="font-family:arial;line-height:26px;color:#0033ff;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Show in Finder</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_16.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+</em> <em> </em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step18</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">對著.app按滑鼠右鍵，選擇壓縮xxx.app。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_17.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+<em> </em> <em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step19</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">都完成後，將剛所產生的壓縮檔，與在Step8所產生的檔案，一起拉到iTunes中，就可完成安裝，但這樣實在有些不便，所以接下來直接介紹線上安裝的方式。</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_18.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+</em> <em> </em>
+<span style="font-family:arial;line-height:26px;font-size:24px;color:#0033ff;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;font-size:21px;vertical-align:baseline;">Ad-Hoc(線上安裝):</span></span>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step20</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">回到Xcode，點一下Sotp旁的下拉選單，選擇</span><span style="font-family:arial;line-height:26px;color:#ff0033;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Edit Scheme..</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">。 </span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_19.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+<em> </em> <em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step21</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">切到</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">Archive</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">，將</span><span style="font-family:arial;line-height:26px;color:#0033ff;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Build Configuration</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">設成</span><span style="font-family:arial;line-height:26px;color:#ff0000;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Adhoc</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">。 </span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_20.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+</em> <em> </em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step22</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">完成後，再選擇功能 </span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">Product</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"> / </span><span style="font-family:arial;line-height:26px;color:#ff0000;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Archive</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">。 </span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_21.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+<em> </em> <em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step23</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">發佈好後，就會切到</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">Organizer-Archives</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">面板，點右上</span><span style="font-family:arial;line-height:26px;color:#0033ff;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Share</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">鈕。 </span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_23.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+</em> <em> </em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step24</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">在</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">Identity</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">選擇</span><span style="font-family:arial;line-height:26px;color:#ff0000;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">iPhone Distribution..</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">。 </span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_24.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+<em> </em> <em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step25</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">記得把</span><span style="font-family:arial;line-height:26px;color:#ff0033;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Save for Enterprise Distribution</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">選擇勾起來，在</span><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;">URL</span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">的地方，就是ipa在網路空間的位置，因此得照實輸入，否則待回會無法安裝喔! </span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_25.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span>
+
+</em> <em> </em>
+<span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step26</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">接著直接複製下方的語法，修改紅色的地方，那路徑與剛在Xcode建立的相同才行喔!都弄好了，分別將xxx.html、xxx.ipa、xxx.plist上傳到網路空間中。 </span>
+<span class="codetitle" style="font-family:arial;line-height:26px;color:#7799aa;margin:0px;padding:0px 0px 0px 25px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;font-weight:bold;clear:both;">安裝網頁-原始碼(setup.html):</span>
+<div class="code" style="font-family:arial;letter-spacing:0px;margin:0px 0px 0px 7px;padding:10px 10px 10px 21px;border:1px solid #cccccc;outline:0px;font-size:12px;vertical-align:baseline;word-break:break-all;color:#232323;overflow:auto;width:550px;line-height:1.333em;">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;<a href="http://www.w3.org/TR/html4/loose.dtd&quot;&amp;gt" target="_blank">http://www.w3.org/TR/html4/loose.dtd&quot;&amp;gt</a>; <span class="span4br"></span>&lt;html&gt;<span class="span4br"></span>&lt;head&gt; <span class="span4br"></span>&lt;title&gt;Setup My App&lt;/title&gt; <span class="span4br"></span>&lt;/head&gt; <span class="span4br"></span>&lt;body&gt;<span class="span4br"></span>&lt;ul&gt;<span class="span4br"></span>&lt;li&gt;&lt;a href=&quot;itms-services://?action=download-manifest&amp;url=<span style="color:#ff0000;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><a href="http://xxx.xxx.com/xxx.plist" target="_blank">http://xxx.xxx.com/xxx.plist</a></span>&quot;&gt; Tap Here to Install the Application&lt;/a&gt;<span class="span4br"></span>&lt;/li&gt; <span class="span4br"></span>&lt;/ul&gt; <span class="span4br"></span>&lt;/body&gt; <span class="span4br"></span>&lt;/html&gt;</div>
+
+<hr>
+<p><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step25</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">接著把網址給要測試的朋友， 只要點一下連結，再按</span><span style="font-family:arial;line-height:26px;color:#0033ff;margin:0px;padding:0px;border-width:0px;outline:0px;font-size:15px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">「安裝」</span></span><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">。 </span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_26.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span></p>
+<hr>
+<p><span style="color:#333333;font-family:arial;line-height:26px;margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;"><span style="margin:0px;padding:0px;border-width:0px;outline:0px;vertical-align:baseline;">Step26</span></span>
+<span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">這時就會開始安裝，安裝完後就可開始，測試與使用囉!</span>
+<img src="http://img.minwt.com/img/Content/iphone/xcode_adhoc/xcode_adhoc_27.jpg" alt="梅問題-iPhone開發教學－Xcode透過Ad-Hoc發佈App給其它裝置測試使用"><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"></span></p>
+<hr>
+<p><span style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">　　呼！相信各位看到這邊，應該心都涼了一半，付費會員比沒付費員還要來的麻煩，但看起來很繁索，但實際的多做幾次後，就會發現其實沒想像中來的難，而畫面來初換初換去的，因此各位在操作要仔細看，若有漏掉某一部分，就會造成無法安裝成功的冏境喔！</span></p>
+<p><span class="span4br"></span></p>
+]]></content>
+    
+    
+      <category term="Ad Hoc" scheme="http://yoursite.com/tags/Ad%20Hoc/"/>
+    
+      <category term="AppStore" scheme="http://yoursite.com/tags/AppStore/"/>
+    
+      <category term="bug" scheme="http://yoursite.com/tags/bug/"/>
+    
+      <category term="ios" scheme="http://yoursite.com/tags/ios/"/>
+    
+      <category term="Objective-C" scheme="http://yoursite.com/tags/Objective-C/"/>
+    
+      <category term="闪退" scheme="http://yoursite.com/tags/%E9%97%AA%E9%80%80/"/>
+    
+      <category term="IOS" scheme="http://yoursite.com/categories/IOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[上传 appstore 出现"an error occurred uploading to the itunes store"问题解决]]></title>
+    <link href="http://yoursite.com/2012/12/28/%E4%B8%8A%E4%BC%A0-appstore-%E5%87%BA%E7%8E%B0an-error-occurred-uploading-to-the-itunes-store%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"/>
+    <id>http://yoursite.com/2012/12/28/上传-appstore-出现an-error-occurred-uploading-to-the-itunes-store问题解决/</id>
+    <published>2012-12-28T01:22:11.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<p>度娘、谷哥说这个是java版本太新啦！</p>
+<p>之前我更新了JDK1.7，好像这个问题遇到过。最直接的是去实用工具——java偏好设置——选择1.6JDK，但是这次更新Lion10.7.5后，这个设置不见了。</p>
+<p>查到终端切换方法</p>
+<p><span class="span4br"></span></p>
+<p>cd /System/Library/Frameworks/JavaVM.framework/Versions</p>
+<p>sudo ln -s CurrentJDK /System/Library/Frameworks/JavaVM.framework/Versions/1.5</p>
+<p>sudo ln -s CurrentJDK /System/Library/Frameworks/JavaVM.framework/Versions/1.5.0</p>
+<p><span class="span4br"></span></p>
+<p>可惜出现</p>
+<p>ln: /System/Library/Frameworks/JavaVM.framework/Versions/1.5/CurrentJDK: File exists<span style="color:#666666;font-family:verdana, geneva, sans-serif;font-size:14px;line-height:19px;background-color:#ffffff;"></span><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>再查发现，需要先移除当前的JDK版本</p>
+<p><span style="color:#666666;font-family:monospace;font-size:14px;line-height:19px;background-color:#ffffff;"></span></p>
+<p>sudo mv Current Current1.7</p>
+<p>sudo ln -s /System/Library/Frameworks/JavaVM.framework/Versions/1.6.0 Current</p>
+<p><span style="color:#666666;font-family:monospace;font-size:14px;line-height:19px;background-color:#ffffff;"></span><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>然后打&#39;java -version&#39;，查看版本</p>
+<p>java version &quot;1.6.0_37&quot;<span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+]]></content>
+    
+    
+      <category term="ios" scheme="http://yoursite.com/tags/ios/"/>
+    
+      <category term="itunes" scheme="http://yoursite.com/tags/itunes/"/>
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="JDK" scheme="http://yoursite.com/tags/JDK/"/>
+    
+      <category term="mac" scheme="http://yoursite.com/tags/mac/"/>
+    
+      <category term="occurred uploading" scheme="http://yoursite.com/tags/occurred%20uploading/"/>
+    
+      <category term="IOS" scheme="http://yoursite.com/categories/IOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[juicy-notorious b i g]]></title>
+    <link href="http://yoursite.com/2012/12/27/%E9%9F%B3%E4%B9%90-juicy/"/>
+    <id>http://yoursite.com/2012/12/27/音乐-juicy/</id>
+    <published>2012-12-26T22:28:22.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<p><script src="http://toothpick.duapp.com/wp-content/themes/dillon/audiojs/audio.min.js"></script></p>
+<p><script>
+  audiojs.events.ready(function() {
+    var as = audiojs.createAll();
+  });
+</script></p>
+<audio src="http://api.ning.com/files/eCOWELWd4YbJkSNhgZo7Ef2sr5Gmm1apFSH76E6i0BLf*yHuVgwwWcjRB3NiBvERZ-9cdhVg4ncGS-k4OO1XM38C8lqU6wsX/Juicy.mp3"></audio>]]></content>
+    
+    
+      <category term="音乐" scheme="http://yoursite.com/categories/%E9%9F%B3%E4%B9%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ios应用生命周期]]></title>
+    <link href="http://yoursite.com/2012/12/26/ios%E5%BA%94%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    <id>http://yoursite.com/2012/12/26/ios应用生命周期/</id>
+    <published>2012-12-25T22:22:57.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<h3 id="-"> </h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="span4br"></span></p>
+<h3 id="-"> </h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一、挂起</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;当有电话进来或者锁屏，这时你的应用程会挂起，在这时，UIApplicationDelegate委托会收到通知，调用&nbsp;applicationWillResignActive&nbsp;方法，你可以重写这个方法，做挂起前的工作，比如关闭网络，保存数据。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;当你的程序被挂起后他不会在后台运行。</p>
+<p><span class="span4br"></span></p>
+<h3 id="-"> </h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;二、复原</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;当程序复原时，另一个名为&nbsp;applicationDidBecomeActive&nbsp;委托方法会被调用，在此你可以通过之前挂起前保存的数据来恢复你的应用程序</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="span4br"></span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;注意：应用程序在启动时，在调用了&nbsp;applicationDidFinishLaunching&nbsp;方法之后也会调用&nbsp;applicationDidBecomeActive&nbsp;方法，所以你要确保你的代码能够分清复原与启动，避免出现逻辑上的bug。</p>
+<p><span class="span4br"></span></p>
+<h3 id="-"> </h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;三、终止</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;当用户按下按钮，或者关机，程序都会被终止。当一个程序将要正常终止时会调用&nbsp;applicationWillTerminate方法。但是如果长主按钮强制退出，则不会调用该方法。这个方法该执行剩下的清理工作，比如所有的连接都能正常关闭，并在程序退出前执行任何其他的必要的工作：</p>
+<pre lang="objective-c">
+- (void)applicationWillTerminate:(UIApplication*)application{    
+
+}    
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions  
+{  
+    // Override point for customization after application launch.  
+    NSLog(@"\n ===> 程序开始 !");   
+
+    return YES;  
+}  
+
+- (void)applicationWillResignActive:(UIApplication *)application  
+{  
+
+    NSLog(@"\n ===> 程序暂行 !");   
+}  
+
+- (void)applicationDidEnterBackground:(UIApplication *)application  
+{  
+
+     NSLog(@"\n ===> 程序进入后台 !");   
+}  
+
+- (void)applicationWillEnterForeground:(UIApplication *)application  
+{  
+
+     NSLog(@"\n ===> 程序进入前台 !");   
+}  
+
+- (void)applicationDidBecomeActive:(UIApplication *)application  
+{  
+    NSLog(@"\n ===> 程序重新激活 !");   
+
+}  
+
+- (void)applicationWillTerminate:(UIApplication *)application  
+{  
+    NSLog(@"\n ===> 程序意外暂行 !");   
+
+    UIDevice *device = [UIDevice currentDevice];  
+
+}  
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="span4br"></span></p>
+<h3 id="-"> </h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;首次运行：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;(BOOL)application:(UIApplication&nbsp;<em>)application&nbsp;didFinishLaunchingWithOptions:(NSDictionary&nbsp;</em>)launchOptions</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;(void)applicationDidBecomeActive:(UIApplication&nbsp;*)application</p>
+<p><span class="span4br"></span></p>
+<h3 id="-"> </h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;首次关闭（home）：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;(void)applicationWillResignActive:(UIApplication&nbsp;*)application</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;(void)applicationDidEnterBackground:(UIApplication&nbsp;*)application</p>
+<p><span class="span4br"></span></p>
+<h3 id="-"> </h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;再次运行：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;(void)applicationWillEnterForeground:(UIApplication&nbsp;*)application</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;(void)applicationDidBecomeActive:(UIApplication&nbsp;*)application</p>
+<p><span class="span4br"></span></p>
+<h3 id="-"> </h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;再次关闭：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;(void)applicationWillResignActive:(UIApplication&nbsp;*)application</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;(void)applicationDidEnterBackground:(UIApplication&nbsp;*)application</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="span4br"></span></p>
+]]></content>
+    
+    
+      <category term="ios" scheme="http://yoursite.com/tags/ios/"/>
+    
+      <category term="Objective-C" scheme="http://yoursite.com/tags/Objective-C/"/>
+    
+      <category term="UIApplicationDelegate" scheme="http://yoursite.com/tags/UIApplicationDelegate/"/>
+    
+      <category term="优化" scheme="http://yoursite.com/tags/%E4%BC%98%E5%8C%96/"/>
+    
+      <category term="保存数据" scheme="http://yoursite.com/tags/%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="后台" scheme="http://yoursite.com/tags/%E5%90%8E%E5%8F%B0/"/>
+    
+      <category term="闪退" scheme="http://yoursite.com/tags/%E9%97%AA%E9%80%80/"/>
+    
+      <category term="IOS" scheme="http://yoursite.com/categories/IOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Lightbox效果下的图库插件：Lightbox Gallery]]></title>
+    <link href="http://yoursite.com/2012/12/24/lightbox%E6%95%88%E6%9E%9C%E4%B8%8B%E7%9A%84%E5%9B%BE%E5%BA%93%E6%8F%92%E4%BB%B6%EF%BC%9Alightbox-gallery/"/>
+    <id>http://yoursite.com/2012/12/24/lightbox效果下的图库插件：lightbox-gallery/</id>
+    <published>2012-12-24T07:19:14.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<p> &nbsp; &nbsp;Lightbox效果是非常常见的图片显示效果，而这个插件将这个效果与图库（相册）整合到了一起。</p>
+<h3 id="-nbsp-nbsp-">&nbsp; &nbsp;插件介绍：</h3>
+<p> &nbsp; &nbsp;Lightbox相册插件能够将相册的浏览变为lightbox效果。</p>
+<p> &nbsp; &nbsp;将相册以Lightbox效果显示</p>
+<p> &nbsp; &nbsp;以工具栏方式显示图片说明</p>
+<p> &nbsp; &nbsp;显示与图片相关的]元数据</p>
+<p> &nbsp; &nbsp;将图库分配到几个页面中（分页功能）</p>
+<p> &nbsp; &nbsp;扩展默认图库选项</p>
+<p> &nbsp; &nbsp;选项页中设置&lt;额外选项</p>
+<p> &nbsp; &nbsp;同时，你还可以将一般图片以lightbox效果显示。</p>
+<h3 id="-nbsp-nbsp-">&nbsp; &nbsp;安装说明：</h3>
+<p> &nbsp; &nbsp;1.编辑lightbox-gallery.js</p>
+<p> &nbsp; &nbsp;并根据你的设置检查第二行的路径。</p>
+<p> &nbsp; &nbsp;2.把lightbox-gallery文件夹复制到你的 directory into yourwp-content/plugins目录中</p>
+<p> &nbsp; &nbsp;3.从WordPress中的“插件”菜单中启用插件。</p>
+<p> &nbsp; &nbsp;在“images”文件夹中可能已经有图片了。用它们替换默认文件。</p>
+<p> &nbsp; &nbsp;搞定！：）</p>
+<p> &nbsp; &nbsp;如果你的主题目录中有“lightbox-gallery.css”和“lightbox-gallery.js”存在，Lightbox Gallery会调用它们。如果这两个文件不存在，插件会调用Lightbox Gallery里的默认“lightbox-gallery.css”和“lightbox-gallery.js”。这样你不必担心升]级插件时你创建的lightbox图库样式被覆盖。</p>
+<h3 id="-nbsp-nbsp-">&nbsp; &nbsp;常见问题：</h3>
+<h3 id="-nbsp-nbsp-gallery-lightbox-">&nbsp; &nbsp;如何在不用[ gallery ]代码的情况下让一般图片在lightbox里显示？</h3>
+<p> &nbsp; &nbsp;只需添加 rel=&quot;lightbox&quot; 到 &quot;a&quot; 标签中即可。下面是一个例子：</p>
+<p> &nbsp; &nbsp;&lt;a href=&quot;image.jpg&quot; rel=&quot;lightbox&quot; title=&quot;this is a caption&quot;&gt;</p>
+<p> &nbsp; &nbsp;&lt;img src=&quot;thumbnail.jpg&quot; alt=&quot;&quot; /&gt;</p>
+<p> &nbsp; &nbsp;&lt;/a&gt;</p>
+<h3 id="-nbsp-nbsp-">&nbsp; &nbsp;如何将在同一个页面里将多个图库作为单独的图库处理？</h3>
+<p> &nbsp; &nbsp;你需要做两步。如果你想单独处理多个图库，将不同的class 名添加到 [ gallery ] ,然后将这些class 名添加到</p>
+<p> &nbsp; &nbsp;1.编辑lightbox-gallery.js</p>
+<p> &nbsp; &nbsp;然后添加一些代码。请看此文件的评论部分。</p>
+<p> &nbsp; &nbsp;将一个class 添加到 [ gallery ] 中。 比如[ gallery class=&quot;gallery2&quot; ]</p>
+<p> &nbsp; &nbsp;截图：</p>
+<p> &nbsp; &nbsp;<a href="http://plugins.wopus.org/wp-content/uploads/plugins/2009/05/screenshot-15b15d1.jpg" title="this is a caption" target="_blank"> <img src="http://plugins.wopus.org/wp-content/uploads/plugins/2009/05/screenshot-15b15d1.jpg" alt=""> </a></p>
+<h2 id="-nbsp-nbsp-span-style-font-size-16px-span-">&nbsp; &nbsp;<span style="font-size:16px;">其他注意事项：</span></h2>
+<h3 id="-nbsp-nbsp-">&nbsp; &nbsp;如何使用</h3>
+<p> &nbsp; &nbsp;这个插件的使用，简单来说就是添加 [ gallery ] 代码。此代码已在WordPress 2.5及更高版本上应用。 LightBox Gallery 插件自动将默认的图库查看方式转换为lightbox显示。 图片的说明文字以工具栏提示方式显示。 图片描述则在lightbox效果弹出后显示。</p>
+<p><span class="span4br"></span></p>
+<h3 id="-nbsp-nbsp-">&nbsp; &nbsp;高级设置</h3>
+<p> &nbsp; &nbsp;用户可以通过下列额外的选项来扩展短标记 [ gallery ]的功能。</p>
+<h3 id="-nbsp-nbsp-span-style-font-size-16px-lightboxsize-span-">&nbsp; &nbsp;<span style="font-size:16px;">lightboxsize</span></h3>
+<p> &nbsp; &nbsp;此选项控制弹出的lightbox图片大小。默认是中等大小，但是你可以将它改为全屏。</p>
+<p><span class="span4br"></span></p>
+<p> &nbsp; &nbsp;[ gallery lightboxsize=&quot;full&quot; ]</p>
+<h3 id="-nbsp-nbsp-span-style-font-size-16px-meta-span-">&nbsp; &nbsp;<span style="font-size:16px;">meta</span></h3>
+<p> &nbsp; &nbsp;此选项控制是否显示EXIF信息。默认为不显示。如果你想显示照片信息，请将它设置为“true”。Lightbox的EXIF信息会显示照相机机型，光圈，焦距，快门速度以及拍摄时间等信息。
+<span class="span4br"></span></p>
+<p> &nbsp; &nbsp;[ gallery meta=&quot;true&quot; ]
+<span class="span4br"></span></p>
+<h3 id="-nbsp-nbsp-span-style-font-size-16px-class-span-">&nbsp; &nbsp;<span style="font-size:16px;">class</span></h3>
+<p> &nbsp; &nbsp;添加一个图库的 class 属性。默认为gallery1</p>
+<p> &nbsp; &nbsp;[ gallery class=&quot;gallery2&quot; ]
+<span class="span4br"></span></p>
+<h3 id="-nbsp-nbsp-span-style-font-size-16px-nofollow-span-">&nbsp; &nbsp;<span style="font-size:16px;">nofollow</span></h3>
+<p> &nbsp; &nbsp;添加 rel=&quot;nofollow&quot; 属性。默认为“false”。
+<span class="span4br"></span></p>
+<p> &nbsp; &nbsp;[ gallery nofollow=&quot;true&quot; ]
+<span class="span4br"></span></p>
+<h3 id="-nbsp-nbsp-span-style-font-size-16px-from-num-span-">&nbsp; &nbsp;<span style="font-size:16px;">from, num</span></h3>
+<p> &nbsp; &nbsp;定义从哪张图片开始显示以及显示多少张图片]。 如果图片数超过num , 就会显示导航条。你可以使用几乎和wp_link_pages</p>
+<p> &nbsp; &nbsp;一样的导航函数。
+<span class="span4br"></span></p>
+<p> &nbsp; &nbsp;[ gallery from=&quot;5&quot; num=&quot;10&quot; ]
+<span class="span4br"></span></p>
+<h3 id="-nbsp-nbsp-span-style-font-size-16px-pagenavi-span-">&nbsp; &nbsp;<span style="font-size:16px;">pagenavi</span></h3>
+<p> &nbsp; &nbsp;如果你不想显示导航条，设置0。默认为1。
+<span class="span4br"></span></p>
+<p> &nbsp; &nbsp;[ gallery num=&quot;10&quot; pagenavi=&quot;0&quot; ]
+<span class="span4br"></span></p>
+<p> &nbsp; &nbsp;卸载</p>
+<p> &nbsp; &nbsp;禁用插件</p>
+<p> &nbsp; &nbsp;完事 :)</p>
+<p> &nbsp; &nbsp;<embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0" /></p>
+]]></content>
+    
+    
+      <category term="插件" scheme="http://yoursite.com/categories/%E6%8F%92%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ios objective-c开发中混合使用或不使用ARC]]></title>
+    <link href="http://yoursite.com/2012/12/19/ios-object-c%E5%BC%80%E5%8F%91%E4%B8%AD%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8%E6%88%96%E4%B8%8D%E4%BD%BF%E7%94%A8arc/"/>
+    <id>http://yoursite.com/2012/12/19/ios-object-c开发中混合使用或不使用arc/</id>
+    <published>2012-12-19T00:55:25.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<p><embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0" /><span style="color:#362e2b;font-family:arial;font-size:14px;line-height:26px;text-align:left;">xcode不断进步，在xcode4中引入了ARC的概念。您用或者不用它就在那里，于是有了本文:如何在未使用arc的工程中引入一个使用了arc特性的文件，如何在arc工程中引用未使用arc的文件。其实说白了也很简单就是在”Compile Sources”中对相应的文件加入使用或者不使用arc的flag</span></p>
+<p><embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0" /><span style="color:#362e2b;font-family:arial;font-size:14px;line-height:26px;text-align:left;">ok,首选“Compile Sources”的位置:选中工程-&gt;TARGETS-&gt;相应的target然后选中右侧的“Build Phases”，向下就找到“Compile Sources”了。</span></p>
+<p>如何在未使用arc的工程中引入一个使用了arc特性的文件:对相应的文件添加:-fobjc-arc参数</p>
+<p>如何在arc工程中引用未使用arc的文件:对相应的文件添加:-fnoobjc-arc参数</p>
+<p><span class="span4br"></span></p>
+]]></content>
+    
+    
+      <category term="ios" scheme="http://yoursite.com/tags/ios/"/>
+    
+      <category term="Objective-C" scheme="http://yoursite.com/tags/Objective-C/"/>
+    
+      <category term="高效" scheme="http://yoursite.com/tags/%E9%AB%98%E6%95%88/"/>
+    
+      <category term="IOS" scheme="http://yoursite.com/categories/IOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[CoreText进行文字排版]]></title>
+    <link href="http://yoursite.com/2012/12/16/coretext%E8%BF%9B%E8%A1%8C%E6%96%87%E5%AD%97%E6%8E%92%E7%89%88/"/>
+    <id>http://yoursite.com/2012/12/16/coretext进行文字排版/</id>
+    <published>2012-12-15T23:10:51.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<p><span style="font-size:18px;">coretext实现UIlable的字间距和行间距的设置</span></p>
+<pre lang="objective-c">#import<foundation>#import<uikit>@interface TextLabel : UILabel{ &nbsp; &nbsp;@private &nbsp; &nbsp; &nbsp; &nbsp;CGFloat characterSpacing_; &nbsp; &nbsp; &nbsp; //字间距 &nbsp; &nbsp;@private &nbsp; &nbsp; &nbsp; &nbsp;long linesSpacing_; &nbsp; //行间距 &nbsp; &nbsp;}@property(nonatomic,assign) CGFloat characterSpacing;@property(nonatomic,assign) long linesSpacing;//准确计算CoreText高度的方法- (int)getAttributedStringHeightWithString:(NSAttributedString *) &nbsp;string &nbsp;WidthValue:(int) width;@end</uikit></foundation></pre>
+
+<p>[html lang=&quot;objective-c&quot;]#import &quot;TextLabel.h&quot;#import</p>
+<coretext>@implementation TextLabel@synthesize characterSpacing = characterSpacing<em>;@synthesize linesSpacing = linesSpacing</em>;-(id) initWithFrame:(CGRect)frame{//初始化字间距、行间距 &nbsp; &nbsp; &nbsp; &nbsp;if(self =[superinitWithFrame:frame]) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;self.characterSpacing = 2.0f; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;self.linesSpacing = 5.0f; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;returnself; &nbsp; &nbsp;}-(void)setCharacterSpacing:(CGFloat)characterSpacing //外部调用设置字间距{ &nbsp; &nbsp; &nbsp; &nbsp;characterSpacing<em> = characterSpacing; &nbsp; &nbsp; &nbsp; &nbsp;[selfsetNeedsDisplay]; &nbsp; &nbsp;}-(void)setLinesSpacing:(long)linesSpacing &nbsp;//外部调用设置行间距{ &nbsp; &nbsp; &nbsp; &nbsp;linesSpacing</em> = linesSpacing; &nbsp; &nbsp; &nbsp; &nbsp;[selfsetNeedsDisplay]; &nbsp; &nbsp;}-(void) drawTextInRect:(CGRect)requestedRect{ &nbsp; &nbsp; &nbsp; &nbsp;//去掉空行 &nbsp; &nbsp;// &nbsp; &nbsp;NSString <em>labelString = self.text;// &nbsp; &nbsp;// &nbsp; &nbsp;NSString </em>myString = [labelString stringByReplacingOccurrencesOfString:@&quot;\r\n&quot; withString:&quot;\n&quot;]; &nbsp; &nbsp; &nbsp; &nbsp;//创建AttributeString &nbsp; &nbsp; &nbsp; &nbsp;NSMutableAttributedString <em>string =[[NSMutableAttributedStringalloc]initWithString:self.text]; &nbsp; &nbsp; &nbsp; &nbsp;string = [selfsetStyle:string]; &nbsp; &nbsp; &nbsp; &nbsp;//排版 &nbsp; &nbsp; &nbsp; &nbsp;CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string); &nbsp; &nbsp; &nbsp; &nbsp;CGMutablePathRef leftColumnPath = CGPathCreateMutable(); &nbsp; &nbsp; &nbsp; &nbsp;CGPathAddRect(leftColumnPath, NULL ,CGRectMake(0 , 0 ,self.bounds.size.width , self.bounds.size.height)); &nbsp; &nbsp; &nbsp; &nbsp;CTFrameRef leftFrame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0, 0), leftColumnPath , NULL); &nbsp; &nbsp; &nbsp; &nbsp;//翻转坐标系统（文本原来是倒的要翻转下） &nbsp; &nbsp; &nbsp; &nbsp;CGContextRef context = UIGraphicsGetCurrentContext(); &nbsp; &nbsp; &nbsp; &nbsp;CGContextSetTextMatrix(context , CGAffineTransformIdentity); &nbsp; &nbsp; &nbsp; &nbsp;CGContextTranslateCTM(context , 0 ,self.bounds.size.height); &nbsp; &nbsp; &nbsp; &nbsp;CGContextScaleCTM(context, 1.0 ,-1.0); &nbsp; &nbsp; &nbsp; &nbsp;//画出文本 &nbsp; &nbsp; &nbsp; &nbsp;CTFrameDraw(leftFrame,context); &nbsp; &nbsp; &nbsp; &nbsp;//释放 &nbsp; &nbsp; &nbsp; &nbsp;CGPathRelease(leftColumnPath); &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(framesetter); &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(leftFrame); &nbsp; &nbsp; &nbsp; &nbsp;[string release]; &nbsp; &nbsp; &nbsp; &nbsp;UIGraphicsPushContext(context); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}-(NSMutableAttributedString</em>)setStyle:(NSMutableAttributedString<em>)string{ &nbsp; &nbsp;//设置字体及大小 &nbsp; &nbsp; &nbsp; &nbsp;CTFontRef helveticaBold = CTFontCreateWithName((CFStringRef)self.font.fontName,self.font.pointSize,NULL); &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTFontAttributeNamevalue:(id)helveticaBold range:NSMakeRange(0,[string length])]; &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(helveticaBold); &nbsp; &nbsp;//设置字间距 &nbsp; &nbsp; &nbsp; &nbsp;if(self.characterSpacing) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;long number = self.characterSpacing; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CFNumberRef num = CFNumberCreate(kCFAllocatorDefault,kCFNumberSInt8Type,&amp;number); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTKernAttributeNamevalue:(id)num range:NSMakeRange(0,[string length])]; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(num); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;//设置字体颜色 &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTForegroundColorAttributeNamevalue:(id)(self.textColor.CGColor) range:NSMakeRange(0,[string length])]; &nbsp; &nbsp; &nbsp; &nbsp;//创建文本对齐方式 &nbsp; &nbsp; &nbsp; &nbsp;CTTextAlignment alignment = kCTLeftTextAlignment; &nbsp; &nbsp; &nbsp; &nbsp;if(self.textAlignment == UITextAlignmentCenter) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;alignment = kCTCenterTextAlignment; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;if(self.textAlignment == UITextAlignmentRight) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;alignment = kCTRightTextAlignment; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting alignmentStyle; &nbsp; &nbsp; &nbsp; &nbsp;alignmentStyle.spec = kCTParagraphStyleSpecifierAlignment; &nbsp; &nbsp; &nbsp; &nbsp;alignmentStyle.valueSize = sizeof(alignment); &nbsp; &nbsp; &nbsp; &nbsp;alignmentStyle.value = &amp;alignment; &nbsp; &nbsp; &nbsp; &nbsp;//设置文本行间距 &nbsp; &nbsp; &nbsp; &nbsp;CGFloat lineSpace = self.linesSpacing; &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting lineSpaceStyle; &nbsp; &nbsp; &nbsp; &nbsp;lineSpaceStyle.spec = kCTParagraphStyleSpecifierLineSpacingAdjustment; &nbsp; &nbsp; &nbsp; &nbsp;lineSpaceStyle.valueSize = sizeof(lineSpace); &nbsp; &nbsp; &nbsp; &nbsp;lineSpaceStyle.value =&amp;lineSpace; &nbsp; &nbsp; &nbsp; &nbsp;//设置文本段间距 &nbsp; &nbsp; &nbsp; &nbsp;CGFloat paragraphSpacing = 5.0; &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting paragraphSpaceStyle; &nbsp; &nbsp; &nbsp; &nbsp;paragraphSpaceStyle.spec = kCTParagraphStyleSpecifierParagraphSpacing; &nbsp; &nbsp; &nbsp; &nbsp;paragraphSpaceStyle.valueSize = sizeof(CGFloat); &nbsp; &nbsp; &nbsp; &nbsp;paragraphSpaceStyle.value = ¶graphSpacing; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//创建设置数组 &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting settings[ ] ={alignmentStyle,lineSpaceStyle,paragraphSpaceStyle}; &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleRef style = CTParagraphStyleCreate(settings , sizeof(settings)); &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(settings); &nbsp; &nbsp;//给文本添加设置 &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTParagraphStyleAttributeName value:(id)style range:NSMakeRange(0 , [string length])]; &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(style); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return string;}//准确计算CoreText高度的方法- (int)getAttributedStringHeightWithString:(NSMutableAttributedString </em>) &nbsp;string &nbsp;WidthValue:(int) width{ &nbsp; &nbsp;string = [selfsetStyle:string]; &nbsp; &nbsp; &nbsp; &nbsp;int total_height = 0; &nbsp; &nbsp; &nbsp; &nbsp;CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string); &nbsp; &nbsp;//string 为要计算高度的NSAttributedString &nbsp; &nbsp;CGRect drawingRect = CGRectMake(0, 0, width, 99999); &nbsp;//这里的高要设置足够大 &nbsp; &nbsp;CGMutablePathRef path = CGPathCreateMutable(); &nbsp; &nbsp;CGPathAddRect(path, NULL, drawingRect); &nbsp; &nbsp;CTFrameRef textFrame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0,0), path, NULL); &nbsp; &nbsp;CGPathRelease(path); &nbsp; &nbsp;CFRelease(framesetter); &nbsp; &nbsp; &nbsp; &nbsp;NSArray <em>linesArray = (NSArray </em>) CTFrameGetLines(textFrame); &nbsp; &nbsp; &nbsp; &nbsp;CGPoint origins[[linesArray count]]; &nbsp; &nbsp;CTFrameGetLineOrigins(textFrame, CFRangeMake(0, 0), origins); &nbsp; &nbsp; &nbsp; &nbsp;int line_y = (int) origins[[linesArray count] -1].y; &nbsp;//最后一行line的原点y坐标 &nbsp; &nbsp; &nbsp; &nbsp;CGFloat ascent; &nbsp; &nbsp;CGFloat descent; &nbsp; &nbsp;CGFloat leading; &nbsp; &nbsp; &nbsp; &nbsp;CTLineRef line = (CTLineRef) [linesArray objectAtIndex:[linesArray count]-1]; &nbsp; &nbsp;CTLineGetTypographicBounds(line, &amp;ascent, &amp;descent, &amp;leading); &nbsp; &nbsp; &nbsp; &nbsp;total_height = 99999 - line_y + (int) descent +1; &nbsp; &nbsp;//+1为了纠正descent转换成int小数点后舍去的值 &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(textFrame); &nbsp; &nbsp; &nbsp; &nbsp;return total_height; &nbsp; &nbsp;}@end[/html]</coretext>]]></content>
+    
+    
+      <category term="ios" scheme="http://yoursite.com/tags/ios/"/>
+    
+      <category term="Objective-C" scheme="http://yoursite.com/tags/Objective-C/"/>
+    
+      <category term="优化" scheme="http://yoursite.com/tags/%E4%BC%98%E5%8C%96/"/>
+    
+      <category term="类库" scheme="http://yoursite.com/tags/%E7%B1%BB%E5%BA%93/"/>
+    
+      <category term="coretext" scheme="http://yoursite.com/categories/coretext/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ios5字体列表,coretext排版时参考]]></title>
+    <link href="http://yoursite.com/2012/12/16/ios5%E5%AD%97%E4%BD%93%E5%88%97%E8%A1%A8coretext%E6%8E%92%E7%89%88%E6%97%B6%E5%8F%82%E8%80%83/"/>
+    <id>http://yoursite.com/2012/12/16/ios5字体列表coretext排版时参考/</id>
+    <published>2012-12-15T23:09:04.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0">
+
+    </embed>
+
+<p><embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0">
+    <p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?--></p>
+<pre><code>&lt;table style=&quot;border-collapse: collapse; border-spacing: 0px; border-top-width: 1px; border-top-style: solid; border-top-color: rgb(161, 165, 169); border-left-width: 1px; border-left-style: solid; border-left-color: rgb(161, 165, 169); margin-bottom: 18px; color: rgb(51, 51, 51); font-family: &#39;Lucida Grande&#39;, &#39;Lucida Sans Unicode&#39;, Helvetica, Arial, Verdana, sans-serif; line-height: 18px; &quot;&gt;
+    &lt;tbody&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;**系列名称**&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;**版本**&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Academy Engraved LET&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d1e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;American Typewriter&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d1e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Apple Color Emoji&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d18e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;AppleGothic&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d5e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Arial&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;5.01.2x 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Arial Hebrew&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Arial Rounded MT Bold&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;1.51x 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Bangla Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d4e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Baskerville&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d4e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Bodoni 72&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d1e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Bodoni 72 Oldstyle&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d1e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Bodoni 72 Smallcaps&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d1e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Bodoni Ornaments&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Bradley Hand&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d3e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Chalkboard SE&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d13e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Chalkduster&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d6e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Cochin&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d1e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Copperplate&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d1e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Courier&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Courier New&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;5.00.2x 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Devanagari Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d10e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Didot&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d4e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Euphemia UCAS&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d4e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Futura&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.2d1e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Geeza Pro&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d8e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Georgia&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;5.00x-3 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Gill Sans&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d9e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Gujarati Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Gurmukhi MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Heiti SC&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d21e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Heiti TC&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d21e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Helvetica&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;8.0d9e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Helvetica Neue&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.1d5e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Hiragino Kaku Gothic ProN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;8.10 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Hiragino Mincho ProN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;8.10 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Hoefler Text&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d7e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Kailasa&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d3e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Kannada Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d3e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Malayalam Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d3e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Marion&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.1d3e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Marker Felt&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;4.4d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Noteworthy&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d15e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Optima&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d4e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Oriya Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d4e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Palatino&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d4e4&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Papyrus&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d10e2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Party LET&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Sinhala Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.05e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Snell Roundhand&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d6e3&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Tamil Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Telugu Sangam MN&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;7.0d2e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Thonburi&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;10.7d8e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Times New Roman&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;5.01.3x 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Trebuchet MS&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;5.00x 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Verdana&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;5.01x 版&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Zapf Dingbats&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d3e1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style=&quot;font-size: 10px; &quot;&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;Zapfino&lt;/td&gt;
+            &lt;td style=&quot;padding: 4px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(161, 165, 169); border-right-width: 1px; border-right-style: solid; border-right-color: rgb(161, 165, 169); &quot;&gt;6.1d5e1&amp;nbsp;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;table style=&quot;border-collapse: collapse; border-spacing: 0px; border-top-width: 1px; border-top-style: solid; border-top-color: rgb(161, 165, 169); border-left-width: 1px; border-left-style: solid; border-left-color: rgb(161, 165, 169); margin-bottom: 18px; color: rgb(51, 51, 51); font-family: &#39;Lucida Grande&#39;, &#39;Lucida Sans Unicode&#39;, Helvetica, Arial, Verdana, sans-serif; line-height: 18px; &quot;&gt;&lt;/table&gt;
+
+&lt;/embed&gt;&lt;/p&gt;
+</code></pre>]]></content>
+    
+    
+      <category term="coretext" scheme="http://yoursite.com/categories/coretext/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[CoreText基础-字体必修课]]></title>
+    <link href="http://yoursite.com/2012/12/16/coretext%E5%9F%BA%E7%A1%80-%E5%AD%97%E4%BD%93%E5%BF%85%E4%BF%AE%E8%AF%BE/"/>
+    <id>http://yoursite.com/2012/12/16/coretext基础-字体必修课/</id>
+    <published>2012-12-15T23:07:09.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0"><span style="color: rgb(69, 69, 69); font-family: tahoma, helvetica, arial; font-size: 14px; line-height: 21px; ">介绍一些字体的术语,以及对应的英文名称</span></embed>
+
+<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0"> </embed>
+
+<p>字体(Font):是一系列字号、样式和磅值相同的字符(例如:10磅黑体Palatino)。现多被视为字样的同义词</p>
+<p>字面(Face):是所有字号的磅值和格式的综合</p>
+<p>字体集(Font family):是一组相关字体(例如:Franklin family包括Franklin Gothic、Fran-klinHeavy和Franklin Compressed)</p>
+<p>磅值(Weight):用于描述字体粗度。典型的磅值,从最粗到最细,有极细、细、book、中等、半粗、粗、较粗、极粗</p>
+<p>样式(Style):字形有三种形式:Roman type是直体;oblique type是斜体;utakuc type是斜体兼曲线(比Roman type更像书法体)。</p>
+<p>x高度(X height):指小写字母的平均高度(以x为基准)。磅值相同的两字母,x高度越大的字母看起来比x高度小的字母要大</p>
+<p>Cap高度(Cap height):与x高度相似。指大写字母的平均高度(以C为基准)</p>
+<p>下行字母(Descender):例如在字母q中,基线以下的字母部分叫下伸部分</p>
+<p>上行字母(Ascender):x高度以上的部分(比如字母b)叫做上伸部分</p>
+<p>基线(Baseline):通常在x、v、b、m下的那条线</p>
+<p>描边(Stroke):组成字符的线或曲线。可以加粗或改变字符形状</p>
+<p>衬线(Serif):用来使字符更可视的一条水平线。如字母左上角和下部的水平线。</p>
+<p>无衬线(Sans Serif):可以让排字员不使用衬线装饰。</p>
+<p>方形字(Block):这种字体的笔画使字符看起来比无衬线字更显眼,但还不到常见的衬线字的程度。例如Lubalin Graph就是方形字,这种字看起来好像是木头块刻的一样</p>
+<p>手写体脚本(Calligraphic script):是一种仿效手写体的字体。例如Murray Hill或者Fraktur字体</p>
+<p>艺术字(Decorative):像绘画般的字体</p>
+<p>Pi符号(Pisymbol):非标准的字母数字字符的特殊符号。例如Wingdings和Mathematical Pi</p>
+<p>连写(Ligature):是一系列连写字母如fi、fl、ffi或ffl。由于字些字母形状的原因经常被连写,故排字员已习惯将它们连写。</p>
+<p><img src="http://toothpick.duapp.com/wp-content/uploads/66f3f2126b76bcd0bc91a4d92138a416.gif" alt=""></p>
+<p><img src="http://toothpick.duapp.com/wp-content/uploads/cf363c3b354aa8b679f50f9aee2dcd88.gif" alt=""></p>
+<p><a href="http://www.dreamingwish.com/wp-content/uploads/2011/11/11544bece19.gif" target="_blank"><img src="file:///Users/toothpick/Library/Application%20Support/Evernote/accounts/Evernote/qpdyx/content/p148/66f3f2126b76bcd0bc91a4d92138a416.gif" alt=""></a></p>
+<p><span style="color: rgb(69, 69, 69); font-family: tahoma, helvetica, arial; font-size: 14px; line-height: 21px; "><a href="http://www.dreamingwish.com/wp-content/uploads/2011/11/115457dd4de.gif" target="_blank"><img src="file:///Users/toothpick/Library/Application%20Support/Evernote/accounts/Evernote/qpdyx/content/p148/cf363c3b354aa8b679f50f9aee2dcd88.gif" alt=""></a></span></p>
+<p>&nbsp;</p>
+<embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0"></embed>]]></content>
+    
+    
+      <category term="coretext" scheme="http://yoursite.com/categories/coretext/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[CoreText基础-排版必修课]]></title>
+    <link href="http://yoursite.com/2012/12/16/coretext%E5%9F%BA%E7%A1%80-%E6%8E%92%E7%89%88%E5%BF%85%E4%BF%AE%E8%AF%BE/"/>
+    <id>http://yoursite.com/2012/12/16/coretext基础-排版必修课/</id>
+    <published>2012-12-15T22:55:19.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0"><span style="color: rgb(69, 69, 69); font-family: tahoma, helvetica, arial; line-height: 21px; font-size: 14px; ">行距(Leading):又称行间距。指的是行的基线到另一行基线之间的距离(Leading的史称来源于旧式排版时用铅条隔开行之间的距离,读作&rdquo;ledding&rdquo;)。</span></embed>
+
+<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0"> </embed>
+
+<p>合成(Composition):是一种通篇字符间距的调整以求更好的视觉效果。多数程序都是按行排列文本的,这样可能会造成相邻行间的空格混乱。</p>
+<p>字距(Tracking):决定单词中每个字母之间的距离</p>
+<p>词间距(Word spacing):决定两个词间合适、最小和最大的距离</p>
+<p>字母间距(Letter spacing):决定两字母间合适、最小和最大距离</p>
+<p>字偶距调整(Kerning):指两字母间距离的调整。根据字母形状微调字母。实际上,每种字体都已为你做好微调,它们通常用于广告和题头。</p>
+<p>成对字偶距调整(Pair kerning):一个表格在InDesign中称为字偶距调整表。表示对想排的字母对自动进行字偶距调整。它常被用于大写标题,因为在这里字母间距的不协调更令人不悦。</p>
+<p>对齐(Justification):为使栏或页中的文本各行左右对齐,&rdquo;对齐&rdquo;用于增大两词或字母间距。它也指对齐方式:右对齐、左对齐或居中</p>
+<p>左对齐(Ragged right and flush left):指文本对齐页面的左边界但右边界不齐</p>
+<p>右对齐(Ragged left and flush right):指文本对齐页面的右边界但左边界不齐</p>
+<p>居中(Centered):以文本或行的中线为基准两边与页边的距离相等</p>
+<p>纵向对齐(Vertical justification):增加两段间距(或两行)以使页面每个栏的顶部和底部对齐。不幸的是,InDesign未设纵向对齐</p>
+<p><a href="http://www.dreamingwish.com/wp-content/uploads/2011/11/basics-01.gif" target="_blank"><img src="file:///Users/toothpick/Library/Application%20Support/Evernote/accounts/Evernote/qpdyx/content/p89/ada6d1b8287fa3a2a4ace179ef514a3a.gif" alt=""></a><a href="http://www.dreamingwish.com/wp-content/uploads/2011/11/basics-05-tracking.gif" target="_blank"><img src="file:///Users/toothpick/Library/Application%20Support/Evernote/accounts/Evernote/qpdyx/content/p89/e77d72fb42d792f665e27252b5cf4627.gif" alt=""></a></p>
+<p><img src="http://toothpick.duapp.com/wp-content/uploads/ada6d1b8287fa3a2a4ace179ef514a3a.gif" alt=""></p>
+<p><img src="http://toothpick.duapp.com/wp-content/uploads/e77d72fb42d792f665e27252b5cf4627.gif" alt=""></p>
+<p>缩进(Indent):可在每段前加空格的方法表示新段落的开始</p>
+<p>伸出(Outdent):表示首行首字母伸出左边界,其他行左边界对齐</p>
+<p>块缩进(Block indent):多用于较长引用,从左边界有时从右边界移动整段</p>
+<p>悬挂缩进(Hanging indent):表示首行由左边界起始,所有相应行都缩进</p>
+<p>项目符号(Bullet):一种字符(通常为实心圆),表示某段在要素列表中是要素之一。可被缩进、伸出或对齐左边界</p>
+<p>大写字母下沉(Drop cap):表示一个字母其高度相当于它所在段落中几行的高度。排版员经常用它引起读者注意</p>
+<p>保持(Keep):使一定数目的行段彼此相连而不被隔断</p>
+<p>样式(Styles):它包含间距、行距、缩进、前导和对齐的属性</p>
+<p>样式或样式标注(Style or style tag):是一系列属性。可在整段中应用样式,称为段落样式;也可在高亮显示的字符上应用样式,称为字符样式</p>
+<p>&nbsp;</p>
+<p>连字符(Hyphen):表示行尾的某单词被分隔了或表示连接两次形成新词</p>
+<p>连字符连接(Hyphenation):决定被分单词中连字符的位置</p>
+<p>连续的连字符连接(Consecutive hyphenation):决定一行中可使用连字符的数量(一般认为一行中三个或更多的连字符是糟糕的排版)</p>
+<p>连字符区(Hyphenation zone):决定分割单词的连字符距离右边界的距离</p>
+<p>非标准词典(Exception dictionary):列出非标准连字符连接的单词。用户可增加一些排版程序词典中默认的单词和重写某单词的默认连字符连接,例如:proj-cet表名词而pro-ject表动词</p>
+<p>随意连字符(Discretionary hyphen):在单词中置入随意连字符会告知程序当此词在行尾处必须被分割开时自动添加连字符。随意连字符只对被置入的单词有效 &nbsp;</p>
+<p>&nbsp;</p>
+<embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0"></embed>
+
+<embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0"></embed>]]></content>
+    
+    
+      <category term="coretext" scheme="http://yoursite.com/categories/coretext/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[关于彻底删除10.8.2深度休眠预留缓存的巨大垃圾文件]]></title>
+    <link href="http://yoursite.com/2012/12/13/74/"/>
+    <id>http://yoursite.com/2012/12/13/74/</id>
+    <published>2012-12-12T21:06:50.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<p><span style="font-size:18px;"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-family:arial ;outline:none;line-height:1.5em;"><span style="outline:none;font-size:18px;">1.首先你要打开&ldquo;文本编辑器&quot;</span></span></p>
+<p><span style="font-size:18px;">&nbsp; &nbsp;</span><img src="http://images.weiphone.com/attachments/photo/Day_121121/208294_cd4a1353502667f458c7a48deed07.png" alt=""><span style="font-size:18px;"> &nbsp;</p>
+<pre><code>&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;2.在桌面上创建一个叫sleepimage的文档&lt;/span&gt;
+</code></pre><p><span style="font-size:18px;">&nbsp; &nbsp;</span><img src="http://images.weiphone.com/attachments/photo/Day_121121/208294_0cfa13535027544979e779e691f2f.png" alt=""></p>
+<pre><code>&lt;span style=&quot;font-size:18px;&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;3.然后打开你的Finder找到桌面选中这个文档回车，把它的后缀删掉 &amp;nbsp; &lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:18px;line-height:26px;background-color:#FFFFFF;&quot;&gt;.rtf&lt;/span&gt;
+
+&lt;span style=&quot;font-size:18px;&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;4.新建一个Finder，按住SHIFT+COMMAND+G，然后输入前往的文件夹地址/private/var/vm。
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;5.在第3步打开的Finder的桌面上把sleepimage拖到/private/var/vm，也就是用文档编辑器创建的那个，系统会提示你巴拉巴拉巴拉的什么要求你输入管理员密码，输入后就替换了，记得是替换！不是保留两者！
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;6.然后选中你已经替换的sleepimage按COMMAND+i把&amp;ldquo;已锁定&amp;rdquo;打上钩钩。&lt;/span&gt;
+</code></pre><p><span style="font-size:18px;">&nbsp; &nbsp;</span><img src="http://images.weiphone.com/attachments/photo/Day_121121/208294_079f1353503118cd14e965d6396cc.png" alt=""></p>
+<pre><code>&lt;span style=&quot;font-size:18px;&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 当当当！！！大功告成啦！！！这个原理就是禁止系统修改此文件夹！然后那个巨恶心的深度睡眠预留空间就不会再被创建了！重启100+N次也不会了！是的！不会了！！！！
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;span style=&quot;outline:none;color:#FF0000;font-size:18px;&quot;&gt;此教程不会影响你正常的休眠和系统，请放心更改。
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;
+
+&lt;span style=&quot;font-size:18px;&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;小弟120G的SSD，内存16G，没有删除前可用74G，删除后91G！！！！
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;
+
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;![](http://images.weiphone.com/attachments/photo/Day_121121/208294_03ce13535032941d3060f7a187559.png)
+</code></pre>]]></content>
+    
+    
+      <category term="mac" scheme="http://yoursite.com/categories/mac/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[详解Mac睡眠模式设置]]></title>
+    <link href="http://yoursite.com/2012/12/13/%E8%AF%A6%E8%A7%A3mac%E7%9D%A1%E7%9C%A0%E6%A8%A1%E5%BC%8F%E8%AE%BE%E7%BD%AE/"/>
+    <id>http://yoursite.com/2012/12/13/详解mac睡眠模式设置/</id>
+    <published>2012-12-12T20:48:12.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<p>检查现用设置</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>打开终端后，首先要做的便是确定你的Mac OS目前正在使用的睡眠模式，以防你需要设置回去</p>
+<p>你可以通过Unix指令 pmset 来观察和更改睡眠模式</p>
+<p>查看当前睡眠模式设置，在终端输入以下指令：</p>
+<p><span class="span4br"></span></p>
+<p>pmset -g | grep hibernatemode</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>你应该在终端中看到类似如下的结果：</p>
+<p><span class="span4br"></span></p>
+<p>$ pmset -g | grep hibernatemodehibernatemode 3</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>好的，现在我们就能知道你的机器正处于模式3</p>
+<p>多亏Dashboard中一个十分方便的小插件 Deep Sleep 的说明书</p>
+<p>我们能够正确的分别出各个睡眠模式的特点：</p>
+<p><span class="span4br"></span></p>
+<p>0-老式睡眠模式</p>
+<p>睡眠期间内存加电，禁用safe sleep（安全睡眠），超快速唤醒</p>
+<p><span class="span4br"></span></p>
+<p>1-休眠模式</p>
+<p>内存中的数据将写入到磁盘上，系统在所谓的“睡眠”时将完全关闭</p>
+<p>因为需要读取先前保存在硬盘中的内存数据，所以唤醒较慢</p>
+<p><span class="span4br"></span></p>
+<p>3-睡眠模式（2005年秋季之后机器默认采用的）</p>
+<p>睡眠过程中，内存保持通电状态，同时内存数据在进入睡眠模式之前同样要写入到硬盘</p>
+<p>万一没有外接电源并且电池也完全没电了的话，系统将自动进入休眠模式</p>
+<p><span class="span4br"></span></p>
+<p>5-和模式1一样</p>
+<p>但这是为了那些使用安全虚拟内存的用户 &nbsp;System Preferences -&gt; Security（系统设置-安全）</p>
+<p><span class="span4br"></span></p>
+<p>7-和模式3一样</p>
+<p>但同样是为了那些使用安全虚拟内存的用户</p>
+<p><span class="span4br"></span></p>
+<p>既然你已经知道自己目前所处的模式，那么做个记录吧</p>
+<p>你也可以用下面的指令，一步到位：</p>
+<p><span class="span4br"></span></p>
+<p>sudo pmset -g | grep hibernatemode &gt; ~/Desktop/current_mode.txt</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>这个指令会将pmset命令的结果除了最后的模式值其他的全部删除掉</p>
+<p>然后将结果导出到桌面上名为current_mode.txt的文本文件</p>
+<p>以防将来需要，保存好这个文件</p>
+<p><span class="span4br"></span></p>
+<p>注意：</p>
+<p>在这里我是故意如此谨慎的</p>
+<p>事实上，除非你曾经捣鼓过这个设置，不然的话你的Mac不是在模式0就是3或者7</p>
+<p>如果你的是模式0的话，这个小提示对你就无所谓了，因为你的Mac仍然使用的是老式睡眠</p>
+<p>保存一个存有3或7数字值的文本文件确实有些过了</p>
+<p>但是至少将来你不会在纠结于初始的模式到底是3还是7了</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>改变睡眠模式设置</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>要改变睡眠模式，你又需要使用pmset指令了，还需要加上变量以及相对应的你想要改变的值</p>
+<p>所以如果你想要回到老式睡眠模式（从上面可以知道是模式0），输入下列指令：</p>
+<p><span class="span4br"></span></p>
+<p>sudo pmset -a hibernatemode 0</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>按下回车，将会需要输入你的密码</p>
+<p>输完之后回车，你的睡眠模式就更改完成了</p>
+<p>如果你想使用原来的设置，用保存在current_mode.txt里面的值替代上述指令的“0”</p>
+<p>当然，这也意味着你也可以设置你的机器直接进入休眠模式，方法就是最后的数值从0改为1</p>
+<p><span class="span4br"></span></p>
+<p>我发现了一个更简单的方法，那就是使用上文提及到的Deep Sleep插件</p>
+<p>这个插件将会返回它在休眠模式之前的值，这也就是说</p>
+<p>你可以使用这个插件进入休眠同时关闭盖子</p>
+<p>（笔记本啦@_@）也能进入正常的睡眠模式</p>
+<p>需要注意的是，上面的改动并不需要重启生效</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>释放一些磁盘空间</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>如果你的机器之前的设置是3或者7并且你已经设置了使用老式睡眠模式，你可以继续下一步：</p>
+<p>释放在你改变睡眠模式之前睡眠时用于保存系统内存备份的那部分磁盘空间</p>
+<p>在终端中输入如下两条指令，按下回车输入密码即可</p>
+<p><span class="span4br"></span></p>
+<p>cd /var/vm</p>
+<p>sudo rm sleepimage</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>如果你回到了新式睡眠模式</p>
+<p>这个睡眠镜像文件（sleepimage）将会在你执行sudo pmset指令的时候自动创建</p>
+<p>一执行指令就会创建，而不是第一次将机器进入睡眠模式的时候</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>总结</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>注明：以下&quot;我&quot;均指原文作者</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>个人来说，我认为新式睡眠更好，我也将我的机器设置为这个模式</p>
+<p>但如果你更喜欢老式睡眠，你也已经知道如何设置了</p>
+<p>是的，这确实需要在终端之路上进行一趟旅程</p>
+<p>但是一旦当你决定踏上了旅程，你就会发现其实它也没有想象中的那么困难</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>p.H：</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>在读原文作者这篇帖子之前，我曾经详细查阅过pmset指令</p>
+<p>所以对原文作者的内容，算是已经有一定了解了</p>
+<p>下面给大家几点直观的使用感觉，比上述文字要直白许多</p>
+<p><span class="span4br"></span></p>
+<p>模式0，相比与其他的模式最大的区别就是进入睡眠极快</p>
+<p>可以说是1秒钟之内，我的笔记本感觉就很直观了</p>
+<p>我的系统默认的是模式3，点击睡眠之后，能够看到硬盘灯狂闪</p>
+<p>原因上文有叙述，简单说就是把内存数据写入硬盘</p>
+<p>所以要过个七八秒之后，才能看到电源灯呼吸闪烁</p>
+<p>相较之下，模式0瞬间就看到电源灯呼吸闪烁，进入睡眠状态</p>
+<p><span class="span4br"></span></p>
+<p>而关于文章中提及的释放磁盘空间</p>
+<p>我的内存是8G的，所以我特意进行了测试</p>
+<p>执行前后，系统可用空间增加了8G多一点</p>
+<p>实际上应该就是8G整，不过涉及到进制的问题，会有一些出入</p>
+<p>插句题外话，windows同样有类似的操作方法，能够释放系统盘的空间（大小等于你的内存大小）</p>
+<p><span class="span4br"></span></p>
+<p>另外，我发现我的睡眠模式默认设置的是模式3</p>
+<p>如果改成模式5的话，睡眠之后，短时间内没问题</p>
+<p>但是可能过一段时间，系统会自动断电</p>
+<p>完全断电的那种，开机就是那种正常的开机，没有任何唤醒</p>
+<p>因为上文提到牵涉到虚拟内存，而我是关闭了Mac的虚拟内存</p>
+<p>所以可能黑果对模式5和7的支持并不是太好，或者是因为我关闭了虚拟内存的缘故</p>
+<p><span class="span4br"></span></p>
+<p>除此之外，有的机器可能采用系统默认的模式3，5，7或1无法睡眠</p>
+<p>但是改用了模式0之后，能够正常睡眠</p>
+<p>当然这并不是通用的方法，但有可能</p>
+<p>它会让你原本不能睡眠的机器能够很好地支持睡眠</p>
+<p><span class="span4br"></span></p>
+<p><span class="span4br"></span></p>
+<p>综上，个人还是比较喜欢模式0</p>
+<p><span class="span4br"></span></p>
+]]></content>
+    
+    
+      <category term="mac" scheme="http://yoursite.com/categories/mac/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[MAC下PHP环境搭建]]></title>
+    <link href="http://yoursite.com/2012/12/11/mac%E4%B8%8Bphp%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>http://yoursite.com/2012/12/11/mac下php环境搭建/</id>
+    <published>2012-12-11T07:08:46.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;如果你是一名&nbsp;Web&nbsp;开发者，很多时候都需要在本地搭建服务器测试环境，比如&nbsp;Apache+Mysql+PHP&nbsp;这样的环境。事实上&nbsp;Mac&nbsp;OS&nbsp;X&nbsp;中想要搭建这样的环境很简单，本文我们就会将详细的教程分享给大家。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="span4br"></span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;首先需要说明的是，Mac&nbsp;OS&nbsp;X&nbsp;系统其实已经集成了&nbsp;Apache+PHP环境，用户手动开启即可。在之前的&nbsp;OS&nbsp;X&nbsp;系统中，只需要进入「系统偏好设置——共享」，然后开启「Web&nbsp;共享」就可以打开&nbsp;Apache。不过在最新的&nbsp;Mountain&nbsp;Lion&nbsp;中苹果取消了这个共享功能的图形界面，只能从命令行开启。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;打开终端，运行启动&nbsp;Apache&nbsp;命令：</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sudo&nbsp;apachectl&nbsp;start</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;重启命令：</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sudo&nbsp;apachectl&nbsp;restart</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Mountain&nbsp;Lion&nbsp;中集成的&nbsp;Apache&nbsp;版本如下：</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mbp:~&nbsp;eyon$&nbsp;httpd&nbsp;-v<span class="span4br"></span>Server&nbsp;version:&nbsp;Apache/2.2.22&nbsp;(Unix)<span class="span4br"></span>Server&nbsp;built:&nbsp;Jun&nbsp;20&nbsp;2012&nbsp;13:57:09</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://img.guomii.com/2012/08/Snip20120806_6.png" alt="" title="Snip20120806_6"></p>
+<h3 id="-"> </h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Root&nbsp;目录</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;系统级的根目录是：</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Library/WebServer/Documents/</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;用户级的根目录是：</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~/Sites</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;~/Sites&nbsp;也就是你用户目录下面的”站点”目录，在&nbsp;OS&nbsp;X&nbsp;Mountain&nbsp;Lion&nbsp;中，这个目录可能没有，所以你需要手动建立一个同名目录。建立方式很简单，直接在终端中运行：</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sudo&nbsp;mkdir&nbsp;~/Sites</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果没有，那么你需要创建一个，取名为”你的用户名.conf”，你可以使用&nbsp;vi&nbsp;或者&nbsp;nano&nbsp;这两种编辑器之一来创建。</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sudo&nbsp;vi&nbsp;/etc/apache2/users/你的用户名.conf</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;文件保存之后，给它赋予相应的权限：</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sudo&nbsp;chmod&nbsp;755&nbsp;/etc/apache2/users/你的用户名.conf</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;之后你就可以通过浏览器访问你的用户级目录网页了，你可以随便防个网页进去测试一下。根目录地址为：</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://localhost/~username/" target="_blank">http://localhost/~username/</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Mountain&nbsp;Lion&nbsp;中已经集成了&nbsp;PHP&nbsp;5.3.13&nbsp;版本，也需要手动开启。你可以用&nbsp;vi&nbsp;或者&nbsp;nano&nbsp;编辑器打开下面这个文件：</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sudo&nbsp;nano&nbsp;/etc/apache2/httpd.conf</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;LoadModule&nbsp;php5_module&nbsp;libexec/apache2/libphp5.so</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;接下来再一次重启&nbsp;Apache：</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sudo&nbsp;apachectl&nbsp;restart</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Mountain&nbsp;Lion&nbsp;中并没有集成&nbsp;Mysql，需要手动安装。你可以<a href="http://dev.mysql.com/downloads/mysql/" target="_blank">点击这个链接下载&nbsp;MySQL&nbsp;的安装包</a>，请下载&nbsp;Mac&nbsp;OS&nbsp;X&nbsp;ver.&nbsp;10.6&nbsp;(x86,&nbsp;64-bit),&nbsp;DMG&nbsp;Archive(可以在&nbsp;Mountain&nbsp;Lion&nbsp;下正常工作)。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://img.guomii.com/2012/08/Snip20120806_5-600x403.png" alt="" title="Snip20120806_5"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;你需要逐一安装这三个文件，双击之后系统可能会提示你由于该软件包来自身份不明的开发者，不能安装。遇到这种情况，你可以按住&nbsp;command&nbsp;键，然后右键点击安装文件，再点击右键菜单中的”打开”，这样就可以绕过这个安全限制了(当然你也可以在系统偏好设置——安全性与隐私——通用中改成可打开”任何来源”的应用程序)。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果你想查看&nbsp;MySQL&nbsp;的版本，可以用下面这个命令：</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/usr/local/mysql/bin/mysql&nbsp;-v</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://img.guomii.com/2012/08/Snip20120806_2-600x297.png" alt="" title="Snip20120806_2"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;设置环境变量也很方便，直接用命令(这里笔者用&nbsp;vi&nbsp;编辑器举例)：</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cd&nbsp;;&nbsp;vi&nbsp;.bash_profile</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;然后按&nbsp;esc&nbsp;退出编辑器，再输入&nbsp;:wq(别忘了冒号)保存退出。当然你如果使用&nbsp;nano&nbsp;或者别的编辑器的话，操作方式跟这个可能不一样，反正意思就是将上面那句话写入到&nbsp;.bash_profile&nbsp;文件中。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;之后你就可以在终端的任意目录使用&nbsp;mysql&nbsp;命令了，你可以运行&nbsp;mysql&nbsp;-v&nbsp;试试。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(请记住密码一定要用半角单引号包起来)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在安装&nbsp;phpMyAdmin&nbsp;之前，请首先修复&nbsp;2002&nbsp;socket&nbsp;错误：</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sudo&nbsp;mkdir&nbsp;/var/mysql</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sudo&nbsp;ln&nbsp;-s&nbsp;/tmp/mysql.sock&nbsp;/var/mysql/mysql.sock</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;修改权限:</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;chmod&nbsp;o+w&nbsp;~/Sites/phpmyadmin/config</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(请将&nbsp;username&nbsp;修改成你的用户名)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;phpMyAdmin配置完成之后，上面建立的&nbsp;/config&nbsp;目录中会出现一个&nbsp;config.inc.php&nbsp;文件，将这个文件移到&nbsp;phpmyadmin&nbsp;根目录(上一级)，然后删除这个空的&nbsp;/config&nbsp;目录。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;以上便是在&nbsp;OS&nbsp;X&nbsp;Mountain&nbsp;Lion&nbsp;上配置&nbsp;Apache+Mysql+Php&nbsp;的完整教程。如果大家有任何不明白的地方，请在下面评论框中提问。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="span4br"></span></p>
+]]></content>
+    
+    
+      <category term="PHP" scheme="http://yoursite.com/categories/PHP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[SDWebImage 笔记（转）]]></title>
+    <link href="http://yoursite.com/2012/12/10/sdwebimage-%E7%AC%94%E8%AE%B0%EF%BC%88%E8%BD%AC%EF%BC%89/"/>
+    <id>http://yoursite.com/2012/12/10/sdwebimage-笔记（转）/</id>
+    <published>2012-12-09T18:39:19.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<p>SDWebImage托管在github上。<a href="https://github.com/rs/SDWebImage" target="_blank">https://github.com/rs/SDWebImage</a>
+这个类库提供一个UIImageView类别以支持加载来自网络的远程图片。具有缓存管理、异步下载、同一个URL下载次数控制和优化等特征。
+使用示范的代码：
+UITableView使用UIImageView+WebCache类（基本应用，UIImageView的一个category）
+前提#import导入UIImageView+WebCache.h文件，然后在tableview的cellForRowAtIndexPath：方法下： </p>
+<p>[html lang=&quot;Objective-C&quot;] </p>
+<ul>
+<li>(UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath <em>)indexPath {
+   static NSString </em>MyIdentifier = @&quot;MyIdentifier&quot;;
+   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  if (cell == nil) {<pre><code>   cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier] autorelease];
+</code></pre>   }
+// Here we use the new provided setImageWithURL: method to load the web image
+  [cell.imageView setImageWithURL:[NSURL URLWithString:@&quot;<a href="http://www.domain.com/path/to/image.jpg" target="_blank">http://www.domain.com/path/to/image.jpg</a>&quot;] placeholderImage:[UIImage imageNamed:@&quot;placeholder.png&quot;]];
+  cell.textLabel.text = @&quot;My Text&quot;;
+  return cell;
+}
+[/html]</li>
+</ul>
+<p>基本代码：[imageView setImageWithURL:[NSURL URLWithString:@&quot;<a href="http://www.domain.com/path/image.jpg" target="_blank">http://www.domain.com/path/image.jpg</a>&quot;]];
+使用SDWebImageManager类：可以进行一些异步加载的工作。
+[html lang=&quot;Objective-C&quot;]
+SDWebImageManager <em>manager = [SDWebImageManager sharedManager];
+UIImage </em>cachedImage = [manager imageWithURL:url]; // 将需要缓存的图片加载进来
+if (cachedImage) {
+      // 如果Cache命中，则直接利用缓存的图片进行有关操作
+      // Use the cached image immediatly
+} else {
+      // 如果Cache没有命中，则去下载指定网络位置的图片，并且给出一个委托方法
+      // Start an async download
+     [manager downloadWithURL:url delegate:self];
+}
+[/html]
+当然你的类要实现SDWebImageManagerDelegate协议，并且要实现协议的webImageManager:didFinishWithImage:方法。
+// 当下载完成后，调用回调方法，使下载的图片显示
+[html lang=&quot;Objective-C&quot;]</p>
+<ul>
+<li>(void)webImageManager:(SDWebImageManager <em>)imageManager didFinishWithImage:(UIImage </em>)image {
+  // Do something with the downloaded image
+}
+[/html]
+独立的异步图像下载
+可能会单独用到异步图片下载，则一定要用downloaderWithURL:delegate:来建立一个SDWebImageDownloader实例。
+downloader = [SDWebImageDownloader downloaderWithURL:url delegate:self];
+这样SDWebImageDownloaderDelegate协议的方法imageDownloader:didFinishWithImage:被调用时下载会立即开始并完成。</li>
+</ul>
+<p>独立的异步图像缓存
+SDImageCache类提供一个创建空缓存的实例，并用方法imageForKey:来寻找当前缓存。
+[html lang=&quot;Objective-C&quot;]
+UIImage *myCachedImage = [[SDImageCache sharedImageCache] imageFromKey:myCacheKey];
+[/html]</p>
+<p>存储一个图像到缓存是使用方法storeImage: forKey:
+[[SDImageCache sharedImageCache] storeImage:myImage forKey:myCacheKey];
+默认情况下，图像将被存储在内存缓存和磁盘缓存中。如果仅仅是想内存缓存中，要使用storeImage:forKey:toDisk:方法的第三个参数带一负值
+来替代。</p>
+<p>SDWebImage 支持异步的图片下载+缓存，提供了 UIImageView+WebCacha 的 category，方便使用。纪录一下 SDWebImage 加载图片的流程。
+入口 setImageWithURL:placeholderImage:options: 会先把 placeholderImage 显示，然后 SDWebImageManager 根据 URL 开始处理图片。
+进入 SDWebImageManager-downloadWithURL:delegate:options:userInfo:，交给 SDImageCache 从缓存查找图片是否已经下载 queryDiskCacheForKey:delegate:userInfo:.
+先从内存图片缓存查找是否有图片，如果内存中已经有图片缓存，SDImageCacheDelegate 回调 imageCache:didFindImage:forKey:userInfo: 到 SDWebImageManager。
+SDWebImageManagerDelegate 回调 webImageManager:didFinishWithImage: 到 UIImageView+WebCache 等前端展示图片。
+如果内存缓存中没有，生成 NSInvocationOperation 添加到队列开始从硬盘查找图片是否已经缓存。
+根据 URLKey 在硬盘缓存目录下尝试读取图片文件。这一步是在 NSOperation 进行的操作，所以回主线程进行结果回调 notifyDelegate:。
+如果上一操作从硬盘读取到了图片，将图片添加到内存缓存中（如果空闲内存过小，会先清空内存缓存）。SDImageCacheDelegate 回调 imageCache:didFindImage:forKey:userInfo:。进而回调展示图片。
+如果从硬盘缓存目录读取不到图片，说明所有缓存都不存在该图片，需要下载图片，回调 imageCache:didNotFindImageForKey:userInfo:。
+共享或重新生成一个下载器 SDWebImageDownloader 开始下载图片。
+图片下载由 NSURLConnection 来做，实现相关 delegate 来判断图片下载中、下载完成和下载失败。
+connection:didReceiveData: 中利用 ImageIO 做了按图片下载进度加载效果。
+connectionDidFinishLoading: 数据下载完成后交给 SDWebImageDecoder 做图片解码处理。
+图片解码处理在一个 NSOperationQueue 完成，不会拖慢主线程 UI。如果有需要对下载的图片进行二次处理，最好也在这里完成，效率会好很多。
+在主线程 notifyDelegateOnMainThreadWithInfo: 宣告解码完成，imageDecoder:didFinishDecodingImage:userInfo: 回调给 SDWebImageDownloader。
+imageDownloader:didFinishWithImage: 回调给 SDWebImageManager 告知图片下载完成。
+通知所有的 downloadDelegates 下载完成，回调给需要的地方展示图片。
+将图片保存到 SDImageCache 中，内存缓存和硬盘缓存同时保存。写文件到硬盘也在以单独 NSInvocationOperation 完成，避免拖慢主线程。
+SDImageCache 在初始化的时候会注册一些消息通知，在内存警告或退到后台的时候清理内存图片缓存，应用结束的时候清理过期图片。
+SDWI 也提供了 UIButton+WebCache 和 MKAnnotationView+WebCache，方便使用。
+SDWebImagePrefetcher 可以预先下载图片，方便后续使用。</p>
+<p>SDWebImage库的作用：
+通过对UIImageView的类别扩展来实现异步加载替换图片的工作。
+主要用到的对象：
+1、UIImageView (WebCache)类别，入口封装，实现读取图片完成后的回调
+2、SDWebImageManager，对图片进行管理的中转站，记录那些图片正在读取。
+向下层读取Cache（调用SDImageCache），或者向网络读取对象（调用SDWebImageDownloader） 。
+实现SDImageCache和SDWebImageDownloader的回调。
+3、SDImageCache，根据URL的MD5摘要对图片进行存储和读取（实现存在内存中或者存在硬盘上两种实现）
+实现图片和内存清理工作。
+4、SDWebImageDownloader，根据URL向网络读取数据（实现部分读取和全部读取后再通知回调两种方式）
+其他类：
+SDWebImageDecoder，异步对图像进行了一次解压⋯⋯
+目前不明白为什么要做这么道工序。（现在清楚了，功能解释见下文）
+有趣的点：
+1、SDImageCache是怎么做数据管理的?
+SDImageCache分两个部分，一个是内存层面的，一个是硬盘层面的。
+内存层面的相当是个缓存器，以Key-Value的形式存储图片。当内存不够的时候会清除所有缓存图片。
+用搜索文件系统的方式做管理，文件替换方式是以时间为单位，剔除时间大于一周的图片文件。
+当SDWebImageManager向SDImageCache要资源时，先搜索内存层面的数据，如果有直接返回，没有的话去访问磁盘，将图片从磁盘读取出来，然后做Decoder，将图片对象放到内存层面做备份，再返回调用层。
+2、为啥必须做Decoder?
+通过这个博客：[crayon url=&quot;<a href="http://www.cocoanetics.com/2011/10/avoiding-image-decompression-sickness&quot;]http://www.cocoanetics.com/2011/10/avoiding-image-decompression-sickness/[/crayon" target="_blank">http://www.cocoanetics.com/2011/10/avoiding-image-decompression-sickness&quot;]http://www.cocoanetics.com/2011/10/avoiding-image-decompression-sickness/[/crayon</a>]
+现在明白了，由于UIImage的imageWithData函数是每次画图的时候才将Data解压成ARGB的图像，
+所以在每次画图的时候，会有一个解压操作，这样效率很低，但是只有瞬时的内存需求。
+为了提高效率通过SDWebImageDecoder将包装在Data下的资源解压，然后画在另外一张图片上，这样这张新图片就不再需要重复解压了。
+这种做法是典型的空间换时间的做法。</p>
+]]></content>
+    
+    
+      <category term="ios" scheme="http://yoursite.com/tags/ios/"/>
+    
+      <category term="SDWebImage" scheme="http://yoursite.com/tags/SDWebImage/"/>
+    
+      <category term="UIImage" scheme="http://yoursite.com/tags/UIImage/"/>
+    
+      <category term="IOS类库" scheme="http://yoursite.com/categories/IOS%E7%B1%BB%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[优化UITableView性能（转）]]></title>
+    <link href="http://yoursite.com/2012/12/09/%E4%BC%98%E5%8C%96uitableview%E6%80%A7%E8%83%BD%EF%BC%88%E8%BD%AC%EF%BC%89/"/>
+    <id>http://yoursite.com/2012/12/09/优化uitableview性能（转）/</id>
+    <published>2012-12-09T06:53:01.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<p><span style="color:#181818;font-family:verdana, arial, 微软雅黑;font-size:15px;line-height:22px;background-color:#ffffff;"></span></p>
+<p>在iOS应用中，UITableView应该是使用率最高的视图之一了。iPod、时钟、日历、备忘录、Mail、天气、照片、电话、短信、Safari、App Store、iTunes、Game Center⋯几乎所有自带的应用中都能看到它的身影，可见它的重要性。</p>
+<p>然而在使用第三方应用时，却经常遇到性能上的问题，普遍表现在滚动时比较卡，特别是table cell中包含图片的情况时。</p>
+<p>实际上只要针对性地优化一下，这种问题就不会有了。有兴趣的可以看看<a href="http://developer.apple.com/library/ios/#samplecode%2FLazyTableImages%2FIntroduction%2FIntro.html" target="_blank"><span class="s1">LazyTableImages</span></a>这个官方的例子程序，虽然也要从网上下载图片并显示，但滚动时丝毫不卡。</p>
+<p>下面就说说我对UITableView的了解。不过由于我也是初学者，或许会说错或遗漏一些，因此仅供参考。</p>
+<p><span class="span4br"></span></p>
+<p><span class="s2">首先说下UITableView的原理。有兴趣的可以看看<a href="http://developer.apple.com/library/ios/#documentation%2FUserExperience%2FConceptual%2FTableView_iPhone%2FAboutTableViewsiPhone%2FAboutTableViewsiPhone.html" target="_blank"><span class="s1">《About Table Views in iOS-Based Applications》</span></a>。</span></p>
+<p>UITableView是UIScrollView的子类，因此它可以自动响应滚动事件（一般为上下滚动）。</p>
+<p>它内部包含0到多个UITableViewCell对象，每个table cell展示各自的内容。当新cell需要被显示时，就会调用tableView:cellForRowAtIndexPath:方法来获取或创建一个cell；而不可视时，它又会被释放。由此可见，同一时间其实只需要存在一屏幕的cell对象即可，不需要为每一行创建一个cell。</p>
+<p>此外，UITableView还可以分为多个sections，每个区段都可以有自己的head、foot和cells。而在定位一个cell时，就需要2个字段了：在哪个section，以及在这个section的第几行。这在iOS SDK中是用NSIndexPath来表述的，UIKit为其添加了indexPathForRow:inSection:这个创建方法。</p>
+<p>其他诸如编辑之类的就不提了，因为和本文无关。</p>
+<p><span class="span4br"></span></p>
+<p>介绍完原理，接下来就开始优化吧。</p>
+<p><span class="span4br"></span></p>
+<ol>
+<li><p>使用不透明视图。<span class="span4br"></span>不透明的视图可以极大地提高渲染的速度。因此如非必要，可以将table cell及其子视图的opaque属性设为YES（默认值）。<span class="span4br"></span>其中的特例包括背景色，它的alpha值应该为1（例如不要使用clearColor）；图像的alpha值也应该为1，或者在画图时设为不透明。</p>
+</li>
+<li><p>不要重复创建不必要的table cell。<span class="span4br"></span>前面说了，UITableView只需要一屏幕的UITableViewCell对象即可。因此在cell不可见时，可以将其缓存起来，而在需要时继续使用它即可。<span class="span4br"></span>而UITableView也提供了这种机制，只需要简单地设置一个identifier即可：</p>
+</li>
+</ol>
+<ul>
+<li>static NSString <em>CellIdentifier = @&quot;xxx&quot;;UITableViewCell </em>cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];if (cell == nil) {cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];}`</pre>值得一提的是，cell被重用时，它内部绘制的内容并不会被自动清除，因此你可能需要调用setNeedsDisplayInRect:或setNeedsDisplay方法。
+<span style="margin:0px;padding:0px;border:0px;outline:0px;vertical-align:baseline;background-color:transparent;background-position:initial initial;background-repeat:initial initial;text-decoration:line-through;">此外，在添加table cell的时候，如果不需要动画效果，最好不要使用insertRowsAtIndexPaths:withRowAnimation:方法，而是直接调用reloadData方法。因为前者会对所有indexPaths调用tableView:cellForRowAtIndexPath:方法，即便该cell并不需要显示（不知道是不是bug），这就可能创建大量多余的cell。</span><ins style="margin:0px;padding:0px;border:0px;outline:0px;vertical-align:baseline;background-color:transparent;background-position:initial initial;background-repeat:initial initial;">勘误：只是在模拟器上测试如此，真机调试时没有这种bug。</ins>
+<p><span class="span4br"></span></li>
+<li><strong>减少视图的数目。</strong>
+UITableViewCell包含了textLabel、detailTextLabel和imageView等view，而你还可以自定义一些视图放在它的contentView里。然而view是很大的对象，创建它会消耗较多资源，并且也影响渲染的性能。
+如果你的table cell包含图片，且数目较多，使用默认的UITableViewCell会非常影响性能。奇怪的是，使用自定义的view，而非预定义的view，明显会快些。
+当然，最佳的解决办法还是继承UITableViewCell，并在其drawRect:中自行绘制：
+<pre style="padding:0px;border:0px;outline:0px;vertical-align:baseline;background-color:transparent;font-family:&#39;droid sans mono&#39;, &#39;dejavu sans mono&#39;, &#39;lucida console&#39;, &#39;courier new&#39;, monospace;word-wrap:break-word;margin-top:0px;margin-bottom:0px;"><code>- (void)drawRect:(CGRect)rect { &amp;nbsp; &amp;nbsp;if (image) {[image drawAtPoint:imagePoint];self.image = nil;} else {[placeHolder drawAtPoint:imagePoint];} &amp;nbsp; &amp;nbsp;[text drawInRect:textRect withFont:font lineBreakMode:UILineBreakModeTailTruncation];}</code></pre>不过这样一来，你会发现选中一行后，这个cell就变蓝了，其中的内容就被挡住了。最简单的方法就是将cell的selectionStyle属性设为UITableViewCellSelectionStyleNone，这样就不会被高亮了。
+此外还可以创建CALayer，将内容绘制到layer上，然后对cell的contentView.layer调用addSublayer:方法。这个例子中，layer并不会显著影响性能，但如果layer透明，或者有圆角、变形等效果，就会影响到绘制速度了。解决办法可参见后面的预渲染图像。
+<span class="span4br"></span></li>
+<li><strong>不要做多余的绘制工作。</strong>
+在实现drawRect:的时候，它的rect参数就是需要绘制的区域，这个区域之外的不需要进行绘制。
+例如上例中，就可以用CGRectIntersectsRect、CGRectIntersection或CGRectContainsRect判断是否需要绘制image和text，然后再调用绘制方法。</li>
+<li><strong>预渲染图像。</strong>
+你会发现即使做到了上述几点，当新的图像出现时，仍然会有短暂的停顿现象。解决的办法就是在bitmap context里先将其画一遍，导出成UIImage对象，然后再绘制到屏幕，详细做法可见<a href="http://www.keakon.net/2011/07/26/%E5%88%A9%E7%94%A8%E9%A2%84%E6%B8%B2%E6%9F%93%E5%8A%A0%E9%80%9FiOS%E8%AE%BE%E5%A4%87%E7%9A%84%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA" target="_blank">《利用预渲染加速iOS设备的图像显示》</a>。</li>
+<li><strong>不要阻塞主线程。</strong>
+做到前几点后，你的table view滚动时应该足够流畅了，不过你仍可能让用户感到不爽。常见的现象就是在更新数据时，整个界面卡住不动，完全不响应用户请求。
+出现这种现象的原因就是主线程执行了耗时很长的函数或方法，在其执行完毕前，无法绘制屏幕和响应用户请求。其中最常见的就是网络请求了，它通常都需要花费数秒的时间，而你不应该让用户等待那么久。
+解决办法就是使用多线程，让子线程去执行这些函数或方法。这里面还有一个学问，当下载线程数超过2时，会显著影响主线程的性能。因此在使用ASIHTTPRequest时，可以用一个NSOperationQueue来维护下载请求，并将其maxConcurrentOperationCount设为2。而NSURLRequest则可以配合<a href="http://developer.apple.com/library/ios/#documentation%2FPerformance%2FReference%2FGCD_libdispatch_Ref%2FReference%2Freference.html" target="_blank">GCD</a>来实现，或者使用NSURLConnection的setDelegateQueue:方法。
+当然，在不需要响应用户请求时，也可以增加下载线程数，以加快下载速度：
+<pre style="padding:0px;border:0px;outline:0px;vertical-align:baseline;background-color:transparent;font-family:&#39;droid sans mono&#39;, &#39;dejavu sans mono&#39;, &#39;lucida console&#39;, &#39;courier new&#39;, monospace;word-wrap:break-word;margin-top:0px;margin-bottom:0px;"><code>- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {if (!decelerate) {queue.maxConcurrentOperationCount = 5;}}- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {queue.maxConcurrentOperationCount = 5;}- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {queue.maxConcurrentOperationCount = 2;}</code></pre>此外，自动载入更新数据对用户来说也很友好，这减少了用户等待下载的时间。例如每次载入50条信息，那就可以在滚动到倒数第10条以内时，加载更多信息：
+<pre style="padding:0px;border:0px;outline:0px;vertical-align:baseline;background-color:transparent;font-family:&#39;droid sans mono&#39;, &#39;dejavu sans mono&#39;, &#39;lucida console&#39;, &#39;courier new&#39;, monospace;word-wrap:break-word;margin-top:0px;margin-bottom:0px;"><code>- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {if (count - indexPath.row &amp;lt; 10 &amp;amp;&amp;amp; !updating) {updating = YES;[self update];}}// update方法获取到结果后，设置updating为NO</code></pre>还有一点要注意的就是当图片下载完成后，如果cell是可见的，还需要更新图像：
+<pre style="padding:0px;border:0px;outline:0px;vertical-align:baseline;background-color:transparent;font-family:&#39;droid sans mono&#39;, &#39;dejavu sans mono&#39;, &#39;lucida console&#39;, &#39;courier new&#39;, monospace;word-wrap:break-word;margin-top:0px;margin-bottom:0px;">`NSArray <em>indexPaths = [self.tableView indexPathsForVisibleRows];for (NSIndexPath </em>visibleIndexPath in indexPaths) {if (indexPath == visibleIndexPath) {MyTableViewCell <em>cell = (MyTableViewCell </em>)[self.tableView cellForRowAtIndexPath:indexPath];cell.image = image;[cell setNeedsDisplayInRect:imageRect];break;}}// 也可不遍历，直接与头尾相比较，看是否在中间即可。
+<ins style="margin:0px;padding:0px;border:0px;outline:0px;vertical-align:baseline;background-color:transparent;background-position:initial initial;background-repeat:initial initial;">最后还是前面所说过的insertRowsAtIndexPaths:withRowAnimation:方法，插入新行需要在主线程执行，而一次插入很多行的话（例如50行），会长时间阻塞主线程。而换成reloadData方法的话，瞬间就处理完了。</ins></li>
+</ul>
+<p><span class="span4br"></span></p></p>
+<p><span style="color:#181818;font-family:verdana, arial, 微软雅黑;font-size:15px;line-height:22px;background-color:#ffffff;">就说那么多吧，我想做到这些也就差不多了，其他就需要自行profile，找出瓶颈来优化了。</span></p>
+<p><span class="span4br"></span></p>
+]]></content>
+    
+    
+      <category term="uitableview" scheme="http://yoursite.com/tags/uitableview/"/>
+    
+      <category term="优化" scheme="http://yoursite.com/tags/%E4%BC%98%E5%8C%96/"/>
+    
+      <category term="高效" scheme="http://yoursite.com/tags/%E9%AB%98%E6%95%88/"/>
+    
+      <category term="IOS" scheme="http://yoursite.com/categories/IOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[SASS用法指南]]></title>
+    <link href="http://yoursite.com/2012/12/04/sass%E7%94%A8%E6%B3%95%E6%8C%87%E5%8D%97/"/>
+    <id>http://yoursite.com/2012/12/04/sass用法指南/</id>
+    <published>2012-12-03T17:55:06.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<p>学过<a href="http://zh.wikipedia.org/wiki/%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E8%A1%A8" target="_blank">CSS</a>的人都知道，它不是一种编程语言。</p>
+<p>你可以用它开发网页样式，但是没法用它编程。也就是说，CSS基本上是设计师的工具，不是程序员的工具。在程序员眼里，CSS是一件很麻烦的东西。它没有变量，也没有条件语句，只是一行行单纯的描述，写起来相当费事。</p>
+<p><img src="http://image.beekka.com/blog/201206/bg2012061901.jpg" alt=""></p>
+<p>很自然地，有人就开始为CSS加入编程元素，这被叫做<a href="http://www.catswhocode.com/blog/8-css-preprocessors-to-speed-up-development-time" target="_blank">“CSS预处理器”</a>（css preprocessor）。它的基本思想是，用一种专门的编程语言，进行网页样式设计，然后再编译成正常的CSS文件。</p>
+<p>各种”CSS预处理器”之中，我自己最喜欢<a href="http://sass-lang.com/" target="_blank">SASS</a>，觉得它有很多优点，打算以后都用它来写CSS。下面是我整理的用法总结，供自己开发时参考，相信对其他人也有用。</p>
+<p>============================================</p>
+<p><strong>SASS用法指南</strong></p>
+<p>作者：阮一峰</p>
+<p><img src="http://image.beekka.com/blog/201206/bg2012061902.png" alt=""></p>
+<p><strong>一、什么是SASS</strong></p>
+<p><a href="http://sass-lang.com/" target="_blank">SASS</a>是一种CSS的开发工具，提供了许多便利的写法，大大节省了设计者的时间，使得CSS的开发，变得简单和可维护。</p>
+<p>本文总结了SASS的主要用法。我的目标是，有了这篇文章，日常的一般使用就不需要去看<a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html" target="_blank">官方文档</a>了。</p>
+<p><strong>二、安装和使用</strong></p>
+<p><strong>2.1 安装</strong></p>
+<p>SASS是Ruby语言写的，但是两者的语法没有关系。不懂Ruby，照样使用。只是必须先<a href="http://www.ruby-lang.org/zh_cn/downloads/" target="_blank">安装Ruby</a>，然后再安装SASS。</p>
+<p>假定你已经安装好了Ruby，接着在命令行输入下面的命令：</p>
+<blockquote>
+<p>gem install sass</p>
+</blockquote>
+<p>然后，就可以使用了。</p>
+<p><strong>2.2 使用</strong></p>
+<p>SASS文件就是普通的文本文件，里面可以直接使用CSS语法。文件后缀名是.scss，意思为Sassy CSS。</p>
+<p>下面的命令，可以在屏幕上显示.scss文件转化的css代码。（假设文件名为test。）</p>
+<blockquote>
+<p>sass test.scss</p>
+</blockquote>
+<p>如果要将显示结果保存成文件，后面再跟一个.css文件名。</p>
+<blockquote>
+<p>sass test.scss test.css</p>
+</blockquote>
+<p>SASS提供四个编译风格的选项：</p>
+<blockquote>
+<ul>
+<li><p>nested：嵌套缩进的css代码，它是默认值。</p>
+</li>
+<li><p>expanded：没有缩进的、扩展的css代码。</p>
+</li>
+<li><p>compact：简洁格式的css代码。</p>
+</li>
+<li><p>compressed：压缩后的css代码。</p>
+</li>
+</ul>
+</blockquote>
+<p>生产环境当中，一般使用最后一个选项。</p>
+<blockquote>
+<p>sass –style compressed test.sass test.css</p>
+</blockquote>
+<p>SASS的官方网站，提供了一个<a href="http://sass-lang.com/try.html" target="_blank">在线转换器</a>。你可以在那里，试运行下面的各种例子。</p>
+<p><strong>三、基本用法</strong></p>
+<p><strong>3.1 变量</strong></p>
+<p>SASS允许使用变量，所有变量以$开头。</p>
+<blockquote>
+<p>$blue : #1875e7;</p>
+<p>div {<span class="span4br"></span>color : $blue;<span class="span4br"></span>}</p>
+</blockquote>
+<p>如果变量需要镶嵌在字符串之中，就必须需要写在#{}之中。</p>
+<blockquote>
+<p>$side : left;</p>
+<p>.rounded {<span class="span4br"></span>border-#{$side}-radius: 5px;<span class="span4br"></span>}</p>
+</blockquote>
+<p><strong>3.2 计算功能</strong></p>
+<p>SASS允许在代码中使用算式：</p>
+<blockquote>
+<p>body {<span class="span4br"></span>margin: (14px/2);<span class="span4br"></span>top: 50px + 100px;<span class="span4br"></span>right: $var * 10%;<span class="span4br"></span>}</p>
+</blockquote>
+<p><strong>3.3 嵌套</strong></p>
+<p>SASS允许选择器嵌套。比如，下面的CSS代码：</p>
+<blockquote>
+<p>div h1 {<span class="span4br"></span>color : red;<span class="span4br"></span>}</p>
+</blockquote>
+<p>可以写成：</p>
+<blockquote>
+<p>div {<span class="span4br"></span>hi {<span class="span4br"></span>color:red;<span class="span4br"></span>}<span class="span4br"></span>}</p>
+</blockquote>
+<p>属性也可以嵌套：</p>
+<blockquote>
+<p>p {<span class="span4br"></span>border-color: red;<span class="span4br"></span>}</p>
+</blockquote>
+<p>可以写成：</p>
+<blockquote>
+<p>p {<span class="span4br"></span>border: {<span class="span4br"></span>color: red;<span class="span4br"></span>}<span class="span4br"></span>}</p>
+</blockquote>
+<p>注意，border后面必须加上冒号。</p>
+<p><strong>3.4 注释</strong></p>
+<p>SASS共有两种注释风格。</p>
+<p>标准的CSS注释 /<em> comment </em>/ ，会保留到编译后的文件。</p>
+<p>单行注释 // comment，只保留在SASS源文件中，编译后被省略。</p>
+<p><strong>四、代码的重用</strong></p>
+<p><strong>4.1 继承</strong></p>
+<p>SASS允许一个选择器，继承另一个选择器。比如，现有class1：</p>
+<blockquote>
+<p>.class1 {<span class="span4br"></span>border: 1px solid #ddd;<span class="span4br"></span>}</p>
+</blockquote>
+<p>class2要继承class1，就要使用@extend命令：</p>
+<blockquote>
+<p>.class2 {<span class="span4br"></span>@extend .class1;<span class="span4br"></span>font-size:120%;<span class="span4br"></span>}</p>
+</blockquote>
+<p><strong>4.2 Mixin</strong></p>
+<p>Mixin有点像C语言的宏（macro），是可以重用的代码块。</p>
+<p>使用@mixin命令，定义一个代码块。</p>
+<blockquote>
+<p>@mixin left {<span class="span4br"></span>float: left;<span class="span4br"></span>margin-left: 10px;<span class="span4br"></span>}</p>
+</blockquote>
+<p>使用@include命令，调用这个mixin。</p>
+<blockquote>
+<p>div {<span class="span4br"></span>@include left;<span class="span4br"></span>}</p>
+</blockquote>
+<p>mixin的强大之处，在于可以指定参数和缺省值。</p>
+<blockquote>
+<p>@mixin left($value: 10px) {<span class="span4br"></span>float: left;<span class="span4br"></span>margin-right: $value;<span class="span4br"></span>}</p>
+</blockquote>
+<p>使用的时候，根据需要加入参数：</p>
+<blockquote>
+<p>div {<span class="span4br"></span>@include left(20px);<span class="span4br"></span>}</p>
+</blockquote>
+<p><strong>4.3 颜色函数</strong></p>
+<p>SASS提供了一些内置的颜色函数，以便生成系列颜色。</p>
+<blockquote>
+<p>lighten(#cc3, 10%) // #d6d65c<span class="span4br"></span>darken(#cc3, 10%) // #a3a329<span class="span4br"></span>grayscale(#cc3) // #808080<span class="span4br"></span>complement(#cc3) // #33c</p>
+</blockquote>
+<p><strong>4.4 插入文件</strong></p>
+<p>@import命令，用来插入外部文件。</p>
+<blockquote>
+<p>@import(“path/filename.scss”);</p>
+</blockquote>
+<p>如果插入的是.css文件，则等同于css的import命令。</p>
+<blockquote>
+<p>@import “foo.css”;</p>
+</blockquote>
+<p><strong>五、高级用法</strong></p>
+<p><strong>5.1 条件语句</strong></p>
+<p>@if可以用来判断：</p>
+<blockquote>
+<p>p {<span class="span4br"></span>@if 1 + 1 == 2 { border: 1px solid; }<span class="span4br"></span>@if 5 &lt; 3 { border: 2px dotted; }<span class="span4br"></span>}</p>
+</blockquote>
+<p>配套的还有@else命令：</p>
+<blockquote>
+<p>@if lightness($color) &gt; 30% {<span class="span4br"></span>background-color: #000;<span class="span4br"></span>} @else {<span class="span4br"></span>background-color: #fff;<span class="span4br"></span>}</p>
+</blockquote>
+<p><strong>5.2 循环语句</strong></p>
+<p>SASS支持for循环：</p>
+<blockquote>
+<p>@for $i from 1 to 10 {<span class="span4br"></span>.border-#{$i} {<span class="span4br"></span>border: #{$i}px solid blue;<span class="span4br"></span>}<span class="span4br"></span>}</p>
+</blockquote>
+<p>也支持while循环：</p>
+<blockquote>
+<p>$i: 6;</p>
+<p>@while $i &gt; 0 {<span class="span4br"></span>.item-#{$i} { width: 2em * $i; }<span class="span4br"></span>$i: $i – 2;<span class="span4br"></span>}</p>
+</blockquote>
+<p>each命令，作用与for类似：</p>
+<blockquote>
+<p>@each $member in a, b, c, d {<span class="span4br"></span>.#{$member} {<span class="span4br"></span>background-image: url(“/image/#{$member}.jpg”);<span class="span4br"></span>}<span class="span4br"></span>}</p>
+</blockquote>
+<p><strong>5.3 自定义函数</strong></p>
+<p>SASS允许用户编写自己的函数。</p>
+<blockquote>
+<p>@function double($n) {<span class="span4br"></span>@return $n * 2;<span class="span4br"></span>}</p>
+<h1 id="sidebar-span-class-span4br-span-width-double-5px-span-class-span4br-span-">sidebar {<span class="span4br"></span>width: double(5px);<span class="span4br"></span>}</h1>
+</blockquote>
+<p>（完）</p>
+<p><span class="span4br"></span></p>
+]]></content>
+    
+    
+      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
+    
+      <category term="SASS" scheme="http://yoursite.com/tags/SASS/"/>
+    
+      <category term="CSS" scheme="http://yoursite.com/categories/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[iOS高效开发必备的10款Objective-C类库(转)]]></title>
+    <link href="http://yoursite.com/2012/12/03/hello-world/"/>
+    <id>http://yoursite.com/2012/12/03/hello-world/</id>
+    <published>2012-12-02T23:11:23.000Z</published>
+    <updated>2014-01-22T08:42:00.000Z</updated>
+    <content type="html"><![CDATA[<p>因为iOS SDK相对比较底层，所以开发者就得受累多做一些体力活。不过幸运的是，有很多第三方的类库可以用来简化很多不必要的工作.经过作者团队的慎重讨论，他们评选出了10款能够极大提高iOS开发效率的类库，根据原文作者的评价来看，基本上有了这10款工具，做iOS开发就真的跟泡Cocoa一样了。</p>
+<p><a href="http://github.com/jdg/MBProgressHUD" target="_blank"><strong>MBProgressHUD</strong></a><strong>——进展指示符库</strong></p>
+<p>苹果的应用程序一般都会用一种优雅的，半透明的进度显示效果，不过这个API是不公开的，因此你要是用了，很可能被清除出AppStore。而MBProgressHUD提供了一个替代方案，而且在用户角度上，实现的效果根本看不出和官方程序有什么差别。同时还提供了其他附加功能，比如虚拟进展指示符，以及完成提示信息。整合到项目里也很容易，这里不细谈了。</p>
+<p><a href="http://allseeing-i.com/ASIHTTPRequest/" target="_blank"><strong>ASIHttpRequest</strong></a><strong>——HTTP Network库</strong></p>
+<p>iPhone当然也有自己的HTTP Network API，那为什么要用ASIHttpRequest呢？因为官方的API简直跟话痨似的，太罗嗦了！ASIHttpRequest库极大的简化了网络通信，提供更先进的工具，什么文件上传工具，重定向处理工具、验证工具、等等。只要你手头的东西跟HTTP有关，用这个绝对能让你感觉道生活有美好！先看一段代码就体会到了。 </p>
+<pre style="padding:0px;list-style:none;width:613.796875px;overflow:hidden;background-color:#f7f7f7;color:#333333;font-size:14px;line-height:24px;margin-top:0px;">
+
+1.  (<span class="keyword">void</span>) loadAppDevMag
+2.  {
+3.  NSURL *url = [NSURL URLWithString:@<span class="string">"http://www.appdevmag.com"</span>];
+4.  ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+5.  [request setDelegate:self];
+6.  [request startAsynchronous];
+7.  }
+8.  <span class="span4br"></span>
+9.  - (<span class="keyword">void</span>)requestFinished:(ASIHTTPRequest *)request
+10.  {
+11.  <span class="comment" style="color:#008200;">// Use when fetching text data</span>
+12.  NSString *responseString = [request responseString];
+13.  }</pre>
+
+<p><a href="http://stig.github.com/json-framework/" target="_blank"><strong>JSON Framework</strong></a><strong>——JSON支持</strong></p>
+<p>如果你做的应用和网站服务器有交互，那就得用到JSON了。但事实上，iOS平台的原生类库根本就不支持JSON，这就略犀利了吧？不过JSON框架满足了你的所有需求，包括一个解析器将JSON字符串解析成对象；以及一个生成器从对象生成字符串。这个库根本就是太流行了，JSON提过很多次了，具体特点就不多讲了，所谓“一段代码胜千言”，下面用一段代码演示一下吧。</p>
+<pre style="padding:0px;list-style:none;width:613.796875px;overflow:hidden;background-color:#f7f7f7;color:#333333;font-size:14px;line-height:24px;margin-top:0px;">
+
+1.  <span class="comment" style="color:#008200;">// JSON string -> NSDictionary</span>
+2.  <span class="span4br"></span>
+3.  NSString *jsonString = @<span class="string">"{\"foo\": \"bar\"}"</span>;
+4.  <span class="span4br"></span>
+5.  NSDictionary *dictionary = [jsonString JSONValue];
+6.  <span class="span4br"></span>
+7.  NSLog(@<span class="string">"Dictionary value for \"foo\" is \"%@\""</span>, [dictionary objectForKey:@<span class="string">"foo"</span>]);
+8.  <span class="span4br"></span>
+9.  <span class="comment" style="color:#008200;">// NSDictionary -> JSON string</span>
+10.  <span class="span4br"></span>
+11.  NSString *newJsonString = [dictionary JSONRepresentation];</pre>
+
+<p><a href="http://www.flurry.com/product/analytics/index.html" target="_blank"><strong>Flurry</strong></a><strong>——详尽的使用统计</strong></p>
+<p>通过Furry你可以得到应用的用户人数，用户活跃度，用户来源等统计信息。但是他最厉害的地方是，你可以追踪应用本身的事件和错误记录，所有这些数据都会在一个类似Google Analytics的界面上显示，这样就很容易掌握用户的行为和出现的问题。当然，这个星球上很多统计工具，但是这款是作者个人比较推崇的解决方案。</p>
+<p><img src="http://articles.csdn.net/uploads/allimg/110317/102_110317162414_1_lit.JPG" alt="ios Libraries development"></p>
+<p><a href="http://regexkit.sourceforge.net/RegexKitLite/" target="_blank"><strong>RegexKitLite</strong></a><strong>——正则表达式支持</strong></p>
+<p>正则表达式大家都知道。但是iPhone SDK居然当他不存在？这怎么能忍啊！果断用RegexKitLite。虽然叫的是Lite，但是功能很full。示例代码。 </p>
+<pre style="padding:0px;list-style:none;width:613.796875px;overflow:hidden;background-color:#f7f7f7;color:#333333;font-size:14px;line-height:24px;margin-top:0px;">
+
+1.  <span class="comment" style="color:#008200;">// finds phone number in format nnn-nnn-nnnn</span>
+2.  NSString *regEx = @<span class="string">"[0-9]{3}-[0-9]{3}-[0-9]{4}"</span>;
+3.  <span class="keyword">for</span>(NSString *match in [textView.text componentsMatchedByRegex:regEx]) {
+4.  NSLog(@<span class="string">"Phone number is %@"</span>, match);
+5.  }</pre>
+
+<p><a href="http://github.com/facebook/facebook-ios-sdk" target="_blank"><strong>Facebook iOS SDK</strong></a><strong>——Facebook API类库</strong></p>
+<p>大体来讲就是iPhone上的Facebook login，完全支持Facebook Graph API和the older REST api。如果你的应用跟Facebook有关，相信我，用这个吧。</p>
+<p><img src="http://articles.csdn.net/uploads/allimg/110317/102_110317162548_1.png" alt=""></p>
+<p><a href="http://github.com/rs/SDWebImage" target="_blank"><strong>SDWebImage</strong></a><strong>——简化网络图片处理</strong></p>
+<p>用SDWebImage调用网站上的图片，跟本地调用内置在应用包里的图片一样简单。操作也很简单，举例说明</p>
+<pre style="padding:0px;list-style:none;width:613.796875px;overflow:hidden;background-color:#f7f7f7;color:#333333;font-size:14px;line-height:24px;margin-top:0px;">
+
+1.  [imageView setImageWithURL:[NSURL URLWithString:@"http://examp</pre>
+
+<p>类似的功能在Three20里也有，这个过会儿再说。相比而言，SDWebImage主要是提供一个小而精的简捷方便的解决方案</p>
+<p><a href="http://code.google.com/p/gdata-objectivec-client/" target="_blank"><strong>GData client</strong></a><strong>——iPhone上所有Google相关服务的类库</strong></p>
+<p>名字就说明一切了。跟Google相关的，值得一提的是，这个项目很开放。有很多示例程序供下载。</p>
+<p><a href="http://code.google.com/p/core-plot/" target="_blank"><strong>CorePlot</strong></a><strong>——2D图形绘图仪</strong></p>
+<p><img src="http://articles.csdn.net/uploads/allimg/110317/102_110317162803_1_lit.jpg" alt=""></p>
+<p>CorePlot有很多解决方案将你的数据可视。，同时也会提供各种迷人的图形效果，比如棒状图、饼状图、线状图等等，在他们网站上也提供了大量的范例图形，很多股票价格应用，游戏分数，个人财务管理都在用。</p>
+<p><a href="http://github.com/facebook/three20" target="_blank"><strong>Three20</strong></a><strong>——通用iOS库</strong></p>
+<p>Three20类库是Facebook自己做的，大而全是他最大的特色。把他整合到已有的项目中可能得费点周折，不过如果一开始你就用上了Three20，尤其是牵扯到很多web相关的项目的时候，你就能深刻体会到神马叫给力了。</p>
+<p><span class="span4br"></span></p>
+]]></content>
+    
+    
+      <category term="Objective-C" scheme="http://yoursite.com/tags/Objective-C/"/>
+    
+      <category term="类库" scheme="http://yoursite.com/tags/%E7%B1%BB%E5%BA%93/"/>
+    
+      <category term="高效" scheme="http://yoursite.com/tags/%E9%AB%98%E6%95%88/"/>
+    
+      <category term="IOS类库" scheme="http://yoursite.com/categories/IOS%E7%B1%BB%E5%BA%93/"/>
+    
+  </entry>
+  
+</feed>
