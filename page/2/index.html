@@ -64,7 +64,7 @@
   
     <li><a href="/categories/CSS/">CSS</a><small>1</small></li>
   
-    <li><a href="/categories/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/categories/IOS/">IOS</a><small>9</small></li>
   
     <li><a href="/categories/IOS类库/">IOS类库</a><small>2</small></li>
   
@@ -86,7 +86,7 @@
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/Ad Hoc/" style="font-size: 12.50px;">Ad Hoc</a><a href="/tags/AppStore/" style="font-size: 12.50px;">AppStore</a><a href="/tags/CSS/" style="font-size: 10.00px;">CSS</a><a href="/tags/JDK/" style="font-size: 10.00px;">JDK</a><a href="/tags/Objective-C/" style="font-size: 17.50px;">Objective-C</a><a href="/tags/SASS/" style="font-size: 10.00px;">SASS</a><a href="/tags/SDWebImage/" style="font-size: 10.00px;">SDWebImage</a><a href="/tags/UIApplicationDelegate/" style="font-size: 10.00px;">UIApplicationDelegate</a><a href="/tags/UIImage/" style="font-size: 10.00px;">UIImage</a><a href="/tags/bug/" style="font-size: 10.00px;">bug</a><a href="/tags/ios/" style="font-size: 20.00px;">ios</a><a href="/tags/itunes/" style="font-size: 12.50px;">itunes</a><a href="/tags/java/" style="font-size: 10.00px;">java</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/occurred uploading/" style="font-size: 10.00px;">occurred uploading</a><a href="/tags/uitableview/" style="font-size: 10.00px;">uitableview</a><a href="/tags/优化/" style="font-size: 15.00px;">优化</a><a href="/tags/保存数据/" style="font-size: 10.00px;">保存数据</a><a href="/tags/后台/" style="font-size: 10.00px;">后台</a><a href="/tags/开发者/" style="font-size: 10.00px;">开发者</a><a href="/tags/类库/" style="font-size: 12.50px;">类库</a><a href="/tags/苹果/" style="font-size: 10.00px;">苹果</a><a href="/tags/账号/" style="font-size: 10.00px;">账号</a><a href="/tags/闪退/" style="font-size: 12.50px;">闪退</a><a href="/tags/高效/" style="font-size: 15.00px;">高效</a>
+    <a href="/tags/Ad Hoc/" style="font-size: 15.00px;">Ad Hoc</a><a href="/tags/AppStore/" style="font-size: 15.00px;">AppStore</a><a href="/tags/CSS/" style="font-size: 10.00px;">CSS</a><a href="/tags/JDK/" style="font-size: 10.00px;">JDK</a><a href="/tags/Objective-C/" style="font-size: 17.50px;">Objective-C</a><a href="/tags/SASS/" style="font-size: 10.00px;">SASS</a><a href="/tags/SDWebImage/" style="font-size: 10.00px;">SDWebImage</a><a href="/tags/UIApplicationDelegate/" style="font-size: 10.00px;">UIApplicationDelegate</a><a href="/tags/UIImage/" style="font-size: 10.00px;">UIImage</a><a href="/tags/bug/" style="font-size: 10.00px;">bug</a><a href="/tags/ios/" style="font-size: 20.00px;">ios</a><a href="/tags/itunes/" style="font-size: 15.00px;">itunes</a><a href="/tags/java/" style="font-size: 10.00px;">java</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/occurred uploading/" style="font-size: 10.00px;">occurred uploading</a><a href="/tags/uitableview/" style="font-size: 10.00px;">uitableview</a><a href="/tags/优化/" style="font-size: 15.00px;">优化</a><a href="/tags/保存数据/" style="font-size: 10.00px;">保存数据</a><a href="/tags/后台/" style="font-size: 10.00px;">后台</a><a href="/tags/开发者/" style="font-size: 12.50px;">开发者</a><a href="/tags/类库/" style="font-size: 12.50px;">类库</a><a href="/tags/苹果/" style="font-size: 12.50px;">苹果</a><a href="/tags/账号/" style="font-size: 12.50px;">账号</a><a href="/tags/闪退/" style="font-size: 12.50px;">闪退</a><a href="/tags/高效/" style="font-size: 15.00px;">高效</a>
   </div>
 </div>
 
@@ -109,6 +109,60 @@
     <div id="main-col" class="alignright">
     <div id="wrapper">
       
+  
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title"><a href="/2012/12/16/coretext进行文字排版/">CoreText进行文字排版</a></h1>
+  
+
+      <time datetime="2012-12-15T23:10:51.000Z"><a href="/2012/12/16/coretext进行文字排版/">12月 16 2012</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <p><span style="font-size:18px;">coretext实现UIlable的字间距和行间距的设置</span></p>
+<pre lang="objective-c">#import<foundation>#import<uikit>@interface TextLabel : UILabel{ &nbsp; &nbsp;@private &nbsp; &nbsp; &nbsp; &nbsp;CGFloat characterSpacing_; &nbsp; &nbsp; &nbsp; //字间距 &nbsp; &nbsp;@private &nbsp; &nbsp; &nbsp; &nbsp;long linesSpacing_; &nbsp; //行间距 &nbsp; &nbsp;}@property(nonatomic,assign) CGFloat characterSpacing;@property(nonatomic,assign) long linesSpacing;//准确计算CoreText高度的方法- (int)getAttributedStringHeightWithString:(NSAttributedString *) &nbsp;string &nbsp;WidthValue:(int) width;@end</uikit></foundation></pre>
+
+<p>[html lang=&quot;objective-c&quot;]#import &quot;TextLabel.h&quot;#import</p>
+<coretext>@implementation TextLabel@synthesize characterSpacing = characterSpacing<em>;@synthesize linesSpacing = linesSpacing</em>;-(id) initWithFrame:(CGRect)frame{//初始化字间距、行间距 &nbsp; &nbsp; &nbsp; &nbsp;if(self =[superinitWithFrame:frame]) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;self.characterSpacing = 2.0f; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;self.linesSpacing = 5.0f; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;returnself; &nbsp; &nbsp;}-(void)setCharacterSpacing:(CGFloat)characterSpacing //外部调用设置字间距{ &nbsp; &nbsp; &nbsp; &nbsp;characterSpacing<em> = characterSpacing; &nbsp; &nbsp; &nbsp; &nbsp;[selfsetNeedsDisplay]; &nbsp; &nbsp;}-(void)setLinesSpacing:(long)linesSpacing &nbsp;//外部调用设置行间距{ &nbsp; &nbsp; &nbsp; &nbsp;linesSpacing</em> = linesSpacing; &nbsp; &nbsp; &nbsp; &nbsp;[selfsetNeedsDisplay]; &nbsp; &nbsp;}-(void) drawTextInRect:(CGRect)requestedRect{ &nbsp; &nbsp; &nbsp; &nbsp;//去掉空行 &nbsp; &nbsp;// &nbsp; &nbsp;NSString <em>labelString = self.text;// &nbsp; &nbsp;// &nbsp; &nbsp;NSString </em>myString = [labelString stringByReplacingOccurrencesOfString:@&quot;\r\n&quot; withString:&quot;\n&quot;]; &nbsp; &nbsp; &nbsp; &nbsp;//创建AttributeString &nbsp; &nbsp; &nbsp; &nbsp;NSMutableAttributedString <em>string =[[NSMutableAttributedStringalloc]initWithString:self.text]; &nbsp; &nbsp; &nbsp; &nbsp;string = [selfsetStyle:string]; &nbsp; &nbsp; &nbsp; &nbsp;//排版 &nbsp; &nbsp; &nbsp; &nbsp;CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string); &nbsp; &nbsp; &nbsp; &nbsp;CGMutablePathRef leftColumnPath = CGPathCreateMutable(); &nbsp; &nbsp; &nbsp; &nbsp;CGPathAddRect(leftColumnPath, NULL ,CGRectMake(0 , 0 ,self.bounds.size.width , self.bounds.size.height)); &nbsp; &nbsp; &nbsp; &nbsp;CTFrameRef leftFrame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0, 0), leftColumnPath , NULL); &nbsp; &nbsp; &nbsp; &nbsp;//翻转坐标系统（文本原来是倒的要翻转下） &nbsp; &nbsp; &nbsp; &nbsp;CGContextRef context = UIGraphicsGetCurrentContext(); &nbsp; &nbsp; &nbsp; &nbsp;CGContextSetTextMatrix(context , CGAffineTransformIdentity); &nbsp; &nbsp; &nbsp; &nbsp;CGContextTranslateCTM(context , 0 ,self.bounds.size.height); &nbsp; &nbsp; &nbsp; &nbsp;CGContextScaleCTM(context, 1.0 ,-1.0); &nbsp; &nbsp; &nbsp; &nbsp;//画出文本 &nbsp; &nbsp; &nbsp; &nbsp;CTFrameDraw(leftFrame,context); &nbsp; &nbsp; &nbsp; &nbsp;//释放 &nbsp; &nbsp; &nbsp; &nbsp;CGPathRelease(leftColumnPath); &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(framesetter); &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(leftFrame); &nbsp; &nbsp; &nbsp; &nbsp;[string release]; &nbsp; &nbsp; &nbsp; &nbsp;UIGraphicsPushContext(context); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}-(NSMutableAttributedString</em>)setStyle:(NSMutableAttributedString<em>)string{ &nbsp; &nbsp;//设置字体及大小 &nbsp; &nbsp; &nbsp; &nbsp;CTFontRef helveticaBold = CTFontCreateWithName((CFStringRef)self.font.fontName,self.font.pointSize,NULL); &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTFontAttributeNamevalue:(id)helveticaBold range:NSMakeRange(0,[string length])]; &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(helveticaBold); &nbsp; &nbsp;//设置字间距 &nbsp; &nbsp; &nbsp; &nbsp;if(self.characterSpacing) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;long number = self.characterSpacing; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CFNumberRef num = CFNumberCreate(kCFAllocatorDefault,kCFNumberSInt8Type,&amp;number); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTKernAttributeNamevalue:(id)num range:NSMakeRange(0,[string length])]; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(num); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;//设置字体颜色 &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTForegroundColorAttributeNamevalue:(id)(self.textColor.CGColor) range:NSMakeRange(0,[string length])]; &nbsp; &nbsp; &nbsp; &nbsp;//创建文本对齐方式 &nbsp; &nbsp; &nbsp; &nbsp;CTTextAlignment alignment = kCTLeftTextAlignment; &nbsp; &nbsp; &nbsp; &nbsp;if(self.textAlignment == UITextAlignmentCenter) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;alignment = kCTCenterTextAlignment; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;if(self.textAlignment == UITextAlignmentRight) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;alignment = kCTRightTextAlignment; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting alignmentStyle; &nbsp; &nbsp; &nbsp; &nbsp;alignmentStyle.spec = kCTParagraphStyleSpecifierAlignment; &nbsp; &nbsp; &nbsp; &nbsp;alignmentStyle.valueSize = sizeof(alignment); &nbsp; &nbsp; &nbsp; &nbsp;alignmentStyle.value = &amp;alignment; &nbsp; &nbsp; &nbsp; &nbsp;//设置文本行间距 &nbsp; &nbsp; &nbsp; &nbsp;CGFloat lineSpace = self.linesSpacing; &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting lineSpaceStyle; &nbsp; &nbsp; &nbsp; &nbsp;lineSpaceStyle.spec = kCTParagraphStyleSpecifierLineSpacingAdjustment; &nbsp; &nbsp; &nbsp; &nbsp;lineSpaceStyle.valueSize = sizeof(lineSpace); &nbsp; &nbsp; &nbsp; &nbsp;lineSpaceStyle.value =&amp;lineSpace; &nbsp; &nbsp; &nbsp; &nbsp;//设置文本段间距 &nbsp; &nbsp; &nbsp; &nbsp;CGFloat paragraphSpacing = 5.0; &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting paragraphSpaceStyle; &nbsp; &nbsp; &nbsp; &nbsp;paragraphSpaceStyle.spec = kCTParagraphStyleSpecifierParagraphSpacing; &nbsp; &nbsp; &nbsp; &nbsp;paragraphSpaceStyle.valueSize = sizeof(CGFloat); &nbsp; &nbsp; &nbsp; &nbsp;paragraphSpaceStyle.value = ¶graphSpacing; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//创建设置数组 &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting settings[ ] ={alignmentStyle,lineSpaceStyle,paragraphSpaceStyle}; &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleRef style = CTParagraphStyleCreate(settings , sizeof(settings)); &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(settings); &nbsp; &nbsp;//给文本添加设置 &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTParagraphStyleAttributeName value:(id)style range:NSMakeRange(0 , [string length])]; &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(style); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return string;}//准确计算CoreText高度的方法- (int)getAttributedStringHeightWithString:(NSMutableAttributedString </em>) &nbsp;string &nbsp;WidthValue:(int) width{ &nbsp; &nbsp;string = [selfsetStyle:string]; &nbsp; &nbsp; &nbsp; &nbsp;int total_height = 0; &nbsp; &nbsp; &nbsp; &nbsp;CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string); &nbsp; &nbsp;//string 为要计算高度的NSAttributedString &nbsp; &nbsp;CGRect drawingRect = CGRectMake(0, 0, width, 99999); &nbsp;//这里的高要设置足够大 &nbsp; &nbsp;CGMutablePathRef path = CGPathCreateMutable(); &nbsp; &nbsp;CGPathAddRect(path, NULL, drawingRect); &nbsp; &nbsp;CTFrameRef textFrame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0,0), path, NULL); &nbsp; &nbsp;CGPathRelease(path); &nbsp; &nbsp;CFRelease(framesetter); &nbsp; &nbsp; &nbsp; &nbsp;NSArray <em>linesArray = (NSArray </em>) CTFrameGetLines(textFrame); &nbsp; &nbsp; &nbsp; &nbsp;CGPoint origins[[linesArray count]]; &nbsp; &nbsp;CTFrameGetLineOrigins(textFrame, CFRangeMake(0, 0), origins); &nbsp; &nbsp; &nbsp; &nbsp;int line_y = (int) origins[[linesArray count] -1].y; &nbsp;//最后一行line的原点y坐标 &nbsp; &nbsp; &nbsp; &nbsp;CGFloat ascent; &nbsp; &nbsp;CGFloat descent; &nbsp; &nbsp;CGFloat leading; &nbsp; &nbsp; &nbsp; &nbsp;CTLineRef line = (CTLineRef) [linesArray objectAtIndex:[linesArray count]-1]; &nbsp; &nbsp;CTLineGetTypographicBounds(line, &amp;ascent, &amp;descent, &amp;leading); &nbsp; &nbsp; &nbsp; &nbsp;total_height = 99999 - line_y + (int) descent +1; &nbsp; &nbsp;//+1为了纠正descent转换成int小数点后舍去的值 &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(textFrame); &nbsp; &nbsp; &nbsp; &nbsp;return total_height; &nbsp; &nbsp;}@end[/html]</coretext>
+	 
+	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="http://weibo.com/u/2049029440"><strong>牙-_签</strong></a> - 12月 16 2012</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://toothpick2012.github.io/"><strong>Toothpick&#39;s blog</strong></a></span>
+</p>
+       	 
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
   
 <article class="post">
   
@@ -1466,129 +1520,13 @@ UITableViewCell包含了textLabel、detailTextLabel和imageView等view，而你�
 
 
 
-  
-<article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-  <header>
-      
-      
-  
-    <h1 class="title"><a href="/2012/12/03/hello-world/">iOS高效开发必备的10款Objective-C类库(转)</a></h1>
-  
-
-      <time datetime="2012-12-02T23:11:23.000Z"><a href="/2012/12/03/hello-world/">12月 3 2012</a></time>
-      
-  </header>
-    <div class="entry">
-      
-        <p>因为iOS SDK相对比较底层，所以开发者就得受累多做一些体力活。不过幸运的是，有很多第三方的类库可以用来简化很多不必要的工作.经过作者团队的慎重讨论，他们评选出了10款能够极大提高iOS开发效率的类库，根据原文作者的评价来看，基本上有了这10款工具，做iOS开发就真的跟泡Cocoa一样了。</p>
-<p><a href="http://github.com/jdg/MBProgressHUD" target="_blank"><strong>MBProgressHUD</strong></a><strong>——进展指示符库</strong></p>
-<p>苹果的应用程序一般都会用一种优雅的，半透明的进度显示效果，不过这个API是不公开的，因此你要是用了，很可能被清除出AppStore。而MBProgressHUD提供了一个替代方案，而且在用户角度上，实现的效果根本看不出和官方程序有什么差别。同时还提供了其他附加功能，比如虚拟进展指示符，以及完成提示信息。整合到项目里也很容易，这里不细谈了。</p>
-<p><a href="http://allseeing-i.com/ASIHTTPRequest/" target="_blank"><strong>ASIHttpRequest</strong></a><strong>——HTTP Network库</strong></p>
-<p>iPhone当然也有自己的HTTP Network API，那为什么要用ASIHttpRequest呢？因为官方的API简直跟话痨似的，太罗嗦了！ASIHttpRequest库极大的简化了网络通信，提供更先进的工具，什么文件上传工具，重定向处理工具、验证工具、等等。只要你手头的东西跟HTTP有关，用这个绝对能让你感觉道生活有美好！先看一段代码就体会到了。 </p>
-<pre style="padding:0px;list-style:none;width:613.796875px;overflow:hidden;background-color:#f7f7f7;color:#333333;font-size:14px;line-height:24px;margin-top:0px;">
-
-1.  (<span class="keyword">void</span>) loadAppDevMag
-2.  {
-3.  NSURL *url = [NSURL URLWithString:@<span class="string">"http://www.appdevmag.com"</span>];
-4.  ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-5.  [request setDelegate:self];
-6.  [request startAsynchronous];
-7.  }
-8.  <span class="span4br"></span>
-9.  - (<span class="keyword">void</span>)requestFinished:(ASIHTTPRequest *)request
-10.  {
-11.  <span class="comment" style="color:#008200;">// Use when fetching text data</span>
-12.  NSString *responseString = [request responseString];
-13.  }</pre>
-
-<p><a href="http://stig.github.com/json-framework/" target="_blank"><strong>JSON Framework</strong></a><strong>——JSON支持</strong></p>
-<p>如果你做的应用和网站服务器有交互，那就得用到JSON了。但事实上，iOS平台的原生类库根本就不支持JSON，这就略犀利了吧？不过JSON框架满足了你的所有需求，包括一个解析器将JSON字符串解析成对象；以及一个生成器从对象生成字符串。这个库根本就是太流行了，JSON提过很多次了，具体特点就不多讲了，所谓“一段代码胜千言”，下面用一段代码演示一下吧。</p>
-<pre style="padding:0px;list-style:none;width:613.796875px;overflow:hidden;background-color:#f7f7f7;color:#333333;font-size:14px;line-height:24px;margin-top:0px;">
-
-1.  <span class="comment" style="color:#008200;">// JSON string -> NSDictionary</span>
-2.  <span class="span4br"></span>
-3.  NSString *jsonString = @<span class="string">"{\"foo\": \"bar\"}"</span>;
-4.  <span class="span4br"></span>
-5.  NSDictionary *dictionary = [jsonString JSONValue];
-6.  <span class="span4br"></span>
-7.  NSLog(@<span class="string">"Dictionary value for \"foo\" is \"%@\""</span>, [dictionary objectForKey:@<span class="string">"foo"</span>]);
-8.  <span class="span4br"></span>
-9.  <span class="comment" style="color:#008200;">// NSDictionary -> JSON string</span>
-10.  <span class="span4br"></span>
-11.  NSString *newJsonString = [dictionary JSONRepresentation];</pre>
-
-<p><a href="http://www.flurry.com/product/analytics/index.html" target="_blank"><strong>Flurry</strong></a><strong>——详尽的使用统计</strong></p>
-<p>通过Furry你可以得到应用的用户人数，用户活跃度，用户来源等统计信息。但是他最厉害的地方是，你可以追踪应用本身的事件和错误记录，所有这些数据都会在一个类似Google Analytics的界面上显示，这样就很容易掌握用户的行为和出现的问题。当然，这个星球上很多统计工具，但是这款是作者个人比较推崇的解决方案。</p>
-<p><img src="http://articles.csdn.net/uploads/allimg/110317/102_110317162414_1_lit.JPG" alt="ios Libraries development"></p>
-<p><a href="http://regexkit.sourceforge.net/RegexKitLite/" target="_blank"><strong>RegexKitLite</strong></a><strong>——正则表达式支持</strong></p>
-<p>正则表达式大家都知道。但是iPhone SDK居然当他不存在？这怎么能忍啊！果断用RegexKitLite。虽然叫的是Lite，但是功能很full。示例代码。 </p>
-<pre style="padding:0px;list-style:none;width:613.796875px;overflow:hidden;background-color:#f7f7f7;color:#333333;font-size:14px;line-height:24px;margin-top:0px;">
-
-1.  <span class="comment" style="color:#008200;">// finds phone number in format nnn-nnn-nnnn</span>
-2.  NSString *regEx = @<span class="string">"[0-9]{3}-[0-9]{3}-[0-9]{4}"</span>;
-3.  <span class="keyword">for</span>(NSString *match in [textView.text componentsMatchedByRegex:regEx]) {
-4.  NSLog(@<span class="string">"Phone number is %@"</span>, match);
-5.  }</pre>
-
-<p><a href="http://github.com/facebook/facebook-ios-sdk" target="_blank"><strong>Facebook iOS SDK</strong></a><strong>——Facebook API类库</strong></p>
-<p>大体来讲就是iPhone上的Facebook login，完全支持Facebook Graph API和the older REST api。如果你的应用跟Facebook有关，相信我，用这个吧。</p>
-<p><img src="http://articles.csdn.net/uploads/allimg/110317/102_110317162548_1.png" alt=""></p>
-<p><a href="http://github.com/rs/SDWebImage" target="_blank"><strong>SDWebImage</strong></a><strong>——简化网络图片处理</strong></p>
-<p>用SDWebImage调用网站上的图片，跟本地调用内置在应用包里的图片一样简单。操作也很简单，举例说明</p>
-<pre style="padding:0px;list-style:none;width:613.796875px;overflow:hidden;background-color:#f7f7f7;color:#333333;font-size:14px;line-height:24px;margin-top:0px;">
-
-1.  [imageView setImageWithURL:[NSURL URLWithString:@"http://examp</pre>
-
-<p>类似的功能在Three20里也有，这个过会儿再说。相比而言，SDWebImage主要是提供一个小而精的简捷方便的解决方案</p>
-<p><a href="http://code.google.com/p/gdata-objectivec-client/" target="_blank"><strong>GData client</strong></a><strong>——iPhone上所有Google相关服务的类库</strong></p>
-<p>名字就说明一切了。跟Google相关的，值得一提的是，这个项目很开放。有很多示例程序供下载。</p>
-<p><a href="http://code.google.com/p/core-plot/" target="_blank"><strong>CorePlot</strong></a><strong>——2D图形绘图仪</strong></p>
-<p><img src="http://articles.csdn.net/uploads/allimg/110317/102_110317162803_1_lit.jpg" alt=""></p>
-<p>CorePlot有很多解决方案将你的数据可视。，同时也会提供各种迷人的图形效果，比如棒状图、饼状图、线状图等等，在他们网站上也提供了大量的范例图形，很多股票价格应用，游戏分数，个人财务管理都在用。</p>
-<p><a href="http://github.com/facebook/three20" target="_blank"><strong>Three20</strong></a><strong>——通用iOS库</strong></p>
-<p>Three20类库是Facebook自己做的，大而全是他最大的特色。把他整合到已有的项目中可能得费点周折，不过如果一开始你就用上了Three20，尤其是牵扯到很多web相关的项目的时候，你就能深刻体会到神马叫给力了。</p>
-<p><span class="span4br"></span></p>
-
-	 
-	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
-<span>Posted by <a style="color:#9f9f9f;" href="http://weibo.com/u/2049029440"><strong>牙-_签</strong></a> - 12月 3 2012</span><br />
-<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://toothpick2012.github.io/"><strong>Toothpick&#39;s blog</strong></a></span>
-</p>
-       	 
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
     <a href="/" class="alignleft prev">上一页</a>
   
+  
+    <a href="/page/3/" class="alignright next">下一页</a>
   
 </nav></div>
     </div>

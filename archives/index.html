@@ -64,7 +64,7 @@
   
     <li><a href="/categories/CSS/">CSS</a><small>1</small></li>
   
-    <li><a href="/categories/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/categories/IOS/">IOS</a><small>9</small></li>
   
     <li><a href="/categories/IOS类库/">IOS类库</a><small>2</small></li>
   
@@ -86,7 +86,7 @@
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/Ad Hoc/" style="font-size: 12.50px;">Ad Hoc</a><a href="/tags/AppStore/" style="font-size: 12.50px;">AppStore</a><a href="/tags/CSS/" style="font-size: 10.00px;">CSS</a><a href="/tags/JDK/" style="font-size: 10.00px;">JDK</a><a href="/tags/Objective-C/" style="font-size: 17.50px;">Objective-C</a><a href="/tags/SASS/" style="font-size: 10.00px;">SASS</a><a href="/tags/SDWebImage/" style="font-size: 10.00px;">SDWebImage</a><a href="/tags/UIApplicationDelegate/" style="font-size: 10.00px;">UIApplicationDelegate</a><a href="/tags/UIImage/" style="font-size: 10.00px;">UIImage</a><a href="/tags/bug/" style="font-size: 10.00px;">bug</a><a href="/tags/ios/" style="font-size: 20.00px;">ios</a><a href="/tags/itunes/" style="font-size: 12.50px;">itunes</a><a href="/tags/java/" style="font-size: 10.00px;">java</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/occurred uploading/" style="font-size: 10.00px;">occurred uploading</a><a href="/tags/uitableview/" style="font-size: 10.00px;">uitableview</a><a href="/tags/优化/" style="font-size: 15.00px;">优化</a><a href="/tags/保存数据/" style="font-size: 10.00px;">保存数据</a><a href="/tags/后台/" style="font-size: 10.00px;">后台</a><a href="/tags/开发者/" style="font-size: 10.00px;">开发者</a><a href="/tags/类库/" style="font-size: 12.50px;">类库</a><a href="/tags/苹果/" style="font-size: 10.00px;">苹果</a><a href="/tags/账号/" style="font-size: 10.00px;">账号</a><a href="/tags/闪退/" style="font-size: 12.50px;">闪退</a><a href="/tags/高效/" style="font-size: 15.00px;">高效</a>
+    <a href="/tags/Ad Hoc/" style="font-size: 15.00px;">Ad Hoc</a><a href="/tags/AppStore/" style="font-size: 15.00px;">AppStore</a><a href="/tags/CSS/" style="font-size: 10.00px;">CSS</a><a href="/tags/JDK/" style="font-size: 10.00px;">JDK</a><a href="/tags/Objective-C/" style="font-size: 17.50px;">Objective-C</a><a href="/tags/SASS/" style="font-size: 10.00px;">SASS</a><a href="/tags/SDWebImage/" style="font-size: 10.00px;">SDWebImage</a><a href="/tags/UIApplicationDelegate/" style="font-size: 10.00px;">UIApplicationDelegate</a><a href="/tags/UIImage/" style="font-size: 10.00px;">UIImage</a><a href="/tags/bug/" style="font-size: 10.00px;">bug</a><a href="/tags/ios/" style="font-size: 20.00px;">ios</a><a href="/tags/itunes/" style="font-size: 15.00px;">itunes</a><a href="/tags/java/" style="font-size: 10.00px;">java</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/occurred uploading/" style="font-size: 10.00px;">occurred uploading</a><a href="/tags/uitableview/" style="font-size: 10.00px;">uitableview</a><a href="/tags/优化/" style="font-size: 15.00px;">优化</a><a href="/tags/保存数据/" style="font-size: 10.00px;">保存数据</a><a href="/tags/后台/" style="font-size: 10.00px;">后台</a><a href="/tags/开发者/" style="font-size: 12.50px;">开发者</a><a href="/tags/类库/" style="font-size: 12.50px;">类库</a><a href="/tags/苹果/" style="font-size: 12.50px;">苹果</a><a href="/tags/账号/" style="font-size: 12.50px;">账号</a><a href="/tags/闪退/" style="font-size: 12.50px;">闪退</a><a href="/tags/高效/" style="font-size: 15.00px;">高效</a>
   </div>
 </div>
 
@@ -110,6 +110,249 @@
     <div id="wrapper">
       
 <h2 class="archive-title">归档</h2>
+
+
+  
+    
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/11/减少上线应用的崩溃情况/">减少上线应用的崩溃情况</a></h1>
+  
+
+      <time datetime="2014-03-11T06:42:55.000Z"><a href="/2014/03/11/减少上线应用的崩溃情况/">3月 11 2014</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <p>应用上线后，在umeng或是百度移动统计里面经常会有NSRangeException，NSInvalidArgumentException等这类错误，而且通常都是占据了很大比例。
+你能看到的错误详情可能是这样：(很庆幸我们还是可以找到具体出错的位置，但是上千个类似错误成分散分布在不同位置，那就别扯蛋了！！)</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre>*** Terminating app due to uncaught exception <span class="string">'NSRangeException'</span>, reason: <span class="string">'*** -[__NSArrayM objectAtIndex:]: index 0 beyond bounds for empty array'</span>
+详细错误信息:
+ ....
+<span class="number">2</span>   CoreFoundation                      <span class="number">0x2f20dd95</span> -[__NSArrayM objectAtIndex:] + <span class="number">232</span>
+<span class="number">3</span>   nineteenlou                         <span class="number">0x001357a7</span> -[UserViewController tableView:didSelectRowAtIndexPath:] + <span class="number">158</span>
+<span class="number">4</span>   UIKit                               <span class="number">0x31b790cb</span> -[UITableView _selectRowAtIndexPath:animated:scrollPosition:notifyDelegate:] + <span class="number">1078</span>
+<span class="number">5</span>   UIKit                               <span class="number">0x31c2c863</span> -[UITableView _userSelectRowAtPendingSelectionIndexPath:] + <span class="number">214</span>
+<span class="keyword">...</span>
+</pre></td></tr></table></figure>
+
+<p>发生错误原因，有的是多线程block造成的，还有接口返回数据解析问题，还有其他乱七八糟问题。
+应用的体验是建立在不崩溃的基础之上的。如果是这样，那必须动武的啦。最佳的方法，就是用swizzle替换数组的方法，判断越界等出现崩溃的情况。</p>
+<p>OK，废话多了，自写的个类SafeMode，上代码吧。
+也可以下载例子:<a href="https://github.com/Toothpick2012/SafeMode" target="_blank">https://github.com/Toothpick2012/SafeMode</a></p>
+<p>SafeMode.h</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre>#import &lt;Foundation/Foundation.h&gt;
+#import &lt;objc/runtime.h&gt;
+
+@<span class="keyword">interface</span> SafeMode:NSObject
++ (void)safe;
++ (void)exchangeOriginalMethod:(<span class="function"><span class="keyword">Method</span>)<span class="title">originalMethod</span> <span class="title">withNewMethod</span>:</span>(<span class="function"><span class="keyword">Method</span>)<span class="title">newMethod</span>;</span>
+@<span class="keyword">end</span>
+
+@<span class="keyword">interface</span> NSArray (Safe)
++ (<span class="function"><span class="keyword">Method</span>)<span class="title">methodOfSelector</span>:</span>(SEL)<span class="keyword">selector</span>;
+- (id)objectAtIndexOrNil:(NSUInteger)<span class="keyword">index</span>;
+@<span class="keyword">end</span>
+
+
+@<span class="keyword">interface</span> NSMutableArray (Safe)
++ (<span class="function"><span class="keyword">Method</span>)<span class="title">methodOfSelector</span>:</span>(SEL)<span class="keyword">selector</span>;
+- (id)objectAtIndexOrNilM:(NSUInteger)<span class="keyword">index</span>;
+- (void)safe_replaceObjectAtIndex:(NSUInteger)<span class="keyword">index</span> withObject:(id)anObject;
+@<span class="keyword">end</span>
+</pre></td></tr></table></figure>
+
+<p>SafeMode.m</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+</pre></td><td class="code"><pre><span class="preprocessor">#import <span class="title">"SafeMode.h"</span></span>
+
+<span class="class"><span class="keyword">@implementation</span> <span class="title">SafeMode</span></span>
+
++ (<span class="keyword">void</span>)safe
+{
+    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;
+    <span class="built_in">dispatch_once</span>(&onceToken, ^{
+        <span class="comment">//NSArray</span>
+        [<span class="keyword">self</span> exchangeOriginalMethod:[<span class="built_in">NSArray</span> methodOfSelector:<span class="keyword">@selector</span>(objectAtIndex:)] withNewMethod:[<span class="built_in">NSArray</span> methodOfSelector:<span class="keyword">@selector</span>(objectAtIndexOrNil:)]];
+        
+        <span class="comment">//NSMutableArray</span>
+        [<span class="keyword">self</span> exchangeOriginalMethod:[<span class="built_in">NSMutableArray</span> methodOfSelector:<span class="keyword">@selector</span>(objectAtIndex:)] withNewMethod:[<span class="built_in">NSMutableArray</span> methodOfSelector:<span class="keyword">@selector</span>(objectAtIndexOrNilM:)]];
+        [<span class="keyword">self</span> exchangeOriginalMethod:[<span class="built_in">NSMutableArray</span> methodOfSelector:<span class="keyword">@selector</span>(replaceObjectAtIndex:withObject:)] withNewMethod:[<span class="built_in">NSMutableArray</span> methodOfSelector:<span class="keyword">@selector</span>(safe_replaceObjectAtIndex:withObject:)]];
+}
+
++ (<span class="keyword">void</span>)exchangeOriginalMethod:(Method)originalMethod withNewMethod:(Method)newMethod
+{
+    method_exchangeImplementations(originalMethod, newMethod);
+}
+
+<span class="keyword">@end</span>
+
+<span class="class"><span class="keyword">@implementation</span> <span class="title">NSArray</span> (<span class="title">Safe</span>)</span>
+
+<span class="preprocessor">#pragma mark - NSArray</span>
++ (Method)methodOfSelector:(SEL)selector
+{
+    <span class="keyword">return</span> class_getInstanceMethod(NSClassFromString(@<span class="string">"__NSArrayI"</span>),selector);
+}
+
+
+- (<span class="keyword">id</span>)objectAtIndexOrNil:(NSUInteger)index
+{
+    <span class="keyword">return</span> (index &lt; [<span class="keyword">self</span> count]) ? [<span class="keyword">self</span> objectAtIndexOrNil:index] : <span class="literal">nil</span>;
+}
+
+<span class="keyword">@end</span>
+
+
+<span class="class"><span class="keyword">@implementation</span> <span class="title">NSMutableArray</span> (<span class="title">Safe</span>)</span>
+
+
+<span class="preprocessor">#pragma mark - NSMutableArray</span>
++ (Method)methodOfSelector:(SEL)selector
+{
+    <span class="keyword">return</span> class_getInstanceMethod(NSClassFromString(@<span class="string">"__NSArrayM"</span>),selector);
+}
+
+- (<span class="keyword">id</span>)objectAtIndexOrNilM:(NSUInteger)index
+{
+    <span class="keyword">return</span> (index &lt; [<span class="keyword">self</span> count]) ? [<span class="keyword">self</span> objectAtIndexOrNilM:index] : <span class="literal">nil</span>;
+}
+
+- (<span class="keyword">void</span>)safe_replaceObjectAtIndex:(NSUInteger)index withObject:(<span class="keyword">id</span>)anObject
+{
+    <span class="keyword">if</span> ((index &lt; [<span class="keyword">self</span> count])&&anObject) {
+        [<span class="keyword">self</span> safe_replaceObjectAtIndex:index withObject:anObject];
+    }
+}
+
+<span class="keyword">@end</span>
+</pre></td></tr></table></figure>
+
+<p>当然，还有其他类似的问题可以在类里面添加方法。这样，上线应用可以避免出现崩溃。<strong><em>ps：测试时最好不开启，免得一些bug难以发现。</em></strong></p>
+
+	 
+	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="http://weibo.com/u/2049029440"><strong>牙-_签</strong></a> - 3月 11 2014</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://toothpick2012.github.io/"><strong>Toothpick&#39;s blog</strong></a></span>
+</p>
+       	 
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
 
 
   
@@ -1280,60 +1523,6 @@ imageLayer.borderWidth = 2.0;
 	 
 	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
 <span>Posted by <a style="color:#9f9f9f;" href="http://weibo.com/u/2049029440"><strong>牙-_签</strong></a> - 12月 19 2012</span><br />
-<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://toothpick2012.github.io/"><strong>Toothpick&#39;s blog</strong></a></span>
-</p>
-       	 
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    
-<article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-  <header>
-      
-      
-  
-    <h1 class="title"><a href="/2012/12/16/coretext进行文字排版/">CoreText进行文字排版</a></h1>
-  
-
-      <time datetime="2012-12-15T23:10:51.000Z"><a href="/2012/12/16/coretext进行文字排版/">12月 16 2012</a></time>
-      
-  </header>
-    <div class="entry">
-      
-        <p><span style="font-size:18px;">coretext实现UIlable的字间距和行间距的设置</span></p>
-<pre lang="objective-c">#import<foundation>#import<uikit>@interface TextLabel : UILabel{ &nbsp; &nbsp;@private &nbsp; &nbsp; &nbsp; &nbsp;CGFloat characterSpacing_; &nbsp; &nbsp; &nbsp; //字间距 &nbsp; &nbsp;@private &nbsp; &nbsp; &nbsp; &nbsp;long linesSpacing_; &nbsp; //行间距 &nbsp; &nbsp;}@property(nonatomic,assign) CGFloat characterSpacing;@property(nonatomic,assign) long linesSpacing;//准确计算CoreText高度的方法- (int)getAttributedStringHeightWithString:(NSAttributedString *) &nbsp;string &nbsp;WidthValue:(int) width;@end</uikit></foundation></pre>
-
-<p>[html lang=&quot;objective-c&quot;]#import &quot;TextLabel.h&quot;#import</p>
-<coretext>@implementation TextLabel@synthesize characterSpacing = characterSpacing<em>;@synthesize linesSpacing = linesSpacing</em>;-(id) initWithFrame:(CGRect)frame{//初始化字间距、行间距 &nbsp; &nbsp; &nbsp; &nbsp;if(self =[superinitWithFrame:frame]) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;self.characterSpacing = 2.0f; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;self.linesSpacing = 5.0f; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;returnself; &nbsp; &nbsp;}-(void)setCharacterSpacing:(CGFloat)characterSpacing //外部调用设置字间距{ &nbsp; &nbsp; &nbsp; &nbsp;characterSpacing<em> = characterSpacing; &nbsp; &nbsp; &nbsp; &nbsp;[selfsetNeedsDisplay]; &nbsp; &nbsp;}-(void)setLinesSpacing:(long)linesSpacing &nbsp;//外部调用设置行间距{ &nbsp; &nbsp; &nbsp; &nbsp;linesSpacing</em> = linesSpacing; &nbsp; &nbsp; &nbsp; &nbsp;[selfsetNeedsDisplay]; &nbsp; &nbsp;}-(void) drawTextInRect:(CGRect)requestedRect{ &nbsp; &nbsp; &nbsp; &nbsp;//去掉空行 &nbsp; &nbsp;// &nbsp; &nbsp;NSString <em>labelString = self.text;// &nbsp; &nbsp;// &nbsp; &nbsp;NSString </em>myString = [labelString stringByReplacingOccurrencesOfString:@&quot;\r\n&quot; withString:&quot;\n&quot;]; &nbsp; &nbsp; &nbsp; &nbsp;//创建AttributeString &nbsp; &nbsp; &nbsp; &nbsp;NSMutableAttributedString <em>string =[[NSMutableAttributedStringalloc]initWithString:self.text]; &nbsp; &nbsp; &nbsp; &nbsp;string = [selfsetStyle:string]; &nbsp; &nbsp; &nbsp; &nbsp;//排版 &nbsp; &nbsp; &nbsp; &nbsp;CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string); &nbsp; &nbsp; &nbsp; &nbsp;CGMutablePathRef leftColumnPath = CGPathCreateMutable(); &nbsp; &nbsp; &nbsp; &nbsp;CGPathAddRect(leftColumnPath, NULL ,CGRectMake(0 , 0 ,self.bounds.size.width , self.bounds.size.height)); &nbsp; &nbsp; &nbsp; &nbsp;CTFrameRef leftFrame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0, 0), leftColumnPath , NULL); &nbsp; &nbsp; &nbsp; &nbsp;//翻转坐标系统（文本原来是倒的要翻转下） &nbsp; &nbsp; &nbsp; &nbsp;CGContextRef context = UIGraphicsGetCurrentContext(); &nbsp; &nbsp; &nbsp; &nbsp;CGContextSetTextMatrix(context , CGAffineTransformIdentity); &nbsp; &nbsp; &nbsp; &nbsp;CGContextTranslateCTM(context , 0 ,self.bounds.size.height); &nbsp; &nbsp; &nbsp; &nbsp;CGContextScaleCTM(context, 1.0 ,-1.0); &nbsp; &nbsp; &nbsp; &nbsp;//画出文本 &nbsp; &nbsp; &nbsp; &nbsp;CTFrameDraw(leftFrame,context); &nbsp; &nbsp; &nbsp; &nbsp;//释放 &nbsp; &nbsp; &nbsp; &nbsp;CGPathRelease(leftColumnPath); &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(framesetter); &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(leftFrame); &nbsp; &nbsp; &nbsp; &nbsp;[string release]; &nbsp; &nbsp; &nbsp; &nbsp;UIGraphicsPushContext(context); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}-(NSMutableAttributedString</em>)setStyle:(NSMutableAttributedString<em>)string{ &nbsp; &nbsp;//设置字体及大小 &nbsp; &nbsp; &nbsp; &nbsp;CTFontRef helveticaBold = CTFontCreateWithName((CFStringRef)self.font.fontName,self.font.pointSize,NULL); &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTFontAttributeNamevalue:(id)helveticaBold range:NSMakeRange(0,[string length])]; &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(helveticaBold); &nbsp; &nbsp;//设置字间距 &nbsp; &nbsp; &nbsp; &nbsp;if(self.characterSpacing) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;long number = self.characterSpacing; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CFNumberRef num = CFNumberCreate(kCFAllocatorDefault,kCFNumberSInt8Type,&amp;number); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTKernAttributeNamevalue:(id)num range:NSMakeRange(0,[string length])]; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(num); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;//设置字体颜色 &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTForegroundColorAttributeNamevalue:(id)(self.textColor.CGColor) range:NSMakeRange(0,[string length])]; &nbsp; &nbsp; &nbsp; &nbsp;//创建文本对齐方式 &nbsp; &nbsp; &nbsp; &nbsp;CTTextAlignment alignment = kCTLeftTextAlignment; &nbsp; &nbsp; &nbsp; &nbsp;if(self.textAlignment == UITextAlignmentCenter) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;alignment = kCTCenterTextAlignment; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;if(self.textAlignment == UITextAlignmentRight) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;alignment = kCTRightTextAlignment; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting alignmentStyle; &nbsp; &nbsp; &nbsp; &nbsp;alignmentStyle.spec = kCTParagraphStyleSpecifierAlignment; &nbsp; &nbsp; &nbsp; &nbsp;alignmentStyle.valueSize = sizeof(alignment); &nbsp; &nbsp; &nbsp; &nbsp;alignmentStyle.value = &amp;alignment; &nbsp; &nbsp; &nbsp; &nbsp;//设置文本行间距 &nbsp; &nbsp; &nbsp; &nbsp;CGFloat lineSpace = self.linesSpacing; &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting lineSpaceStyle; &nbsp; &nbsp; &nbsp; &nbsp;lineSpaceStyle.spec = kCTParagraphStyleSpecifierLineSpacingAdjustment; &nbsp; &nbsp; &nbsp; &nbsp;lineSpaceStyle.valueSize = sizeof(lineSpace); &nbsp; &nbsp; &nbsp; &nbsp;lineSpaceStyle.value =&amp;lineSpace; &nbsp; &nbsp; &nbsp; &nbsp;//设置文本段间距 &nbsp; &nbsp; &nbsp; &nbsp;CGFloat paragraphSpacing = 5.0; &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting paragraphSpaceStyle; &nbsp; &nbsp; &nbsp; &nbsp;paragraphSpaceStyle.spec = kCTParagraphStyleSpecifierParagraphSpacing; &nbsp; &nbsp; &nbsp; &nbsp;paragraphSpaceStyle.valueSize = sizeof(CGFloat); &nbsp; &nbsp; &nbsp; &nbsp;paragraphSpaceStyle.value = ¶graphSpacing; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//创建设置数组 &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleSetting settings[ ] ={alignmentStyle,lineSpaceStyle,paragraphSpaceStyle}; &nbsp; &nbsp; &nbsp; &nbsp;CTParagraphStyleRef style = CTParagraphStyleCreate(settings , sizeof(settings)); &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(settings); &nbsp; &nbsp;//给文本添加设置 &nbsp; &nbsp; &nbsp; &nbsp;[string addAttribute:(id)kCTParagraphStyleAttributeName value:(id)style range:NSMakeRange(0 , [string length])]; &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(style); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return string;}//准确计算CoreText高度的方法- (int)getAttributedStringHeightWithString:(NSMutableAttributedString </em>) &nbsp;string &nbsp;WidthValue:(int) width{ &nbsp; &nbsp;string = [selfsetStyle:string]; &nbsp; &nbsp; &nbsp; &nbsp;int total_height = 0; &nbsp; &nbsp; &nbsp; &nbsp;CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string); &nbsp; &nbsp;//string 为要计算高度的NSAttributedString &nbsp; &nbsp;CGRect drawingRect = CGRectMake(0, 0, width, 99999); &nbsp;//这里的高要设置足够大 &nbsp; &nbsp;CGMutablePathRef path = CGPathCreateMutable(); &nbsp; &nbsp;CGPathAddRect(path, NULL, drawingRect); &nbsp; &nbsp;CTFrameRef textFrame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0,0), path, NULL); &nbsp; &nbsp;CGPathRelease(path); &nbsp; &nbsp;CFRelease(framesetter); &nbsp; &nbsp; &nbsp; &nbsp;NSArray <em>linesArray = (NSArray </em>) CTFrameGetLines(textFrame); &nbsp; &nbsp; &nbsp; &nbsp;CGPoint origins[[linesArray count]]; &nbsp; &nbsp;CTFrameGetLineOrigins(textFrame, CFRangeMake(0, 0), origins); &nbsp; &nbsp; &nbsp; &nbsp;int line_y = (int) origins[[linesArray count] -1].y; &nbsp;//最后一行line的原点y坐标 &nbsp; &nbsp; &nbsp; &nbsp;CGFloat ascent; &nbsp; &nbsp;CGFloat descent; &nbsp; &nbsp;CGFloat leading; &nbsp; &nbsp; &nbsp; &nbsp;CTLineRef line = (CTLineRef) [linesArray objectAtIndex:[linesArray count]-1]; &nbsp; &nbsp;CTLineGetTypographicBounds(line, &amp;ascent, &amp;descent, &amp;leading); &nbsp; &nbsp; &nbsp; &nbsp;total_height = 99999 - line_y + (int) descent +1; &nbsp; &nbsp;//+1为了纠正descent转换成int小数点后舍去的值 &nbsp; &nbsp; &nbsp; &nbsp;CFRelease(textFrame); &nbsp; &nbsp; &nbsp; &nbsp;return total_height; &nbsp; &nbsp;}@end[/html]</coretext>
-	 
-	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
-<span>Posted by <a style="color:#9f9f9f;" href="http://weibo.com/u/2049029440"><strong>牙-_签</strong></a> - 12月 16 2012</span><br />
 <span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://toothpick2012.github.io/"><strong>Toothpick&#39;s blog</strong></a></span>
 </p>
        	 

@@ -4,7 +4,7 @@
   <subtitle><![CDATA[牙-_签]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://toothpick2012.github.io//"/>
-  <updated>2014-01-23T07:43:01.311Z</updated>
+  <updated>2014-03-11T07:34:30.002Z</updated>
   <id>http://toothpick2012.github.io//</id>
   
   <author>
@@ -13,6 +13,226 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[减少上线应用的崩溃情况]]></title>
+    <link href="http://toothpick2012.github.io/2014/03/11/%E5%87%8F%E5%B0%91%E4%B8%8A%E7%BA%BF%E5%BA%94%E7%94%A8%E7%9A%84%E5%B4%A9%E6%BA%83%E6%83%85%E5%86%B5/"/>
+    <id>http://toothpick2012.github.io/2014/03/11/减少上线应用的崩溃情况/</id>
+    <published>2014-03-11T06:42:55.000Z</published>
+    <updated>2014-03-11T07:33:50.000Z</updated>
+    <content type="html"><![CDATA[<p>应用上线后，在umeng或是百度移动统计里面经常会有NSRangeException，NSInvalidArgumentException等这类错误，而且通常都是占据了很大比例。
+你能看到的错误详情可能是这样：(很庆幸我们还是可以找到具体出错的位置，但是上千个类似错误成分散分布在不同位置，那就别扯蛋了！！)</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre>*** Terminating app due to uncaught exception <span class="string">'NSRangeException'</span>, reason: <span class="string">'*** -[__NSArrayM objectAtIndex:]: index 0 beyond bounds for empty array'</span>
+详细错误信息:
+ ....
+<span class="number">2</span>   CoreFoundation                      <span class="number">0x2f20dd95</span> -[__NSArrayM objectAtIndex:] + <span class="number">232</span>
+<span class="number">3</span>   nineteenlou                         <span class="number">0x001357a7</span> -[UserViewController tableView:didSelectRowAtIndexPath:] + <span class="number">158</span>
+<span class="number">4</span>   UIKit                               <span class="number">0x31b790cb</span> -[UITableView _selectRowAtIndexPath:animated:scrollPosition:notifyDelegate:] + <span class="number">1078</span>
+<span class="number">5</span>   UIKit                               <span class="number">0x31c2c863</span> -[UITableView _userSelectRowAtPendingSelectionIndexPath:] + <span class="number">214</span>
+<span class="keyword">...</span>
+</pre></td></tr></table></figure>
+
+<p>发生错误原因，有的是多线程block造成的，还有接口返回数据解析问题，还有其他乱七八糟问题。
+应用的体验是建立在不崩溃的基础之上的。如果是这样，那必须动武的啦。最佳的方法，就是用swizzle替换数组的方法，判断越界等出现崩溃的情况。</p>
+<p>OK，废话多了，自写的个类SafeMode，上代码吧。
+也可以下载例子:<a href="https://github.com/Toothpick2012/SafeMode" target="_blank">https://github.com/Toothpick2012/SafeMode</a></p>
+<p>SafeMode.h</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre>#import &lt;Foundation/Foundation.h&gt;
+#import &lt;objc/runtime.h&gt;
+
+@<span class="keyword">interface</span> SafeMode:NSObject
++ (void)safe;
++ (void)exchangeOriginalMethod:(<span class="function"><span class="keyword">Method</span>)<span class="title">originalMethod</span> <span class="title">withNewMethod</span>:</span>(<span class="function"><span class="keyword">Method</span>)<span class="title">newMethod</span>;</span>
+@<span class="keyword">end</span>
+
+@<span class="keyword">interface</span> NSArray (Safe)
++ (<span class="function"><span class="keyword">Method</span>)<span class="title">methodOfSelector</span>:</span>(SEL)<span class="keyword">selector</span>;
+- (id)objectAtIndexOrNil:(NSUInteger)<span class="keyword">index</span>;
+@<span class="keyword">end</span>
+
+
+@<span class="keyword">interface</span> NSMutableArray (Safe)
++ (<span class="function"><span class="keyword">Method</span>)<span class="title">methodOfSelector</span>:</span>(SEL)<span class="keyword">selector</span>;
+- (id)objectAtIndexOrNilM:(NSUInteger)<span class="keyword">index</span>;
+- (void)safe_replaceObjectAtIndex:(NSUInteger)<span class="keyword">index</span> withObject:(id)anObject;
+@<span class="keyword">end</span>
+</pre></td></tr></table></figure>
+
+<p>SafeMode.m</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+</pre></td><td class="code"><pre><span class="preprocessor">#import <span class="title">"SafeMode.h"</span></span>
+
+<span class="class"><span class="keyword">@implementation</span> <span class="title">SafeMode</span></span>
+
++ (<span class="keyword">void</span>)safe
+{
+    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;
+    <span class="built_in">dispatch_once</span>(&onceToken, ^{
+        <span class="comment">//NSArray</span>
+        [<span class="keyword">self</span> exchangeOriginalMethod:[<span class="built_in">NSArray</span> methodOfSelector:<span class="keyword">@selector</span>(objectAtIndex:)] withNewMethod:[<span class="built_in">NSArray</span> methodOfSelector:<span class="keyword">@selector</span>(objectAtIndexOrNil:)]];
+        
+        <span class="comment">//NSMutableArray</span>
+        [<span class="keyword">self</span> exchangeOriginalMethod:[<span class="built_in">NSMutableArray</span> methodOfSelector:<span class="keyword">@selector</span>(objectAtIndex:)] withNewMethod:[<span class="built_in">NSMutableArray</span> methodOfSelector:<span class="keyword">@selector</span>(objectAtIndexOrNilM:)]];
+        [<span class="keyword">self</span> exchangeOriginalMethod:[<span class="built_in">NSMutableArray</span> methodOfSelector:<span class="keyword">@selector</span>(replaceObjectAtIndex:withObject:)] withNewMethod:[<span class="built_in">NSMutableArray</span> methodOfSelector:<span class="keyword">@selector</span>(safe_replaceObjectAtIndex:withObject:)]];
+}
+
++ (<span class="keyword">void</span>)exchangeOriginalMethod:(Method)originalMethod withNewMethod:(Method)newMethod
+{
+    method_exchangeImplementations(originalMethod, newMethod);
+}
+
+<span class="keyword">@end</span>
+
+<span class="class"><span class="keyword">@implementation</span> <span class="title">NSArray</span> (<span class="title">Safe</span>)</span>
+
+<span class="preprocessor">#pragma mark - NSArray</span>
++ (Method)methodOfSelector:(SEL)selector
+{
+    <span class="keyword">return</span> class_getInstanceMethod(NSClassFromString(@<span class="string">"__NSArrayI"</span>),selector);
+}
+
+
+- (<span class="keyword">id</span>)objectAtIndexOrNil:(NSUInteger)index
+{
+    <span class="keyword">return</span> (index &lt; [<span class="keyword">self</span> count]) ? [<span class="keyword">self</span> objectAtIndexOrNil:index] : <span class="literal">nil</span>;
+}
+
+<span class="keyword">@end</span>
+
+
+<span class="class"><span class="keyword">@implementation</span> <span class="title">NSMutableArray</span> (<span class="title">Safe</span>)</span>
+
+
+<span class="preprocessor">#pragma mark - NSMutableArray</span>
++ (Method)methodOfSelector:(SEL)selector
+{
+    <span class="keyword">return</span> class_getInstanceMethod(NSClassFromString(@<span class="string">"__NSArrayM"</span>),selector);
+}
+
+- (<span class="keyword">id</span>)objectAtIndexOrNilM:(NSUInteger)index
+{
+    <span class="keyword">return</span> (index &lt; [<span class="keyword">self</span> count]) ? [<span class="keyword">self</span> objectAtIndexOrNilM:index] : <span class="literal">nil</span>;
+}
+
+- (<span class="keyword">void</span>)safe_replaceObjectAtIndex:(NSUInteger)index withObject:(<span class="keyword">id</span>)anObject
+{
+    <span class="keyword">if</span> ((index &lt; [<span class="keyword">self</span> count])&&anObject) {
+        [<span class="keyword">self</span> safe_replaceObjectAtIndex:index withObject:anObject];
+    }
+}
+
+<span class="keyword">@end</span>
+</pre></td></tr></table></figure>
+
+<p>当然，还有其他类似的问题可以在类里面添加方法。这样，上线应用可以避免出现崩溃。<strong><em>ps：测试时最好不开启，免得一些bug难以发现。</em></strong></p>
+]]></content>
+    
+    
+      <category term="Ad Hoc" scheme="http://toothpick2012.github.io/tags/Ad%20Hoc/"/>
+    
+      <category term="AppStore" scheme="http://toothpick2012.github.io/tags/AppStore/"/>
+    
+      <category term="ios" scheme="http://toothpick2012.github.io/tags/ios/"/>
+    
+      <category term="itunes" scheme="http://toothpick2012.github.io/tags/itunes/"/>
+    
+      <category term="开发者" scheme="http://toothpick2012.github.io/tags/%E5%BC%80%E5%8F%91%E8%80%85/"/>
+    
+      <category term="苹果" scheme="http://toothpick2012.github.io/tags/%E8%8B%B9%E6%9E%9C/"/>
+    
+      <category term="账号" scheme="http://toothpick2012.github.io/tags/%E8%B4%A6%E5%8F%B7/"/>
+    
+      <category term="IOS" scheme="http://toothpick2012.github.io/categories/IOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[ios7状态栏以及导航栏]]></title>
@@ -1988,93 +2208,6 @@ UITableViewCell包含了textLabel、detailTextLabel和imageView等view，而你�
       <category term="SASS" scheme="http://toothpick2012.github.io/tags/SASS/"/>
     
       <category term="CSS" scheme="http://toothpick2012.github.io/categories/CSS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[iOS高效开发必备的10款Objective-C类库(转)]]></title>
-    <link href="http://toothpick2012.github.io/2012/12/03/hello-world/"/>
-    <id>http://toothpick2012.github.io/2012/12/03/hello-world/</id>
-    <published>2012-12-02T23:11:23.000Z</published>
-    <updated>2014-01-22T08:42:00.000Z</updated>
-    <content type="html"><![CDATA[<p>因为iOS SDK相对比较底层，所以开发者就得受累多做一些体力活。不过幸运的是，有很多第三方的类库可以用来简化很多不必要的工作.经过作者团队的慎重讨论，他们评选出了10款能够极大提高iOS开发效率的类库，根据原文作者的评价来看，基本上有了这10款工具，做iOS开发就真的跟泡Cocoa一样了。</p>
-<p><a href="http://github.com/jdg/MBProgressHUD" target="_blank"><strong>MBProgressHUD</strong></a><strong>——进展指示符库</strong></p>
-<p>苹果的应用程序一般都会用一种优雅的，半透明的进度显示效果，不过这个API是不公开的，因此你要是用了，很可能被清除出AppStore。而MBProgressHUD提供了一个替代方案，而且在用户角度上，实现的效果根本看不出和官方程序有什么差别。同时还提供了其他附加功能，比如虚拟进展指示符，以及完成提示信息。整合到项目里也很容易，这里不细谈了。</p>
-<p><a href="http://allseeing-i.com/ASIHTTPRequest/" target="_blank"><strong>ASIHttpRequest</strong></a><strong>——HTTP Network库</strong></p>
-<p>iPhone当然也有自己的HTTP Network API，那为什么要用ASIHttpRequest呢？因为官方的API简直跟话痨似的，太罗嗦了！ASIHttpRequest库极大的简化了网络通信，提供更先进的工具，什么文件上传工具，重定向处理工具、验证工具、等等。只要你手头的东西跟HTTP有关，用这个绝对能让你感觉道生活有美好！先看一段代码就体会到了。 </p>
-<pre style="padding:0px;list-style:none;width:613.796875px;overflow:hidden;background-color:#f7f7f7;color:#333333;font-size:14px;line-height:24px;margin-top:0px;">
-
-1.  (<span class="keyword">void</span>) loadAppDevMag
-2.  {
-3.  NSURL *url = [NSURL URLWithString:@<span class="string">"http://www.appdevmag.com"</span>];
-4.  ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-5.  [request setDelegate:self];
-6.  [request startAsynchronous];
-7.  }
-8.  <span class="span4br"></span>
-9.  - (<span class="keyword">void</span>)requestFinished:(ASIHTTPRequest *)request
-10.  {
-11.  <span class="comment" style="color:#008200;">// Use when fetching text data</span>
-12.  NSString *responseString = [request responseString];
-13.  }</pre>
-
-<p><a href="http://stig.github.com/json-framework/" target="_blank"><strong>JSON Framework</strong></a><strong>——JSON支持</strong></p>
-<p>如果你做的应用和网站服务器有交互，那就得用到JSON了。但事实上，iOS平台的原生类库根本就不支持JSON，这就略犀利了吧？不过JSON框架满足了你的所有需求，包括一个解析器将JSON字符串解析成对象；以及一个生成器从对象生成字符串。这个库根本就是太流行了，JSON提过很多次了，具体特点就不多讲了，所谓“一段代码胜千言”，下面用一段代码演示一下吧。</p>
-<pre style="padding:0px;list-style:none;width:613.796875px;overflow:hidden;background-color:#f7f7f7;color:#333333;font-size:14px;line-height:24px;margin-top:0px;">
-
-1.  <span class="comment" style="color:#008200;">// JSON string -> NSDictionary</span>
-2.  <span class="span4br"></span>
-3.  NSString *jsonString = @<span class="string">"{\"foo\": \"bar\"}"</span>;
-4.  <span class="span4br"></span>
-5.  NSDictionary *dictionary = [jsonString JSONValue];
-6.  <span class="span4br"></span>
-7.  NSLog(@<span class="string">"Dictionary value for \"foo\" is \"%@\""</span>, [dictionary objectForKey:@<span class="string">"foo"</span>]);
-8.  <span class="span4br"></span>
-9.  <span class="comment" style="color:#008200;">// NSDictionary -> JSON string</span>
-10.  <span class="span4br"></span>
-11.  NSString *newJsonString = [dictionary JSONRepresentation];</pre>
-
-<p><a href="http://www.flurry.com/product/analytics/index.html" target="_blank"><strong>Flurry</strong></a><strong>——详尽的使用统计</strong></p>
-<p>通过Furry你可以得到应用的用户人数，用户活跃度，用户来源等统计信息。但是他最厉害的地方是，你可以追踪应用本身的事件和错误记录，所有这些数据都会在一个类似Google Analytics的界面上显示，这样就很容易掌握用户的行为和出现的问题。当然，这个星球上很多统计工具，但是这款是作者个人比较推崇的解决方案。</p>
-<p><img src="http://articles.csdn.net/uploads/allimg/110317/102_110317162414_1_lit.JPG" alt="ios Libraries development"></p>
-<p><a href="http://regexkit.sourceforge.net/RegexKitLite/" target="_blank"><strong>RegexKitLite</strong></a><strong>——正则表达式支持</strong></p>
-<p>正则表达式大家都知道。但是iPhone SDK居然当他不存在？这怎么能忍啊！果断用RegexKitLite。虽然叫的是Lite，但是功能很full。示例代码。 </p>
-<pre style="padding:0px;list-style:none;width:613.796875px;overflow:hidden;background-color:#f7f7f7;color:#333333;font-size:14px;line-height:24px;margin-top:0px;">
-
-1.  <span class="comment" style="color:#008200;">// finds phone number in format nnn-nnn-nnnn</span>
-2.  NSString *regEx = @<span class="string">"[0-9]{3}-[0-9]{3}-[0-9]{4}"</span>;
-3.  <span class="keyword">for</span>(NSString *match in [textView.text componentsMatchedByRegex:regEx]) {
-4.  NSLog(@<span class="string">"Phone number is %@"</span>, match);
-5.  }</pre>
-
-<p><a href="http://github.com/facebook/facebook-ios-sdk" target="_blank"><strong>Facebook iOS SDK</strong></a><strong>——Facebook API类库</strong></p>
-<p>大体来讲就是iPhone上的Facebook login，完全支持Facebook Graph API和the older REST api。如果你的应用跟Facebook有关，相信我，用这个吧。</p>
-<p><img src="http://articles.csdn.net/uploads/allimg/110317/102_110317162548_1.png" alt=""></p>
-<p><a href="http://github.com/rs/SDWebImage" target="_blank"><strong>SDWebImage</strong></a><strong>——简化网络图片处理</strong></p>
-<p>用SDWebImage调用网站上的图片，跟本地调用内置在应用包里的图片一样简单。操作也很简单，举例说明</p>
-<pre style="padding:0px;list-style:none;width:613.796875px;overflow:hidden;background-color:#f7f7f7;color:#333333;font-size:14px;line-height:24px;margin-top:0px;">
-
-1.  [imageView setImageWithURL:[NSURL URLWithString:@"http://examp</pre>
-
-<p>类似的功能在Three20里也有，这个过会儿再说。相比而言，SDWebImage主要是提供一个小而精的简捷方便的解决方案</p>
-<p><a href="http://code.google.com/p/gdata-objectivec-client/" target="_blank"><strong>GData client</strong></a><strong>——iPhone上所有Google相关服务的类库</strong></p>
-<p>名字就说明一切了。跟Google相关的，值得一提的是，这个项目很开放。有很多示例程序供下载。</p>
-<p><a href="http://code.google.com/p/core-plot/" target="_blank"><strong>CorePlot</strong></a><strong>——2D图形绘图仪</strong></p>
-<p><img src="http://articles.csdn.net/uploads/allimg/110317/102_110317162803_1_lit.jpg" alt=""></p>
-<p>CorePlot有很多解决方案将你的数据可视。，同时也会提供各种迷人的图形效果，比如棒状图、饼状图、线状图等等，在他们网站上也提供了大量的范例图形，很多股票价格应用，游戏分数，个人财务管理都在用。</p>
-<p><a href="http://github.com/facebook/three20" target="_blank"><strong>Three20</strong></a><strong>——通用iOS库</strong></p>
-<p>Three20类库是Facebook自己做的，大而全是他最大的特色。把他整合到已有的项目中可能得费点周折，不过如果一开始你就用上了Three20，尤其是牵扯到很多web相关的项目的时候，你就能深刻体会到神马叫给力了。</p>
-<p><span class="span4br"></span></p>
-]]></content>
-    
-    
-      <category term="Objective-C" scheme="http://toothpick2012.github.io/tags/Objective-C/"/>
-    
-      <category term="类库" scheme="http://toothpick2012.github.io/tags/%E7%B1%BB%E5%BA%93/"/>
-    
-      <category term="高效" scheme="http://toothpick2012.github.io/tags/%E9%AB%98%E6%95%88/"/>
-    
-      <category term="IOS类库" scheme="http://toothpick2012.github.io/categories/IOS%E7%B1%BB%E5%BA%93/"/>
     
   </entry>
   
