@@ -4,7 +4,7 @@
   <subtitle><![CDATA[牙-_签]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://toothpick2012.github.io//"/>
-  <updated>2014-03-11T08:30:12.807Z</updated>
+  <updated>2014-03-11T09:11:39.886Z</updated>
   <id>http://toothpick2012.github.io//</id>
   
   <author>
@@ -15,11 +15,278 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[类簇在iOS开发中的应用(转)]]></title>
+    <link href="http://toothpick2012.github.io/2014/03/11/ddd/"/>
+    <id>http://toothpick2012.github.io/2014/03/11/ddd/</id>
+    <published>2014-03-11T09:06:40.000Z</published>
+    <updated>2014-03-11T09:11:28.000Z</updated>
+    <content type="html"><![CDATA[<p>类簇(class cluster)是一种设计模式，在Foundation Framework中被广泛使用，举个简单的例子</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="built_in">NSArray</span> *arr = [<span class="built_in">NSArray</span> arrayWithObjects:@<span class="string">"foo"</span>,@<span class="string">"bar"</span>, <span class="literal">nil</span>]; 
+<span class="built_in">NSLog</span>(@<span class="string">"arr class:%@"</span>, [arr class]); 
+<span class="comment">// output: __NSArrayI</span>
+</pre></td></tr></table></figure>
+
+<p>显然__NSArrayI是一个私有类，来看看这个类的头文件</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>@interface __NSArrayI : NSArray { 
+    unsigned int _used; 
+} 
+//<span class="keyword">...</span>
+</pre></td></tr></table></figure>
+
+
+<p>可以看出__NSArrayI继承了NSArray。为什么要这么设计呢？拿NSNumber来举个例子，我们都知道NSNumber可以存储多种类型的数字，如Int/Float/Double等等，一种方式是把NSNumber作为基类，然后分别去实现各自的子类，像这样：
+ ![此处输入图片的描述][1]
+初看起来也没什么问题，但如果子类很多，像这样：
+![此处输入图片的描述][2]</p>
+<p>这对使用者来说显然不够方便，得记住这么多类。如果使用类簇，问题就变得简单了，把Number作为抽象基类，子类各自实现存取方式，然后在基类中定义多个初始化方式，像这样：
+![此处输入图片的描述][3]</p>
+<p>现在只需要记住一个类就可以了。NSNumber的初始化伪代码大概像这样：</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre>- (id)initWithBool 
+{ 
+    <span class="keyword">return</span> [[__NSCFBoolean alloc]init]; 
+} 
+ 
+- (id)initWithLong 
+{ 
+    <span class="keyword">return</span> [[__NSCFNumber alloc]init]; 
+} 
+ 
+//<span class="keyword">...</span>
+</pre></td></tr></table></figure>
+
+<h1 id="-ios-">在iOS项目中的应用</h1>
+<hr>
+<p>在开发app时经常会遇到表现和行为完全一样，但数据源不一样的情况。以花瓣app为例，同样是瀑布流，可能来自我喜欢的图片、某个画板下的图片、某个用户的图片等等。如果为每一种表现方式都新建一个Controller，并且使用这个Controller来初始化，那么就会遇到最开始提到的问题：子类太多，使用不便。这正好可以通过类簇来很方便地搞定。比如这样：</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="class"><span class="keyword">@implementation</span> <span class="title">HBWaterfallViewController</span> </span>
+- (<span class="keyword">id</span>)initWithLiked 
+{ 
+    <span class="keyword">return</span> [[HBLikedViewController alloc]init]; 
+} 
+  
+- (<span class="keyword">id</span>)initWithBoardID:(<span class="built_in">NSInteger</span>)boardID 
+{ 
+    <span class="keyword">return</span> [[HBBoardViewController alloc]initWithBoardID:boardID]; 
+}
+</pre></td></tr></table></figure>
+
+<h2 id="pragma-mark-">pragma mark - 通用的方法</h2>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre>- (PSUICollectionViewCell *)collectionView:(PSUICollectionView *)collectionView 
+                    cellForItemAtIndexPath:(NSIndexPath *)indexPath 
+{ 
+    // <span class="keyword">...</span> 
+} 
+  
+// <span class="keyword">...</span>
+</pre></td></tr></table></figure>
+
+<h2 id="pragma-mark-">pragma mark - 每个子类需要实现的方法</h2>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="pp">- <span class="params">(void)</span>fetchMoreData 
+{ 
+    NSAssert<span class="params">(<span class="variable">NO</span>, @<span class="string">"子类需要实现此方法"</span>)</span>; 
+}</span>
+</pre></td></tr></table></figure>
+
+<p>使用起来类似这样[[HBWaterfallViewController alloc]initWithBoardID:9527] 或 [[HBWaterfallViewController alloc]initWithLiked]。如果有新的DataSource，新加一个初始化方法即可，对于使用者来说，打开头文件，看下init开头的方法就行了。</p>
+<p>再举个例子，现在很多应用需要同时兼顾iOS6和iOS7，在表现上需要为不同的系统加载不同的图片资源，最简单粗暴的方法就是各种if/else判断，像这样：</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="tag">if</span> (<span class="attr_selector">[[UIDevice currentDevice]</span><span class="tag">systemMajorVersion</span>] &lt; 7) 
+<span class="rules">{ 
+    <span class="comment">/* iOS 6 and previous versions */</span> 
+<span class="rule">}</span></span> 
+<span class="tag">else</span> 
+<span class="rules">{ 
+    <span class="comment">/* iOS 7 and above */</span> 
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p>不够优雅，可以使用类簇的思想来去掉if/else判断，把跟视图具体元素无关的代码放在基类，跟系统版本相关的代码拆成两个子类，然后在各自的类中加载相应的资源。</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+</pre></td><td class="code"><pre><span class="comment">/* TestView.h */</span> 
+<span class="class"><span class="keyword">@interface</span> <span class="title">TestView</span>: <span class="title">UIView</span> </span>
+ 
+<span class="comment">/* Common method */</span> 
+- ( <span class="keyword">void</span> )test; 
+ 
+<span class="keyword">@end</span> 
+ 
+<span class="comment">/* TestView.m */</span> 
+<span class="class"><span class="keyword">@implementation</span> <span class="title">TestView</span> </span>
+ 
++ (<span class="keyword">id</span>)alloc 
+{ 
+    <span class="keyword">if</span> ([<span class="keyword">self</span> class]== [TestView class]) 
+    { 
+        <span class="keyword">if</span> ([[UIDevice currentDevice] systemMajorVersion] &lt; <span class="number">7</span>) 
+        { 
+            <span class="keyword">return</span> [TestViewIOS6 alloc]; 
+        } 
+        <span class="keyword">else</span> 
+        { 
+            <span class="keyword">return</span> [TestViewIOS7 alloc]; 
+        } 
+    } 
+    <span class="keyword">else</span> 
+    { 
+        <span class="keyword">return</span> [<span class="keyword">super</span> alloc]; 
+    } 
+} 
+ 
+- ( <span class="keyword">void</span> )test 
+{} 
+ 
+<span class="keyword">@end</span>
+</pre></td></tr></table></figure>
+
+<p>这里alloc时并没有返回TestView类，而是根据系统版本返回TestViewIOS6 或 TestViewIOS7。</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre><span class="comment">/* TestViewIOS6.m */</span> 
+<span class="class"><span class="keyword">@implementation</span> <span class="title">TestViewIOS6</span>: <span class="title">TestView</span> </span>
+ 
+- (<span class="keyword">void</span>)drawRect: (<span class="built_in">CGRect</span>)rect 
+{ 
+    <span class="comment">/* Custom iOS6 drawing code */</span> 
+} 
+ 
+<span class="keyword">@end</span> 
+ 
+<span class="comment">/* TestViewIOS7.m */</span> 
+<span class="class"><span class="keyword">@implementation</span> <span class="title">TestViewIOS7</span> </span>
+ 
+- (<span class="keyword">void</span>)drawRect: (<span class="built_in">CGRect</span>)rect 
+{ 
+    <span class="comment">/* Custom iOS7 drawing code */</span> 
+} 
+ 
+<span class="keyword">@end</span>
+</pre></td></tr></table></figure>
+
+<h1 id="-">小结</h1>
+<hr>
+<p>类簇的本质其实是抽象工厂，类簇也可以有多个基类，如NSArray, NSMutableArray, 后者就是继承的前者。它对一些「大同小异」的问题，往往会有不错的效果。</p>
+]]></content>
+    
+    
+      <category term="Objective-C" scheme="http://toothpick2012.github.io/tags/Objective-C/"/>
+    
+      <category term="类簇" scheme="http://toothpick2012.github.io/tags/%E7%B1%BB%E7%B0%87/"/>
+    
+      <category term="class cluster" scheme="http://toothpick2012.github.io/tags/class%20cluster/"/>
+    
+      <category term="ios" scheme="http://toothpick2012.github.io/tags/ios/"/>
+    
+      <category term="基础" scheme="http://toothpick2012.github.io/tags/%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="进阶" scheme="http://toothpick2012.github.io/tags/%E8%BF%9B%E9%98%B6/"/>
+    
+      <category term="开发者" scheme="http://toothpick2012.github.io/tags/%E5%BC%80%E5%8F%91%E8%80%85/"/>
+    
+      <category term="IOS" scheme="http://toothpick2012.github.io/categories/IOS/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[减少上线应用的崩溃情况]]></title>
     <link href="http://toothpick2012.github.io/2014/03/11/%E5%87%8F%E5%B0%91%E4%B8%8A%E7%BA%BF%E5%BA%94%E7%94%A8%E7%9A%84%E5%B4%A9%E6%BA%83%E6%83%85%E5%86%B5/"/>
     <id>http://toothpick2012.github.io/2014/03/11/减少上线应用的崩溃情况/</id>
     <published>2014-03-11T06:42:55.000Z</published>
-    <updated>2014-03-11T07:33:50.000Z</updated>
+    <updated>2014-03-11T09:11:25.000Z</updated>
     <content type="html"><![CDATA[<p>应用上线后，在umeng或是百度移动统计里面经常会有NSRangeException，NSInvalidArgumentException等这类错误，而且通常都是占据了很大比例。
 你能看到的错误详情可能是这样：(很庆幸我们还是可以找到具体出错的位置，但是上千个类似错误成分散分布在不同位置，那就别扯蛋了！！)</p>
 <figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
@@ -212,7 +479,8 @@
 <span class="keyword">@end</span>
 </pre></td></tr></table></figure>
 
-<p>当然，还有其他类似的问题可以在类里面添加方法。这样，上线应用可以避免出现崩溃。<strong><em>ps：测试时最好不开启，免得一些bug难以发现。</em></strong></p>
+<p>当然，还有其他类似的问题可以在类里面添加方法。这样，上线应用可以避免出现崩溃。另外数组的objectAtIndex:方法的类不是NSArray，而是__NSArrayI，这个可以参考
+<strong><em>ps：测试时最好不开启，免得一些bug难以发现。</em></strong></p>
 ]]></content>
     
     
@@ -2030,184 +2298,6 @@ UITableViewCell包含了textLabel、detailTextLabel和imageView等view，而你�
       <category term="高效" scheme="http://toothpick2012.github.io/tags/%E9%AB%98%E6%95%88/"/>
     
       <category term="IOS" scheme="http://toothpick2012.github.io/categories/IOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[SASS用法指南]]></title>
-    <link href="http://toothpick2012.github.io/2012/12/04/sass%E7%94%A8%E6%B3%95%E6%8C%87%E5%8D%97/"/>
-    <id>http://toothpick2012.github.io/2012/12/04/sass用法指南/</id>
-    <published>2012-12-03T17:55:06.000Z</published>
-    <updated>2014-01-22T08:42:00.000Z</updated>
-    <content type="html"><![CDATA[<p>学过<a href="http://zh.wikipedia.org/wiki/%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E8%A1%A8" target="_blank">CSS</a>的人都知道，它不是一种编程语言。</p>
-<p>你可以用它开发网页样式，但是没法用它编程。也就是说，CSS基本上是设计师的工具，不是程序员的工具。在程序员眼里，CSS是一件很麻烦的东西。它没有变量，也没有条件语句，只是一行行单纯的描述，写起来相当费事。</p>
-<p><img src="http://image.beekka.com/blog/201206/bg2012061901.jpg" alt=""></p>
-<p>很自然地，有人就开始为CSS加入编程元素，这被叫做<a href="http://www.catswhocode.com/blog/8-css-preprocessors-to-speed-up-development-time" target="_blank">“CSS预处理器”</a>（css preprocessor）。它的基本思想是，用一种专门的编程语言，进行网页样式设计，然后再编译成正常的CSS文件。</p>
-<p>各种”CSS预处理器”之中，我自己最喜欢<a href="http://sass-lang.com/" target="_blank">SASS</a>，觉得它有很多优点，打算以后都用它来写CSS。下面是我整理的用法总结，供自己开发时参考，相信对其他人也有用。</p>
-<p>============================================</p>
-<p><strong>SASS用法指南</strong></p>
-<p>作者：阮一峰</p>
-<p><img src="http://image.beekka.com/blog/201206/bg2012061902.png" alt=""></p>
-<p><strong>一、什么是SASS</strong></p>
-<p><a href="http://sass-lang.com/" target="_blank">SASS</a>是一种CSS的开发工具，提供了许多便利的写法，大大节省了设计者的时间，使得CSS的开发，变得简单和可维护。</p>
-<p>本文总结了SASS的主要用法。我的目标是，有了这篇文章，日常的一般使用就不需要去看<a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html" target="_blank">官方文档</a>了。</p>
-<p><strong>二、安装和使用</strong></p>
-<p><strong>2.1 安装</strong></p>
-<p>SASS是Ruby语言写的，但是两者的语法没有关系。不懂Ruby，照样使用。只是必须先<a href="http://www.ruby-lang.org/zh_cn/downloads/" target="_blank">安装Ruby</a>，然后再安装SASS。</p>
-<p>假定你已经安装好了Ruby，接着在命令行输入下面的命令：</p>
-<blockquote>
-<p>gem install sass</p>
-</blockquote>
-<p>然后，就可以使用了。</p>
-<p><strong>2.2 使用</strong></p>
-<p>SASS文件就是普通的文本文件，里面可以直接使用CSS语法。文件后缀名是.scss，意思为Sassy CSS。</p>
-<p>下面的命令，可以在屏幕上显示.scss文件转化的css代码。（假设文件名为test。）</p>
-<blockquote>
-<p>sass test.scss</p>
-</blockquote>
-<p>如果要将显示结果保存成文件，后面再跟一个.css文件名。</p>
-<blockquote>
-<p>sass test.scss test.css</p>
-</blockquote>
-<p>SASS提供四个编译风格的选项：</p>
-<blockquote>
-<ul>
-<li><p>nested：嵌套缩进的css代码，它是默认值。</p>
-</li>
-<li><p>expanded：没有缩进的、扩展的css代码。</p>
-</li>
-<li><p>compact：简洁格式的css代码。</p>
-</li>
-<li><p>compressed：压缩后的css代码。</p>
-</li>
-</ul>
-</blockquote>
-<p>生产环境当中，一般使用最后一个选项。</p>
-<blockquote>
-<p>sass –style compressed test.sass test.css</p>
-</blockquote>
-<p>SASS的官方网站，提供了一个<a href="http://sass-lang.com/try.html" target="_blank">在线转换器</a>。你可以在那里，试运行下面的各种例子。</p>
-<p><strong>三、基本用法</strong></p>
-<p><strong>3.1 变量</strong></p>
-<p>SASS允许使用变量，所有变量以$开头。</p>
-<blockquote>
-<p>$blue : #1875e7;</p>
-<p>div {<span class="span4br"></span>color : $blue;<span class="span4br"></span>}</p>
-</blockquote>
-<p>如果变量需要镶嵌在字符串之中，就必须需要写在#{}之中。</p>
-<blockquote>
-<p>$side : left;</p>
-<p>.rounded {<span class="span4br"></span>border-#{$side}-radius: 5px;<span class="span4br"></span>}</p>
-</blockquote>
-<p><strong>3.2 计算功能</strong></p>
-<p>SASS允许在代码中使用算式：</p>
-<blockquote>
-<p>body {<span class="span4br"></span>margin: (14px/2);<span class="span4br"></span>top: 50px + 100px;<span class="span4br"></span>right: $var * 10%;<span class="span4br"></span>}</p>
-</blockquote>
-<p><strong>3.3 嵌套</strong></p>
-<p>SASS允许选择器嵌套。比如，下面的CSS代码：</p>
-<blockquote>
-<p>div h1 {<span class="span4br"></span>color : red;<span class="span4br"></span>}</p>
-</blockquote>
-<p>可以写成：</p>
-<blockquote>
-<p>div {<span class="span4br"></span>hi {<span class="span4br"></span>color:red;<span class="span4br"></span>}<span class="span4br"></span>}</p>
-</blockquote>
-<p>属性也可以嵌套：</p>
-<blockquote>
-<p>p {<span class="span4br"></span>border-color: red;<span class="span4br"></span>}</p>
-</blockquote>
-<p>可以写成：</p>
-<blockquote>
-<p>p {<span class="span4br"></span>border: {<span class="span4br"></span>color: red;<span class="span4br"></span>}<span class="span4br"></span>}</p>
-</blockquote>
-<p>注意，border后面必须加上冒号。</p>
-<p><strong>3.4 注释</strong></p>
-<p>SASS共有两种注释风格。</p>
-<p>标准的CSS注释 /<em> comment </em>/ ，会保留到编译后的文件。</p>
-<p>单行注释 // comment，只保留在SASS源文件中，编译后被省略。</p>
-<p><strong>四、代码的重用</strong></p>
-<p><strong>4.1 继承</strong></p>
-<p>SASS允许一个选择器，继承另一个选择器。比如，现有class1：</p>
-<blockquote>
-<p>.class1 {<span class="span4br"></span>border: 1px solid #ddd;<span class="span4br"></span>}</p>
-</blockquote>
-<p>class2要继承class1，就要使用@extend命令：</p>
-<blockquote>
-<p>.class2 {<span class="span4br"></span>@extend .class1;<span class="span4br"></span>font-size:120%;<span class="span4br"></span>}</p>
-</blockquote>
-<p><strong>4.2 Mixin</strong></p>
-<p>Mixin有点像C语言的宏（macro），是可以重用的代码块。</p>
-<p>使用@mixin命令，定义一个代码块。</p>
-<blockquote>
-<p>@mixin left {<span class="span4br"></span>float: left;<span class="span4br"></span>margin-left: 10px;<span class="span4br"></span>}</p>
-</blockquote>
-<p>使用@include命令，调用这个mixin。</p>
-<blockquote>
-<p>div {<span class="span4br"></span>@include left;<span class="span4br"></span>}</p>
-</blockquote>
-<p>mixin的强大之处，在于可以指定参数和缺省值。</p>
-<blockquote>
-<p>@mixin left($value: 10px) {<span class="span4br"></span>float: left;<span class="span4br"></span>margin-right: $value;<span class="span4br"></span>}</p>
-</blockquote>
-<p>使用的时候，根据需要加入参数：</p>
-<blockquote>
-<p>div {<span class="span4br"></span>@include left(20px);<span class="span4br"></span>}</p>
-</blockquote>
-<p><strong>4.3 颜色函数</strong></p>
-<p>SASS提供了一些内置的颜色函数，以便生成系列颜色。</p>
-<blockquote>
-<p>lighten(#cc3, 10%) // #d6d65c<span class="span4br"></span>darken(#cc3, 10%) // #a3a329<span class="span4br"></span>grayscale(#cc3) // #808080<span class="span4br"></span>complement(#cc3) // #33c</p>
-</blockquote>
-<p><strong>4.4 插入文件</strong></p>
-<p>@import命令，用来插入外部文件。</p>
-<blockquote>
-<p>@import(“path/filename.scss”);</p>
-</blockquote>
-<p>如果插入的是.css文件，则等同于css的import命令。</p>
-<blockquote>
-<p>@import “foo.css”;</p>
-</blockquote>
-<p><strong>五、高级用法</strong></p>
-<p><strong>5.1 条件语句</strong></p>
-<p>@if可以用来判断：</p>
-<blockquote>
-<p>p {<span class="span4br"></span>@if 1 + 1 == 2 { border: 1px solid; }<span class="span4br"></span>@if 5 &lt; 3 { border: 2px dotted; }<span class="span4br"></span>}</p>
-</blockquote>
-<p>配套的还有@else命令：</p>
-<blockquote>
-<p>@if lightness($color) &gt; 30% {<span class="span4br"></span>background-color: #000;<span class="span4br"></span>} @else {<span class="span4br"></span>background-color: #fff;<span class="span4br"></span>}</p>
-</blockquote>
-<p><strong>5.2 循环语句</strong></p>
-<p>SASS支持for循环：</p>
-<blockquote>
-<p>@for $i from 1 to 10 {<span class="span4br"></span>.border-#{$i} {<span class="span4br"></span>border: #{$i}px solid blue;<span class="span4br"></span>}<span class="span4br"></span>}</p>
-</blockquote>
-<p>也支持while循环：</p>
-<blockquote>
-<p>$i: 6;</p>
-<p>@while $i &gt; 0 {<span class="span4br"></span>.item-#{$i} { width: 2em * $i; }<span class="span4br"></span>$i: $i – 2;<span class="span4br"></span>}</p>
-</blockquote>
-<p>each命令，作用与for类似：</p>
-<blockquote>
-<p>@each $member in a, b, c, d {<span class="span4br"></span>.#{$member} {<span class="span4br"></span>background-image: url(“/image/#{$member}.jpg”);<span class="span4br"></span>}<span class="span4br"></span>}</p>
-</blockquote>
-<p><strong>5.3 自定义函数</strong></p>
-<p>SASS允许用户编写自己的函数。</p>
-<blockquote>
-<p>@function double($n) {<span class="span4br"></span>@return $n * 2;<span class="span4br"></span>}</p>
-<h1 id="sidebar-span-class-span4br-span-width-double-5px-span-class-span4br-span-">sidebar {<span class="span4br"></span>width: double(5px);<span class="span4br"></span>}</h1>
-</blockquote>
-<p>（完）</p>
-<p><span class="span4br"></span></p>
-]]></content>
-    
-    
-      <category term="CSS" scheme="http://toothpick2012.github.io/tags/CSS/"/>
-    
-      <category term="SASS" scheme="http://toothpick2012.github.io/tags/SASS/"/>
-    
-      <category term="CSS" scheme="http://toothpick2012.github.io/categories/CSS/"/>
     
   </entry>
   

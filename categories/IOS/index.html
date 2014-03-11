@@ -64,7 +64,7 @@
   
     <li><a href="/categories/CSS/">CSS</a><small>1</small></li>
   
-    <li><a href="/categories/IOS/">IOS</a><small>9</small></li>
+    <li><a href="/categories/IOS/">IOS</a><small>10</small></li>
   
     <li><a href="/categories/IOS类库/">IOS类库</a><small>2</small></li>
   
@@ -86,7 +86,7 @@
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/Ad Hoc/" style="font-size: 15.00px;">Ad Hoc</a><a href="/tags/AppStore/" style="font-size: 15.00px;">AppStore</a><a href="/tags/CSS/" style="font-size: 10.00px;">CSS</a><a href="/tags/JDK/" style="font-size: 10.00px;">JDK</a><a href="/tags/Objective-C/" style="font-size: 17.50px;">Objective-C</a><a href="/tags/SASS/" style="font-size: 10.00px;">SASS</a><a href="/tags/SDWebImage/" style="font-size: 10.00px;">SDWebImage</a><a href="/tags/UIApplicationDelegate/" style="font-size: 10.00px;">UIApplicationDelegate</a><a href="/tags/UIImage/" style="font-size: 10.00px;">UIImage</a><a href="/tags/bug/" style="font-size: 10.00px;">bug</a><a href="/tags/ios/" style="font-size: 20.00px;">ios</a><a href="/tags/itunes/" style="font-size: 15.00px;">itunes</a><a href="/tags/java/" style="font-size: 10.00px;">java</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/occurred uploading/" style="font-size: 10.00px;">occurred uploading</a><a href="/tags/uitableview/" style="font-size: 10.00px;">uitableview</a><a href="/tags/优化/" style="font-size: 15.00px;">优化</a><a href="/tags/保存数据/" style="font-size: 10.00px;">保存数据</a><a href="/tags/后台/" style="font-size: 10.00px;">后台</a><a href="/tags/开发者/" style="font-size: 12.50px;">开发者</a><a href="/tags/类库/" style="font-size: 12.50px;">类库</a><a href="/tags/苹果/" style="font-size: 12.50px;">苹果</a><a href="/tags/账号/" style="font-size: 12.50px;">账号</a><a href="/tags/闪退/" style="font-size: 12.50px;">闪退</a><a href="/tags/高效/" style="font-size: 15.00px;">高效</a>
+    <a href="/tags/Ad Hoc/" style="font-size: 15.00px;">Ad Hoc</a><a href="/tags/AppStore/" style="font-size: 15.00px;">AppStore</a><a href="/tags/CSS/" style="font-size: 10.00px;">CSS</a><a href="/tags/JDK/" style="font-size: 10.00px;">JDK</a><a href="/tags/Objective-C/" style="font-size: 17.50px;">Objective-C</a><a href="/tags/SASS/" style="font-size: 10.00px;">SASS</a><a href="/tags/SDWebImage/" style="font-size: 10.00px;">SDWebImage</a><a href="/tags/UIApplicationDelegate/" style="font-size: 10.00px;">UIApplicationDelegate</a><a href="/tags/UIImage/" style="font-size: 10.00px;">UIImage</a><a href="/tags/bug/" style="font-size: 10.00px;">bug</a><a href="/tags/class cluster/" style="font-size: 10.00px;">class cluster</a><a href="/tags/ios/" style="font-size: 20.00px;">ios</a><a href="/tags/itunes/" style="font-size: 15.00px;">itunes</a><a href="/tags/java/" style="font-size: 10.00px;">java</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/occurred uploading/" style="font-size: 10.00px;">occurred uploading</a><a href="/tags/uitableview/" style="font-size: 10.00px;">uitableview</a><a href="/tags/优化/" style="font-size: 15.00px;">优化</a><a href="/tags/保存数据/" style="font-size: 10.00px;">保存数据</a><a href="/tags/后台/" style="font-size: 10.00px;">后台</a><a href="/tags/基础/" style="font-size: 10.00px;">基础</a><a href="/tags/开发者/" style="font-size: 15.00px;">开发者</a><a href="/tags/类库/" style="font-size: 12.50px;">类库</a><a href="/tags/类簇/" style="font-size: 10.00px;">类簇</a><a href="/tags/苹果/" style="font-size: 12.50px;">苹果</a><a href="/tags/账号/" style="font-size: 12.50px;">账号</a><a href="/tags/进阶/" style="font-size: 10.00px;">进阶</a><a href="/tags/闪退/" style="font-size: 12.50px;">闪退</a><a href="/tags/高效/" style="font-size: 15.00px;">高效</a>
   </div>
 </div>
 
@@ -110,6 +110,296 @@
     <div id="wrapper">
       
 <h2 class="archive-title category">IOS</h2>
+
+
+  
+    
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/11/ddd/">类簇在iOS开发中的应用(转)</a></h1>
+  
+
+      <time datetime="2014-03-11T09:06:40.000Z"><a href="/2014/03/11/ddd/">3月 11 2014</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <p>类簇(class cluster)是一种设计模式，在Foundation Framework中被广泛使用，举个简单的例子</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="built_in">NSArray</span> *arr = [<span class="built_in">NSArray</span> arrayWithObjects:@<span class="string">"foo"</span>,@<span class="string">"bar"</span>, <span class="literal">nil</span>]; 
+<span class="built_in">NSLog</span>(@<span class="string">"arr class:%@"</span>, [arr class]); 
+<span class="comment">// output: __NSArrayI</span>
+</pre></td></tr></table></figure>
+
+<p>显然__NSArrayI是一个私有类，来看看这个类的头文件</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>@interface __NSArrayI : NSArray { 
+    unsigned int _used; 
+} 
+//<span class="keyword">...</span>
+</pre></td></tr></table></figure>
+
+
+<p>可以看出__NSArrayI继承了NSArray。为什么要这么设计呢？拿NSNumber来举个例子，我们都知道NSNumber可以存储多种类型的数字，如Int/Float/Double等等，一种方式是把NSNumber作为基类，然后分别去实现各自的子类，像这样：
+ ![此处输入图片的描述][1]
+初看起来也没什么问题，但如果子类很多，像这样：
+![此处输入图片的描述][2]</p>
+<p>这对使用者来说显然不够方便，得记住这么多类。如果使用类簇，问题就变得简单了，把Number作为抽象基类，子类各自实现存取方式，然后在基类中定义多个初始化方式，像这样：
+![此处输入图片的描述][3]</p>
+<p>现在只需要记住一个类就可以了。NSNumber的初始化伪代码大概像这样：</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre>- (id)initWithBool 
+{ 
+    <span class="keyword">return</span> [[__NSCFBoolean alloc]init]; 
+} 
+ 
+- (id)initWithLong 
+{ 
+    <span class="keyword">return</span> [[__NSCFNumber alloc]init]; 
+} 
+ 
+//<span class="keyword">...</span>
+</pre></td></tr></table></figure>
+
+<h1 id="-ios-">在iOS项目中的应用</h1>
+<hr>
+<p>在开发app时经常会遇到表现和行为完全一样，但数据源不一样的情况。以花瓣app为例，同样是瀑布流，可能来自我喜欢的图片、某个画板下的图片、某个用户的图片等等。如果为每一种表现方式都新建一个Controller，并且使用这个Controller来初始化，那么就会遇到最开始提到的问题：子类太多，使用不便。这正好可以通过类簇来很方便地搞定。比如这样：</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="class"><span class="keyword">@implementation</span> <span class="title">HBWaterfallViewController</span> </span>
+- (<span class="keyword">id</span>)initWithLiked 
+{ 
+    <span class="keyword">return</span> [[HBLikedViewController alloc]init]; 
+} 
+  
+- (<span class="keyword">id</span>)initWithBoardID:(<span class="built_in">NSInteger</span>)boardID 
+{ 
+    <span class="keyword">return</span> [[HBBoardViewController alloc]initWithBoardID:boardID]; 
+}
+</pre></td></tr></table></figure>
+
+<h2 id="pragma-mark-">pragma mark - 通用的方法</h2>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre>- (PSUICollectionViewCell *)collectionView:(PSUICollectionView *)collectionView 
+                    cellForItemAtIndexPath:(NSIndexPath *)indexPath 
+{ 
+    // <span class="keyword">...</span> 
+} 
+  
+// <span class="keyword">...</span>
+</pre></td></tr></table></figure>
+
+<h2 id="pragma-mark-">pragma mark - 每个子类需要实现的方法</h2>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="pp">- <span class="params">(void)</span>fetchMoreData 
+{ 
+    NSAssert<span class="params">(<span class="variable">NO</span>, @<span class="string">"子类需要实现此方法"</span>)</span>; 
+}</span>
+</pre></td></tr></table></figure>
+
+<p>使用起来类似这样[[HBWaterfallViewController alloc]initWithBoardID:9527] 或 [[HBWaterfallViewController alloc]initWithLiked]。如果有新的DataSource，新加一个初始化方法即可，对于使用者来说，打开头文件，看下init开头的方法就行了。</p>
+<p>再举个例子，现在很多应用需要同时兼顾iOS6和iOS7，在表现上需要为不同的系统加载不同的图片资源，最简单粗暴的方法就是各种if/else判断，像这样：</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="tag">if</span> (<span class="attr_selector">[[UIDevice currentDevice]</span><span class="tag">systemMajorVersion</span>] &lt; 7) 
+<span class="rules">{ 
+    <span class="comment">/* iOS 6 and previous versions */</span> 
+<span class="rule">}</span></span> 
+<span class="tag">else</span> 
+<span class="rules">{ 
+    <span class="comment">/* iOS 7 and above */</span> 
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p>不够优雅，可以使用类簇的思想来去掉if/else判断，把跟视图具体元素无关的代码放在基类，跟系统版本相关的代码拆成两个子类，然后在各自的类中加载相应的资源。</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+</pre></td><td class="code"><pre><span class="comment">/* TestView.h */</span> 
+<span class="class"><span class="keyword">@interface</span> <span class="title">TestView</span>: <span class="title">UIView</span> </span>
+ 
+<span class="comment">/* Common method */</span> 
+- ( <span class="keyword">void</span> )test; 
+ 
+<span class="keyword">@end</span> 
+ 
+<span class="comment">/* TestView.m */</span> 
+<span class="class"><span class="keyword">@implementation</span> <span class="title">TestView</span> </span>
+ 
++ (<span class="keyword">id</span>)alloc 
+{ 
+    <span class="keyword">if</span> ([<span class="keyword">self</span> class]== [TestView class]) 
+    { 
+        <span class="keyword">if</span> ([[UIDevice currentDevice] systemMajorVersion] &lt; <span class="number">7</span>) 
+        { 
+            <span class="keyword">return</span> [TestViewIOS6 alloc]; 
+        } 
+        <span class="keyword">else</span> 
+        { 
+            <span class="keyword">return</span> [TestViewIOS7 alloc]; 
+        } 
+    } 
+    <span class="keyword">else</span> 
+    { 
+        <span class="keyword">return</span> [<span class="keyword">super</span> alloc]; 
+    } 
+} 
+ 
+- ( <span class="keyword">void</span> )test 
+{} 
+ 
+<span class="keyword">@end</span>
+</pre></td></tr></table></figure>
+
+<p>这里alloc时并没有返回TestView类，而是根据系统版本返回TestViewIOS6 或 TestViewIOS7。</p>
+<figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre><span class="comment">/* TestViewIOS6.m */</span> 
+<span class="class"><span class="keyword">@implementation</span> <span class="title">TestViewIOS6</span>: <span class="title">TestView</span> </span>
+ 
+- (<span class="keyword">void</span>)drawRect: (<span class="built_in">CGRect</span>)rect 
+{ 
+    <span class="comment">/* Custom iOS6 drawing code */</span> 
+} 
+ 
+<span class="keyword">@end</span> 
+ 
+<span class="comment">/* TestViewIOS7.m */</span> 
+<span class="class"><span class="keyword">@implementation</span> <span class="title">TestViewIOS7</span> </span>
+ 
+- (<span class="keyword">void</span>)drawRect: (<span class="built_in">CGRect</span>)rect 
+{ 
+    <span class="comment">/* Custom iOS7 drawing code */</span> 
+} 
+ 
+<span class="keyword">@end</span>
+</pre></td></tr></table></figure>
+
+<h1 id="-">小结</h1>
+<hr>
+<p>类簇的本质其实是抽象工厂，类簇也可以有多个基类，如NSArray, NSMutableArray, 后者就是继承的前者。它对一些「大同小异」的问题，往往会有不错的效果。</p>
+
+	 
+	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="http://weibo.com/u/2049029440"><strong>牙-_签</strong></a> - 3月 11 2014</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://toothpick2012.github.io/"><strong>Toothpick&#39;s blog</strong></a></span>
+</p>
+       	 
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
 
 
   
@@ -333,7 +623,8 @@
 <span class="keyword">@end</span>
 </pre></td></tr></table></figure>
 
-<p>当然，还有其他类似的问题可以在类里面添加方法。这样，上线应用可以避免出现崩溃。<strong><em>ps：测试时最好不开启，免得一些bug难以发现。</em></strong></p>
+<p>当然，还有其他类似的问题可以在类里面添加方法。这样，上线应用可以避免出现崩溃。另外数组的objectAtIndex:方法的类不是NSArray，而是__NSArrayI，这个可以参考
+<strong><em>ps：测试时最好不开启，免得一些bug难以发现。</em></strong></p>
 
 	 
 	     <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
