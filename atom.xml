@@ -4,7 +4,7 @@
   <subtitle><![CDATA[牙-_签]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://toothpick2012.github.io//"/>
-  <updated>2014-03-11T09:11:39.886Z</updated>
+  <updated>2014-03-11T09:13:05.043Z</updated>
   <id>http://toothpick2012.github.io//</id>
   
   <author>
@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[类簇在iOS开发中的应用(转)]]></title>
-    <link href="http://toothpick2012.github.io/2014/03/11/ddd/"/>
-    <id>http://toothpick2012.github.io/2014/03/11/ddd/</id>
+    <link href="http://toothpick2012.github.io/2014/03/11/%E7%B1%BB%E7%B0%87%E5%9C%A8iOS%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/"/>
+    <id>http://toothpick2012.github.io/2014/03/11/类簇在iOS开发中的应用/</id>
     <published>2014-03-11T09:06:40.000Z</published>
     <updated>2014-03-11T09:11:28.000Z</updated>
     <content type="html"><![CDATA[<p>类簇(class cluster)是一种设计模式，在Foundation Framework中被广泛使用，举个简单的例子</p>
