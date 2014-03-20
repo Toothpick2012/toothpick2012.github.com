@@ -70,6 +70,8 @@
   
     <li><a href="/categories/PHP/">PHP</a><small>1</small></li>
   
+    <li><a href="/categories/blog/">blog</a><small>1</small></li>
+  
     <li><a href="/categories/coretext/">coretext</a><small>4</small></li>
   
     <li><a href="/categories/mac/">mac</a><small>2</small></li>
@@ -86,7 +88,7 @@
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/Ad Hoc/" style="font-size: 15.00px;">Ad Hoc</a><a href="/tags/AppStore/" style="font-size: 15.00px;">AppStore</a><a href="/tags/CSS/" style="font-size: 10.00px;">CSS</a><a href="/tags/JDK/" style="font-size: 10.00px;">JDK</a><a href="/tags/Objective-C/" style="font-size: 17.50px;">Objective-C</a><a href="/tags/SASS/" style="font-size: 10.00px;">SASS</a><a href="/tags/SDWebImage/" style="font-size: 10.00px;">SDWebImage</a><a href="/tags/UIApplicationDelegate/" style="font-size: 10.00px;">UIApplicationDelegate</a><a href="/tags/UIImage/" style="font-size: 10.00px;">UIImage</a><a href="/tags/bug/" style="font-size: 10.00px;">bug</a><a href="/tags/class cluster/" style="font-size: 10.00px;">class cluster</a><a href="/tags/ios/" style="font-size: 20.00px;">ios</a><a href="/tags/itunes/" style="font-size: 15.00px;">itunes</a><a href="/tags/java/" style="font-size: 10.00px;">java</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/occurred uploading/" style="font-size: 10.00px;">occurred uploading</a><a href="/tags/uitableview/" style="font-size: 10.00px;">uitableview</a><a href="/tags/优化/" style="font-size: 15.00px;">优化</a><a href="/tags/保存数据/" style="font-size: 10.00px;">保存数据</a><a href="/tags/后台/" style="font-size: 10.00px;">后台</a><a href="/tags/基础/" style="font-size: 10.00px;">基础</a><a href="/tags/开发者/" style="font-size: 15.00px;">开发者</a><a href="/tags/类库/" style="font-size: 12.50px;">类库</a><a href="/tags/类簇/" style="font-size: 10.00px;">类簇</a><a href="/tags/苹果/" style="font-size: 12.50px;">苹果</a><a href="/tags/账号/" style="font-size: 12.50px;">账号</a><a href="/tags/进阶/" style="font-size: 10.00px;">进阶</a><a href="/tags/闪退/" style="font-size: 12.50px;">闪退</a><a href="/tags/高效/" style="font-size: 15.00px;">高效</a>
+    <a href="/tags/Ad Hoc/" style="font-size: 15.00px;">Ad Hoc</a><a href="/tags/AppStore/" style="font-size: 15.00px;">AppStore</a><a href="/tags/CSS/" style="font-size: 10.00px;">CSS</a><a href="/tags/JDK/" style="font-size: 10.00px;">JDK</a><a href="/tags/Objective-C/" style="font-size: 17.50px;">Objective-C</a><a href="/tags/SASS/" style="font-size: 10.00px;">SASS</a><a href="/tags/SDWebImage/" style="font-size: 10.00px;">SDWebImage</a><a href="/tags/UIApplicationDelegate/" style="font-size: 10.00px;">UIApplicationDelegate</a><a href="/tags/UIImage/" style="font-size: 10.00px;">UIImage</a><a href="/tags/blog/" style="font-size: 10.00px;">blog</a><a href="/tags/bug/" style="font-size: 10.00px;">bug</a><a href="/tags/class cluster/" style="font-size: 10.00px;">class cluster</a><a href="/tags/ios/" style="font-size: 20.00px;">ios</a><a href="/tags/itunes/" style="font-size: 15.00px;">itunes</a><a href="/tags/java/" style="font-size: 10.00px;">java</a><a href="/tags/jekyll/" style="font-size: 10.00px;">jekyll</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/occurred uploading/" style="font-size: 10.00px;">occurred uploading</a><a href="/tags/uitableview/" style="font-size: 10.00px;">uitableview</a><a href="/tags/优化/" style="font-size: 15.00px;">优化</a><a href="/tags/保存数据/" style="font-size: 10.00px;">保存数据</a><a href="/tags/后台/" style="font-size: 10.00px;">后台</a><a href="/tags/基础/" style="font-size: 10.00px;">基础</a><a href="/tags/开发者/" style="font-size: 15.00px;">开发者</a><a href="/tags/类库/" style="font-size: 12.50px;">类库</a><a href="/tags/类簇/" style="font-size: 10.00px;">类簇</a><a href="/tags/苹果/" style="font-size: 12.50px;">苹果</a><a href="/tags/账号/" style="font-size: 12.50px;">账号</a><a href="/tags/进阶/" style="font-size: 10.00px;">进阶</a><a href="/tags/闪退/" style="font-size: 12.50px;">闪退</a><a href="/tags/高效/" style="font-size: 15.00px;">高效</a>
   </div>
 </div>
 
@@ -157,12 +159,8 @@
 </pre></td></tr></table></figure>
 
 
-<p>可以看出__NSArrayI继承了NSArray。为什么要这么设计呢？拿NSNumber来举个例子，我们都知道NSNumber可以存储多种类型的数字，如Int/Float/Double等等，一种方式是把NSNumber作为基类，然后分别去实现各自的子类，像这样：
- ![此处输入图片的描述][1]
-初看起来也没什么问题，但如果子类很多，像这样：
-![此处输入图片的描述][2]</p>
-<p>这对使用者来说显然不够方便，得记住这么多类。如果使用类簇，问题就变得简单了，把Number作为抽象基类，子类各自实现存取方式，然后在基类中定义多个初始化方式，像这样：
-![此处输入图片的描述][3]</p>
+<p>可以看出__NSArrayI继承了NSArray。为什么要这么设计呢？拿NSNumber来举个例子，我们都知道NSNumber可以存储多种类型的数字，如Int/Float/Double等等，一种方式是把NSNumber作为基类，然后分别去实现各自的子类，像这样：<br> ![此处输入图片的描述][1]<br>初看起来也没什么问题，但如果子类很多，像这样：<br>![此处输入图片的描述][2]</p>
+<p>这对使用者来说显然不够方便，得记住这么多类。如果使用类簇，问题就变得简单了，把Number作为抽象基类，子类各自实现存取方式，然后在基类中定义多个初始化方式，像这样：<br>![此处输入图片的描述][3]</p>
 <p>现在只需要记住一个类就可以了。NSNumber的初始化伪代码大概像这样：</p>
 <figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
 2
@@ -188,7 +186,7 @@
 //<span class="keyword">...</span>
 </pre></td></tr></table></figure>
 
-<h1 id="-ios-">在iOS项目中的应用</h1>
+<h1 id="在iOS项目中的应用">在iOS项目中的应用</h1>
 <hr>
 <p>在开发app时经常会遇到表现和行为完全一样，但数据源不一样的情况。以花瓣app为例，同样是瀑布流，可能来自我喜欢的图片、某个画板下的图片、某个用户的图片等等。如果为每一种表现方式都新建一个Controller，并且使用这个Controller来初始化，那么就会遇到最开始提到的问题：子类太多，使用不便。这正好可以通过类簇来很方便地搞定。比如这样：</p>
 <figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
@@ -213,7 +211,7 @@
 }
 </pre></td></tr></table></figure>
 
-<h2 id="pragma-mark-">pragma mark - 通用的方法</h2>
+<h2 id="pragma_mark_-_通用的方法">pragma mark - 通用的方法</h2>
 <figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -230,7 +228,7 @@
 // <span class="keyword">...</span>
 </pre></td></tr></table></figure>
 
-<h2 id="pragma-mark-">pragma mark - 每个子类需要实现的方法</h2>
+<h2 id="pragma_mark_-_每个子类需要实现的方法">pragma mark - 每个子类需要实现的方法</h2>
 <figure class="highlight Objective-C"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -373,7 +371,7 @@
 <span class="keyword">@end</span>
 </pre></td></tr></table></figure>
 
-<h1 id="-">小结</h1>
+<h1 id="小结">小结</h1>
 <hr>
 <p>类簇的本质其实是抽象工厂，类簇也可以有多个基类，如NSArray, NSMutableArray, 后者就是继承的前者。它对一些「大同小异」的问题，往往会有不错的效果。</p>
 
