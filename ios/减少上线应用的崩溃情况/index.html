@@ -140,125 +140,106 @@
     <div class="entry-content">
       <p>应用上线后，在umeng或是百度移动统计里面经常会有NSRangeException，NSInvalidArgumentException等这类错误，而且通常都是占据了很大比例。
 你能看到的错误详情可能是这样：(很庆幸我们还是可以找到具体出错的位置，但是上千个类似错误成分散分布在不同位置，那就别扯蛋了！！)</p>
-
-<p><code>objective-C
-*** Terminating app due to uncaught exception 'NSRangeException', reason: '*** -[__NSArrayM objectAtIndex:]: index 0 beyond bounds for empty array'
-详细错误信息:
- ....
-2   CoreFoundation                      0x2f20dd95 -[__NSArrayM objectAtIndex:] + 232
-3   nineteenlou                         0x001357a7 -[UserViewController tableView:didSelectRowAtIndexPath:] + 158
-4   UIKit                               0x31b790cb -[UITableView _selectRowAtIndexPath:animated:scrollPosition:notifyDelegate:] + 1078
-5   UIKit                               0x31c2c863 -[UITableView _userSelectRowAtPendingSelectionIndexPath:] + 214
-...
-</code></p>
-
+<div class="highlight"><pre><code class="language-objective-C" data-lang="objective-C"><span class="o">***</span> <span class="n">Terminating</span> <span class="n">app</span> <span class="n">due</span> <span class="n">to</span> <span class="n">uncaught</span> <span class="n">exception</span> <span class="err">&#39;</span><span class="n">NSRangeException</span><span class="err">&#39;</span><span class="p">,</span> <span class="nl">reason</span><span class="p">:</span> <span class="err">&#39;</span><span class="o">***</span> <span class="o">-</span><span class="p">[</span><span class="n">__NSArrayM</span> <span class="nl">objectAtIndex</span><span class="p">:]</span><span class="o">:</span> <span class="n">index</span> <span class="mi">0</span> <span class="n">beyond</span> <span class="n">bounds</span> <span class="k">for</span> <span class="n">empty</span> <span class="n">array</span><span class="err">&#39;</span>
+<span class="err">详细错误信息</span><span class="o">:</span>
+ <span class="p">....</span>
+<span class="mi">2</span>   <span class="n">CoreFoundation</span>                      <span class="mh">0x2f20dd95</span> <span class="o">-</span><span class="p">[</span><span class="n">__NSArrayM</span> <span class="nl">objectAtIndex</span><span class="p">:]</span> <span class="o">+</span> <span class="mi">232</span>
+<span class="mi">3</span>   <span class="n">nineteenlou</span>                         <span class="mh">0x001357a7</span> <span class="o">-</span><span class="p">[</span><span class="n">UserViewController</span> <span class="nl">tableView</span><span class="p">:</span><span class="nl">didSelectRowAtIndexPath</span><span class="p">:]</span> <span class="o">+</span> <span class="mi">158</span>
+<span class="mi">4</span>   <span class="n">UIKit</span>                               <span class="mh">0x31b790cb</span> <span class="o">-</span><span class="p">[</span><span class="bp">UITableView</span> <span class="nl">_selectRowAtIndexPath</span><span class="p">:</span><span class="nl">animated</span><span class="p">:</span><span class="nl">scrollPosition</span><span class="p">:</span><span class="nl">notifyDelegate</span><span class="p">:]</span> <span class="o">+</span> <span class="mi">1078</span>
+<span class="mi">5</span>   <span class="n">UIKit</span>                               <span class="mh">0x31c2c863</span> <span class="o">-</span><span class="p">[</span><span class="bp">UITableView</span> <span class="nl">_userSelectRowAtPendingSelectionIndexPath</span><span class="p">:]</span> <span class="o">+</span> <span class="mi">214</span>
+<span class="p">...</span>
+</code></pre></div>
 <p>发生错误原因，有的是多线程block造成的，还有接口返回数据解析问题，还有其他乱七八糟问题。
 应用的体验是建立在不崩溃的基础之上的。如果是这样，那必须动武的啦。最佳的方法，就是用swizzle替换数组的方法，判断越界等出现崩溃的情况。</p>
 
 <p>OK，废话多了，自写的个类SafeMode，上代码吧。
 也可以下载例子:https://github.com/Toothpick2012/SafeMode</p>
 
-<p>SafeMode.h
-```Objective-C
-#import &lt;Foundation/Foundation.h&gt;
-#import &lt;objc/runtime.h&gt;</p>
+<p>SafeMode.h</p>
+<div class="highlight"><pre><code class="language-Objective-C" data-lang="Objective-C"><span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+<span class="cp">#import &lt;objc/runtime.h&gt;</span>
 
-<p>@interface SafeMode:NSObject
-+ (void)safe;
-+ (void)exchangeOriginalMethod:(Method)originalMethod withNewMethod:(Method)newMethod;
-@end</p>
+<span class="k">@interface</span> <span class="nc">SafeMode</span>:<span class="bp">NSObject</span>
+<span class="p">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">safe</span><span class="p">;</span>
+<span class="p">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">exchangeOriginalMethod:</span><span class="p">(</span><span class="n">Method</span><span class="p">)</span><span class="nv">originalMethod</span> <span class="nf">withNewMethod:</span><span class="p">(</span><span class="n">Method</span><span class="p">)</span><span class="nv">newMethod</span><span class="p">;</span>
+<span class="k">@end</span>
 
-<p>@interface NSArray (Safe)
-+ (Method)methodOfSelector:(SEL)selector;
-- (id)objectAtIndexOrNil:(NSUInteger)index;
-@end</p>
+<span class="k">@interface</span> <span class="bp">NSArray</span> <span class="nl">(Safe)</span>
+<span class="p">+</span> <span class="p">(</span><span class="n">Method</span><span class="p">)</span><span class="nf">methodOfSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span><span class="nv">selector</span><span class="p">;</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">objectAtIndexOrNil:</span><span class="p">(</span><span class="bp">NSUInteger</span><span class="p">)</span><span class="nv">index</span><span class="p">;</span>
+<span class="k">@end</span>
 
-<p>@interface NSMutableArray (Safe)
-+ (Method)methodOfSelector:(SEL)selector;
-- (id)objectAtIndexOrNilM:(NSUInteger)index;
-- (void)safe_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject;
-@end
-```</p>
 
-<p>SafeMode.m
-```Objective-C
-#import “SafeMode.h”</p>
+<span class="k">@interface</span> <span class="bp">NSMutableArray</span> <span class="nl">(Safe)</span>
+<span class="p">+</span> <span class="p">(</span><span class="n">Method</span><span class="p">)</span><span class="nf">methodOfSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span><span class="nv">selector</span><span class="p">;</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">objectAtIndexOrNilM:</span><span class="p">(</span><span class="bp">NSUInteger</span><span class="p">)</span><span class="nv">index</span><span class="p">;</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">safe_replaceObjectAtIndex:</span><span class="p">(</span><span class="bp">NSUInteger</span><span class="p">)</span><span class="nv">index</span> <span class="nf">withObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">anObject</span><span class="p">;</span>
+<span class="k">@end</span>
+</code></pre></div>
+<p>SafeMode.m</p>
+<div class="highlight"><pre><code class="language-Objective-C" data-lang="Objective-C"><span class="cp">#import &quot;SafeMode.h&quot;</span>
 
-<p>@implementation SafeMode</p>
+<span class="k">@implementation</span> <span class="nc">SafeMode</span>
 
-<ul>
-  <li>
-    <p>(void)safe
-{
-  static dispatch_once_t onceToken;
-  dispatch_once(&amp;onceToken, ^{
-      //NSArray
-      [self exchangeOriginalMethod:[NSArray methodOfSelector:@selector(objectAtIndex:)] withNewMethod:[NSArray methodOfSelector:@selector(objectAtIndexOrNil:)]];</p>
+<span class="p">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">safe</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="kt">dispatch_once_t</span> <span class="n">onceToken</span><span class="p">;</span>
+    <span class="n">dispatch_once</span><span class="p">(</span><span class="o">&amp;</span><span class="n">onceToken</span><span class="p">,</span> <span class="o">^</span><span class="p">{</span>
+        <span class="c1">//NSArray</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="nl">exchangeOriginalMethod</span><span class="p">:[</span><span class="bp">NSArray</span> <span class="nl">methodOfSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">objectAtIndex</span><span class="p">:)]</span> <span class="nl">withNewMethod</span><span class="p">:[</span><span class="bp">NSArray</span> <span class="nl">methodOfSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">objectAtIndexOrNil</span><span class="p">:)]];</span>
 
-    <pre><code>  //NSMutableArray
-  [self exchangeOriginalMethod:[NSMutableArray methodOfSelector:@selector(objectAtIndex:)] withNewMethod:[NSMutableArray methodOfSelector:@selector(objectAtIndexOrNilM:)]];
-  [self exchangeOriginalMethod:[NSMutableArray methodOfSelector:@selector(replaceObjectAtIndex:withObject:)] withNewMethod:[NSMutableArray methodOfSelector:@selector(safe_replaceObjectAtIndex:withObject:)]]; }
-</code></pre>
-  </li>
-  <li>
-    <p>(void)exchangeOriginalMethod:(Method)originalMethod withNewMethod:(Method)newMethod
-{
-  method_exchangeImplementations(originalMethod, newMethod);
-}</p>
-  </li>
-</ul>
+        <span class="c1">//NSMutableArray</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="nl">exchangeOriginalMethod</span><span class="p">:[</span><span class="bp">NSMutableArray</span> <span class="nl">methodOfSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">objectAtIndex</span><span class="p">:)]</span> <span class="nl">withNewMethod</span><span class="p">:[</span><span class="bp">NSMutableArray</span> <span class="nl">methodOfSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">objectAtIndexOrNilM</span><span class="p">:)]];</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="nl">exchangeOriginalMethod</span><span class="p">:[</span><span class="bp">NSMutableArray</span> <span class="nl">methodOfSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">replaceObjectAtIndex</span><span class="p">:</span><span class="nl">withObject</span><span class="p">:)]</span> <span class="nl">withNewMethod</span><span class="p">:[</span><span class="bp">NSMutableArray</span> <span class="nl">methodOfSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">safe_replaceObjectAtIndex</span><span class="p">:</span><span class="nl">withObject</span><span class="p">:)]];</span>
+<span class="p">}</span>
 
-<p>@end</p>
+<span class="o">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">exchangeOriginalMethod</span><span class="p">:(</span><span class="n">Method</span><span class="p">)</span><span class="n">originalMethod</span> <span class="nl">withNewMethod</span><span class="p">:(</span><span class="n">Method</span><span class="p">)</span><span class="n">newMethod</span>
+<span class="p">{</span>
+    <span class="n">method_exchangeImplementations</span><span class="p">(</span><span class="n">originalMethod</span><span class="p">,</span> <span class="n">newMethod</span><span class="p">);</span>
+<span class="p">}</span>
 
-<p>@implementation NSArray (Safe)</p>
+<span class="k">@end</span>
 
-<h1 id="pragma-mark---nsarray">pragma mark - NSArray</h1>
-<ul>
-  <li>
-    <p>(Method)methodOfSelector:(SEL)selector
-{
-  return class_getInstanceMethod(NSClassFromString(@”__NSArrayI”),selector);
-}</p>
-  </li>
-  <li>
-    <p>(id)objectAtIndexOrNil:(NSUInteger)index
-{
-  return (index &lt; [self count]) ? [self objectAtIndexOrNil:index] : nil;
-}</p>
-  </li>
-</ul>
+<span class="k">@implementation</span> <span class="bp">NSArray</span> <span class="nl">(Safe)</span>
 
-<p>@end</p>
+<span class="cp">#pragma mark - NSArray</span>
+<span class="p">+</span> <span class="p">(</span><span class="n">Method</span><span class="p">)</span><span class="nf">methodOfSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span><span class="nv">selector</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">class_getInstanceMethod</span><span class="p">(</span><span class="n">NSClassFromString</span><span class="p">(</span><span class="s">@&quot;__NSArrayI&quot;</span><span class="p">),</span><span class="n">selector</span><span class="p">);</span>
+<span class="p">}</span>
 
-<p>@implementation NSMutableArray (Safe)</p>
 
-<h1 id="pragma-mark---nsmutablearray">pragma mark - NSMutableArray</h1>
-<ul>
-  <li>
-    <p>(Method)methodOfSelector:(SEL)selector
-{
-  return class_getInstanceMethod(NSClassFromString(@”__NSArrayM”),selector);
-}</p>
-  </li>
-  <li>
-    <p>(id)objectAtIndexOrNilM:(NSUInteger)index
-{
-  return (index &lt; [self count]) ? [self objectAtIndexOrNilM:index] : nil;
-}</p>
-  </li>
-  <li>
-    <p>(void)safe_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject
-{
-  if ((index &lt; [self count])&amp;&amp;anObject) {
-      [self safe_replaceObjectAtIndex:index withObject:anObject];
-  }
-}</p>
-  </li>
-</ul>
+<span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">objectAtIndexOrNil:</span><span class="p">(</span><span class="bp">NSUInteger</span><span class="p">)</span><span class="nv">index</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="p">[</span><span class="nb">self</span> <span class="n">count</span><span class="p">])</span> <span class="o">?</span> <span class="p">[</span><span class="nb">self</span> <span class="nl">objectAtIndexOrNil</span><span class="p">:</span><span class="n">index</span><span class="p">]</span> <span class="o">:</span> <span class="nb">nil</span><span class="p">;</span>
+<span class="p">}</span>
 
-<p>@end
-```</p>
+<span class="k">@end</span>
 
+
+<span class="k">@implementation</span> <span class="bp">NSMutableArray</span> <span class="nl">(Safe)</span>
+
+
+<span class="cp">#pragma mark - NSMutableArray</span>
+<span class="p">+</span> <span class="p">(</span><span class="n">Method</span><span class="p">)</span><span class="nf">methodOfSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span><span class="nv">selector</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">class_getInstanceMethod</span><span class="p">(</span><span class="n">NSClassFromString</span><span class="p">(</span><span class="s">@&quot;__NSArrayM&quot;</span><span class="p">),</span><span class="n">selector</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">objectAtIndexOrNilM:</span><span class="p">(</span><span class="bp">NSUInteger</span><span class="p">)</span><span class="nv">index</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="p">[</span><span class="nb">self</span> <span class="n">count</span><span class="p">])</span> <span class="o">?</span> <span class="p">[</span><span class="nb">self</span> <span class="nl">objectAtIndexOrNilM</span><span class="p">:</span><span class="n">index</span><span class="p">]</span> <span class="o">:</span> <span class="nb">nil</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">safe_replaceObjectAtIndex:</span><span class="p">(</span><span class="bp">NSUInteger</span><span class="p">)</span><span class="nv">index</span> <span class="nf">withObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">anObject</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">index</span> <span class="o">&lt;</span> <span class="p">[</span><span class="nb">self</span> <span class="n">count</span><span class="p">])</span><span class="o">&amp;&amp;</span><span class="n">anObject</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="nl">safe_replaceObjectAtIndex</span><span class="p">:</span><span class="n">index</span> <span class="nl">withObject</span><span class="p">:</span><span class="n">anObject</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+</code></pre></div>
 <p>当然，还有其他类似的问题可以在类里面添加方法。这样，上线应用可以避免出现崩溃。另外数组的objectAtIndex:方法的类不是NSArray，而是__NSArrayI，这个可以参考[类簇在iOS开发中的应用][1]</p>
 
 <p><strong><em>ps：测试时最好不开启，免得一些bug难以发现。</em></strong></p>

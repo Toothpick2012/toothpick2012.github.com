@@ -134,26 +134,28 @@
     </header>
     <div class="entry-content">
       <div class="search-wrapper" style="display:none;">
-		<input type="text" class="search-field" placeholder="搜索..." />
-		<ul class="search-results"></ul><!-- /.search-results -->
+        <input type="text" class="search-field" placeholder="搜索...">
+        <ul class="search-results"></ul><!-- /.search-results -->
 </div>
-<div class="search-loading">加载中...</div>
-<!-- Jekyll Simple Search option -->
-<script>
-	seajs.use(['http://libs.baidu.com/jquery/2.0.0/jquery.min.js','/custom/js/jekyll-search.jquery.min.js'], function() {
-		$(".search-wrapper").css("display","block");
-		$(".search-loading").css("display","none");
-	    $(".search-field").jekyllSearch({
-	       jsonFile : '/search.json',
-	       searchResults : '.search-results',
-	       template : '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{date}</time></span></a></article></li>',
-	 	  searchResultsTitle : '搜索结果',
-	       noResults: '<p>没有结果</p>',
-	       fuzzy: true
-	    });
-	});
-</script>
 
+<div  class="search-loading">加载中...</div>
+
+<!-- Jekyll Simple Search option -->
+
+<p><script>
+    seajs.use([&#39;http://libs.baidu.com/jquery/2.0.0/jquery.min.js&#39;,&#39;/custom/js/jekyll-search.jquery.min.js&#39;], function() {
+        $(&quot;.search-wrapper&quot;).css(&quot;display&quot;,&quot;block&quot;);
+        $(&quot;.search-loading&quot;).css(&quot;display&quot;,&quot;none&quot;);
+        $(&quot;.search-field&quot;).jekyllSearch({
+           jsonFile : &#39;/search.json&#39;,
+           searchResults : &#39;.search-results&#39;,
+           template : &#39;<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{date}</time></span></a></article></li>&#39;,
+          searchResultsTitle : &#39;搜索结果&#39;,
+           noResults: &#39;<p>没有结果</p>&#39;,
+           fuzzy: true
+        });
+    });
+</script></p>
 
       <footer class="entry-meta">
         

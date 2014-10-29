@@ -138,49 +138,48 @@
       </div><!-- /.header-title-wrap -->
     </header>
     <div class="entry-content">
-      <h1 id="cocoapods">CocoaPods管理个人本地库</h1>
+      <h1>CocoaPods管理个人本地库</h1>
 
 <p>@()[CocoaPods|技巧|pod]
-有的时候我们的一些代码不是开源的，或者暂时不想放到Github上。我们只想使用CocoaPods引用本地的代码，接下来就来玩玩如何管理本地库
-#####1、创建一个spec
-<code>
-pod spec create Peanut
-</code>
-#####2、spec配置
-然后用文本编辑器或是vim来编辑
-```
-Pod::Spec.new do |s|
-  s.name         = “TKVBaseProject”
-  s.version      = “0.0.1”
-  s.summary      = “A short description of TKVBaseProject.”
-  s.description  = «-DESC
-                   A longer description of TKVBaseProject in Markdown format.
-                   DESC</p>
+有的时候我们的一些代码不是开源的，或者暂时不想放到Github上。我们只想使用CocoaPods引用本地的代码，接下来就来玩玩如何管理本地库</p>
 
-<p>s.homepage     = “http://EXAMPLE/TKVBaseProject”
-  s.license      = “MIT (example)”
-  s.author             = { “qiumx” =&gt; “toothpick.v@gmail.com” }</p>
+<h5>1、创建一个spec</h5>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">pod</span> <span class="n">spec</span> <span class="n">create</span> <span class="no">Peanut</span>
+</code></pre></div>
+<h5>2、spec配置</h5>
 
-<p>s.source       = { :git =&gt; “~/Desktop/Demo/TestLocalPod”}
-  #本地库目录路径</p>
+<p>然后用文本编辑器或是vim来编辑</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Pod</span><span class="o">::</span><span class="no">Spec</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">name</span>         <span class="o">=</span> <span class="s2">&quot;TKVBaseProject&quot;</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">version</span>      <span class="o">=</span> <span class="s2">&quot;0.0.1&quot;</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">summary</span>      <span class="o">=</span> <span class="s2">&quot;A short description of TKVBaseProject.&quot;</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">description</span>  <span class="o">=</span> <span class="o">&lt;&lt;-</span><span class="no">DESC</span>
+<span class="sh">                   A longer description of TKVBaseProject in Markdown format.</span>
+<span class="no">                   DESC</span>
 
-<p>s.source_files  = “class/<em>*/</em>.{h,m}”
-  #源文件
-  s.public_header_files = “class/<em>*/</em>.h”
-  #头文件
-  s.xcconfig = { “HEADER_SEARCH_PATHS” =&gt; “$(PODS_ROOT)/TKVBaseProject” }
-  #生成项目目录
-  # s.dependency “JSONKit”, “~&gt; 1.4”
-  #依赖库
-end
-```</p>
+  <span class="n">s</span><span class="o">.</span><span class="n">homepage</span>     <span class="o">=</span> <span class="s2">&quot;http://EXAMPLE/TKVBaseProject&quot;</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">license</span>      <span class="o">=</span> <span class="s2">&quot;MIT (example)&quot;</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">author</span>             <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;qiumx&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;toothpick.v@gmail.com&quot;</span> <span class="p">}</span>
 
-<h5 id="podfile">3、Podfile配置</h5>
-<p>我们回到工程目录中，打开Podfile添加
-<code>
-pod 'TKVBaseProject', :path =&gt; '~/Desktop/Demo/TestLocalPod'
-</code>
-然后运行pod install</p>
+  <span class="n">s</span><span class="o">.</span><span class="n">source</span>       <span class="o">=</span> <span class="p">{</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s2">&quot;~/Desktop/Demo/TestLocalPod&quot;</span><span class="p">}</span>
+  <span class="c1">#本地库目录路径</span>
+
+  <span class="n">s</span><span class="o">.</span><span class="n">source_files</span>  <span class="o">=</span> <span class="s2">&quot;class/**/*.{h,m}&quot;</span>
+  <span class="c1">#源文件</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">public_header_files</span> <span class="o">=</span> <span class="s2">&quot;class/**/*.h&quot;</span>
+  <span class="c1">#头文件</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">xcconfig</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;HEADER_SEARCH_PATHS&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;$(PODS_ROOT)/TKVBaseProject&quot;</span> <span class="p">}</span>
+  <span class="c1">#生成项目目录</span>
+  <span class="c1"># s.dependency &quot;JSONKit&quot;, &quot;~&gt; 1.4&quot;</span>
+  <span class="c1">#依赖库</span>
+<span class="k">end</span>
+</code></pre></div>
+<h5>3、Podfile配置</h5>
+
+<p>我们回到工程目录中，打开Podfile添加</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">pod</span> <span class="s1">&#39;TKVBaseProject&#39;</span><span class="p">,</span> <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s1">&#39;~/Desktop/Demo/TestLocalPod&#39;</span>
+</code></pre></div>
+<p>然后运行pod install</p>
 
       <footer class="entry-meta">
         <span class="entry-tags"><a href="/tags/#cocoapods" title="Pages tagged cocoapods" class="tag">cocoapods</a><a href="/tags/#pod" title="Pages tagged pod" class="tag">pod</a><a href="/tags/#技巧" title="Pages tagged 技巧" class="tag">技巧</a><a href="/tags/#库" title="Pages tagged 库" class="tag">库</a><a href="/tags/#个人" title="Pages tagged 个人" class="tag">个人</a><a href="/tags/#本地" title="Pages tagged 本地" class="tag">本地</a></span>

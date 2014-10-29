@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="/feed.xml" />
 <link rel="alternate" type="text/html" href="" />
-<updated>2014-10-29T03:29:18-04:00</updated>
+<updated>2014-10-29T04:50:31-04:00</updated>
 <id>/</id>
 <author>
   <name>toothpickv</name>
@@ -24,49 +24,48 @@
     <uri></uri>
     <email>toothpick.v@gmail.com</email>
   </author>
-  <content type="html">&lt;h1 id=&quot;cocoapods&quot;&gt;CocoaPods管理个人本地库&lt;/h1&gt;
+  <content type="html">&lt;h1&gt;CocoaPods管理个人本地库&lt;/h1&gt;
 
 &lt;p&gt;@()[CocoaPods|技巧|pod]
-有的时候我们的一些代码不是开源的，或者暂时不想放到Github上。我们只想使用CocoaPods引用本地的代码，接下来就来玩玩如何管理本地库
-#####1、创建一个spec
-&lt;code&gt;
-pod spec create Peanut
-&lt;/code&gt;
-#####2、spec配置
-然后用文本编辑器或是vim来编辑
-```
-Pod::Spec.new do |s|
-  s.name         = “TKVBaseProject”
-  s.version      = “0.0.1”
-  s.summary      = “A short description of TKVBaseProject.”
-  s.description  = «-DESC
-                   A longer description of TKVBaseProject in Markdown format.
-                   DESC&lt;/p&gt;
+有的时候我们的一些代码不是开源的，或者暂时不想放到Github上。我们只想使用CocoaPods引用本地的代码，接下来就来玩玩如何管理本地库&lt;/p&gt;
 
-&lt;p&gt;s.homepage     = “http://EXAMPLE/TKVBaseProject”
-  s.license      = “MIT (example)”
-  s.author             = { “qiumx” =&amp;gt; “toothpick.v@gmail.com” }&lt;/p&gt;
+&lt;h5&gt;1、创建一个spec&lt;/h5&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Peanut&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h5&gt;2、spec配置&lt;/h5&gt;
 
-&lt;p&gt;s.source       = { :git =&amp;gt; “~/Desktop/Demo/TestLocalPod”}
-  #本地库目录路径&lt;/p&gt;
+&lt;p&gt;然后用文本编辑器或是vim来编辑&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Pod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;         &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;TKVBaseProject&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;0.0.1&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;A short description of TKVBaseProject.&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;description&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;DESC&lt;/span&gt;
+&lt;span class=&quot;sh&quot;&gt;                   A longer description of TKVBaseProject in Markdown format.&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;                   DESC&lt;/span&gt;
 
-&lt;p&gt;s.source_files  = “class/&lt;em&gt;*/&lt;/em&gt;.{h,m}”
-  #源文件
-  s.public_header_files = “class/&lt;em&gt;*/&lt;/em&gt;.h”
-  #头文件
-  s.xcconfig = { “HEADER_SEARCH_PATHS” =&amp;gt; “$(PODS_ROOT)/TKVBaseProject” }
-  #生成项目目录
-  # s.dependency “JSONKit”, “~&amp;gt; 1.4”
-  #依赖库
-end
-```&lt;/p&gt;
+  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;homepage&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;http://EXAMPLE/TKVBaseProject&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;license&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;MIT (example)&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;author&lt;/span&gt;             &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;qiumx&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;toothpick.v@gmail.com&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;h5 id=&quot;podfile&quot;&gt;3、Podfile配置&lt;/h5&gt;
-&lt;p&gt;我们回到工程目录中，打开Podfile添加
-&lt;code&gt;
-pod &#39;TKVBaseProject&#39;, :path =&amp;gt; &#39;~/Desktop/Demo/TestLocalPod&#39;
-&lt;/code&gt;
-然后运行pod install&lt;/p&gt;
+  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:git&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;~/Desktop/Demo/TestLocalPod&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#本地库目录路径&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source_files&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;class/**/*.{h,m}&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#源文件&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;public_header_files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;class/**/*.h&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#头文件&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xcconfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;HEADER_SEARCH_PATHS&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;$(PODS_ROOT)/TKVBaseProject&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#生成项目目录&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# s.dependency &amp;quot;JSONKit&amp;quot;, &amp;quot;~&amp;gt; 1.4&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#依赖库&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h5&gt;3、Podfile配置&lt;/h5&gt;
+
+&lt;p&gt;我们回到工程目录中，打开Podfile添加&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;TKVBaseProject&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;~/Desktop/Demo/TestLocalPod&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;然后运行pod install&lt;/p&gt;
 
   &lt;p&gt;&lt;a href=&quot;/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/&quot;&gt;CocoaPods管理个人本地库&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;&quot;&gt;牙=_签's Blog&lt;/a&gt; on October 29, 2014.&lt;/p&gt;</content>
 </entry>
@@ -83,46 +82,30 @@ pod &#39;TKVBaseProject&#39;, :path =&amp;gt; &#39;~/Desktop/Demo/TestLocalPod&#
     <uri></uri>
     <email>toothpick.v@gmail.com</email>
   </author>
-  <content type="html">&lt;h1 id=&quot;cocoapods&quot;&gt;CocoaPods小技巧&lt;/h1&gt;
+  <content type="html">&lt;h1&gt;CocoaPods小技巧&lt;/h1&gt;
 
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;@()[CocoaPods&lt;/td&gt;
-      &lt;td&gt;技巧&lt;/td&gt;
-      &lt;td&gt;pod]&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;@()[CocoaPods|技巧|pod]&lt;/p&gt;
 
-&lt;h5 id=&quot;section&quot;&gt;1、消除一些库编译时候会有警告。但是作为一个有洁癖的人呢不想看见这些&lt;/h5&gt;
+&lt;h5&gt;1、消除一些库编译时候会有警告。但是作为一个有洁癖的人呢不想看见这些&lt;/h5&gt;
 
-&lt;p&gt;可以在platform :ios, ‘x.0’的后面加入这句
-&lt;code&gt;ruby
-inhibit_all_warnings!
-&lt;/code&gt;
-这样编译这些第三方库的时候就没有那些烦人的小警告了。&lt;/p&gt;
+&lt;p&gt;可以在platform :ios, ‘x.0’的后面加入这句&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;inhibit_all_warnings!&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这样编译这些第三方库的时候就没有那些烦人的小警告了。&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;ps:&lt;/code&gt;但是有一个神库ReactiveCocoa。当你关闭所有警告的时候。它就编译不过了。可急坏了。其实很简单对他单独设置打开编译警告就好了
-&lt;code&gt;ruby
-pod &#39;ReactiveCocoa&#39;, &#39;~&amp;gt; 2.1.8&#39;, :inhibit_warnings =&amp;gt; true
-&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ps:&lt;/code&gt;但是有一个神库ReactiveCocoa。当你关闭所有警告的时候。它就编译不过了。可急坏了。其实很简单对他单独设置打开编译警告就好了&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;ReactiveCocoa&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;~&amp;gt; 2.1.8&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:inhibit_warnings&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h5&gt;2、如果你有多个Targets需要pod的库怎么办&lt;/h5&gt;
 
-&lt;h5 id=&quot;targetspod&quot;&gt;2、如果你有多个Targets需要pod的库怎么办&lt;/h5&gt;
-&lt;p&gt;也很简单。Podfile的头部加入
-&lt;code&gt;ruby
-link_with [&#39;AAAAA&#39;, &#39;BBBBB&#39;]
-&lt;/code&gt;
-AAAAA和BBBBB都是你target的名字，这样不同的target都会有pod库了。我主要是用来解决Unit Test需要pod install一些库的问题。&lt;/p&gt;
+&lt;p&gt;也很简单。Podfile的头部加入&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;link_with&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;AAAAA&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;BBBBB&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;AAAAA和BBBBB都是你target的名字，这样不同的target都会有pod库了。我主要是用来解决Unit Test需要pod install一些库的问题。&lt;/p&gt;
 
-&lt;h5 id=&quot;podspec&quot;&gt;3、使用本地podspec文件&lt;/h5&gt;
-&lt;p&gt;&lt;code&gt;
-pod &#39;xxx&#39;, :podspec =&amp;gt; &#39;~/Desktop/xxx.podspec&#39;
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;@end
-```&lt;/p&gt;
-
+&lt;h5&gt;3、使用本地podspec文件&lt;/h5&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;xxx&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:podspec&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;~/Desktop/xxx.podspec&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;当然，还有其他类似的问题可以在类里面添加方法。这样，上线应用可以避免出现崩溃。另外数组的objectAtIndex:方法的类不是NSArray，而是__NSArrayI，这个可以参考[类簇在iOS开发中的应用][1]&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;ps：测试时最好不开启，免得一些bug难以发现。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -144,125 +127,106 @@ pod &#39;xxx&#39;, :podspec =&amp;gt; &#39;~/Desktop/xxx.podspec&#39;
   </author>
   <content type="html">&lt;p&gt;应用上线后，在umeng或是百度移动统计里面经常会有NSRangeException，NSInvalidArgumentException等这类错误，而且通常都是占据了很大比例。
 你能看到的错误详情可能是这样：(很庆幸我们还是可以找到具体出错的位置，但是上千个类似错误成分散分布在不同位置，那就别扯蛋了！！)&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;objective-C
-*** Terminating app due to uncaught exception &#39;NSRangeException&#39;, reason: &#39;*** -[__NSArrayM objectAtIndex:]: index 0 beyond bounds for empty array&#39;
-详细错误信息:
- ....
-2   CoreFoundation                      0x2f20dd95 -[__NSArrayM objectAtIndex:] + 232
-3   nineteenlou                         0x001357a7 -[UserViewController tableView:didSelectRowAtIndexPath:] + 158
-4   UIKit                               0x31b790cb -[UITableView _selectRowAtIndexPath:animated:scrollPosition:notifyDelegate:] + 1078
-5   UIKit                               0x31c2c863 -[UITableView _userSelectRowAtPendingSelectionIndexPath:] + 214
-...
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-C&quot; data-lang=&quot;objective-C&quot;&gt;&lt;span class=&quot;o&quot;&gt;***&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Terminating&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;due&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;uncaught&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exception&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSRangeException&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;reason&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;***&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__NSArrayM&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;objectAtIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beyond&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bounds&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;empty&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;详细错误信息&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;....&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;CoreFoundation&lt;/span&gt;                      &lt;span class=&quot;mh&quot;&gt;0x2f20dd95&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__NSArrayM&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;objectAtIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;232&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;nineteenlou&lt;/span&gt;                         &lt;span class=&quot;mh&quot;&gt;0x001357a7&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserViewController&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;tableView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;didSelectRowAtIndexPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;158&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;UIKit&lt;/span&gt;                               &lt;span class=&quot;mh&quot;&gt;0x31b790cb&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;UITableView&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;_selectRowAtIndexPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;animated&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;scrollPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;notifyDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1078&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;UIKit&lt;/span&gt;                               &lt;span class=&quot;mh&quot;&gt;0x31c2c863&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;UITableView&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;_userSelectRowAtPendingSelectionIndexPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;214&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;发生错误原因，有的是多线程block造成的，还有接口返回数据解析问题，还有其他乱七八糟问题。
 应用的体验是建立在不崩溃的基础之上的。如果是这样，那必须动武的啦。最佳的方法，就是用swizzle替换数组的方法，判断越界等出现崩溃的情况。&lt;/p&gt;
 
 &lt;p&gt;OK，废话多了，自写的个类SafeMode，上代码吧。
 也可以下载例子:https://github.com/Toothpick2012/SafeMode&lt;/p&gt;
 
-&lt;p&gt;SafeMode.h
-```Objective-C
-#import &amp;lt;Foundation/Foundation.h&amp;gt;
-#import &amp;lt;objc/runtime.h&amp;gt;&lt;/p&gt;
+&lt;p&gt;SafeMode.h&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot; data-lang=&quot;Objective-C&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#import &amp;lt;Foundation/Foundation.h&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#import &amp;lt;objc/runtime.h&amp;gt;&lt;/span&gt;
 
-&lt;p&gt;@interface SafeMode:NSObject
-+ (void)safe;
-+ (void)exchangeOriginalMethod:(Method)originalMethod withNewMethod:(Method)newMethod;
-@end&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SafeMode&lt;/span&gt;:&lt;span class=&quot;bp&quot;&gt;NSObject&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;safe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;exchangeOriginalMethod:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;originalMethod&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;withNewMethod:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;newMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
 
-&lt;p&gt;@interface NSArray (Safe)
-+ (Method)methodOfSelector:(SEL)selector;
-- (id)objectAtIndexOrNil:(NSUInteger)index;
-@end&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;NSArray&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;(Safe)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;methodOfSelector:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;SEL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;objectAtIndexOrNil:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSUInteger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
 
-&lt;p&gt;@interface NSMutableArray (Safe)
-+ (Method)methodOfSelector:(SEL)selector;
-- (id)objectAtIndexOrNilM:(NSUInteger)index;
-- (void)safe_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject;
-@end
-```&lt;/p&gt;
 
-&lt;p&gt;SafeMode.m
-```Objective-C
-#import “SafeMode.h”&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;NSMutableArray&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;(Safe)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;methodOfSelector:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;SEL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;objectAtIndexOrNilM:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSUInteger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;safe_replaceObjectAtIndex:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSUInteger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;withObject:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;anObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;SafeMode.m&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot; data-lang=&quot;Objective-C&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#import &amp;quot;SafeMode.h&amp;quot;&lt;/span&gt;
 
-&lt;p&gt;@implementation SafeMode&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;@implementation&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SafeMode&lt;/span&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;(void)safe
-{
-  static dispatch_once_t onceToken;
-  dispatch_once(&amp;amp;onceToken, ^{
-      //NSArray
-      [self exchangeOriginalMethod:[NSArray methodOfSelector:@selector(objectAtIndex:)] withNewMethod:[NSArray methodOfSelector:@selector(objectAtIndexOrNil:)]];&lt;/p&gt;
+&lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;safe&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;dispatch_once_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onceToken&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;dispatch_once&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;onceToken&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//NSArray&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;exchangeOriginalMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSArray&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;methodOfSelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;@selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;objectAtIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:)]&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;withNewMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSArray&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;methodOfSelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;@selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;objectAtIndexOrNil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:)]];&lt;/span&gt;
 
-    &lt;pre&gt;&lt;code&gt;  //NSMutableArray
-  [self exchangeOriginalMethod:[NSMutableArray methodOfSelector:@selector(objectAtIndex:)] withNewMethod:[NSMutableArray methodOfSelector:@selector(objectAtIndexOrNilM:)]];
-  [self exchangeOriginalMethod:[NSMutableArray methodOfSelector:@selector(replaceObjectAtIndex:withObject:)] withNewMethod:[NSMutableArray methodOfSelector:@selector(safe_replaceObjectAtIndex:withObject:)]]; }
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;(void)exchangeOriginalMethod:(Method)originalMethod withNewMethod:(Method)newMethod
-{
-  method_exchangeImplementations(originalMethod, newMethod);
-}&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+        &lt;span class=&quot;c1&quot;&gt;//NSMutableArray&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;exchangeOriginalMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSMutableArray&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;methodOfSelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;@selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;objectAtIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:)]&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;withNewMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSMutableArray&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;methodOfSelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;@selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;objectAtIndexOrNilM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:)]];&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;exchangeOriginalMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSMutableArray&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;methodOfSelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;@selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;replaceObjectAtIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;withObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:)]&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;withNewMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSMutableArray&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;methodOfSelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;@selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;safe_replaceObjectAtIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;withObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:)]];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;p&gt;@end&lt;/p&gt;
+&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;exchangeOriginalMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;originalMethod&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;withNewMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newMethod&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;method_exchangeImplementations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;originalMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;p&gt;@implementation NSArray (Safe)&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
 
-&lt;h1 id=&quot;pragma-mark---nsarray&quot;&gt;pragma mark - NSArray&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;(Method)methodOfSelector:(SEL)selector
-{
-  return class_getInstanceMethod(NSClassFromString(@”__NSArrayI”),selector);
-}&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;(id)objectAtIndexOrNil:(NSUInteger)index
-{
-  return (index &amp;lt; [self count]) ? [self objectAtIndexOrNil:index] : nil;
-}&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+&lt;span class=&quot;k&quot;&gt;@implementation&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;NSArray&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;(Safe)&lt;/span&gt;
 
-&lt;p&gt;@end&lt;/p&gt;
+&lt;span class=&quot;cp&quot;&gt;#pragma mark - NSArray&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;methodOfSelector:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;SEL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;selector&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;class_getInstanceMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSClassFromString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&amp;quot;__NSArrayI&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;p&gt;@implementation NSMutableArray (Safe)&lt;/p&gt;
 
-&lt;h1 id=&quot;pragma-mark---nsmutablearray&quot;&gt;pragma mark - NSMutableArray&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;(Method)methodOfSelector:(SEL)selector
-{
-  return class_getInstanceMethod(NSClassFromString(@”__NSArrayM”),selector);
-}&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;(id)objectAtIndexOrNilM:(NSUInteger)index
-{
-  return (index &amp;lt; [self count]) ? [self objectAtIndexOrNilM:index] : nil;
-}&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;(void)safe_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject
-{
-  if ((index &amp;lt; [self count])&amp;amp;&amp;amp;anObject) {
-      [self safe_replaceObjectAtIndex:index withObject:anObject];
-  }
-}&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;objectAtIndexOrNil:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSUInteger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;index&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;objectAtIndexOrNil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;p&gt;@end
-```&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
 
+
+&lt;span class=&quot;k&quot;&gt;@implementation&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;NSMutableArray&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;(Safe)&lt;/span&gt;
+
+
+&lt;span class=&quot;cp&quot;&gt;#pragma mark - NSMutableArray&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;methodOfSelector:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;SEL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;selector&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;class_getInstanceMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSClassFromString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&amp;quot;__NSArrayM&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;objectAtIndexOrNilM:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSUInteger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;index&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;objectAtIndexOrNilM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;safe_replaceObjectAtIndex:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSUInteger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;withObject:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;anObject&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;anObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;safe_replaceObjectAtIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;withObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;anObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;当然，还有其他类似的问题可以在类里面添加方法。这样，上线应用可以避免出现崩溃。另外数组的objectAtIndex:方法的类不是NSArray，而是__NSArrayI，这个可以参考[类簇在iOS开发中的应用][1]&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;ps：测试时最好不开启，免得一些bug难以发现。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;

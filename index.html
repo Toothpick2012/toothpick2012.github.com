@@ -140,7 +140,7 @@
     <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-10-29T00:00:00-04:00"><a href="/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/"><!-- October 29, 2014 -->10月29, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About toothpickv">toothpickv</a></span></span></div><!-- /.entry-meta -->
   </header>
   <div class="entry-content">
-    <h1 id="cocoapods">CocoaPods管理个人本地库</h1> <p>@()[CocoaPods|技巧|pod] 有的时候我们的一些代码不是开源的，或者暂时不想放到Github上。我们只想使用CocoaPods引用本地的代码，接下来就来玩玩如何管理本地库 #####1、创建一个spec <code> pod spec create Peanut </code> #####2、spec配置 然后用文本编辑器或是vim来编辑 ``` Pod::Spec.new do |s| s.name = “TKVBaseProject” s.version = “0.0.1” s.summary = “A short description of TKVBaseProject.” s.description = «-DESC A longer...
+    <h1>CocoaPods管理个人本地库</h1> <p>@()[CocoaPods|技巧|pod] 有的时候我们的一些代码不是开源的，或者暂时不想放到Github上。我们只想使用CocoaPods引用本地的代码，接下来就来玩玩如何管理本地库</p> <h5>1、创建一个spec</h5> <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">pod</span> <span class="n">spec</span> <span class="n">create</span> <span class="no">Peanut</span> </code></pre></div> <h5>2、spec配置</h5> <p>然后用文本编辑器或是vim来编辑</p> <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Pod</span><span class="o">::</span><span class="no">Spec</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span> <span class="n">s</span><span...
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
 
@@ -152,7 +152,7 @@
     <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-10-28T00:00:00-04:00"><a href="/ios/CocoaPods%E5%B0%8F%E6%8A%80%E5%B7%A7/"><!-- October 28, 2014 -->10月28, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About toothpickv">toothpickv</a></span></span></div><!-- /.entry-meta -->
   </header>
   <div class="entry-content">
-    <h1 id="cocoapods">CocoaPods小技巧</h1> <table> <tbody> <tr> <td>@()[CocoaPods</td> <td>技巧</td> <td>pod]</td> </tr> </tbody> </table> <h5 id="section">1、消除一些库编译时候会有警告。但是作为一个有洁癖的人呢不想看见这些</h5> <p>可以在platform :ios, ‘x.0’的后面加入这句 <code>ruby inhibit_all_warnings! </code> 这样编译这些第三方库的时候就没有那些烦人的小警告了。</p> <p><code>ps:</code>但是有一个神库ReactiveCocoa。当你关闭所有警告的时候。它就编译不过了。可急坏了。其实很简单对他单独设置打开编译警告就好了 <code>ruby pod 'ReactiveCocoa', '~&gt; 2.1.8', :inhibit_warnings =&gt; true </code></p> <h5 id="targetspod">2、如果你有多个Targets需要pod的库怎么办</h5> <p>也很简单。Podfile的头部加入 <code>ruby link_with...
+    <h1>CocoaPods小技巧</h1> <p>@()[CocoaPods|技巧|pod]</p> <h5>1、消除一些库编译时候会有警告。但是作为一个有洁癖的人呢不想看见这些</h5> <p>可以在platform :ios, ‘x.0’的后面加入这句</p> <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">inhibit_all_warnings!</span> </code></pre></div> <p>这样编译这些第三方库的时候就没有那些烦人的小警告了。</p> <p><code>ps:</code>但是有一个神库ReactiveCocoa。当你关闭所有警告的时候。它就编译不过了。可急坏了。其实很简单对他单独设置打开编译警告就好了</p> <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">pod</span> <span class="s1">&#39;ReactiveCocoa&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 2.1.8&#39;</span><span class="p">,</span> <span class="ss">:inhibit_warnings</span> <span class="o">=&gt;</span> <span class="kp">true</span> </code></pre></div> <h5>2、如果你有多个Targets需要pod的库怎么办</h5> <p>也很简单。Podfile的头部加入</p>...
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
 
@@ -164,7 +164,7 @@
     <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-03-11T10:42:55-04:00"><a href="/ios/%E5%87%8F%E5%B0%91%E4%B8%8A%E7%BA%BF%E5%BA%94%E7%94%A8%E7%9A%84%E5%B4%A9%E6%BA%83%E6%83%85%E5%86%B5/"><!-- March 11, 2014 -->03月11, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About toothpickv">toothpickv</a></span></span></div><!-- /.entry-meta -->
   </header>
   <div class="entry-content">
-    <p>应用上线后，在umeng或是百度移动统计里面经常会有NSRangeException，NSInvalidArgumentException等这类错误，而且通常都是占据了很大比例。 你能看到的错误详情可能是这样：(很庆幸我们还是可以找到具体出错的位置，但是上千个类似错误成分散分布在不同位置，那就别扯蛋了！！)</p> <p><code>objective-C *** Terminating app due to uncaught exception 'NSRangeException', reason: '*** -[__NSArrayM objectAtIndex:]: index 0 beyond bounds for empty array' 详细错误信息: .... 2 CoreFoundation 0x2f20dd95 -[__NSArrayM objectAtIndex:] + 232 3 nineteenlou 0x001357a7 -[UserViewController...
+    <p>应用上线后，在umeng或是百度移动统计里面经常会有NSRangeException，NSInvalidArgumentException等这类错误，而且通常都是占据了很大比例。 你能看到的错误详情可能是这样：(很庆幸我们还是可以找到具体出错的位置，但是上千个类似错误成分散分布在不同位置，那就别扯蛋了！！)</p> <div class="highlight"><pre><code class="language-objective-C" data-lang="objective-C"><span class="o">***</span> <span class="n">Terminating</span> <span class="n">app</span> <span class="n">due</span> <span class="n">to</span> <span class="n">uncaught</span> <span class="n">exception</span> <span class="err">&#39;</span><span class="n">NSRangeException</span><span class="err">&#39;</span><span class="p">,</span> <span class="nl">reason</span><span class="p">:</span> <span class="err">&#39;</span><span class="o">***</span> <span class="o">-</span><span class="p">[</span><span class="n">__NSArrayM</span> <span...
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
 

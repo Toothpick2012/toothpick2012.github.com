@@ -138,46 +138,30 @@
       </div><!-- /.header-title-wrap -->
     </header>
     <div class="entry-content">
-      <h1 id="cocoapods">CocoaPods小技巧</h1>
+      <h1>CocoaPods小技巧</h1>
 
-<table>
-  <tbody>
-    <tr>
-      <td>@()[CocoaPods</td>
-      <td>技巧</td>
-      <td>pod]</td>
-    </tr>
-  </tbody>
-</table>
+<p>@()[CocoaPods|技巧|pod]</p>
 
-<h5 id="section">1、消除一些库编译时候会有警告。但是作为一个有洁癖的人呢不想看见这些</h5>
+<h5>1、消除一些库编译时候会有警告。但是作为一个有洁癖的人呢不想看见这些</h5>
 
-<p>可以在platform :ios, ‘x.0’的后面加入这句
-<code>ruby
-inhibit_all_warnings!
-</code>
-这样编译这些第三方库的时候就没有那些烦人的小警告了。</p>
+<p>可以在platform :ios, ‘x.0’的后面加入这句</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">inhibit_all_warnings!</span>
+</code></pre></div>
+<p>这样编译这些第三方库的时候就没有那些烦人的小警告了。</p>
 
-<p><code>ps:</code>但是有一个神库ReactiveCocoa。当你关闭所有警告的时候。它就编译不过了。可急坏了。其实很简单对他单独设置打开编译警告就好了
-<code>ruby
-pod 'ReactiveCocoa', '~&gt; 2.1.8', :inhibit_warnings =&gt; true
-</code></p>
+<p><code>ps:</code>但是有一个神库ReactiveCocoa。当你关闭所有警告的时候。它就编译不过了。可急坏了。其实很简单对他单独设置打开编译警告就好了</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">pod</span> <span class="s1">&#39;ReactiveCocoa&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 2.1.8&#39;</span><span class="p">,</span> <span class="ss">:inhibit_warnings</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</code></pre></div>
+<h5>2、如果你有多个Targets需要pod的库怎么办</h5>
 
-<h5 id="targetspod">2、如果你有多个Targets需要pod的库怎么办</h5>
-<p>也很简单。Podfile的头部加入
-<code>ruby
-link_with ['AAAAA', 'BBBBB']
-</code>
-AAAAA和BBBBB都是你target的名字，这样不同的target都会有pod库了。我主要是用来解决Unit Test需要pod install一些库的问题。</p>
+<p>也很简单。Podfile的头部加入</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">link_with</span> <span class="o">[</span><span class="s1">&#39;AAAAA&#39;</span><span class="p">,</span> <span class="s1">&#39;BBBBB&#39;</span><span class="o">]</span>
+</code></pre></div>
+<p>AAAAA和BBBBB都是你target的名字，这样不同的target都会有pod库了。我主要是用来解决Unit Test需要pod install一些库的问题。</p>
 
-<h5 id="podspec">3、使用本地podspec文件</h5>
-<p><code>
-pod 'xxx', :podspec =&gt; '~/Desktop/xxx.podspec'
-</code></p>
-
-<p>@end
-```</p>
-
+<h5>3、使用本地podspec文件</h5>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">pod</span> <span class="s1">&#39;xxx&#39;</span><span class="p">,</span> <span class="ss">:podspec</span> <span class="o">=&gt;</span> <span class="s1">&#39;~/Desktop/xxx.podspec&#39;</span>
+</code></pre></div>
 <p>当然，还有其他类似的问题可以在类里面添加方法。这样，上线应用可以避免出现崩溃。另外数组的objectAtIndex:方法的类不是NSArray，而是__NSArrayI，这个可以参考[类簇在iOS开发中的应用][1]</p>
 
 <p><strong><em>ps：测试时最好不开启，免得一些bug难以发现。</em></strong></p>
