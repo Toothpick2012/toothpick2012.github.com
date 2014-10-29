@@ -1,0 +1,267 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>CocoaPods管理个人本地库 &#8211; 牙=_签's Blog</title>
+<meta name="description" content="">
+<meta name="keywords" content="cocoapods, pod, 技巧, 库, 个人, 本地">
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CocoaPods管理个人本地库">
+<meta property="og:description" content="">
+<meta property="og:url" content="/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/">
+<meta property="og:site_name" content="牙=_签's Blog">
+
+
+
+
+
+<link rel="canonical" href="/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="牙=_签's Blog Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.min.css">
+<link rel="stylesheet" href="/custom/css/main.css">
+<!-- Webfonts -->
+<!-- <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css"> -->
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+
+
+<script src="/custom/js/sea.js"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="/custom/js/gallery.js"></script>
+
+</head>
+
+<body id="post" class="feature">
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">菜单</button>
+	<ul class="dl-menu">
+		<li><a href="/">首页</a></li>
+		<li>
+			<a href="#">文章</a>
+			<ul class="dl-submenu">
+				<li><a href="/posts/">所有文章</a></li>
+				<li><a href="/tags/">所有标签</a></li>
+			</ul>
+		</li>
+		<li><a href="/search.html">搜索</a></li>
+		<li>
+			<a href="#">关于</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="/images/avatar.jpg" alt="toothpickv photo" class="author-photo">
+					<h4>toothpickv</h4>
+					<p>一个中国汉纸</p>
+				</li>
+				<li><a href="/about/">更多</a></li>
+				<li>
+					<a href="mailto:toothpick.v@gmail.com"><i class="icon-envelope"></i> Email</a>
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<!-- <li><a href="/theme-setup">Theme Setup</a></li><li><a href="http://mademistakes.com">External Link</a></li> -->
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+<div class="entry-header">
+  
+  <div class="entry-image">
+    
+
+  	 
+		      
+  					
+  				<div class="entry-image" style="background: url(http://blog.qiumingxing.cn/images/skulls.png)">
+  					
+	
+  	
+  			</div>
+    
+  </div><!-- /.entry-image -->
+</div><!-- /.entry-header -->
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/" rel="bookmark" title="CocoaPods管理个人本地库">CocoaPods管理个人本地库</a></h1>
+        
+        <h2>10月29, 2014 <!-- October 29, 2014 --></h2>
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <h1 id="cocoapods">CocoaPods管理个人本地库</h1>
+
+<p>@()[CocoaPods|技巧|pod]
+有的时候我们的一些代码不是开源的，或者暂时不想放到Github上。我们只想使用CocoaPods引用本地的代码，接下来就来玩玩如何管理本地库
+#####1、创建一个spec
+<code>
+pod spec create Peanut
+</code>
+#####2、spec配置
+然后用文本编辑器或是vim来编辑
+```
+Pod::Spec.new do |s|
+  s.name         = “TKVBaseProject”
+  s.version      = “0.0.1”
+  s.summary      = “A short description of TKVBaseProject.”
+  s.description  = «-DESC
+                   A longer description of TKVBaseProject in Markdown format.
+                   DESC</p>
+
+<p>s.homepage     = “http://EXAMPLE/TKVBaseProject”
+  s.license      = “MIT (example)”
+  s.author             = { “qiumx” =&gt; “toothpick.v@gmail.com” }</p>
+
+<p>s.source       = { :git =&gt; “~/Desktop/Demo/TestLocalPod”}
+  #本地库目录路径</p>
+
+<p>s.source_files  = “class/<em>*/</em>.{h,m}”
+  #源文件
+  s.public_header_files = “class/<em>*/</em>.h”
+  #头文件
+  s.xcconfig = { “HEADER_SEARCH_PATHS” =&gt; “$(PODS_ROOT)/TKVBaseProject” }
+  #生成项目目录
+  # s.dependency “JSONKit”, “~&gt; 1.4”
+  #依赖库
+end
+```</p>
+
+<h5 id="podfile">3、Podfile配置</h5>
+<p>我们回到工程目录中，打开Podfile添加
+<code>
+pod 'TKVBaseProject', :path =&gt; '~/Desktop/Demo/TestLocalPod'
+</code>
+然后运行pod install</p>
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="/tags/#cocoapods" title="Pages tagged cocoapods" class="tag">cocoapods</a><a href="/tags/#pod" title="Pages tagged pod" class="tag">pod</a><a href="/tags/#技巧" title="Pages tagged 技巧" class="tag">技巧</a><a href="/tags/#库" title="Pages tagged 库" class="tag">库</a><a href="/tags/#个人" title="Pages tagged 个人" class="tag">个人</a><a href="/tags/#本地" title="Pages tagged 本地" class="tag">本地</a></span>
+        <span><a href="/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/" rel="bookmark" title="CocoaPods管理个人本地库">CocoaPods管理个人本地库</a> was published on <span class="entry-date date published updated"><time datetime="2014-10-29T00:00:00-04:00">October 29, 2014</time></span></span>
+        
+        <span class="author vcard"><span class="fn"><a href="/about/" title="About toothpickv">toothpickv</a></span></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    
+    <!--多说js加载开始，一个页面只需要加载一次 -->
+<script type="text/javascript">
+	var duoshuoQuery = {short_name:"toothpickv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!--多说js加载结束，一个页面只需要加载一次 -->
+<!-- Duoshuo Comment BEGIN -->
+	<div id="comments">
+		<div class="ds-thread" data-title="CocoaPods管理个人本地库 - 牙=_签's Blog"></div>
+	</div>
+<!-- Duoshuo Comment END -->
+    
+    <div class="read-more">
+      
+        <div class="read-more-header">
+          <a href="/ios/CocoaPods%E5%B0%8F%E6%8A%80%E5%B7%A7/" class="read-more-btn">Read More</a>
+        </div><!-- /.read-more-header -->
+        <div class="read-more-content">
+          <h3><a href="/ios/CocoaPods%E5%B0%8F%E6%8A%80%E5%B7%A7/" title="CocoaPods小技巧">CocoaPods小技巧</a></h3>
+          <p> <a href="/ios/CocoaPods%E5%B0%8F%E6%8A%80%E5%B7%A7/">Continue reading</a></p>
+        </div><!-- /.read-more-content -->
+      
+      <div class="read-more-list">
+        
+          <div class="list-item">
+            <h4><a href="/ios/%E5%87%8F%E5%B0%91%E4%B8%8A%E7%BA%BF%E5%BA%94%E7%94%A8%E7%9A%84%E5%B4%A9%E6%BA%83%E6%83%85%E5%86%B5/" title="减少上线应用的崩溃情况">减少上线应用的崩溃情况</a></h4>
+            <span>Published on March 11, 2014</span>
+          </div><!-- /.list-item -->
+        
+      </div><!-- /.read-more-list -->
+      
+    </div><!-- /.read-more -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2014 toothpickv.</span>
+
+<!-- Baidu Analytics snippet -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fccf659d598605041092bdb6fcfda452b' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49476672-1', 'qiumingxing.cn');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- 百度分享 -->
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"left","bdTop":"250"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="/assets/js/scripts.min.js"></script>
+
+	        
+
+</body>
+</html>
