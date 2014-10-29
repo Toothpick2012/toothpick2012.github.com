@@ -2,26 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 <title type="text">牙=_签's Blog</title>
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
-<link rel="self" type="application/atom+xml" href="/feed.xml" />
-<link rel="alternate" type="text/html" href="" />
-<updated>2014-10-29T04:50:31-04:00</updated>
-<id>/</id>
+<link rel="self" type="application/atom+xml" href="http://blog.qiumingxing.cn/feed.xml" />
+<link rel="alternate" type="text/html" href="http://blog.qiumingxing.cn" />
+<updated>2014-10-29T05:36:37-04:00</updated>
+<id>http://blog.qiumingxing.cn/</id>
 <author>
   <name>toothpickv</name>
-  <uri>/</uri>
+  <uri>http://blog.qiumingxing.cn/</uri>
   <email>toothpick.v@gmail.com</email>
 </author>
 
 
 <entry>
   <title type="html"><![CDATA[CocoaPods管理个人本地库]]></title>
- <link rel="alternate" type="text/html" href="/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/" />
-  <id>/ios/CocoaPods管理个人本地库</id>
+ <link rel="alternate" type="text/html" href="http://blog.qiumingxing.cn/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/" />
+  <id>http://blog.qiumingxing.cn/ios/CocoaPods管理个人本地库</id>
   <published>2014-10-29T00:00:00-04:00</published>
   <updated>2014-10-29T00:00:00-04:00</updated>
   <author>
     <name>toothpickv</name>
-    <uri></uri>
+    <uri>http://blog.qiumingxing.cn</uri>
     <email>toothpick.v@gmail.com</email>
   </author>
   <content type="html">&lt;h1&gt;CocoaPods管理个人本地库&lt;/h1&gt;
@@ -67,19 +67,19 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;然后运行pod install&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/&quot;&gt;CocoaPods管理个人本地库&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;&quot;&gt;牙=_签's Blog&lt;/a&gt; on October 29, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://blog.qiumingxing.cn/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/&quot;&gt;CocoaPods管理个人本地库&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;http://blog.qiumingxing.cn&quot;&gt;牙=_签's Blog&lt;/a&gt; on October 29, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[CocoaPods小技巧]]></title>
- <link rel="alternate" type="text/html" href="/ios/CocoaPods%E5%B0%8F%E6%8A%80%E5%B7%A7/" />
-  <id>/ios/CocoaPods小技巧</id>
+ <link rel="alternate" type="text/html" href="http://blog.qiumingxing.cn/ios/CocoaPods%E5%B0%8F%E6%8A%80%E5%B7%A7/" />
+  <id>http://blog.qiumingxing.cn/ios/CocoaPods小技巧</id>
   <published>2014-10-28T00:00:00-04:00</published>
   <updated>2014-10-28T00:00:00-04:00</updated>
   <author>
     <name>toothpickv</name>
-    <uri></uri>
+    <uri>http://blog.qiumingxing.cn</uri>
     <email>toothpick.v@gmail.com</email>
   </author>
   <content type="html">&lt;h1&gt;CocoaPods小技巧&lt;/h1&gt;
@@ -110,19 +110,19 @@
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;ps：测试时最好不开启，免得一些bug难以发现。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/ios/CocoaPods%E5%B0%8F%E6%8A%80%E5%B7%A7/&quot;&gt;CocoaPods小技巧&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;&quot;&gt;牙=_签's Blog&lt;/a&gt; on October 28, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://blog.qiumingxing.cn/ios/CocoaPods%E5%B0%8F%E6%8A%80%E5%B7%A7/&quot;&gt;CocoaPods小技巧&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;http://blog.qiumingxing.cn&quot;&gt;牙=_签's Blog&lt;/a&gt; on October 28, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[减少上线应用的崩溃情况]]></title>
- <link rel="alternate" type="text/html" href="/ios/%E5%87%8F%E5%B0%91%E4%B8%8A%E7%BA%BF%E5%BA%94%E7%94%A8%E7%9A%84%E5%B4%A9%E6%BA%83%E6%83%85%E5%86%B5/" />
-  <id>/ios/减少上线应用的崩溃情况</id>
+ <link rel="alternate" type="text/html" href="http://blog.qiumingxing.cn/ios/%E5%87%8F%E5%B0%91%E4%B8%8A%E7%BA%BF%E5%BA%94%E7%94%A8%E7%9A%84%E5%B4%A9%E6%BA%83%E6%83%85%E5%86%B5/" />
+  <id>http://blog.qiumingxing.cn/ios/减少上线应用的崩溃情况</id>
   <published>2014-03-11T10:42:55-04:00</published>
   <updated>2014-03-11T10:42:55-04:00</updated>
   <author>
     <name>toothpickv</name>
-    <uri></uri>
+    <uri>http://blog.qiumingxing.cn</uri>
     <email>toothpick.v@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;应用上线后，在umeng或是百度移动统计里面经常会有NSRangeException，NSInvalidArgumentException等这类错误，而且通常都是占据了很大比例。
@@ -231,7 +231,192 @@
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;ps：测试时最好不开启，免得一些bug难以发现。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/ios/%E5%87%8F%E5%B0%91%E4%B8%8A%E7%BA%BF%E5%BA%94%E7%94%A8%E7%9A%84%E5%B4%A9%E6%BA%83%E6%83%85%E5%86%B5/&quot;&gt;减少上线应用的崩溃情况&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;&quot;&gt;牙=_签's Blog&lt;/a&gt; on March 11, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://blog.qiumingxing.cn/ios/%E5%87%8F%E5%B0%91%E4%B8%8A%E7%BA%BF%E5%BA%94%E7%94%A8%E7%9A%84%E5%B4%A9%E6%BA%83%E6%83%85%E5%86%B5/&quot;&gt;减少上线应用的崩溃情况&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;http://blog.qiumingxing.cn&quot;&gt;牙=_签's Blog&lt;/a&gt; on March 11, 2014.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[ios7状态栏以及导航栏]]></title>
+ <link rel="alternate" type="text/html" href="http://blog.qiumingxing.cn/ios/ios7%E7%8A%B6%E6%80%81%E6%A0%8F%E4%BB%A5%E5%8F%8A%E5%AF%BC%E8%88%AA%E6%A0%8F/" />
+  <id>http://blog.qiumingxing.cn/ios/ios7状态栏以及导航栏</id>
+  <published>2013-11-04T00:00:00-05:00</published>
+  <updated>2013-11-04T00:00:00-05:00</updated>
+  <author>
+    <name>toothpickv</name>
+    <uri>http://blog.qiumingxing.cn</uri>
+    <email>toothpick.v@gmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;ios7的发布使得ios的导航栏和状态栏一体化，渐渐适应以后还是蛮好看的。但是作为开发者，接下来新SDK编译的适配工作也会显得蛋疼不已。许多应用如微信等，可能还是只是适配布局，未进行较大的UI改动，或是出于谨慎考虑。设计风格的大改，怕是不可避免的。本公司的射鸡师早已酝酿出了一套界面，咋一看还真是漂亮极了。导航栏一会绿色一会白色，状态栏字体也是一会黑色一会白色，所以射鸡师它真的不痛程序猿的痛好吗！？
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;ok，这个适配工作真是有些许麻烦，既要保证完美适配，也不想搞乱项目。来吧。&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+设置导航栏的背景颜色
+&lt;div&gt;在iOS 7中，不再使用tintColor属性来设置导航栏的颜色，而是使用barTintColor属性来修改背景色。我们可以在AppDelegate.m文件中的方法didFinishLaunchingWithOptions:里面添加如下代码来修改颜色：&lt;/div&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;UINavigationBar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;appearance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;setBarTintColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;UIColor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellowColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;默认情况下，导航栏的translucent属性为YES。另外，系统还会对所有的导航栏做模糊处理，这样可以让iOS 7中导航栏的颜色会变得淡了。至于这个的解决方案可以参考：&lt;/div&gt;
+
+&lt;div&gt;如何在iOS 7中设置barTintColor实现类似网易和 Facebook 的 navigationBar 效果&lt;/div&gt;
+
+&lt;div&gt;[http://www.cocoachina.com/applenews/devnews/2013/1024/7233.html](http://www.cocoachina.com/applenews/devnews/2013/1024/7233.html)&lt;/div&gt;
+
+&lt;div&gt;&lt;/div&gt;
+
+&lt;div&gt;修改状态栏风格&lt;/div&gt;
+
+&lt;div&gt; 在老版本的iOS中，状态栏永远都是白色风格。而在iOS 7中，我们可以修改每个view controller中状态栏的外观。通过UIStatusBarStyle常量可以指定状态栏的内容是暗色或亮色。默认情况下，状态栏的显示是暗色，状态栏上的时间、电池指示器和Wi-Fi信号显示为暗色,通常搭配浅色的背景。相反的，深色的背景时需要转为亮色的状态栏搭配。&lt;/div&gt;
+
+&lt;div&gt;&lt;/div&gt;
+
+&lt;p&gt;在iOS 7中，我们可以在每个view controller中overridingpreferredStatusBarStyle:方法，如下所示：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;&lt;span class=&quot;p&quot;&gt;-(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UIStatusBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;preferredStatusBarStyle&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;   &lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UIStatusBarStyleLightContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;另外，我们也可以使用UIApplication的statusBarStyle方法来设置状态栏，不过，首先需要停止使用View controller-based status bar appearance。在project target的Info tab中，插入一个新的key，名字为View controller-based status bar appearance，并将其值设置为YES，动态改变状态栏。
+&lt;div&gt;&lt;img src=&quot;file:///Users/toothpick/Library/Application%20Support/Evernote/accounts/Evernote/qpdyx/content/p521/8d689d4273ef2f584a3e98b94384cafb.jpeg&quot; alt=&quot;&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;适配工作&lt;/div&gt;
+&lt;div&gt;&lt;span style=&quot;color: #ff9300;&quot;&gt;NO.1&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;了解了修改的方法以后，接下来是如何简单方便的适配整个项目了。&lt;/div&gt;
+&lt;div&gt;对于原先使用官方类UINavigationController，可以添加一个扩展类UIViewController+NavigationBar，使用公共方法来设置导航栏&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setBarColor:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;color&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isIOS7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;navigationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;navigationBar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;setBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UIBarStyleDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;navigationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;navigationBar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;setBarTintColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;navigationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;navigationBar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;setBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UIBarStyleBlack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;navigationController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;navigationBar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;setTintColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;}&lt;/div&gt;
+
+&lt;div&gt;如果，有需要再自定义UINavigationBar为MyUINavigationBar,和UINavigationController为MyUINavigationController&lt;/div&gt;
+
+&lt;div&gt;&lt;span style=&quot;color: #00f900;&quot;&gt;MyUINavigationBar：&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setBarTintColor:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;barTintColor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//自定义&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setTintColor:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;tintColor&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//自定义&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+
+&lt;div&gt;&lt;span style=&quot;color: #00f900;&quot;&gt;MyUINavigationController&lt;/span&gt;：
+
+```objective-c
+- (id)init {
+self = [super initWithNavigationBarClass:[MyUINavigationBar class] toolbarClass:nil];
+return self;
+}
+
+- (id)initWithRootViewController:(UIViewController *)rootViewController {
+self = [super initWithNavigationBarClass:[MyUINavigationBar class] toolbarClass:nil];
+        if(self) {
+self.viewControllers = @[rootViewController];
+};
+
+return self;
+}
+```
+
+&lt;div&gt;&lt;span style=&quot;color: #ff9300;&quot;&gt;NO.2&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div&gt;状态栏也需要因应导航栏的变化而变化，创建扩展类UIViewController+StatusBarStyle&lt;/div&gt;
+
+&lt;div&gt;&lt;span style=&quot;color: #00f900;&quot;&gt;UIViewController+StatusBarStyle.h: &lt;/span&gt;&lt;/div&gt;
+
+&lt;div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;&lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interface&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;StatusBarStyle&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSObject&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UIStatusBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;statusBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;BOOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;statusBarHidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interface&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;UIViewController&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StatusBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;setStatusBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UIStatusBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setStatusBarHidden:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;BOOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;isHidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&amp;nbsp;
+&lt;div&gt;UIViewController+StatusBarStyle.m:&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;&lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;implementation&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StatusBarStyle&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UIStatusBarStyle&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;statusBarStyle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UIStatusBarStyleDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isBarHidden&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;NO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;UIViewController&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;viewControllerv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UIStatusBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;statusBarStyle&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;statusBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;BOOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;statusBarHidden&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isBarHidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;implementation&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;UIViewController&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StatusBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;setStatusBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UIStatusBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;style&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isIOS7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;statusBarStyle&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;viewControllerv&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setNeedsStatusBarAppearanceUpdate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;setStatusBarHidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;BOOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isHidden&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isIOS7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;isBarHidden&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isHidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;viewControllerv&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setNeedsStatusBarAppearanceUpdate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;cp&quot;&gt;#ifdef __IPHONE_7_0&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UIStatusBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;preferredStatusBarStyle&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;viewControllerv&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;viewControllerv&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StatusBarStyle&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;statusBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UIStatusBarAnimation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;preferredStatusBarUpdateAnimation&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UIStatusBarAnimationFade&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;BOOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prefersStatusBarHidden&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StatusBarStyle&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;statusBarHidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#endif&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+
+&lt;div&gt;&lt;/div&gt;
+
+&lt;div&gt;&lt;span style=&quot;color: #ff9300;&quot;&gt;以上个人的解决方案，适配工作有点紧，有未充分考虑，如果大神有更方便简洁的方案，欢迎赐教。&lt;/span&gt;&lt;/div&gt;
+
+  &lt;p&gt;&lt;a href=&quot;http://blog.qiumingxing.cn/ios/ios7%E7%8A%B6%E6%80%81%E6%A0%8F%E4%BB%A5%E5%8F%8A%E5%AF%BC%E8%88%AA%E6%A0%8F/&quot;&gt;ios7状态栏以及导航栏&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;http://blog.qiumingxing.cn&quot;&gt;牙=_签's Blog&lt;/a&gt; on November 04, 2013.&lt;/p&gt;</content>
 </entry>
 
 </feed>
