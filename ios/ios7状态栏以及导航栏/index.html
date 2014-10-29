@@ -138,27 +138,20 @@
       </div><!-- /.header-title-wrap -->
     </header>
     <div class="entry-content">
-      <p>ios7的发布使得ios的导航栏和状态栏一体化，渐渐适应以后还是蛮好看的。但是作为开发者，接下来新SDK编译的适配工作也会显得蛋疼不已。许多应用如微信等，可能还是只是适配布局，未进行较大的UI改动，或是出于谨慎考虑。设计风格的大改，怕是不可避免的。本公司的射鸡师早已酝酿出了一套界面，咋一看还真是漂亮极了。导航栏一会绿色一会白色，状态栏字体也是一会黑色一会白色，所以射鸡师它真的不痛程序猿的痛好吗！？
-<div></div>
-<div>ok，这个适配工作真是有些许麻烦，既要保证完美适配，也不想搞乱项目。来吧。</div>
-<div></div>
-设置导航栏的背景颜色
-<div>在iOS 7中，不再使用tintColor属性来设置导航栏的颜色，而是使用barTintColor属性来修改背景色。我们可以在AppDelegate.m文件中的方法didFinishLaunchingWithOptions:里面添加如下代码来修改颜色：</div></p>
+      <p>ios7的发布使得ios的导航栏和状态栏一体化，渐渐适应以后还是蛮好看的。但是作为开发者，接下来新SDK编译的适配工作也会显得蛋疼不已。许多应用如微信等，可能还是只是适配布局，未进行较大的UI改动，或是出于谨慎考虑。设计风格的大改，怕是不可避免的。本公司的射鸡师早已酝酿出了一套界面，咋一看还真是漂亮极了。导航栏一会绿色一会白色，状态栏字体也是一会黑色一会白色，所以射鸡师它真的不痛程序猿的痛好吗！？</p>
+
+<p>ok，这个适配工作真是有些许麻烦，既要保证完美适配，也不想搞乱项目。来吧。</p>
+
+<p>设置导航栏的背景颜色
+在iOS 7中，不再使用tintColor属性来设置导航栏的颜色，而是使用barTintColor属性来修改背景色。我们可以在AppDelegate.m文件中的方法didFinishLaunchingWithOptions:里面添加如下代码来修改颜色：</p>
 <div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="p">[[</span><span class="bp">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setBarTintColor</span><span class="p">:[</span><span class="bp">UIColor</span> <span class="n">yellowColor</span><span class="p">]];</span>
 </code></pre></div>
-<div>默认情况下，导航栏的translucent属性为YES。另外，系统还会对所有的导航栏做模糊处理，这样可以让iOS 7中导航栏的颜色会变得淡了。至于这个的解决方案可以参考：</div>
+<p>默认情况下，导航栏的translucent属性为YES。另外，系统还会对所有的导航栏做模糊处理，这样可以让iOS 7中导航栏的颜色会变得淡了。至于这个的解决方案可以参考：
+如何在iOS 7中设置barTintColor实现类似网易和 Facebook 的 navigationBar 效果
+<a href="http://www.cocoachina.com/applenews/devnews/2013/1024/7233.html">http://www.cocoachina.com/applenews/devnews/2013/1024/7233.html</a></p>
 
-<div>如何在iOS 7中设置barTintColor实现类似网易和 Facebook 的 navigationBar 效果</div>
-
-<div>[http://www.cocoachina.com/applenews/devnews/2013/1024/7233.html](http://www.cocoachina.com/applenews/devnews/2013/1024/7233.html)</div>
-
-<div></div>
-
-<div>修改状态栏风格</div>
-
-<div> 在老版本的iOS中，状态栏永远都是白色风格。而在iOS 7中，我们可以修改每个view controller中状态栏的外观。通过UIStatusBarStyle常量可以指定状态栏的内容是暗色或亮色。默认情况下，状态栏的显示是暗色，状态栏上的时间、电池指示器和Wi-Fi信号显示为暗色,通常搭配浅色的背景。相反的，深色的背景时需要转为亮色的状态栏搭配。</div>
-
-<div></div>
+<p>修改状态栏风格
+ 在老版本的iOS中，状态栏永远都是白色风格。而在iOS 7中，我们可以修改每个view controller中状态栏的外观。通过UIStatusBarStyle常量可以指定状态栏的内容是暗色或亮色。默认情况下，状态栏的显示是暗色，状态栏上的时间、电池指示器和Wi-Fi信号显示为暗色,通常搭配浅色的背景。相反的，深色的背景时需要转为亮色的状态栏搭配。</p>
 
 <p>在iOS 7中，我们可以在每个view controller中overridingpreferredStatusBarStyle:方法，如下所示：</p>
 <div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="p">-(</span><span class="n">UIStatusBarStyle</span><span class="p">)</span><span class="nf">preferredStatusBarStyle</span>
@@ -167,13 +160,12 @@
 <span class="p">}</span>
 </code></pre></div>
 <p>另外，我们也可以使用UIApplication的statusBarStyle方法来设置状态栏，不过，首先需要停止使用View controller-based status bar appearance。在project target的Info tab中，插入一个新的key，名字为View controller-based status bar appearance，并将其值设置为YES，动态改变状态栏。
-<div><img src="file:///Users/toothpick/Library/Application%20Support/Evernote/accounts/Evernote/qpdyx/content/p521/8d689d4273ef2f584a3e98b94384cafb.jpeg" alt=""></div>
-<div></div>
-<div>适配工作</div>
-<div><span style="color: #ff9300;">NO.1</span></div>
-<div>了解了修改的方法以后，接下来是如何简单方便的适配整个项目了。</div>
-<div>对于原先使用官方类UINavigationController，可以添加一个扩展类UIViewController+NavigationBar，使用公共方法来设置导航栏</div>
-<div></div></p>
+<img src="file:///Users/toothpick/Library/Application%20Support/Evernote/accounts/Evernote/qpdyx/content/p521/8d689d4273ef2f584a3e98b94384cafb.jpeg" alt=""></p>
+
+<p>适配工作
+<span style="color: #ff9300;">NO.1</span>
+了解了修改的方法以后，接下来是如何简单方便的适配整个项目了。
+对于原先使用官方类UINavigationController，可以添加一个扩展类UIViewController+NavigationBar，使用公共方法来设置导航栏</p>
 <div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setBarColor:</span><span class="p">(</span><span class="bp">UIColor</span><span class="o">*</span><span class="p">)</span><span class="nv">color</span>
 <span class="p">{</span>
 <span class="k">if</span><span class="err"> </span><span class="p">(</span><span class="n">isIOS7</span><span class="p">)</span>
@@ -187,11 +179,9 @@
 <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="n">navigationController</span><span class="p">.</span><span class="n">navigationBar</span><span class="err"> </span><span class="nl">setTintColor</span><span class="p">:</span><span class="n">color</span><span class="p">];</span>
 <span class="p">}</span>
 </code></pre></div>
-<div>}</div>
-
-<div>如果，有需要再自定义UINavigationBar为MyUINavigationBar,和UINavigationController为MyUINavigationController</div>
-
-<div><span style="color: #00f900;">MyUINavigationBar：</span></div>
+<p>}
+如果，有需要再自定义UINavigationBar为MyUINavigationBar,和UINavigationController为MyUINavigationController
+<span style="color: #00f900;">MyUINavigationBar：</span></p>
 <div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setBarTintColor:</span><span class="p">(</span><span class="bp">UIColor</span><span class="err"> </span><span class="o">*</span><span class="p">)</span><span class="nv">barTintColor</span> <span class="p">{</span>
 <span class="c1">//自定义</span>
 <span class="p">}</span>
@@ -201,34 +191,24 @@
 <span class="c1">//自定义</span>
 <span class="p">}</span>
 </code></pre></div>
-<div></div>
+<p><span style="color: #00f900;">MyUINavigationController</span></p>
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">init</span> <span class="p">{</span>
+    <span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">super</span><span class="err"> </span><span class="nl">initWithNavigationBarClass</span><span class="p">:[</span><span class="n">MyUINavigationBar</span><span class="err"> </span><span class="k">class</span><span class="p">]</span><span class="err"> </span><span class="nl">toolbarClass</span><span class="p">:</span><span class="nb">nil</span><span class="p">];</span>
+    <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
+<span class="p">}</span>
 
-<div><span style="color: #00f900;">MyUINavigationController</span>：
+<span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithRootViewController:</span><span class="p">(</span><span class="bp">UIViewController</span><span class="err"> </span><span class="o">*</span><span class="p">)</span><span class="nv">rootViewController</span> <span class="p">{</span>
+    <span class="nb">self</span><span class="err"> </span><span class="o">=</span> <span class="p">[</span><span class="nb">super</span><span class="err"> </span><span class="nl">initWithNavigationBarClass</span><span class="p">:[</span><span class="n">MyUINavigationBar</span><span class="err"> </span><span class="k">class</span><span class="p">]</span><span class="err"> </span><span class="nl">toolbarClass</span><span class="p">:</span><span class="nb">nil</span><span class="p">];</span>
+    <span class="k">if</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">self</span><span class="p">.</span><span class="n">viewControllers</span><span class="err"> </span><span class="o">=</span><span class="err"> </span><span class="l">@[</span><span class="n">rootViewController</span><span class="l">]</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="k">return</span><span class="err"> </span><span class="nb">self</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><span style="color: #ff9300;">NO.2</span></p>
 
-```objective-c
-- (id)init {
-self = [super initWithNavigationBarClass:[MyUINavigationBar class] toolbarClass:nil];
-return self;
-}
-
-- (id)initWithRootViewController:(UIViewController *)rootViewController {
-self = [super initWithNavigationBarClass:[MyUINavigationBar class] toolbarClass:nil];
-        if(self) {
-self.viewControllers = @[rootViewController];
-};
-
-return self;
-}
-```
-
-<div><span style="color: #ff9300;">NO.2</span></div>
-</div>
-
-<div>状态栏也需要因应导航栏的变化而变化，创建扩展类UIViewController+StatusBarStyle</div>
-
-<div><span style="color: #00f900;">UIViewController+StatusBarStyle.h: </span></div>
-
-<div></div>
+<p>状态栏也需要因应导航栏的变化而变化，创建扩展类UIViewController+StatusBarStyle
+<span style="color: #00f900;">UIViewController+StatusBarStyle.h: </span></p>
 <div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="p">@</span><span class="n">interface</span><span class="err"> </span><span class="nl">StatusBarStyle</span> <span class="p">:</span><span class="err"> </span><span class="bp">NSObject</span>
 
 <span class="o">+</span> <span class="p">(</span><span class="n">UIStatusBarStyle</span><span class="p">)</span><span class="n">statusBarStyle</span><span class="p">;</span>
@@ -243,8 +223,7 @@ return self;
 <span class="k">@end</span>
 </code></pre></div>
 <p>&nbsp;
-<div>UIViewController+StatusBarStyle.m:</div>
-<div></div></p>
+UIViewController+StatusBarStyle.m:</p>
 <div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="p">@</span><span class="n">implementation</span><span class="err"> </span><span class="n">StatusBarStyle</span>
 
 <span class="k">static</span><span class="err"> </span><span class="n">UIStatusBarStyle</span><span class="err"> </span><span class="n">statusBarStyle</span> <span class="o">=</span><span class="err"> </span><span class="n">UIStatusBarStyleDefault</span><span class="p">;</span>
@@ -302,11 +281,7 @@ return self;
 <span class="cp">#endif</span>
 <span class="k">@end</span>
 </code></pre></div>
-<div></div>
-
-<div></div>
-
-<div><span style="color: #ff9300;">以上个人的解决方案，适配工作有点紧，有未充分考虑，如果大神有更方便简洁的方案，欢迎赐教。</span></div>
+<p><span style="color: #ff9300;">以上个人的解决方案，适配工作有点紧，有未充分考虑，如果大神有更方便简洁的方案，欢迎赐教。</span></p>
 
       <footer class="entry-meta">
         <span class="entry-tags"><a href="http://blog.qiumingxing.cn/tags/#cocoapods" title="Pages tagged cocoapods" class="tag">cocoapods</a><a href="http://blog.qiumingxing.cn/tags/#pod" title="Pages tagged pod" class="tag">pod</a><a href="http://blog.qiumingxing.cn/tags/#技巧" title="Pages tagged 技巧" class="tag">技巧</a><a href="http://blog.qiumingxing.cn/tags/#库" title="Pages tagged 库" class="tag">库</a><a href="http://blog.qiumingxing.cn/tags/#个人" title="Pages tagged 个人" class="tag">个人</a><a href="http://blog.qiumingxing.cn/tags/#本地" title="Pages tagged 本地" class="tag">本地</a></span>
