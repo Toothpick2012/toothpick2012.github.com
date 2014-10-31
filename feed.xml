@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://blog.qiumingxing.cn/feed.xml" />
 <link rel="alternate" type="text/html" href="http://blog.qiumingxing.cn" />
-<updated>2014-10-30T22:36:45-04:00</updated>
+<updated>2014-10-30T22:40:08-04:00</updated>
 <id>http://blog.qiumingxing.cn/</id>
 <author>
   <name>toothpickv</name>
@@ -213,8 +213,9 @@ MIIFnjCCBIagAwIBAgIIE/IgVItTuH4wDQYJKoZIhvcNAQEFBQAwgZYxCzA…
 
 &lt;p&gt;如果你打开的是一个用于开发测试的证书，你会看到一项 &lt;code&gt;ProvisionedDevices&lt;/code&gt;，在这一项里包含了所有可以用于测试的设备列表。因为配置文件需要被苹果签名，所以每次你添加了新的设备进去就要重新下载新的配置文件。&lt;/p&gt;
 
-&lt;p&gt;相关文章：
-&lt;a href=&quot;http://www.objc.io/issue-17/inside-code-signing.html&quot;&gt;Inside Code Signing&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;相关文章：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.objc.io/issue-17/inside-code-signing.html&quot;&gt;Inside Code Signing&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://objccn.io/issue-17-2/&quot;&gt;译文：代码签名探析&lt;/a&gt;&lt;/p&gt;
 
