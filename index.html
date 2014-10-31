@@ -135,6 +135,18 @@
 <article class="hentry">
   <header>
     
+      <h1 class="entry-title"><a href="http://blog.qiumingxing.cn/ios/iOS%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E7%AC%94%E5%BD%95/" rel="bookmark" title="iOS开发代码签名笔录" itemprop="url">iOS开发代码签名笔录</a></h1>
+    
+    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-10-31T10:42:55-04:00"><a href="http://blog.qiumingxing.cn/ios/iOS%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E7%AC%94%E5%BD%95/"><!-- October 31, 2014 -->10月31, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://blog.qiumingxing.cn/about/" title="About toothpickv">toothpickv</a></span></span></div><!-- /.entry-meta -->
+  </header>
+  <div class="entry-content">
+    <h1>iOS开发代码签名笔录</h1> <h2>加密</h2> <p><a href="http://zh.wikipedia.org/wiki/X.509">X.509 标准</a>：像 SSL 一样X.509 标准的公开密钥加密 <a href="http://zh.wikipedia.org/wiki/%E5%85%AC%E5%BC%80%E5%AF%86%E9%92%A5%E5%8A%A0%E5%AF%86">公开密钥加密</a>：用公钥加密，需要私钥解密</p> <h2>证书和密匙</h2> <p>一个证书是一个公钥加上许多附加信息，这些附加信息都是被某个认证机构（Certificate Authority 简称 CA）进行签名认证过的，认证这个证书中的信息是准确无误的。对于 iOS 开发来说这个认证机构就是苹果的认证部门 Apple Worldwide Developer Relations CA。认证的签名有固定的有效期，这就意味着当前系统时间需要被正确设置，因为证书是基于当前时间进行核对。这也是为什么将系统时间设定到过去会对 iOS 造成多方面破坏的原因之一。</p> <h3>查看</h3> <p><strong>钥匙串访问</strong>=&gt;“我的证书（My Certificates）”，你可以看到所有你持有的私钥相对应的证书。要用一个证书设置代码签名，你必须拥有私钥，所以所有你拥有私钥的证书都会被列在这里。如果你拥有一个证书的私钥，你可以展开证书并将它的私钥显示出来：</p> <p><img src="http://img.objccn.io/issue-17/iphone-developer-keychain.png" alt="iOS Developer Certificate in the OS...
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
+    
       <h1 class="entry-title"><a href="http://blog.qiumingxing.cn/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/" rel="bookmark" title="CocoaPods管理个人本地库" itemprop="url">CocoaPods管理个人本地库</a></h1>
     
     <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-10-29T00:00:00-04:00"><a href="http://blog.qiumingxing.cn/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/"><!-- October 29, 2014 -->10月29, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://blog.qiumingxing.cn/about/" title="About toothpickv">toothpickv</a></span></span></div><!-- /.entry-meta -->
@@ -165,18 +177,6 @@
   </header>
   <div class="entry-content">
     <p>应用上线后，在umeng或是百度移动统计里面经常会有NSRangeException，NSInvalidArgumentException等这类错误，而且通常都是占据了很大比例。 你能看到的错误详情可能是这样：(很庆幸我们还是可以找到具体出错的位置，但是上千个类似错误成分散分布在不同位置，那就别扯蛋了！！)</p> <div class="highlight"><pre><code class="language-objective-C" data-lang="objective-C"><span class="o">***</span> <span class="n">Terminating</span> <span class="n">app</span> <span class="n">due</span> <span class="n">to</span> <span class="n">uncaught</span> <span class="n">exception</span> <span class="err">&#39;</span><span class="n">NSRangeException</span><span class="err">&#39;</span><span class="p">,</span> <span class="nl">reason</span><span class="p">:</span> <span class="err">&#39;</span><span class="o">***</span> <span class="o">-</span><span class="p">[</span><span class="n">__NSArrayM</span> <span...
-  </div><!-- /.entry-content -->
-</article><!-- /.hentry -->
-
-<article class="hentry">
-  <header>
-    
-      <h1 class="entry-title"><a href="http://blog.qiumingxing.cn/ios/iOS%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E7%AC%94%E5%BD%95/" rel="bookmark" title="iOS开发代码签名笔录" itemprop="url">iOS开发代码签名笔录</a></h1>
-    
-    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-03-11T10:42:55-04:00"><a href="http://blog.qiumingxing.cn/ios/iOS%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E7%AC%94%E5%BD%95/"><!-- March 11, 2014 -->03月11, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://blog.qiumingxing.cn/about/" title="About toothpickv">toothpickv</a></span></span></div><!-- /.entry-meta -->
-  </header>
-  <div class="entry-content">
-    <h1>iOS开发代码签名笔录</h1> <h2>加密</h2> <p><a href="http://zh.wikipedia.org/wiki/X.509">X.509 标准</a>：像 SSL 一样X.509 标准的公开密钥加密 <a href="http://zh.wikipedia.org/wiki/%E5%85%AC%E5%BC%80%E5%AF%86%E9%92%A5%E5%8A%A0%E5%AF%86">公开密钥加密</a>：用公钥加密，需要私钥解密</p> <h2>证书和密匙</h2> <p>一个证书是一个公钥加上许多附加信息，这些附加信息都是被某个认证机构（Certificate Authority 简称 CA）进行签名认证过的，认证这个证书中的信息是准确无误的。对于 iOS 开发来说这个认证机构就是苹果的认证部门 Apple Worldwide Developer Relations CA。认证的签名有固定的有效期，这就意味着当前系统时间需要被正确设置，因为证书是基于当前时间进行核对。这也是为什么将系统时间设定到过去会对 iOS 造成多方面破坏的原因之一。</p> <h3>查看</h3> <p><strong>钥匙串访问</strong>=&gt;“我的证书（My Certificates）”，你可以看到所有你持有的私钥相对应的证书。要用一个证书设置代码签名，你必须拥有私钥，所以所有你拥有私钥的证书都会被列在这里。如果你拥有一个证书的私钥，你可以展开证书并将它的私钥显示出来：</p> <p><img src="http://img.objccn.io/issue-17/iphone-developer-keychain.png" alt="iOS Developer Certificate in the OS...
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
 
