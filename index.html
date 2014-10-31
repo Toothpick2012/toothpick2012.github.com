@@ -135,6 +135,18 @@
 <article class="hentry">
   <header>
     
+      <h1 class="entry-title"><a href="http://blog.qiumingxing.cn/ios/block%E5%9C%A8arc%E4%B8%8E%E9%9D%9Earc%E5%8C%BA%E5%88%AB/" rel="bookmark" title="block在arc与非arc区别" itemprop="url">block在arc与非arc区别</a></h1>
+    
+    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-10-31T15:56:55-04:00"><a href="http://blog.qiumingxing.cn/ios/block%E5%9C%A8arc%E4%B8%8E%E9%9D%9Earc%E5%8C%BA%E5%88%AB/"><!-- October 31, 2014 -->10月31, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://blog.qiumingxing.cn/about/" title="About toothpickv">toothpickv</a></span></span></div><!-- /.entry-meta -->
+  </header>
+  <div class="entry-content">
+    <h1>block在arc与非arc区别</h1> <p>来自：http://www.cnbluebox.com/?p=255</p> <h2>Block简介</h2> <p>Block作为C语言的扩展，并不是高新技术，和其他语言的闭包或lambda表达式是一回事。需要注意的是由于Objective-C在iOS中不支持GC机制，使用Block必须自己管理内存，而内存管理正是使用Block坑最多的地方，错误的内存管理 要么导致return cycle内存泄漏要么内存被提前释放导致crash。 Block的使用很像函数指针，不过与函数最大的不同是：Block可以访问函数以外、词法作用域以内的外部变量的值。换句话说，Block不仅 实现函数的功能，还能携带函数的执行环境。</p> <p>可以这样理解，Block其实包含两个部分内容</p> <blockquote> <ul> <li>Block执行的代码，这是在编译的时候已经生成好的；</li> <li>一个包含Block执行时需要的所有外部变量值的数据结构。 Block将使用到的、作用域附近到的变量的值建立一份快照拷贝到栈上。</li> </ul> </blockquote> <p>Block与函数另一个不同是，Block类似ObjC的对象，可以使用自动释放池管理内存（但Block并不完全等同于ObjC对象，后面将详细说明）。</p> <h2>Block的类型与内存管理</h2> <p>根据Block在内存中的位置分为三种类型NSGlobalBlock，NSStackBlock, NSMallocBlock。</p> <p>NSGlobalBlock：类似函数，位于text段； NSStackBlock：位于栈内存，函数返回后Block将无效； NSMallocBlock：位于堆内存。 1、NSGlobalBlock如下，我们可以通过是否引用外部变量识别，未引用外部变量即为NSGlobalBlock，可以当做函数使用。</p> <div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="p">{</span> <span class="c1">//create a NSGlobalBlock</span> <span class="kt">float</span>...
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
+    
       <h1 class="entry-title"><a href="http://blog.qiumingxing.cn/ios/iOS%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E7%AC%94%E5%BD%95/" rel="bookmark" title="iOS开发代码签名笔录" itemprop="url">iOS开发代码签名笔录</a></h1>
     
     <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-10-31T10:42:55-04:00"><a href="http://blog.qiumingxing.cn/ios/iOS%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E7%AC%94%E5%BD%95/"><!-- October 31, 2014 -->10月31, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://blog.qiumingxing.cn/about/" title="About toothpickv">toothpickv</a></span></span></div><!-- /.entry-meta -->
@@ -180,18 +192,6 @@
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
 
-<article class="hentry">
-  <header>
-    
-      <h1 class="entry-title"><a href="http://blog.qiumingxing.cn/ios/ios7%E7%8A%B6%E6%80%81%E6%A0%8F%E4%BB%A5%E5%8F%8A%E5%AF%BC%E8%88%AA%E6%A0%8F/" rel="bookmark" title="ios7状态栏以及导航栏" itemprop="url">ios7状态栏以及导航栏</a></h1>
-    
-    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2013-11-04T00:00:00-05:00"><a href="http://blog.qiumingxing.cn/ios/ios7%E7%8A%B6%E6%80%81%E6%A0%8F%E4%BB%A5%E5%8F%8A%E5%AF%BC%E8%88%AA%E6%A0%8F/"><!-- November 04, 2013 -->11月04, 2013</a></time></span><span class="author vcard"><span class="fn"><a href="http://blog.qiumingxing.cn/about/" title="About toothpickv">toothpickv</a></span></span></div><!-- /.entry-meta -->
-  </header>
-  <div class="entry-content">
-    <p>ios7的发布使得ios的导航栏和状态栏一体化，渐渐适应以后还是蛮好看的。但是作为开发者，接下来新SDK编译的适配工作也会显得蛋疼不已。许多应用如微信等，可能还是只是适配布局，未进行较大的UI改动，或是出于谨慎考虑。设计风格的大改，怕是不可避免的。本公司的射鸡师早已酝酿出了一套界面，咋一看还真是漂亮极了。导航栏一会绿色一会白色，状态栏字体也是一会黑色一会白色，所以射鸡师它真的不痛程序猿的痛好吗！？</p> <p>ok，这个适配工作真是有些许麻烦，既要保证完美适配，也不想搞乱项目。来吧。</p> <p>设置导航栏的背景颜色 在iOS 7中，不再使用tintColor属性来设置导航栏的颜色，而是使用barTintColor属性来修改背景色。我们可以在AppDelegate.m文件中的方法didFinishLaunchingWithOptions:里面添加如下代码来修改颜色：</p> <div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="p">[[</span><span class="bp">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setBarTintColor</span><span class="p">:[</span><span class="bp">UIColor</span> <span class="n">yellowColor</span><span class="p">]];</span> </code></pre></div> <p>默认情况下，导航栏的translucent属性为YES。另外，系统还会对所有的导航栏做模糊处理，这样可以让iOS 7中导航栏的颜色会变得淡了。至于这个的解决方案可以参考： 如何在iOS 7中设置barTintColor实现类似网易和 Facebook 的 navigationBar 效果 <a href="http://www.cocoachina.com/applenews/devnews/2013/1024/7233.html">http://www.cocoachina.com/applenews/devnews/2013/1024/7233.html</a></p> <p>修改状态栏风格  在老版本的iOS中，状态栏永远都是白色风格。而在iOS 7中，我们可以修改每个view...
-  </div><!-- /.entry-content -->
-</article><!-- /.hentry -->
-
 
 <div class="pagination">
   
@@ -204,9 +204,15 @@
       
     </li>
     
+      <li>
+        
+          <a href="http://blog.qiumingxing.cn/page2">2</a>
+        
+      </li>
+    
   </ul>
   
-    Next
+    <a href="http://blog.qiumingxing.cn/page2" class="btn">Next</a>
   
 </div><!-- /.pagination -->
 </div><!-- /#main -->
