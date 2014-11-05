@@ -2,26 +2,177 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 <title type="text">牙=_签's Blog</title>
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
-<link rel="self" type="application/atom+xml" href="http://blog.qiumingxing.cn/feed.xml" />
-<link rel="alternate" type="text/html" href="http://blog.qiumingxing.cn" />
-<updated>2014-10-31T08:04:01-04:00</updated>
-<id>http://blog.qiumingxing.cn/</id>
+<link rel="self" type="application/atom+xml" href="/feed.xml" />
+<link rel="alternate" type="text/html" href="" />
+<updated>2014-11-05T07:05:45-05:00</updated>
+<id>/</id>
 <author>
   <name>toothpickv</name>
-  <uri>http://blog.qiumingxing.cn/</uri>
+  <uri>/</uri>
   <email>toothpick.v@gmail.com</email>
 </author>
 
 
 <entry>
+  <title type="html"><![CDATA[Textkit入门]]></title>
+ <link rel="alternate" type="text/html" href="/ios/Textkit%E5%88%9D%E6%8E%A2/" />
+  <id>/ios/Textkit初探</id>
+  <published>2014-11-05T10:18:55-05:00</published>
+  <updated>2014-11-05T10:18:55-05:00</updated>
+  <author>
+    <name>toothpickv</name>
+    <uri></uri>
+    <email>toothpick.v@gmail.com</email>
+  </author>
+  <content type="html">&lt;h1&gt;初级入门基本的富文本以及排版&lt;/h1&gt;
+
+&lt;h3&gt;NSAttributedString基本属性研究&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;&lt;span class=&quot;n&quot;&gt;NSFontAttributeName&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;//设置字体属性，默认值：字体：Helvetica(Neue) 字号：12&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSForegroundColorAttributeNam&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;//设置字体颜色，取值为 UIColor对象，默认值为黑色&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSBackgroundColorAttributeName&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;//设置字体所在区域背景颜色，取值为 UIColor对象，默认值为nil, 透明色&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSLigatureAttributeName&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;//设置连体属性，取值为NSNumber 对象(整数)，0 表示没有连体字符，1 表示使用默认的连体字符&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSKernAttributeName&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;//设定字符间距，取值为 NSNumber 对象（整数），正值间距加宽，负值间距变窄&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSStrikethroughStyleAttributeName&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//设置删除线，取值为 NSNumber 对象（整数）&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSStrikethroughColorAttributeName&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//设置删除线颜色，取值为 UIColor 对象，默认值为黑色&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSUnderlineStyleAttributeName&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;//设置下划线，取值为 NSNumber 对象（整数），枚举常量 NSUnderlineStyle中的值，与删除线类似&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSUnderlineColorAttributeName&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;//设置下划线颜色，取值为 UIColor 对象，默认值为黑色&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSStrokeWidthAttributeName&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;//设置笔画宽度，取值为 NSNumber 对象（整数），负值填充效果，正值中空效果&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSStrokeColorAttributeName&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;//填充部分颜色，不是字体颜色，取值为 UIColor 对象&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSShadowAttributeName&lt;/span&gt;              &lt;span class=&quot;c1&quot;&gt;//设置阴影属性，取值为 NSShadow 对象&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//和这三个任一个都好使，NSVerticalGlyphFormAttributeName，NSObliquenessAttributeName，NSExpansionAttributeName&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;NSTextEffectAttributeName&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;//设置文本特殊效果，取值为 NSString 对象，目前只有图版印刷效果可用：&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSBaselineOffsetAttributeName&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;//设置基线偏移值，取值为 NSNumber （float）,正值上偏，负值下偏&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSObliquenessAttributeName&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;//设置字形倾斜度，取值为 NSNumber （float）,正值右倾，负值左倾&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSExpansionAttributeName&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;//设置文本横向拉伸属性，取值为 NSNumber （float）,正值横向拉伸文本，负值横向压缩文本&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSWritingDirectionAttributeName&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;//设置文字书写方向，从左向右书写或者从右向左书写&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSVerticalGlyphFormAttributeName&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;//设置文字排版方向，取值为 NSNumber 对象(整数)，0 表示横排文本，1 表示竖排文本。目前iOS无效，只能横排。&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSLinkAttributeName&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;//设置链接属性，点击后调用浏览器打开指定URL地址&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSAttachmentAttributeName&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;//设置文本附件,取值为NSTextAttachment对象,常用于文字图片混排&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSParagraphStyleAttributeName&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;//设置文本段落排版格式，取值为 NSParagraphStyle 对象&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;NSParagraphStyleAttributeName段落排版属性&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;&lt;span class=&quot;n&quot;&gt;alignment&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//对齐方式  &lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//新特性支援兩端對齊（NSTextAlignmentJustified）&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;firstLineHeadIndent&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//首行缩进&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;headIndent&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//缩进&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;tailIndent&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//尾部缩进&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;lineBreakMode&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//断行方式&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;maximumLineHeight&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//最大行高&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;minimumLineHeight&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//最低行高&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;lineSpacing&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//行距&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;paragraphSpacing&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//段距&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;paragraphSpacingBefore&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//段首空间&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;baseWritingDirection&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//句子方向&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;lineHeightMultiple&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//可变行高,乘因数。&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;hyphenationFactor&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//连字符属性&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;简单试用&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setAttributes:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;UITextView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;textView&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;bp&quot;&gt;NSMutableDictionary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;titleAttributes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;l&quot;&gt;@{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;NSFontAttributeName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;UIFont&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;systemFontOfSize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;18.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;l&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mutableCopy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;bp&quot;&gt;NSMutableAttributedString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributedString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSMutableAttributedString&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;initWithString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&amp;quot;TextKit&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;titleAttributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+
+    &lt;span class=&quot;bp&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;showString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;bp&quot;&gt;NSDictionary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//字距调整（Kerning）&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributedString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;appendAttributedString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSAttributedString&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;initWithString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&amp;quot;字距调整（Kerning）&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;titleAttributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;showString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;字体间距展示字体&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;l&quot;&gt;@{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;NSKernAttributeName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;@5&lt;/span&gt;&lt;span class=&quot;l&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributedString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;appendAttributedString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSAttributedString&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;initWithString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;showString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//连字(Ligatures)属性，一般中文用不到，在英文中可能出现相邻字母连笔的情况。0为不连笔；1为默认连笔，也是默认值；2在ios 上不支持&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributedString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;appendAttributedString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSAttributedString&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;initWithString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&amp;quot;连字(Ligatures)&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;titleAttributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;showString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;fluid&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;l&quot;&gt;@{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;NSLigatureAttributeName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;@1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;NSFontAttributeName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;UIFont&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;fontWithName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;futura&amp;quot;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;l&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributedString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;appendAttributedString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSAttributedString&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;initWithString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;showString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;l&quot;&gt;@{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;NSLigatureAttributeName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;@0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;NSFontAttributeName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;UIFont&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;fontWithName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;futura&amp;quot;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;l&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributedString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;appendAttributedString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSAttributedString&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;initWithString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;showString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;//段落排版&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributedString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;appendAttributedString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSAttributedString&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;initWithString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&amp;quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;段落排版&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;titleAttributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
+    &lt;span class=&quot;bp&quot;&gt;NSMutableParagraphStyle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;paragraphStyle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSParagraphStyle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defaultParagraphStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mutableCopy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;paragraphStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alignment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NSTextAlignmentJustified&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;paragraphStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;firstLineHeadIndent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;20.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;paragraphStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;headIndent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;2.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//    paragraphStyle.tailIndent = 2.0;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;paragraphStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lineSpacing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;5.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;showString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;stringWithFormat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&amp;quot;这段文字左右对齐！首行缩进firstLineHeadIndent=%f；缩进headIndent=%f；尾部缩进tailIndent=%f；行距lineSpacing=%f；&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;paragraphStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;firstLineHeadIndent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;paragraphStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;headIndent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;paragraphStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tailIndent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;paragraphStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lineSpacing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;l&quot;&gt;@{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;NSParagraphStyleAttributeName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;paragraphStyle&lt;/span&gt;&lt;span class=&quot;l&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributedString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;appendAttributedString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSAttributedString&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;initWithString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;showString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
+
+
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributedString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;appendAttributedString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSAttributedString&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;initWithString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&amp;quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;附件图片&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;titleAttributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
+    &lt;span class=&quot;bp&quot;&gt;NSTextAttachment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attachment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSTextAttachment&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;bp&quot;&gt;UIImage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;UIImage&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;imageNamed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&amp;quot;demo&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;attachment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;attachment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bounds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CGRectMake&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;l&quot;&gt;@{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;NSAttachmentAttributeName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attachment&lt;/span&gt;&lt;span class=&quot;l&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributedString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;appendAttributedString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSAttributedString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;attributedStringWithAttachment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attachment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;textView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributedText&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attributedString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;运行效果&lt;/h3&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://qiumingxing-cn.qiniudn.com/TextKitDemo.png&quot; alt=&quot;TextKitDemo&quot;&gt;&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;h1&gt;TextKit结构&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://img.objccn.io/issue-5/TextKit.png&quot; alt=&quot;TextKit Structure&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;从上图可以看出来，要让一个文本引擎工作，需要几个参与者。我们将从外到里介绍它们：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;字符串（String）&lt;/strong&gt;：要绘制文本，那么必然在某个地方有个字符串来存储这段文本。在默认的结构中，&lt;code&gt;NSTextStorage&lt;/code&gt; 保存并管理这个字符串，在这种情况中，它可以远离绘制。但并不一定非得这样。使用 TextKit 时，文本可以来自任何适合的来源。例如，对于一个代码编辑器，字符串可以是一棵包含所有显示的代码的结构信息的注释语法树（annotated syntax tree，缩写为 AST）。使用一个自定义的 &lt;code&gt;NSTextStorage&lt;/code&gt; 就可以让文本在稍后动态地添加字体或颜色高亮等文本属性装饰。这是第一次，开发者可以直接为文本组件使用自己的模型。要想实现这个功能，我们需要一个特别设计的 &lt;code&gt;NSTextStorage&lt;/code&gt;，即：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;NSTextStorage&lt;/code&gt;：如果你把文本系统看做一个模型-视图-控制器（MVC）架构，这个类代表的是模型。&lt;code&gt;NSTextStorage&lt;/code&gt; 是一个中枢，它管理所有的文本和属性信息。系统只提供了两个存取器方法存取它们，并另外提供了两个方法来分别修改文本和属性。后面我们将进一步了解这些方法。现在重要的是你得理解 &lt;code&gt;NSTextStorage&lt;/code&gt; 是从它的父类 &lt;code&gt;NSAttributedString&lt;/code&gt; 继承了这些方法。这就很清楚了，&lt;code&gt;NSTextStorage&lt;/code&gt;——从文本系统看来——仅仅是一个带有属性的字符串，附带一些扩展。这两者唯一的重大不同点是 &lt;code&gt;NSTextStorage&lt;/code&gt; 包含了一个方法，可以把所有对其内容进行的修改以通知的形式发送出来。我们等一下会介绍这部分内容。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;UITextView&lt;/code&gt;：堆栈的另一头是实际的视图。在 TextKit 中，有两个目的：第一，它是文本系统用来绘制的视图。文本视图它自己并&lt;em&gt;不&lt;/em&gt;会做任何绘制；它仅仅提供一个供其它类绘制的区域。作为视图层级机构中唯一的组件，第二个目的是处理所有的用户交互。具体来说，Text View 实现 &lt;code&gt;UITextInput&lt;/code&gt; 的协议来处理键盘事件，它为用户提供了一种途径来设置一个插入点或选择文本。它并不对文本做任何实际上的改变，仅仅将这些改变请求转发给刚刚讨论的 Text Storage。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;NSTextContainer&lt;/code&gt;：每个 Text View 定义了一个文本可以绘制的区域。为此，每个 Text View 都有一个 Text Container，它精确地描述了这个可用的区域。在简单的情况下，这是一个垂直的无限大的矩形区域。文本被填充到这个区域，并且 Text View 允许用户滚动它。然而，在更高级的情况下，这个区域可能是一个无限大的矩形。例如，当渲染一本书时，每一页都有最大的高度和宽度。 Text Container 会定义这个大小，并且不接受任何超出的文本。相同情况下，一幅图像可能占据了页面的一部分，文本应该沿着它的边缘重新排版。这也是由 Text Container 来处理的，我们会在后面的例子中看到这一点。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;NSLayoutManager&lt;/code&gt;：Layout Manager 是中心组件，它把所有组件粘合在一起：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;这个管理器监听 Text Storage 中文本或属性改变的通知，一旦接收到通知就触发布局进程。&lt;/li&gt;
+&lt;li&gt;从 Text Storage 提供的文本开始，它将所有的字符翻译为字形（Glyph）[^2]。&lt;/li&gt;
+&lt;li&gt;一旦字形全部生成，这个管理器向它的 Text Containers 查询文本可用以绘制的区域。&lt;/li&gt;
+&lt;li&gt;然后这些区域被行逐步填充，而行又被字形逐步填充。一旦一行填充完毕，下一行开始填充。&lt;/li&gt;
+&lt;li&gt;对于每一行，布局管理器必须考虑断行行为（放不下的单词必须移到下一行）、连字符、内联的图像附件等等。&lt;/li&gt;
+&lt;li&gt;当布局完成，文本的当前显示状态被设为无效，然后 Layout Manager 将前面几步排版好的文本设给 Text View。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;CoreText&lt;/strong&gt;：没有直接包含在 TextKit 中，CoreText 是进行实际排版的库。对于布局管理器的每一步，CoreText 被这样或那样的方式调用。它提供了从字符到字形的翻译，用它们来填充行，以及建议断字点。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;相关使用查看&lt;/code&gt;：&lt;a href=&quot;http://objccn.io/issue-5-1/&quot;&gt;初识 TextKit&lt;/a&gt; 以及&lt;a href=&quot;https://github.com/objcio/issue-5-textkit&quot;&gt;TextKitDemo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;参考软文:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.cocoachina.com/industry/20140521/8504.html&quot;&gt;iOS文字排版(CoreText)那些事儿&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://objccn.io/issue-5-1/&quot;&gt;初识 TextKit&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;/ios/Textkit%E5%88%9D%E6%8E%A2/&quot;&gt;Textkit入门&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;&quot;&gt;牙=_签's Blog&lt;/a&gt; on November 05, 2014.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
   <title type="html"><![CDATA[block在arc与非arc区别]]></title>
- <link rel="alternate" type="text/html" href="http://blog.qiumingxing.cn/ios/block%E5%9C%A8arc%E4%B8%8E%E9%9D%9Earc%E5%8C%BA%E5%88%AB/" />
-  <id>http://blog.qiumingxing.cn/ios/block在arc与非arc区别</id>
+ <link rel="alternate" type="text/html" href="/ios/block%E5%9C%A8arc%E4%B8%8E%E9%9D%9Earc%E5%8C%BA%E5%88%AB/" />
+  <id>/ios/block在arc与非arc区别</id>
   <published>2014-10-31T15:56:55-04:00</published>
   <updated>2014-10-31T15:56:55-04:00</updated>
   <author>
     <name>toothpickv</name>
-    <uri>http://blog.qiumingxing.cn</uri>
+    <uri></uri>
     <email>toothpick.v@gmail.com</email>
   </author>
   <content type="html">&lt;h1&gt;block在arc与非arc区别&lt;/h1&gt;
@@ -384,19 +535,19 @@ Block变量，被&lt;/strong&gt;block修饰的变量称作Block变量。 基本�
 因此防止循环引用的方法如下：&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;&lt;span class=&quot;n&quot;&gt;__unsafe_unretained&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TestCycleRetain&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weakSelf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-  &lt;p&gt;&lt;a href=&quot;http://blog.qiumingxing.cn/ios/block%E5%9C%A8arc%E4%B8%8E%E9%9D%9Earc%E5%8C%BA%E5%88%AB/&quot;&gt;block在arc与非arc区别&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;http://blog.qiumingxing.cn&quot;&gt;牙=_签's Blog&lt;/a&gt; on October 31, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/ios/block%E5%9C%A8arc%E4%B8%8E%E9%9D%9Earc%E5%8C%BA%E5%88%AB/&quot;&gt;block在arc与非arc区别&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;&quot;&gt;牙=_签's Blog&lt;/a&gt; on October 31, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[iOS开发代码签名笔录]]></title>
- <link rel="alternate" type="text/html" href="http://blog.qiumingxing.cn/ios/iOS%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E7%AC%94%E5%BD%95/" />
-  <id>http://blog.qiumingxing.cn/ios/iOS开发代码签名笔录</id>
+ <link rel="alternate" type="text/html" href="/ios/iOS%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E7%AC%94%E5%BD%95/" />
+  <id>/ios/iOS开发代码签名笔录</id>
   <published>2014-10-31T10:42:55-04:00</published>
   <updated>2014-10-31T10:42:55-04:00</updated>
   <author>
     <name>toothpickv</name>
-    <uri>http://blog.qiumingxing.cn</uri>
+    <uri></uri>
     <email>toothpick.v@gmail.com</email>
   </author>
   <content type="html">&lt;h1&gt;iOS开发代码签名笔录&lt;/h1&gt;
@@ -602,19 +753,19 @@ MIIFnjCCBIagAwIBAgIIE/IgVItTuH4wDQYJKoZIhvcNAQEFBQAwgZYxCzA…
 
 &lt;p&gt;&lt;a href=&quot;http://objccn.io/issue-17-2/&quot;&gt;译文：代码签名探析&lt;/a&gt;&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://blog.qiumingxing.cn/ios/iOS%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E7%AC%94%E5%BD%95/&quot;&gt;iOS开发代码签名笔录&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;http://blog.qiumingxing.cn&quot;&gt;牙=_签's Blog&lt;/a&gt; on October 31, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/ios/iOS%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E7%AC%94%E5%BD%95/&quot;&gt;iOS开发代码签名笔录&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;&quot;&gt;牙=_签's Blog&lt;/a&gt; on October 31, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[CocoaPods管理个人本地库]]></title>
- <link rel="alternate" type="text/html" href="http://blog.qiumingxing.cn/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/" />
-  <id>http://blog.qiumingxing.cn/ios/CocoaPods管理个人本地库</id>
+ <link rel="alternate" type="text/html" href="/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/" />
+  <id>/ios/CocoaPods管理个人本地库</id>
   <published>2014-10-29T00:00:00-04:00</published>
   <updated>2014-10-29T00:00:00-04:00</updated>
   <author>
     <name>toothpickv</name>
-    <uri>http://blog.qiumingxing.cn</uri>
+    <uri></uri>
     <email>toothpick.v@gmail.com</email>
   </author>
   <content type="html">&lt;h1&gt;CocoaPods管理个人本地库&lt;/h1&gt;
@@ -660,19 +811,19 @@ MIIFnjCCBIagAwIBAgIIE/IgVItTuH4wDQYJKoZIhvcNAQEFBQAwgZYxCzA…
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;然后运行pod install&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://blog.qiumingxing.cn/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/&quot;&gt;CocoaPods管理个人本地库&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;http://blog.qiumingxing.cn&quot;&gt;牙=_签's Blog&lt;/a&gt; on October 29, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/&quot;&gt;CocoaPods管理个人本地库&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;&quot;&gt;牙=_签's Blog&lt;/a&gt; on October 29, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[CocoaPods小技巧]]></title>
- <link rel="alternate" type="text/html" href="http://blog.qiumingxing.cn/ios/CocoaPods%E5%B0%8F%E6%8A%80%E5%B7%A7/" />
-  <id>http://blog.qiumingxing.cn/ios/CocoaPods小技巧</id>
+ <link rel="alternate" type="text/html" href="/ios/CocoaPods%E5%B0%8F%E6%8A%80%E5%B7%A7/" />
+  <id>/ios/CocoaPods小技巧</id>
   <published>2014-10-28T00:00:00-04:00</published>
   <updated>2014-10-28T00:00:00-04:00</updated>
   <author>
     <name>toothpickv</name>
-    <uri>http://blog.qiumingxing.cn</uri>
+    <uri></uri>
     <email>toothpick.v@gmail.com</email>
   </author>
   <content type="html">&lt;h1&gt;CocoaPods小技巧&lt;/h1&gt;
@@ -703,19 +854,19 @@ MIIFnjCCBIagAwIBAgIIE/IgVItTuH4wDQYJKoZIhvcNAQEFBQAwgZYxCzA…
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;ps：测试时最好不开启，免得一些bug难以发现。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://blog.qiumingxing.cn/ios/CocoaPods%E5%B0%8F%E6%8A%80%E5%B7%A7/&quot;&gt;CocoaPods小技巧&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;http://blog.qiumingxing.cn&quot;&gt;牙=_签's Blog&lt;/a&gt; on October 28, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/ios/CocoaPods%E5%B0%8F%E6%8A%80%E5%B7%A7/&quot;&gt;CocoaPods小技巧&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;&quot;&gt;牙=_签's Blog&lt;/a&gt; on October 28, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[减少上线应用的崩溃情况]]></title>
- <link rel="alternate" type="text/html" href="http://blog.qiumingxing.cn/ios/%E5%87%8F%E5%B0%91%E4%B8%8A%E7%BA%BF%E5%BA%94%E7%94%A8%E7%9A%84%E5%B4%A9%E6%BA%83%E6%83%85%E5%86%B5/" />
-  <id>http://blog.qiumingxing.cn/ios/减少上线应用的崩溃情况</id>
+ <link rel="alternate" type="text/html" href="/ios/%E5%87%8F%E5%B0%91%E4%B8%8A%E7%BA%BF%E5%BA%94%E7%94%A8%E7%9A%84%E5%B4%A9%E6%BA%83%E6%83%85%E5%86%B5/" />
+  <id>/ios/减少上线应用的崩溃情况</id>
   <published>2014-03-11T10:42:55-04:00</published>
   <updated>2014-03-11T10:42:55-04:00</updated>
   <author>
     <name>toothpickv</name>
-    <uri>http://blog.qiumingxing.cn</uri>
+    <uri></uri>
     <email>toothpick.v@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;应用上线后，在umeng或是百度移动统计里面经常会有NSRangeException，NSInvalidArgumentException等这类错误，而且通常都是占据了很大比例。
@@ -824,19 +975,19 @@ MIIFnjCCBIagAwIBAgIIE/IgVItTuH4wDQYJKoZIhvcNAQEFBQAwgZYxCzA…
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;ps：测试时最好不开启，免得一些bug难以发现。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://blog.qiumingxing.cn/ios/%E5%87%8F%E5%B0%91%E4%B8%8A%E7%BA%BF%E5%BA%94%E7%94%A8%E7%9A%84%E5%B4%A9%E6%BA%83%E6%83%85%E5%86%B5/&quot;&gt;减少上线应用的崩溃情况&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;http://blog.qiumingxing.cn&quot;&gt;牙=_签's Blog&lt;/a&gt; on March 11, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/ios/%E5%87%8F%E5%B0%91%E4%B8%8A%E7%BA%BF%E5%BA%94%E7%94%A8%E7%9A%84%E5%B4%A9%E6%BA%83%E6%83%85%E5%86%B5/&quot;&gt;减少上线应用的崩溃情况&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;&quot;&gt;牙=_签's Blog&lt;/a&gt; on March 11, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[ios7状态栏以及导航栏]]></title>
- <link rel="alternate" type="text/html" href="http://blog.qiumingxing.cn/ios/ios7%E7%8A%B6%E6%80%81%E6%A0%8F%E4%BB%A5%E5%8F%8A%E5%AF%BC%E8%88%AA%E6%A0%8F/" />
-  <id>http://blog.qiumingxing.cn/ios/ios7状态栏以及导航栏</id>
+ <link rel="alternate" type="text/html" href="/ios/ios7%E7%8A%B6%E6%80%81%E6%A0%8F%E4%BB%A5%E5%8F%8A%E5%AF%BC%E8%88%AA%E6%A0%8F/" />
+  <id>/ios/ios7状态栏以及导航栏</id>
   <published>2013-11-04T00:00:00-05:00</published>
   <updated>2013-11-04T00:00:00-05:00</updated>
   <author>
     <name>toothpickv</name>
-    <uri>http://blog.qiumingxing.cn</uri>
+    <uri></uri>
     <email>toothpick.v@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;ios7的发布使得ios的导航栏和状态栏一体化，渐渐适应以后还是蛮好看的。但是作为开发者，接下来新SDK编译的适配工作也会显得蛋疼不已。许多应用如微信等，可能还是只是适配布局，未进行较大的UI改动，或是出于谨慎考虑。设计风格的大改，怕是不可避免的。本公司的射鸡师早已酝酿出了一套界面，咋一看还真是漂亮极了。导航栏一会绿色一会白色，状态栏字体也是一会黑色一会白色，所以射鸡师它真的不痛程序猿的痛好吗！？&lt;/p&gt;
@@ -984,7 +1135,7 @@ UIViewController+StatusBarStyle.m:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span style=&quot;color: #ff9300;&quot;&gt;以上个人的解决方案，适配工作有点紧，有未充分考虑，如果大神有更方便简洁的方案，欢迎赐教。&lt;/span&gt;&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://blog.qiumingxing.cn/ios/ios7%E7%8A%B6%E6%80%81%E6%A0%8F%E4%BB%A5%E5%8F%8A%E5%AF%BC%E8%88%AA%E6%A0%8F/&quot;&gt;ios7状态栏以及导航栏&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;http://blog.qiumingxing.cn&quot;&gt;牙=_签's Blog&lt;/a&gt; on November 04, 2013.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/ios/ios7%E7%8A%B6%E6%80%81%E6%A0%8F%E4%BB%A5%E5%8F%8A%E5%AF%BC%E8%88%AA%E6%A0%8F/&quot;&gt;ios7状态栏以及导航栏&lt;/a&gt; was originally published by toothpickv at &lt;a href=&quot;&quot;&gt;牙=_签's Blog&lt;/a&gt; on November 04, 2013.&lt;/p&gt;</content>
 </entry>
 
 </feed>

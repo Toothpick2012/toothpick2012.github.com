@@ -1,0 +1,373 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Textkit入门 &#8211; 牙=_签's Blog</title>
+<meta name="description" content="">
+<meta name="keywords" content="Textkit, CoreText, 富文本, 附件, 苹果, iOS7">
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Textkit入门">
+<meta property="og:description" content="">
+<meta property="og:url" content="/ios/Textkit%E5%88%9D%E6%8E%A2/">
+<meta property="og:site_name" content="牙=_签's Blog">
+
+
+
+
+
+<link rel="canonical" href="/ios/Textkit%E5%88%9D%E6%8E%A2/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="牙=_签's Blog Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.min.css">
+<link rel="stylesheet" href="/custom/css/main.css">
+<!-- Webfonts -->
+<!-- <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css"> -->
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+
+
+<script src="/custom/js/sea.js"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="/custom/js/gallery.js"></script>
+<script src="/custom/js/jquery.goup.min.js"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            $.goup({
+                trigger: 100,
+                bottomOffset: 150,
+                locationOffset: 100,
+                title: 'TOP',
+                titleAsText: true
+            });
+        });
+ </script>
+</head>
+
+<body id="post" class="feature">
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">菜单</button>
+	<ul class="dl-menu">
+		<li><a href="/">首页</a></li>
+		<li>
+			<a href="#">文章</a>
+			<ul class="dl-submenu">
+				<li><a href="/posts/">所有文章</a></li>
+				<li><a href="/tags/">所有标签</a></li>
+			</ul>
+		</li>
+		<li><a href="/search.html">搜索</a></li>
+		<li>
+			<a href="#">关于</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="/images/avatar.jpg" alt="toothpickv photo" class="author-photo">
+					<h4>toothpickv</h4>
+					<p>一个中国汉纸</p>
+				</li>
+				<li><a href="/about/">更多</a></li>
+				<li>
+					<a href="mailto:toothpick.v@gmail.com"><i class="icon-envelope"></i> Email</a>
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<!-- <li><a href="/theme-setup">Theme Setup</a></li><li><a href="http://mademistakes.com">External Link</a></li> -->
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+<div class="entry-header">
+  
+  <div class="entry-image">
+    
+
+  	  
+		      
+  			<div class="entry-image" style="background: #000000">
+		 
+  		
+  			</div>
+    
+  </div><!-- /.entry-image -->
+</div><!-- /.entry-header -->
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="/ios/Textkit%E5%88%9D%E6%8E%A2/" rel="bookmark" title="Textkit入门">Textkit入门</a></h1>
+        
+        <h2>11月05, 2014 <!-- November 05, 2014 --></h2>
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <h1>初级入门基本的富文本以及排版</h1>
+
+<h3>NSAttributedString基本属性研究</h3>
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="n">NSFontAttributeName</span>                <span class="c1">//设置字体属性，默认值：字体：Helvetica(Neue) 字号：12</span>
+<span class="n">NSForegroundColorAttributeNam</span>      <span class="c1">//设置字体颜色，取值为 UIColor对象，默认值为黑色</span>
+<span class="n">NSBackgroundColorAttributeName</span>     <span class="c1">//设置字体所在区域背景颜色，取值为 UIColor对象，默认值为nil, 透明色</span>
+<span class="n">NSLigatureAttributeName</span>            <span class="c1">//设置连体属性，取值为NSNumber 对象(整数)，0 表示没有连体字符，1 表示使用默认的连体字符</span>
+<span class="n">NSKernAttributeName</span>                <span class="c1">//设定字符间距，取值为 NSNumber 对象（整数），正值间距加宽，负值间距变窄</span>
+<span class="n">NSStrikethroughStyleAttributeName</span>  <span class="c1">//设置删除线，取值为 NSNumber 对象（整数）</span>
+<span class="n">NSStrikethroughColorAttributeName</span>  <span class="c1">//设置删除线颜色，取值为 UIColor 对象，默认值为黑色</span>
+<span class="n">NSUnderlineStyleAttributeName</span>      <span class="c1">//设置下划线，取值为 NSNumber 对象（整数），枚举常量 NSUnderlineStyle中的值，与删除线类似</span>
+<span class="n">NSUnderlineColorAttributeName</span>      <span class="c1">//设置下划线颜色，取值为 UIColor 对象，默认值为黑色</span>
+<span class="n">NSStrokeWidthAttributeName</span>         <span class="c1">//设置笔画宽度，取值为 NSNumber 对象（整数），负值填充效果，正值中空效果</span>
+<span class="n">NSStrokeColorAttributeName</span>         <span class="c1">//填充部分颜色，不是字体颜色，取值为 UIColor 对象</span>
+<span class="n">NSShadowAttributeName</span>              <span class="c1">//设置阴影属性，取值为 NSShadow 对象</span>
+<span class="c1">//和这三个任一个都好使，NSVerticalGlyphFormAttributeName，NSObliquenessAttributeName，NSExpansionAttributeName</span>
+
+<span class="n">NSTextEffectAttributeName</span>          <span class="c1">//设置文本特殊效果，取值为 NSString 对象，目前只有图版印刷效果可用：</span>
+<span class="n">NSBaselineOffsetAttributeName</span>      <span class="c1">//设置基线偏移值，取值为 NSNumber （float）,正值上偏，负值下偏</span>
+<span class="n">NSObliquenessAttributeName</span>         <span class="c1">//设置字形倾斜度，取值为 NSNumber （float）,正值右倾，负值左倾</span>
+<span class="n">NSExpansionAttributeName</span>           <span class="c1">//设置文本横向拉伸属性，取值为 NSNumber （float）,正值横向拉伸文本，负值横向压缩文本</span>
+<span class="n">NSWritingDirectionAttributeName</span>    <span class="c1">//设置文字书写方向，从左向右书写或者从右向左书写</span>
+<span class="n">NSVerticalGlyphFormAttributeName</span>   <span class="c1">//设置文字排版方向，取值为 NSNumber 对象(整数)，0 表示横排文本，1 表示竖排文本。目前iOS无效，只能横排。</span>
+<span class="n">NSLinkAttributeName</span>                <span class="c1">//设置链接属性，点击后调用浏览器打开指定URL地址</span>
+<span class="n">NSAttachmentAttributeName</span>          <span class="c1">//设置文本附件,取值为NSTextAttachment对象,常用于文字图片混排</span>
+<span class="n">NSParagraphStyleAttributeName</span>      <span class="c1">//设置文本段落排版格式，取值为 NSParagraphStyle 对象</span>
+</code></pre></div>
+<h3>NSParagraphStyleAttributeName段落排版属性</h3>
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="n">alignment</span> <span class="c1">//对齐方式  </span>
+<span class="c1">//新特性支援兩端對齊（NSTextAlignmentJustified）</span>
+
+<span class="n">firstLineHeadIndent</span> <span class="c1">//首行缩进</span>
+<span class="n">headIndent</span> <span class="c1">//缩进</span>
+<span class="n">tailIndent</span> <span class="c1">//尾部缩进</span>
+<span class="n">lineBreakMode</span> <span class="c1">//断行方式</span>
+<span class="n">maximumLineHeight</span> <span class="c1">//最大行高</span>
+<span class="n">minimumLineHeight</span> <span class="c1">//最低行高</span>
+<span class="n">lineSpacing</span> <span class="c1">//行距</span>
+<span class="n">paragraphSpacing</span> <span class="c1">//段距</span>
+<span class="n">paragraphSpacingBefore</span> <span class="c1">//段首空间</span>
+<span class="n">baseWritingDirection</span> <span class="c1">//句子方向</span>
+<span class="n">lineHeightMultiple</span> <span class="c1">//可变行高,乘因数。</span>
+<span class="n">hyphenationFactor</span> <span class="c1">//连字符属性</span>
+</code></pre></div>
+<h3>简单试用</h3>
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setAttributes:</span><span class="p">(</span><span class="bp">UITextView</span><span class="o">*</span><span class="p">)</span><span class="nv">textView</span>
+<span class="p">{</span>
+    <span class="bp">NSMutableDictionary</span> <span class="o">*</span><span class="n">titleAttributes</span> <span class="o">=</span> <span class="p">[</span><span class="l">@{</span><span class="nl">NSFontAttributeName</span><span class="p">:[</span><span class="bp">UIFont</span> <span class="nl">systemFontOfSize</span><span class="p">:</span><span class="mf">18.0</span><span class="p">]</span><span class="l">}</span> <span class="n">mutableCopy</span><span class="p">];</span>
+    <span class="bp">NSMutableAttributedString</span> <span class="o">*</span><span class="n">attributedString</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSMutableAttributedString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithString</span><span class="p">:</span><span class="s">@&quot;TextKit</span><span class="se">\n\n</span><span class="s">&quot;</span> <span class="nl">attributes</span><span class="p">:</span><span class="n">titleAttributes</span><span class="p">];</span>
+
+    <span class="bp">NSString</span> <span class="o">*</span><span class="n">showString</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="bp">NSDictionary</span> <span class="o">*</span><span class="n">attributes</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="c1">//字距调整（Kerning）</span>
+    <span class="p">[</span><span class="n">attributedString</span> <span class="nl">appendAttributedString</span><span class="p">:[[</span><span class="bp">NSAttributedString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithString</span><span class="p">:</span><span class="s">@&quot;字距调整（Kerning）</span><span class="se">\n</span><span class="s">&quot;</span> <span class="nl">attributes</span><span class="p">:</span><span class="n">titleAttributes</span><span class="p">]];</span>
+    <span class="n">showString</span> <span class="o">=</span> <span class="s">@&quot;字体间距展示字体</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">;</span>
+    <span class="n">attributes</span> <span class="o">=</span> <span class="l">@{</span><span class="nl">NSKernAttributeName</span><span class="p">:</span><span class="mi">@5</span><span class="l">}</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">attributedString</span> <span class="nl">appendAttributedString</span><span class="p">:</span>
+     <span class="p">[[</span><span class="bp">NSAttributedString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithString</span><span class="p">:</span><span class="n">showString</span> <span class="nl">attributes</span><span class="p">:</span><span class="n">attributes</span><span class="p">]];</span>
+    <span class="c1">//连字(Ligatures)属性，一般中文用不到，在英文中可能出现相邻字母连笔的情况。0为不连笔；1为默认连笔，也是默认值；2在ios 上不支持</span>
+    <span class="p">[</span><span class="n">attributedString</span> <span class="nl">appendAttributedString</span><span class="p">:[[</span><span class="bp">NSAttributedString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithString</span><span class="p">:</span><span class="s">@&quot;连字(Ligatures)</span><span class="se">\n</span><span class="s">&quot;</span> <span class="nl">attributes</span><span class="p">:</span><span class="n">titleAttributes</span><span class="p">]];</span>
+    <span class="n">showString</span> <span class="o">=</span> <span class="s">@&quot;fluid</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+    <span class="n">attributes</span> <span class="o">=</span> <span class="l">@{</span><span class="nl">NSLigatureAttributeName</span><span class="p">:</span><span class="mi">@1</span><span class="p">,</span> <span class="nl">NSFontAttributeName</span><span class="p">:[</span><span class="bp">UIFont</span> <span class="nl">fontWithName</span><span class="p">:</span> <span class="s">@&quot;futura&quot;</span> <span class="nl">size</span><span class="p">:</span> <span class="mi">30</span><span class="p">]</span><span class="l">}</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">attributedString</span> <span class="nl">appendAttributedString</span><span class="p">:</span>
+     <span class="p">[[</span><span class="bp">NSAttributedString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithString</span><span class="p">:</span><span class="n">showString</span> <span class="nl">attributes</span><span class="p">:</span><span class="n">attributes</span><span class="p">]];</span>
+    <span class="n">attributes</span> <span class="o">=</span> <span class="l">@{</span><span class="nl">NSLigatureAttributeName</span><span class="p">:</span><span class="mi">@0</span><span class="p">,</span> <span class="nl">NSFontAttributeName</span><span class="p">:[</span><span class="bp">UIFont</span> <span class="nl">fontWithName</span><span class="p">:</span> <span class="s">@&quot;futura&quot;</span> <span class="nl">size</span><span class="p">:</span> <span class="mi">30</span><span class="p">]</span><span class="l">}</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">attributedString</span> <span class="nl">appendAttributedString</span><span class="p">:</span>
+     <span class="p">[[</span><span class="bp">NSAttributedString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithString</span><span class="p">:</span><span class="n">showString</span> <span class="nl">attributes</span><span class="p">:</span><span class="n">attributes</span><span class="p">]];</span>
+
+    <span class="c1">//段落排版</span>
+    <span class="p">[</span><span class="n">attributedString</span> <span class="nl">appendAttributedString</span><span class="p">:[[</span><span class="bp">NSAttributedString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithString</span><span class="p">:</span><span class="s">@&quot;</span><span class="se">\n</span><span class="s">段落排版</span><span class="se">\n</span><span class="s">&quot;</span> <span class="nl">attributes</span><span class="p">:</span><span class="n">titleAttributes</span><span class="p">]];</span>
+    <span class="bp">NSMutableParagraphStyle</span> <span class="o">*</span><span class="n">paragraphStyle</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSParagraphStyle</span> <span class="n">defaultParagraphStyle</span><span class="p">]</span> <span class="n">mutableCopy</span><span class="p">];</span>
+    <span class="n">paragraphStyle</span><span class="p">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="n">NSTextAlignmentJustified</span><span class="p">;</span>
+    <span class="n">paragraphStyle</span><span class="p">.</span><span class="n">firstLineHeadIndent</span> <span class="o">=</span> <span class="mf">20.0</span><span class="p">;</span>
+    <span class="n">paragraphStyle</span><span class="p">.</span><span class="n">headIndent</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">;</span>
+<span class="c1">//    paragraphStyle.tailIndent = 2.0;</span>
+    <span class="n">paragraphStyle</span><span class="p">.</span><span class="n">lineSpacing</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">;</span>
+    <span class="n">showString</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSString</span> <span class="nl">stringWithFormat</span><span class="p">:</span><span class="s">@&quot;这段文字左右对齐！首行缩进firstLineHeadIndent=%f；缩进headIndent=%f；尾部缩进tailIndent=%f；行距lineSpacing=%f；&quot;</span><span class="p">,</span> <span class="n">paragraphStyle</span><span class="p">.</span><span class="n">firstLineHeadIndent</span><span class="p">,</span> <span class="n">paragraphStyle</span><span class="p">.</span><span class="n">headIndent</span><span class="p">,</span> <span class="n">paragraphStyle</span><span class="p">.</span><span class="n">tailIndent</span><span class="p">,</span> <span class="n">paragraphStyle</span><span class="p">.</span><span class="n">lineSpacing</span><span class="p">];</span>
+    <span class="n">attributes</span> <span class="o">=</span> <span class="l">@{</span><span class="nl">NSParagraphStyleAttributeName</span><span class="p">:</span><span class="n">paragraphStyle</span><span class="l">}</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">attributedString</span> <span class="nl">appendAttributedString</span><span class="p">:</span>
+     <span class="p">[[</span><span class="bp">NSAttributedString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithString</span><span class="p">:</span><span class="n">showString</span> <span class="nl">attributes</span><span class="p">:</span><span class="n">attributes</span><span class="p">]];</span>
+
+
+    <span class="p">[</span><span class="n">attributedString</span> <span class="nl">appendAttributedString</span><span class="p">:[[</span><span class="bp">NSAttributedString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithString</span><span class="p">:</span><span class="s">@&quot;</span><span class="se">\n</span><span class="s">附件图片</span><span class="se">\n</span><span class="s">&quot;</span> <span class="nl">attributes</span><span class="p">:</span><span class="n">titleAttributes</span><span class="p">]];</span>
+    <span class="bp">NSTextAttachment</span> <span class="o">*</span><span class="n">attachment</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSTextAttachment</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+    <span class="bp">UIImage</span> <span class="o">*</span><span class="n">image</span> <span class="o">=</span> <span class="p">[</span><span class="bp">UIImage</span> <span class="nl">imageNamed</span><span class="p">:</span><span class="s">@&quot;demo&quot;</span><span class="p">];</span>
+    <span class="n">attachment</span><span class="p">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="p">;</span>
+    <span class="n">attachment</span><span class="p">.</span><span class="n">bounds</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">image</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">image</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
+    <span class="n">attributes</span> <span class="o">=</span> <span class="l">@{</span><span class="nl">NSAttachmentAttributeName</span><span class="p">:</span><span class="n">attachment</span><span class="l">}</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">attributedString</span> <span class="nl">appendAttributedString</span><span class="p">:[</span><span class="bp">NSAttributedString</span> <span class="nl">attributedStringWithAttachment</span><span class="p">:</span><span class="n">attachment</span><span class="p">]];</span>
+
+    <span class="n">textView</span><span class="p">.</span><span class="n">attributedText</span> <span class="o">=</span> <span class="n">attributedString</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3>运行效果</h3>
+
+<hr>
+
+<p><img src="http://qiumingxing-cn.qiniudn.com/TextKitDemo.png" alt="TextKitDemo"></p>
+
+<hr>
+
+<h1>TextKit结构</h1>
+
+<p><img src="http://img.objccn.io/issue-5/TextKit.png" alt="TextKit Structure"></p>
+
+<p>从上图可以看出来，要让一个文本引擎工作，需要几个参与者。我们将从外到里介绍它们：</p>
+
+<p><strong>字符串（String）</strong>：要绘制文本，那么必然在某个地方有个字符串来存储这段文本。在默认的结构中，<code>NSTextStorage</code> 保存并管理这个字符串，在这种情况中，它可以远离绘制。但并不一定非得这样。使用 TextKit 时，文本可以来自任何适合的来源。例如，对于一个代码编辑器，字符串可以是一棵包含所有显示的代码的结构信息的注释语法树（annotated syntax tree，缩写为 AST）。使用一个自定义的 <code>NSTextStorage</code> 就可以让文本在稍后动态地添加字体或颜色高亮等文本属性装饰。这是第一次，开发者可以直接为文本组件使用自己的模型。要想实现这个功能，我们需要一个特别设计的 <code>NSTextStorage</code>，即：</p>
+
+<p><code>NSTextStorage</code>：如果你把文本系统看做一个模型-视图-控制器（MVC）架构，这个类代表的是模型。<code>NSTextStorage</code> 是一个中枢，它管理所有的文本和属性信息。系统只提供了两个存取器方法存取它们，并另外提供了两个方法来分别修改文本和属性。后面我们将进一步了解这些方法。现在重要的是你得理解 <code>NSTextStorage</code> 是从它的父类 <code>NSAttributedString</code> 继承了这些方法。这就很清楚了，<code>NSTextStorage</code>——从文本系统看来——仅仅是一个带有属性的字符串，附带一些扩展。这两者唯一的重大不同点是 <code>NSTextStorage</code> 包含了一个方法，可以把所有对其内容进行的修改以通知的形式发送出来。我们等一下会介绍这部分内容。</p>
+
+<p><code>UITextView</code>：堆栈的另一头是实际的视图。在 TextKit 中，有两个目的：第一，它是文本系统用来绘制的视图。文本视图它自己并<em>不</em>会做任何绘制；它仅仅提供一个供其它类绘制的区域。作为视图层级机构中唯一的组件，第二个目的是处理所有的用户交互。具体来说，Text View 实现 <code>UITextInput</code> 的协议来处理键盘事件，它为用户提供了一种途径来设置一个插入点或选择文本。它并不对文本做任何实际上的改变，仅仅将这些改变请求转发给刚刚讨论的 Text Storage。</p>
+
+<p><code>NSTextContainer</code>：每个 Text View 定义了一个文本可以绘制的区域。为此，每个 Text View 都有一个 Text Container，它精确地描述了这个可用的区域。在简单的情况下，这是一个垂直的无限大的矩形区域。文本被填充到这个区域，并且 Text View 允许用户滚动它。然而，在更高级的情况下，这个区域可能是一个无限大的矩形。例如，当渲染一本书时，每一页都有最大的高度和宽度。 Text Container 会定义这个大小，并且不接受任何超出的文本。相同情况下，一幅图像可能占据了页面的一部分，文本应该沿着它的边缘重新排版。这也是由 Text Container 来处理的，我们会在后面的例子中看到这一点。</p>
+
+<p><code>NSLayoutManager</code>：Layout Manager 是中心组件，它把所有组件粘合在一起：</p>
+
+<ol>
+<li>这个管理器监听 Text Storage 中文本或属性改变的通知，一旦接收到通知就触发布局进程。</li>
+<li>从 Text Storage 提供的文本开始，它将所有的字符翻译为字形（Glyph）[^2]。</li>
+<li>一旦字形全部生成，这个管理器向它的 Text Containers 查询文本可用以绘制的区域。</li>
+<li>然后这些区域被行逐步填充，而行又被字形逐步填充。一旦一行填充完毕，下一行开始填充。</li>
+<li>对于每一行，布局管理器必须考虑断行行为（放不下的单词必须移到下一行）、连字符、内联的图像附件等等。</li>
+<li>当布局完成，文本的当前显示状态被设为无效，然后 Layout Manager 将前面几步排版好的文本设给 Text View。</li>
+</ol>
+
+<p><strong>CoreText</strong>：没有直接包含在 TextKit 中，CoreText 是进行实际排版的库。对于布局管理器的每一步，CoreText 被这样或那样的方式调用。它提供了从字符到字形的翻译，用它们来填充行，以及建议断字点。</p>
+
+<p><code>相关使用查看</code>：<a href="http://objccn.io/issue-5-1/">初识 TextKit</a> 以及<a href="https://github.com/objcio/issue-5-textkit">TextKitDemo</a></p>
+
+<p>参考软文:</p>
+
+<p><a href="http://www.cocoachina.com/industry/20140521/8504.html">iOS文字排版(CoreText)那些事儿</a></p>
+
+<p><a href="http://objccn.io/issue-5-1/">初识 TextKit</a></p>
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="/tags/#Textkit" title="Pages tagged Textkit" class="tag">Textkit</a><a href="/tags/#CoreText" title="Pages tagged CoreText" class="tag">CoreText</a><a href="/tags/#富文本" title="Pages tagged 富文本" class="tag">富文本</a><a href="/tags/#附件" title="Pages tagged 附件" class="tag">附件</a><a href="/tags/#苹果" title="Pages tagged 苹果" class="tag">苹果</a><a href="/tags/#iOS7" title="Pages tagged iOS7" class="tag">iOS7</a></span>
+        <span><a href="/ios/Textkit%E5%88%9D%E6%8E%A2/" rel="bookmark" title="Textkit入门">Textkit入门</a> was published on <span class="entry-date date published updated"><time datetime="2014-11-05T10:18:55-05:00">November 05, 2014</time></span></span>
+        
+        <span class="author vcard"><span class="fn"><a href="/about/" title="About toothpickv">toothpickv</a></span></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    
+    <!--多说js加载开始，一个页面只需要加载一次 -->
+<script type="text/javascript">
+	var duoshuoQuery = {short_name:"toothpickv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!--多说js加载结束，一个页面只需要加载一次 -->
+<!-- Duoshuo Comment BEGIN -->
+	<div id="comments">
+		<div class="ds-thread" data-title="Textkit入门 - 牙=_签's Blog"></div>
+	</div>
+<!-- Duoshuo Comment END -->
+    
+    <div class="read-more">
+      
+        <div class="read-more-header">
+          <a href="/ios/block%E5%9C%A8arc%E4%B8%8E%E9%9D%9Earc%E5%8C%BA%E5%88%AB/" class="read-more-btn">Read More</a>
+        </div><!-- /.read-more-header -->
+        <div class="read-more-content">
+          <h3><a href="/ios/block%E5%9C%A8arc%E4%B8%8E%E9%9D%9Earc%E5%8C%BA%E5%88%AB/" title="block在arc与非arc区别">block在arc与非arc区别</a></h3>
+          <p> <a href="/ios/block%E5%9C%A8arc%E4%B8%8E%E9%9D%9Earc%E5%8C%BA%E5%88%AB/">Continue reading</a></p>
+        </div><!-- /.read-more-content -->
+      
+      <div class="read-more-list">
+        
+          <div class="list-item">
+            <h4><a href="/ios/iOS%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E7%AC%94%E5%BD%95/" title="iOS开发代码签名笔录">iOS开发代码签名笔录</a></h4>
+            <span>Published on October 31, 2014</span>
+          </div><!-- /.list-item -->
+        
+          <div class="list-item">
+            <h4><a href="/ios/CocoaPods%E7%AE%A1%E7%90%86%E4%B8%AA%E4%BA%BA%E6%9C%AC%E5%9C%B0%E5%BA%93/" title="CocoaPods管理个人本地库">CocoaPods管理个人本地库</a></h4>
+            <span>Published on October 29, 2014</span>
+          </div><!-- /.list-item -->
+        
+      </div><!-- /.read-more-list -->
+      
+    </div><!-- /.read-more -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2014 toothpickv.</span>
+
+<!-- Baidu Analytics snippet -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fccf659d598605041092bdb6fcfda452b' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49476672-1', 'qiumingxing.cn');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- 百度分享 -->
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"left","bdTop":"250"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="/assets/js/scripts.min.js"></script>
+
+	        
+
+</body>
+</html>

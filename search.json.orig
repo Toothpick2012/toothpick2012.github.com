@@ -1,6 +1,13 @@
 [
 	
 		{
+		  "title"    : "Textkit入门",
+		  "category" : "iOS",
+		  "url"     : "/ios/Textkit%E5%88%9D%E6%8E%A2/",
+		  "date"     : "2014-11-05 10:18:55 -0500"
+		} ,
+	
+		{
 		  "title"    : "block在arc与非arc区别",
 		  "category" : "iOS",
 		  "url"     : "/ios/block%E5%9C%A8arc%E4%B8%8E%E9%9D%9Earc%E5%8C%BA%E5%88%AB/",
